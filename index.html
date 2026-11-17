@@ -45,6 +45,27 @@
     }
   </script>
   <style>
+    /* 針對 43 歲以上夥伴優化全站基準字級，讓所有 rem 單位整體放大更清晰 */
+    html {
+      font-size: 18px;
+    }
+    /* 放大原本偏小的輔助文字級距，避免手機閱讀吃力 */
+    .text-\[10px\] {
+      font-size: 13px !important;
+      line-height: 1.45 !important;
+    }
+    .text-\[11px\] {
+      font-size: 14px !important;
+      line-height: 1.5 !important;
+    }
+    .text-xs {
+      font-size: 15px !important;
+      line-height: 1.55 !important;
+    }
+    .text-sm {
+      font-size: 16.5px !important;
+      line-height: 1.6 !important;
+    }
     /* 隱藏水平捲軸但保持可滑動 */
     .no-scrollbar::-webkit-scrollbar {
       display: none;
@@ -67,7 +88,7 @@
     }
   </style>
 </head>
-<body class="text-slate-800 antialiased pb-24">
+<body class="text-slate-800 antialiased pb-24 text-base">
 
   <!-- 頂部 Hero 橫幅 -->
   <header class="relative overflow-hidden bg-gradient-to-br from-sky-600 via-blue-700 to-indigo-900 text-white rounded-b-3xl shadow-lg px-5 pt-7 pb-6">
@@ -140,34 +161,31 @@
   <!-- 黏性導覽切換列 (Sticky Tabs) -->
   <nav class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm">
     <div class="max-w-lg mx-auto px-3 py-2 flex gap-1.5 overflow-x-auto no-scrollbar">
-      <button onclick="switchTab('overview')" id="tab-overview" class="tab-btn flex-1 min-w-[84px] py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all bg-blue-600 text-white shadow-sm">
-        ✈️ 航班＆住宿
+      <button type="button" onclick="switchTab('flights')" id="tab-flights" class="tab-btn flex-1 min-w-[96px] py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all bg-blue-600 text-white shadow-sm">
+        ✈️ 航班＆貴賓室
       </button>
-      <button onclick="switchTab('itinerary')" id="tab-itinerary" class="tab-btn flex-1 min-w-[84px] py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-slate-100">
+      <button type="button" onclick="switchTab('hotels')" id="tab-hotels" class="tab-btn flex-1 min-w-[88px] py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-slate-100">
+        🏨 住宿資訊
+      </button>
+      <button type="button" onclick="switchTab('itinerary')" id="tab-itinerary" class="tab-btn flex-1 min-w-[84px] py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-slate-100">
         🗺️ 每日行程
       </button>
-      <button onclick="switchTab('currency')" id="tab-currency" class="tab-btn flex-1 min-w-[84px] py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-slate-100">
+      <button type="button" onclick="switchTab('currency')" id="tab-currency" class="tab-btn flex-1 min-w-[84px] py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-slate-100">
         💱 匯率速算
       </button>
-      <button onclick="switchTab('expense')" id="tab-expense" class="tab-btn flex-1 min-w-[84px] py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-slate-100">
+      <button type="button" onclick="switchTab('expense')" id="tab-expense" class="tab-btn flex-1 min-w-[84px] py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-slate-100">
         📒 共同記帳
       </button>
-      <button onclick="switchTab('translate')" id="tab-translate" class="tab-btn flex-1 min-w-[84px] py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-slate-100">
+      <button type="button" onclick="switchTab('translate')" id="tab-translate" class="tab-btn flex-1 min-w-[84px] py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-slate-100">
         🗣️ 翻譯助手
       </button>
-      <button onclick="switchTab('photoguide')" id="tab-photoguide" class="tab-btn flex-1 min-w-[92px] py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-slate-100">
+      <button type="button" onclick="switchTab('photoguide')" id="tab-photoguide" class="tab-btn flex-1 min-w-[92px] py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-slate-100">
         📸 拍照穿搭
       </button>
-      <button onclick="switchTab('luggage')" id="tab-luggage" class="tab-btn flex-1 min-w-[92px] py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-slate-100">
-        🧳 寄行李攻略
-      </button>
-      <button onclick="switchTab('checklist')" id="tab-checklist" class="tab-btn flex-1 min-w-[84px] py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-slate-100">
-        ✅ 打包清單
-      </button>
-      <button onclick="switchTab('taxrefund')" id="tab-taxrefund" class="tab-btn flex-1 min-w-[84px] py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-slate-100">
+      <button type="button" onclick="switchTab('taxrefund')" id="tab-taxrefund" class="tab-btn flex-1 min-w-[84px] py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-slate-100">
         🧾 退稅新制
       </button>
-      <button onclick="switchTab('souvenirs')" id="tab-souvenirs" class="tab-btn flex-1 min-w-[88px] py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-slate-100">
+      <button type="button" onclick="switchTab('souvenirs')" id="tab-souvenirs" class="tab-btn flex-1 min-w-[88px] py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-slate-100">
         🎁 伴手禮清單
       </button>
     </div>
@@ -176,8 +194,131 @@
   <!-- 主內容區塊 -->
   <main class="max-w-lg mx-auto px-4 pt-4 space-y-4">
 
-    <!-- ==================== 分頁 1：航班與住宿總覽 ==================== -->
-    <section id="panel-overview" class="tab-panel space-y-4">
+    <!-- ==================== 分頁 1：航班與貴賓室總覽 ==================== -->
+    <section id="panel-flights" class="tab-panel space-y-4">
+      
+      <!-- 航班資訊總覽卡片 -->
+      <div class="glass-card rounded-2xl p-4 shadow-sm space-y-3.5">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
+          <h2 class="text-base font-black text-slate-900 flex items-center gap-2">
+            <span class="w-7 h-7 rounded-xl bg-sky-100 text-sky-600 flex items-center justify-center text-sm">✈️</span>
+            去回程航班資訊
+          </h2>
+          <span class="text-xs font-bold text-slate-400">桃園 TPE ⇄ 新千歲 CTS</span>
+        </div>
+
+        <!-- 去程（已移除東方宇逸貴賓室） -->
+        <div class="bg-sky-50/80 border border-sky-200/80 rounded-2xl p-3.5 space-y-2">
+          <div class="flex items-center justify-between text-xs font-bold text-sky-800">
+            <span>🛫 去程｜12/09 (週三) 桃園第二航廈 (T2)</span>
+            <span class="bg-emerald-600 text-white px-2.5 py-0.5 rounded-lg shadow-xs">長榮 BR166</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <div>
+              <div class="text-xl font-black text-slate-900">06:15</div>
+              <div class="text-xs text-slate-500 font-bold">桃園機場 T2</div>
+            </div>
+            <div class="flex-1 px-3 flex flex-col items-center">
+              <span class="text-[11px] text-slate-500 font-bold">直飛 3h45m</span>
+              <div class="w-full h-0.5 bg-sky-300 relative my-1">
+                <span class="absolute right-0 -top-1.5 text-sky-600 text-xs">➔</span>
+              </div>
+              <span class="text-[11px] text-sky-800 font-extrabold">先行 7 寶同行</span>
+            </div>
+            <div class="text-right">
+              <div class="text-xl font-black text-slate-900">11:00</div>
+              <div class="text-xs text-slate-500 font-bold">新千歲機場</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 回程分流 -->
+        <div class="space-y-2.5 pt-1">
+          <div class="text-xs font-extrabold text-slate-600 px-1 flex items-center justify-between">
+            <span>🛬 回程｜12/14 (週一) 兩班不同航空分流</span>
+            <span class="text-[11px] font-bold text-rose-600">先過退稅再託運</span>
+          </div>
+          
+          <!-- 華航 -->
+          <div class="bg-indigo-50/60 border border-indigo-200/80 rounded-xl p-3">
+            <div class="flex items-center justify-between text-xs font-bold mb-1">
+              <span class="text-indigo-800 font-black">華航 CI131（國際線航廈）</span>
+              <span class="bg-indigo-600 text-white px-2 py-0.5 rounded-md">吉、洹、lin、勲、丹</span>
+            </div>
+            <div class="flex items-center justify-between text-sm font-black text-slate-800 mt-1">
+              <span>15:05 新千歲</span>
+              <span class="text-indigo-400 text-xs">➔</span>
+              <span>18:15 桃園</span>
+            </div>
+          </div>
+
+          <!-- 長榮 -->
+          <div class="bg-emerald-50/60 border border-emerald-200/80 rounded-xl p-3">
+            <div class="flex items-center justify-between text-xs font-bold mb-1">
+              <span class="text-emerald-800 font-black">長榮 BR115（國際線航廈）</span>
+              <span class="bg-emerald-600 text-white px-2 py-0.5 rounded-md">臻、歐巴</span>
+            </div>
+            <div class="flex items-center justify-between text-sm font-black text-slate-800 mt-1">
+              <span>15:20 新千歲</span>
+              <span class="text-emerald-400 text-xs">➔</span>
+              <span>19:05 桃園 T2</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 回程新千歲機場貴賓室指南 -->
+      <div class="glass-card rounded-2xl p-4 shadow-sm space-y-3 border border-indigo-100">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+          <h3 class="text-sm font-black text-slate-900 flex items-center gap-1.5">
+            <span>🥂</span> 回程新千歲機場 (CTS) 貴賓室指南
+          </h3>
+          <span class="text-[11px] font-bold text-indigo-600">12/14 離境前必看</span>
+        </div>
+
+        <!-- 1. 華航配合貴賓室 -->
+        <div class="bg-indigo-50/70 border border-indigo-200/80 rounded-xl p-3 space-y-1.5 text-xs">
+          <div class="flex items-center justify-between">
+            <span class="font-black text-indigo-950">1. 華航配合貴賓室｜Royal Lounge（皇家貴賓室）</span>
+            <span class="text-[10px] font-bold bg-indigo-100 text-indigo-800 px-2 py-0.5 rounded">國際線管制區 4F</span>
+          </div>
+          <p class="text-[11px] text-slate-700 leading-relaxed">
+            • <strong>使用資格：</strong>搭乘華航（CI131）商務艙，或持有華航晶鑽／翡翠／金卡（天合聯盟 SkyTeam Elite Plus）會員與同行親友。<br>
+            • <strong>位置與時間：</strong>新千歲機場<strong>國際線航廈出境管制區內 4 樓</strong>（起飛前約 2.5 小時開放）。<br>
+            • <strong>提供內容：</strong>日式飯糰、三明治輕食、熱湯小點、<strong>北海道限定 Sapporo Classic 生啤酒</strong>、清酒、咖啡飲品、免費 Wi-Fi 與充電座位區。
+          </p>
+        </div>
+
+        <!-- 2. Café Sky Library（龍騰卡 / PP卡 / AE白金卡） -->
+        <div class="bg-amber-50/80 border border-amber-200 rounded-xl p-3 space-y-1.5 text-xs">
+          <div class="flex items-center justify-between">
+            <span class="font-black text-amber-950">2. Café Sky Library（Portom 飯店 4F）</span>
+            <span class="text-[10px] font-bold bg-amber-500 text-white px-2 py-0.5 rounded">管制區外・安檢前</span>
+          </div>
+          <p class="text-[11px] text-slate-700 leading-relaxed">
+            • <strong>適用卡片：</strong><strong>龍騰卡 (DragonPass)、Priority Pass (PP卡)、LoungeKey、美國運通簽帳白金卡</strong>（持台灣各銀行信用卡附贈之龍騰／PP 卡權益即可進場）。<br>
+            • <strong>位置與時間：</strong>位於<strong>國際線航廈 4F 連通「Portom International Hokkaido」飯店 4 樓</strong>（安檢報到前使用），營業時間 <strong>09:00–20:00</strong>，每次限時 2 小時。<br>
+            • <strong>提供內容：</strong>提供精選<strong>三明治輕食套餐＋甜點、咖啡軟性飲料，外加 1 杯免費酒精飲品</strong>（生啤酒／紅白酒），空間安靜有書牆與沙發，適合 11:30–13:30 報到前休息！
+          </p>
+        </div>
+
+        <!-- 3. 國內線 Super Lounge（台灣 JCB 卡免費） -->
+        <div class="bg-sky-50/70 border border-sky-200/80 rounded-xl p-3 space-y-1.5 text-xs">
+          <div class="flex items-center justify-between">
+            <span class="font-black text-sky-950">3. 國內線 3F「Super Lounge」</span>
+            <span class="text-[10px] font-bold bg-sky-600 text-white px-2 py-0.5 rounded">JCB 白金卡以上免費</span>
+          </div>
+          <p class="text-[11px] text-slate-700 leading-relaxed">
+            • <strong>適用卡片：</strong>台灣發行的 <strong>JCB 白金卡、晶緻卡、極緻卡</strong>（如富邦 J 卡、玉山 Unicard JCB、台新 Richart JCB 等），出示<strong>實體 JCB 卡＋當日國際線登機證（或電子機票）</strong>即可免費入場。<br>
+            • <strong>位置與服務：</strong>位於<strong>國內線航廈 3F（管制區外）</strong>，提供落地窗停機坪景觀座位、免費咖啡飲料機與充電插座（無熱食），逛完國內線伴手禮可順道歇腳。
+          </p>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ==================== 分頁 2：住宿資訊總覽（無付款與分帳資訊） ==================== -->
+    <section id="panel-hotels" class="tab-panel hidden space-y-4">
       
       <!-- 重要行動提醒橫幅 -->
       <div class="bg-amber-50 border-2 border-amber-200/90 rounded-2xl p-3.5 flex items-start gap-3 shadow-sm">
@@ -186,96 +327,46 @@
         </div>
         <div class="text-xs sm:text-sm">
           <p class="font-black text-amber-900">Day 2 (12/10) 晚上記得幫大行李箱寄宅配唷！</p>
-          <p class="text-amber-800 mt-0.5 leading-relaxed font-medium">在星野櫃檯直接把大行李寄去札幌飯店，記得先收好 <strong>2 天份的隨身過夜包</strong>（行動電源要放隨身包裡～）。</p>
+          <p class="text-amber-800 mt-0.5 leading-relaxed font-medium">在星野櫃檯直接把大行李寄去札幌東急 Stay，記得先收好 <strong>2 天份的隨身過夜包</strong>（行動電源要放隨身包裡～）。</p>
         </div>
       </div>
 
-      <!-- 航班卡片 -->
-      <div class="glass-card rounded-2xl p-4 shadow-sm space-y-3">
-        <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
-          <h2 class="text-base font-extrabold text-slate-900 flex items-center gap-2">
-            <span class="w-7 h-7 rounded-lg bg-sky-100 text-sky-600 flex items-center justify-center text-sm">✈️</span>
-            航班資訊總覽
-          </h2>
-          <span class="text-xs font-semibold text-slate-400">桃園 TPE ⇄ 新千歲 CTS</span>
-        </div>
-
-        <!-- 去程 -->
-        <div class="bg-sky-50/70 border border-sky-100 rounded-xl p-3">
-          <div class="flex items-center justify-between text-xs font-bold text-sky-700 mb-1.5">
-            <span>去程｜12/09 (三)</span>
-            <span class="bg-emerald-600 text-white px-2 py-0.5 rounded-md">長榮 BR166</span>
-          </div>
-          <div class="flex items-center justify-between">
-            <div>
-              <div class="text-lg font-black text-slate-900">06:15</div>
-              <div class="text-xs text-slate-500 font-medium">桃園機場</div>
-            </div>
-            <div class="flex-1 px-3 flex flex-col items-center">
-              <span class="text-[11px] text-slate-400 font-medium">直飛 3h45m</span>
-              <div class="w-full h-0.5 bg-sky-200 relative my-1">
-                <span class="absolute right-0 -top-1.5 text-sky-500 text-xs">➔</span>
-              </div>
-              <span class="text-[11px] text-sky-700 font-semibold">全員7位同行</span>
-            </div>
-            <div class="text-right">
-              <div class="text-lg font-black text-slate-900">11:00</div>
-              <div class="text-xs text-slate-500 font-medium">新千歲機場</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 回程分流 -->
-        <div class="space-y-2.5">
-          <div class="text-xs font-bold text-slate-500 px-1">回程｜12/14 (一) 兩班不同航空請留意報到櫃檯</div>
-          
-          <!-- 華航 -->
-          <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3">
-            <div class="flex items-center justify-between text-xs font-bold mb-1">
-              <span class="text-indigo-700">華航 CI131</span>
-              <span class="bg-indigo-100 text-indigo-800 px-2 py-0.5 rounded-md">吉、洹、lin、哥、丹</span>
-            </div>
-            <div class="flex items-center justify-between text-sm font-bold text-slate-800 mt-1">
-              <span>15:05 新千歲</span>
-              <span class="text-slate-400 text-xs">➔</span>
-              <span>18:15 桃園</span>
-            </div>
-          </div>
-
-          <!-- 長榮 -->
-          <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3">
-            <div class="flex items-center justify-between text-xs font-bold mb-1">
-              <span class="text-emerald-700">長榮 BR115</span>
-              <span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-md">臻、歐巴</span>
-            </div>
-            <div class="flex items-center justify-between text-sm font-bold text-slate-800 mt-1">
-              <span>15:20 新千歲</span>
-              <span class="text-slate-400 text-xs">➔</span>
-              <span>19:05 桃園 T2</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 住宿與付款定案卡片 -->
+      <!-- 住宿資訊卡片（純住宿與設施資訊） -->
       <div class="glass-card rounded-2xl p-4 shadow-sm space-y-3">
         <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
           <h2 class="text-base font-black text-slate-900 flex items-center gap-2">
             <span class="w-7 h-7 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center text-sm">🏨</span>
-            住宿與分帳小筆記
+            住宿資訊與飯店設施
           </h2>
           <span class="text-xs font-bold text-slate-400">共住 5 晚 ✨</span>
         </div>
 
         <!-- 住宿 1：星野 -->
-        <div class="border border-slate-200 rounded-xl p-3.5 bg-white space-y-2">
+        <div class="border border-slate-200 rounded-xl p-3.5 bg-white space-y-2.5">
           <div class="flex items-start justify-between gap-2">
             <div>
               <span class="inline-block text-[11px] font-bold bg-sky-100 text-sky-800 px-2 py-0.5 rounded-md mb-1">12/09 – 12/11 (2晚)</span>
               <h3 class="font-extrabold text-slate-900 text-sm">星野 TOMAMU (The Tower)</h3>
             </div>
-            <span class="shrink-0 text-xs font-bold bg-slate-100 text-slate-700 px-2.5 py-1 rounded-lg">各自付款</span>
+            <span class="shrink-0 text-xs font-bold bg-sky-50 text-sky-700 border border-sky-200 px-2.5 py-1 rounded-lg">4間雙人房・7人</span>
           </div>
+
+          <!-- 飯店設施與免費福利 -->
+          <div class="bg-sky-50/70 border border-sky-100 rounded-xl p-2.5 space-y-1.5 text-xs">
+            <div class="font-extrabold text-sky-900 flex items-center gap-1">
+              <span>♨️</span> 泡湯設施＆迎賓免費茶飲
+            </div>
+            <ul class="space-y-1.5 text-slate-700 text-[11px] leading-relaxed">
+              <li>
+                • <strong>♨️ 木林之湯（Kirin-no-Yu）：</strong>位於星野 Tomamu 度假村內、微笑海灘旁（從 The Tower 大廳搭接駁車約 5 分鐘）。<br>
+                <span class="text-sky-800 font-bold">🕒 營業時間：</span>約 <strong>15:00–23:00</strong>（依時期調整）｜露天風呂＋三溫暖（非天然溫泉），男女分浴，<strong>住客免費</strong>（現場附毛巾）。<br>
+                <span class="text-amber-700 font-bold">✨ 建議時段：</span>Day 1 下午 15:30、晚上 21:30；Day 2 下午 16:30。
+              </li>
+              <li>• <strong>🥂 免費迎賓茶飲：</strong>The Tower 1F「<strong>Cafe Lounge Yukku Yukku</strong>」免費供應咖啡、紅茶、氣泡酒與果汁（10:00–22:00）。</li>
+              <li>• <strong>🚌 免費園區巡迴巴士：</strong>串聯 The Tower、螢火蟲街道、森林餐廳、霧冰平台纜車站與愛絲冰城（約 15–20 分一班）。</li>
+            </ul>
+          </div>
+
           <div class="bg-slate-50 rounded-lg p-2.5 border border-slate-100">
             <div class="flex items-center justify-between mb-1">
               <span class="text-[11px] font-semibold text-slate-500">預訂號碼（櫃檯安排相鄰房用）</span>
@@ -287,20 +378,51 @@
               1VPF8K2ZDU / 1VPEW1C8X6<br>1VPFM7U3E5 / 1VPFNZ2C58
             </p>
           </div>
+
+          <div class="flex items-center gap-2 pt-1">
+            <button onclick="copyText('〒079-2204 北海道勇払郡占冠村字中トマム', '已複製星野 TOMAMU 日文地址')" class="flex-1 text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 py-2 px-3 rounded-lg transition active:scale-95">
+              📋 複製日文地址
+            </button>
+            <a href="https://www.google.com/maps/place//data=!4m2!3m1!19sChIJcw7lj0Vhc18RGuVjEFL_9hY" target="_blank" class="flex-1 text-center text-xs font-bold text-blue-600 bg-blue-50 hover:bg-blue-100 py-2 px-3 rounded-lg transition">
+              📍 開啟 Google 地圖
+            </a>
+          </div>
         </div>
 
         <!-- 住宿 2：JR INN 旭川 -->
-        <div class="border border-amber-200 rounded-xl p-3.5 bg-amber-50/40 space-y-1.5">
+        <div class="border border-amber-200 rounded-xl p-3.5 bg-amber-50/40 space-y-2.5">
           <div class="flex items-start justify-between gap-2">
             <div>
               <span class="inline-block text-[11px] font-bold bg-amber-100 text-amber-800 px-2 py-0.5 rounded-md mb-1">12/11 – 12/12 (1晚)</span>
-              <h3 class="font-extrabold text-slate-900 text-sm">JR INN 旭川 (4間房)</h3>
+              <h3 class="font-extrabold text-slate-900 text-sm">JR INN 旭川 (JR INN Asahikawa)</h3>
             </div>
-            <span class="shrink-0 text-xs font-bold bg-amber-500 text-white px-2.5 py-1 rounded-lg">洹(Angela)代墊</span>
+            <span class="shrink-0 text-xs font-bold bg-amber-100 text-amber-800 px-2.5 py-1 rounded-lg">4間雙人房・7人</span>
           </div>
-          <p class="text-xs text-slate-700 font-medium">
-            💰 費用：<strong class="text-amber-800 text-sm">1,722 元 / 間</strong>（請大家再各自匯款給洹）
-          </p>
+
+          <!-- 飯店設施與免費福利 -->
+          <div class="bg-white/90 border border-amber-200/80 rounded-xl p-2.5 space-y-1.5 text-xs">
+            <div class="font-extrabold text-amber-900 flex items-center gap-1">
+              <span>♨️</span> 5F 大浴場＆房客專屬休憩空間
+            </div>
+            <ul class="space-y-1.5 text-slate-700 text-[11px] leading-relaxed">
+              <li>• <strong>📍 飯店位置：</strong>旭川市宮下通 7-2-5（JR 旭川站直結、AEON 永旺樓上）。</li>
+              <li>
+                • <strong>♨️ JR INN 旭川大浴場（5F）：</strong><br>
+                <span class="text-amber-800 font-bold">🕒 營業時間：</span><strong>15:00–凌晨 01:00</strong>；<strong>05:00–10:00</strong>｜大浴場＋半露天風呂（非天然溫泉），男女分浴，<strong>住客免費使用</strong>（需從房間帶毛巾）。<br>
+                <span class="text-amber-700 font-bold">✨ 建議時段：</span>Day 3 晚上、Day 4 早上。
+              </li>
+              <li>• <strong>☕ 免費茶飲＆漫畫 Lounge（5F）：</strong>大浴場旁設有 <strong>JR INN Lounge</strong>，泡完湯可免費喝咖啡、茶飲，還有整面牆漫畫雜誌可翻閱（1F 電梯旁可免費選枕頭）。</li>
+            </ul>
+          </div>
+
+          <div class="flex items-center gap-2 pt-1">
+            <button onclick="copyText('〒070-0030 北海道旭川市宮下通7丁目2-5', '已複製 JR INN 旭川日文地址')" class="flex-1 text-xs font-bold text-slate-700 bg-white border border-amber-200 hover:bg-amber-50 py-2 px-3 rounded-lg transition active:scale-95">
+              📋 複製日文地址
+            </button>
+            <a href="https://www.google.com/maps/place//data=!4m2!3m1!19sChIJOdlckhDmDF8RBCotONjS4B4" target="_blank" class="flex-1 text-center text-xs font-bold text-blue-600 bg-blue-50 hover:bg-blue-100 py-2 px-3 rounded-lg transition">
+              📍 開啟 Google 地圖
+            </a>
+          </div>
         </div>
 
         <!-- 住宿 3：札幌東急 Stay -->
@@ -310,11 +432,44 @@
               <span class="inline-block text-[11px] font-bold bg-indigo-100 text-indigo-800 px-2 py-0.5 rounded-md mb-1">12/12 – 12/14 (2晚)</span>
               <h3 class="font-extrabold text-slate-900 text-sm">札幌東急 Stay (Tokyu Stay Sapporo)</h3>
             </div>
-            <span class="shrink-0 text-xs font-bold bg-slate-100 text-slate-700 px-2.5 py-1 rounded-lg">現場付款</span>
+            <span class="shrink-0 text-xs font-bold bg-indigo-50 text-indigo-700 border border-indigo-200 px-2.5 py-1 rounded-lg">4間房・9人合體</span>
           </div>
-          <p class="text-xs text-slate-600 leading-relaxed">
-            ✨ <strong>德、歐在此會合</strong>｜房內配有<strong>獨立洗脫烘衣機</strong>，步行 5 分鐘內可達大通站、狸小路與機場巴士站。
-          </p>
+
+          <!-- 飯店設施與免費福利 -->
+          <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-2.5 space-y-1.5 text-xs">
+            <div class="font-extrabold text-slate-900 flex items-center gap-1">
+              <span>🧺</span> 房內設備＆大廳茶飲資訊
+            </div>
+            <ul class="space-y-1 text-slate-700 text-[11px] leading-relaxed">
+              <li>• <strong>✨ 9人合體＆絕佳位置：</strong><strong>德、歐在此會合</strong>；步行 5 分鐘內可達大通站、狸小路與新千歲機場巴士站。</li>
+              <li>• <strong>🚿 房內獨立衛浴（無大浴場）：</strong>本館無公共大浴場，但每間房皆有獨立浴缸，並配備<strong>獨立洗脫烘衣機（附免費洗衣精）</strong>與<strong>微波爐</strong>！</li>
+              <li>• <strong>☕ 1F 大廳免費咖啡茶飲：</strong>大廳休息區提供房客免費現磨咖啡與茶包（<strong>15:00–23:00</strong>）。</li>
+            </ul>
+          </div>
+
+          <!-- Day 5 晚餐後外湯推薦：すすきの天然温泉 湯香郷 -->
+          <div class="bg-rose-50/70 border border-rose-200/80 rounded-xl p-2.5 space-y-1.5 text-xs">
+            <div class="flex items-center justify-between">
+              <span class="font-extrabold text-rose-950 flex items-center gap-1">
+                <span>♨️</span> すすきの天然温泉 湯香郷（Day 5 晚餐後）
+              </span>
+              <span class="text-[10px] font-bold bg-rose-600 text-white px-2 py-0.5 rounded">¥2,750 起</span>
+            </div>
+            <p class="text-[11px] text-slate-700 leading-relaxed">
+              • <strong>📍 地址位置：</strong>札幌市中央區南 7 條西 3 丁目（Jasmac Plaza 飯店 2F–4F；地鐵「豐水すすきの站」步行約 4 分鐘，就在風土燒肉附近）。<br>
+              • <strong>🕒 營業時間：</strong>10:00–24:00（最終入場時間出發前再確認官網，建議 Day 5 晚餐後前往）。<br>
+              • <strong>♨️ 泉質類型：</strong><strong>天然溫泉（鈉-氯化物泉）</strong>，附檜木露天風呂、三溫暖，男女分浴（含館內服與毛巾）。
+            </p>
+            <div class="flex items-center gap-2 pt-0.5">
+              <button onclick="copyText('〒064-8533 北海道札幌市中央区南7条西3丁目 ジャスマックプラザ', '已複製湯香郷日文地址')" class="flex-1 text-[11px] font-bold text-slate-700 bg-white border border-rose-200 hover:bg-rose-50 py-1.5 px-2.5 rounded-lg transition active:scale-95">
+                📋 複製溫泉地址
+              </button>
+              <a href="https://www.google.com/maps/place//data=!4m2!3m1!19sChIJDyeEt4cpC18R3KbNqPJ-k-g" target="_blank" class="flex-1 text-center text-[11px] font-bold text-rose-700 bg-rose-100 hover:bg-rose-200 py-1.5 px-2.5 rounded-lg transition">
+                📍 開啟 Google 地圖
+              </a>
+            </div>
+          </div>
+
           <div class="bg-indigo-50/60 rounded-lg p-2.5 border border-indigo-100 space-y-1.5">
             <div class="flex items-center justify-between">
               <span class="text-[11px] font-semibold text-indigo-900">札幌東急 Stay 預約號碼（共 4 間 / 2 晚）</span>
@@ -341,7 +496,7 @@
             <button onclick="copyText('〒060-0061 北海道札幌市中央区南1条西1-13-4', '已複製札幌飯店日文地址')" class="flex-1 text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 py-2 px-3 rounded-lg transition active:scale-95">
               📋 複製日文地址
             </button>
-            <a href="https://www.google.com/maps/search/?api=1&query=Tokyu+Stay+Sapporo" target="_blank" class="flex-1 text-center text-xs font-bold text-blue-600 bg-blue-50 hover:bg-blue-100 py-2 px-3 rounded-lg transition">
+            <a href="https://www.google.com/maps/place//data=!4m2!3m1!19sChIJo13_5oIpC18RWnRe2r68XCk" target="_blank" class="flex-1 text-center text-xs font-bold text-blue-600 bg-blue-50 hover:bg-blue-100 py-2 px-3 rounded-lg transition">
               📍 開啟 Google 地圖
             </a>
           </div>
@@ -350,7 +505,7 @@
       </div>
     </section>
 
-    <!-- ==================== 分頁 2：每日詳細行程 ==================== -->
+    <!-- ==================== 分頁 3：每日詳細行程 ==================== -->
     <section id="panel-itinerary" class="tab-panel hidden space-y-3">
       
       <!-- 日期快速選擇膠囊（自動換行排版，確保所有天數按鈕完整呈現） -->
@@ -383,23 +538,13 @@
         <div class="space-y-3 border-l-2 border-slate-200 ml-2 pl-3.5 text-xs sm:text-sm">
           <div class="relative">
             <span class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-sky-500 ring-4 ring-white"></span>
-            <div class="font-bold text-slate-900">11:00 降落新千歲機場 ➔ 12:00 包車出發 🚐</div>
-            <p class="text-slate-600 text-xs mt-0.5">開心出關領行李（也可以在國內線順路買超好吃空弁唷）。</p>
+            <div class="font-bold text-slate-900">15:00 The Tower 入住 ➔ 15:30 迎賓下午茶／木林之湯 ☕</div>
+            <p class="text-slate-600 text-xs mt-0.5">領房卡與通行券，<strong>順便跟櫃檯拿幾張黑貓託運單</strong>；接著去 1F Lounge 免費喝咖啡果汁，或搭接駁車去<strong>木林之湯（15:00–23:00）</strong>泡湯！</p>
           </div>
           <div class="relative">
             <span class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-sky-500 ring-4 ring-white"></span>
-            <div class="font-bold text-slate-900">12:10–12:50 中停：永旺 千歲店 (AEON) 🛒</div>
-            <p class="text-slate-600 text-xs mt-0.5">採買<strong>車上午餐熟食便當</strong>，還有這兩晚在星野吃的鮮奶、水果跟零食！12:50 上高速<strong>在車上邊吃邊休息</strong>。</p>
-          </div>
-          <div class="relative">
-            <span class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-sky-500 ring-4 ring-white"></span>
-            <div class="font-bold text-slate-900">15:00 The Tower 入住 ➔ 15:30 迎賓下午茶 ☕</div>
-            <p class="text-slate-600 text-xs mt-0.5">領房卡與通行券，<strong>順便跟櫃檯拿幾張黑貓託運單</strong>；接著去一樓 Books & Cafe 免費喝咖啡果汁～</p>
-          </div>
-          <div class="relative">
-            <span class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-sky-500 ring-4 ring-white"></span>
-            <div class="font-bold text-slate-900">17:30 螢火蟲街道晚餐 ➔ 20:30 水之教會 ✨</div>
-            <p class="text-slate-600 text-xs mt-0.5">吃湯咖哩 GARAKU 或竹藏拉麵，看 6 公尺牛奶瓶聖誕樹（18:30 聖誕老人會出現！）；20:20 走室內連通道去水之教會（20:45 有牛鈴音樂會）。</p>
+            <div class="font-bold text-slate-900">17:30 螢火蟲街道晚餐 ➔ 20:30 水之教會 ➔ 21:30 木林之湯 ✨</div>
+            <p class="text-slate-600 text-xs mt-0.5">吃湯咖哩 GARAKU 或竹藏拉麵，看 6 公尺牛奶瓶聖誕樹；20:30 參觀水之教會，<strong>21:30 可再去木林之湯泡雪見露天風呂</strong>（23:00 結束）。</p>
           </div>
         </div>
       </article>
@@ -430,8 +575,8 @@
           </div>
           <div class="relative">
             <span class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-blue-600 ring-4 ring-white"></span>
-            <div class="font-bold text-slate-900">12:30 Foresta Mall 午餐 ➔ 14:30 微笑海灘＆木林之湯 ♨️</div>
-            <p class="text-slate-600 text-xs mt-0.5">午餐吃成吉思汗 KING 或居酒屋；下午去 30°C 人造浪泳池玩水，再去露天雪見溫泉泡湯看雪景～</p>
+            <div class="font-bold text-slate-900">12:30 Foresta Mall 午餐 ➔ 14:30 微笑海灘 ➔ 16:30 木林之湯 ♨️</div>
+            <p class="text-slate-600 text-xs mt-0.5">午餐吃成吉思汗 KING 或居酒屋；下午去 30°C 人造浪泳池玩水，<strong>16:30 接續旁邊的木林之湯</strong>泡露天雪見風呂！</p>
           </div>
           <div class="relative">
             <span class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-amber-500 ring-4 ring-white"></span>
@@ -480,8 +625,8 @@
           </div>
           <div class="relative">
             <span class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-amber-500 ring-4 ring-white"></span>
-            <div class="font-bold text-slate-900">18:45 抵達 JR INN 旭川 ➔ 19:30 大黑屋烤羊肉</div>
-            <p class="text-slate-600 text-xs mt-0.5">結束包車入住飯店，步行約 10–12 分鐘吃旭川必吃成吉思汗大黑屋。</p>
+            <div class="font-bold text-slate-900">18:45 抵達 JR INN 旭川 ➔ 19:30 大黑屋烤羊肉 ➔ 5F 大浴場</div>
+            <p class="text-slate-600 text-xs mt-0.5">結束包車入住飯店，步行約 10–12 分鐘吃成吉思汗大黑屋；回飯店後可去 <strong>5F 大浴場＆半露天風呂（開放至 25:00 / 隔早 05:00–10:00）</strong>泡湯喝免費茶飲。</p>
             <a href="https://www.google.com/maps/place//data=!4m2!3m1!19sChIJRf7PMgzmDF8Rm_3HyHkvjn0" target="_blank" class="inline-flex items-center gap-1 mt-1.5 text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-lg">
               📍 開啟餐廳地圖 (成吉思汗大黑屋)
             </a>
@@ -609,11 +754,16 @@
           </div>
           <div class="relative">
             <span class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-indigo-600 ring-4 ring-white"></span>
-            <div class="font-bold text-indigo-900">19:00 晚餐：風土 燒肉・成吉思汗・內臟 薄野店</div>
-            <p class="text-slate-600 text-xs mt-0.5"><strong>已訂位（薄野南6條西4丁目）</strong>！餐後回飯店用房內洗脫烘衣機洗衣服、打包戰利品。</p>
-            <a href="https://maps.app.goo.gl/XZyBUQ8ZERfnuewb7" target="_blank" class="inline-flex items-center gap-1 mt-1.5 text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-lg">
-              📍 開啟餐廳地圖 (風土燒肉)
-            </a>
+            <div class="font-bold text-indigo-900">19:00 晚餐：風土 燒肉 ➔ 餐後：すすきの天然温泉 湯香郷 ♨️</div>
+            <p class="text-slate-600 text-xs mt-0.5"><strong>已訂位（薄野南6條西4丁目）</strong>！餐後可步行前往 Jasmac Plaza 飯店內的<strong>「すすきの天然温泉 湯香郷」</strong>（天然鈉-氯化物泉＋檜木露天風呂，¥2,750 起，出發前再確認當日最終入場時間）。</p>
+            <div class="flex flex-wrap gap-1.5 mt-1.5">
+              <a href="https://maps.app.goo.gl/XZyBUQ8ZERfnuewb7" target="_blank" class="inline-flex items-center gap-1 text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-lg">
+                📍 開啟地圖 (風土燒肉)
+              </a>
+              <a href="https://www.google.com/maps/place//data=!4m2!3m1!19sChIJDyeEt4cpC18R3KbNqPJ-k-g" target="_blank" class="inline-flex items-center gap-1 text-xs font-bold text-rose-700 bg-rose-50 px-2.5 py-1 rounded-lg">
+                ♨️ 開啟地圖 (湯香郷溫泉)
+              </a>
+            </div>
           </div>
         </div>
       </article>
@@ -629,12 +779,12 @@
         </div>
         <div class="flex flex-wrap gap-1.5 mb-3">
           <span class="text-[11px] font-bold bg-sky-50 text-sky-800 border border-sky-200/80 px-2.5 py-0.5 rounded-full">🌡️ 札幌・千歲：-4°C ~ +1°C</span>
-          <span class="text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200/80 px-2.5 py-0.5 rounded-full">🌅 日落：約 16:01</span>
+          <span class="text-[11px] font-bold bg-indigo-50 text-indigo-800 border border-indigo-200/80 px-2.5 py-0.5 rounded-full">✈️ 華航 15:05 ／ 長榮 15:20 起飛</span>
         </div>
         <div class="space-y-3 border-l-2 border-slate-200 ml-2 pl-3.5 text-xs sm:text-sm">
           <div class="relative">
             <span class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-4 ring-white"></span>
-            <div class="font-bold text-slate-900">10:00 札幌東急 Stay 辦理退房 ➔ 前往機場</div>
+            <div class="font-bold text-slate-900">10:00 札幌東急 Stay 辦理退房 ➔ 前往新千歲機場</div>
             <p class="text-slate-600 text-xs mt-0.5">推行李步行 5 分鐘內至機場巴士站（或搭 JR 快速 Airport 號，約 37 分鐘直達新千歲機場）。</p>
           </div>
           <div class="relative">
@@ -645,7 +795,15 @@
           <div class="relative">
             <span class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-amber-500 ring-4 ring-white"></span>
             <div class="font-bold text-amber-900">13:00 移動至國際線航廈 ➔【先辦退稅確認再託運】</div>
-            <p class="text-slate-600 text-xs mt-0.5">有買免稅品者<strong>託運行李前先刷護照過海關 KIOSK</strong>！接著各自前往櫃檯報到（<strong>華航 CI131 15:05 起飛</strong>／<strong>長榮 BR115 15:20 起飛</strong>），平安返台！</p>
+            <p class="text-slate-600 text-xs mt-0.5">有買免稅品者<strong>託運行李前先刷護照過海關 KIOSK</strong>，完成後再前往航空公司櫃檯辦理登機託運。</p>
+          </div>
+          <div class="relative">
+            <span class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-blue-600 ring-4 ring-white"></span>
+            <div class="font-bold text-blue-900">15:05 ＆ 15:20 分流搭機返台 🛫</div>
+            <p class="text-slate-600 text-xs mt-0.5 leading-relaxed">
+              • <strong>中華航空 CI131（15:05 新千歲 ➔ 18:15 桃園）：</strong>吉、洹、lin、勲、丹<br>
+              • <strong>長榮航空 BR115（15:20 新千歲 ➔ 19:05 桃園 T2）：</strong>臻、歐巴
+            </p>
           </div>
         </div>
       </article>
@@ -1397,47 +1555,39 @@
   </div>
 
   <script>
-    // 分頁切換邏輯
+    // 分頁切換邏輯（確保任何分頁都能正常點擊切換）
     function switchTab(tabName) {
-      document.querySelectorAll('.tab-panel').forEach(panel => {
-        panel.classList.add('hidden');
-      });
-      document.getElementById('panel-' + tabName).classList.remove('hidden');
+      try {
+        document.querySelectorAll('.tab-panel').forEach(panel => {
+          panel.classList.add('hidden');
+          panel.style.display = 'none';
+        });
 
-      document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.remove('bg-blue-600', 'text-white', 'shadow-sm');
-        btn.classList.add('text-slate-600', 'hover:bg-slate-100');
-      });
-      const activeBtn = document.getElementById('tab-' + tabName);
-      activeBtn.classList.remove('text-slate-600', 'hover:bg-slate-100');
-      activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-sm');
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+          btn.classList.remove('bg-blue-600', 'text-white', 'shadow-sm');
+          btn.classList.add('text-slate-600', 'hover:bg-slate-100');
+        });
 
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // 行程天數篩選邏輯
-    function filterDay(dayId, btnEl) {
-      const cards = document.querySelectorAll('.day-card');
-      cards.forEach(card => {
-        if (dayId === 'all' || card.id === 'card-' + dayId) {
-          card.classList.remove('hidden');
-        } else {
-          card.classList.add('hidden');
+        const targetPanel = document.getElementById('panel-' + tabName);
+        if (targetPanel) {
+          targetPanel.classList.remove('hidden');
+          targetPanel.style.display = 'block';
         }
-      });
 
-      document.querySelectorAll('.day-filter-btn').forEach(btn => {
-        btn.classList.remove('bg-slate-800', 'text-white');
-        btn.classList.add('bg-white', 'text-slate-600', 'border', 'border-slate-200');
-      });
-      if (btnEl) {
-        btnEl.classList.remove('bg-white', 'text-slate-600', 'border', 'border-slate-200');
-        btnEl.classList.add('bg-slate-800', 'text-white');
+        const activeBtn = document.getElementById('tab-' + tabName);
+        if (activeBtn) {
+          activeBtn.classList.remove('text-slate-600', 'hover:bg-slate-100');
+          activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-sm');
+        }
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } catch (err) {
+        console.error('Switch tab error:', err);
       }
     }
 
-    // 剪貼簿複製功能（相容手機與 iFrame）
-    function copyText(text, message) {
+    // 複製文字與 Toast 提示
+    function copyText(text, successMsg) {
       const textarea = document.createElement('textarea');
       textarea.value = text;
       textarea.style.position = 'fixed';
@@ -1446,340 +1596,268 @@
       textarea.select();
       try {
         document.execCommand('copy');
-        showToast(message || '已複製！');
+        showToast(successMsg || '已複製到剪貼簿！');
       } catch (err) {
-        showToast('複製失敗，請手動選取');
+        showToast('複製失敗，請手動選取複製');
       }
       document.body.removeChild(textarea);
     }
 
-    // Toast 提示框
+    let toastTimer;
     function showToast(msg) {
       const toast = document.getElementById('toast');
-      if (!toast) return;
-      document.getElementById('toast-msg').textContent = msg;
+      const toastMsg = document.getElementById('toast-msg');
+      if (!toast || !toastMsg) return;
+      toastMsg.textContent = msg;
       toast.classList.remove('opacity-0', 'translate-y-2');
-      toast.classList.add('opacity-100', 'translate-y-0');
-      setTimeout(() => {
-        toast.classList.remove('opacity-100', 'translate-y-0');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
         toast.classList.add('opacity-0', 'translate-y-2');
       }, 2200);
     }
 
-    // 互動式打包清單資料
-    const defaultChecklist = [
-      { id: 'c1', text: '護照正本（確認效期 6 個月以上）', tag: '必備' },
-      { id: 'c2', text: 'Visit Japan Web 入境 QR Code 截圖', tag: '必備' },
-      { id: 'c3', text: '日本上網卡 / 漫遊開通確認', tag: '必備' },
-      { id: 'c4', text: '日幣現金（含旭山動物園門票 1,000 円）＆信用卡', tag: '必備' },
-      { id: 'c5', text: '防滑防水雪靴（鞋底刻紋深、防雪水滲入）', tag: '雪地' },
-      { id: 'c6', text: '發熱衣、保暖中層、防風防水羽絨外套', tag: '雪地' },
-      { id: 'c7', text: '毛帽（遮耳）、圍巾、防水觸控手套、暖暖包', tag: '雪地' },
-      { id: 'c8', text: '2天份隨身過夜包（Day 2 晚上寄大行李用）', tag: '重要' },
-      { id: 'c9', text: '泳衣＆泳帽（Day 2 星野微笑海灘玩水用）', tag: '星野' },
-      { id: 'c10', text: '行動電源＆充電線（務必放隨身行李，禁託運）', tag: '3C' },
-      { id: 'c11', text: '保濕乳液、護唇膏、個人常備藥品', tag: '生活' }
-    ];
-
-    let checkedState = JSON.parse(localStorage.getItem('hokkaido_2026_checklist') || '{}');
-
-    function renderChecklist() {
-      const container = document.getElementById('checklist-container');
-      container.innerHTML = '';
-      let checkedCount = 0;
-
-      defaultChecklist.forEach(item => {
-        const isChecked = !!checkedState[item.id];
-        if (isChecked) checkedCount++;
-
-        const div = document.createElement('div');
-        div.onclick = () => toggleCheck(item.id);
-        div.className = `flex items-center justify-between p-3 rounded-xl border cursor-pointer transition-all select-none ${
-          isChecked 
-            ? 'bg-slate-50 border-slate-200 text-slate-400 line-through' 
-            : 'bg-white border-slate-200/90 text-slate-800 hover:border-blue-300 shadow-xs'
-        }`;
-
-        div.innerHTML = `
-          <div class="flex items-center gap-3 pr-2">
-            <div class="w-5 h-5 rounded-md flex items-center justify-center shrink-0 border transition-colors ${
-              isChecked ? 'bg-blue-600 border-blue-600 text-white' : 'border-slate-300 bg-white'
-            }">
-              ${isChecked ? '<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>' : ''}
-            </div>
-            <span class="text-xs sm:text-sm font-medium">${item.text}</span>
-          </div>
-          <span class="shrink-0 text-[10px] font-bold px-2 py-0.5 rounded-md ${
-            isChecked ? 'bg-slate-200 text-slate-500' : 'bg-sky-50 text-sky-700'
-          }">${item.tag}</span>
-        `;
-        container.appendChild(div);
+    // 每日行程日期快速篩選
+    function filterDay(dayId, clickedBtn) {
+      document.querySelectorAll('.day-filter-btn').forEach(btn => {
+        btn.classList.remove('bg-slate-800', 'text-white', 'shadow-xs');
+        btn.classList.add('bg-white', 'text-slate-700', 'border', 'border-slate-300');
       });
+      if (clickedBtn) {
+        clickedBtn.classList.remove('bg-white', 'text-slate-700', 'border', 'border-slate-300');
+        clickedBtn.classList.add('bg-slate-800', 'text-white', 'shadow-xs');
+      }
 
-      const pct = Math.round((checkedCount / defaultChecklist.length) * 100);
-      document.getElementById('progress-text').textContent = `${pct}% (${checkedCount}/${defaultChecklist.length})`;
-      document.getElementById('progress-bar').style.width = `${pct}%`;
+      document.querySelectorAll('.day-card').forEach(card => {
+        if (dayId === 'all' || card.id === 'card-' + dayId) {
+          card.classList.remove('hidden');
+          card.style.display = 'block';
+        } else {
+          card.classList.add('hidden');
+          card.style.display = 'none';
+        }
+      });
     }
 
-    function toggleCheck(id) {
-      checkedState[id] = !checkedState[id];
-      localStorage.setItem('hokkaido_2026_checklist', JSON.stringify(checkedState));
-      renderChecklist();
+    // ==================== 出發倒數計時器 ====================
+    function updateDepartureCountdown() {
+      const targetTime = new Date('2026-12-09T06:15:00+08:00').getTime();
+      const now = Date.now();
+      const diff = targetTime - now;
+
+      const labelEl = document.getElementById('countdown-label');
+      const timerEl = document.getElementById('countdown-timer');
+      if (!labelEl || !timerEl) return;
+
+      if (diff <= 0) {
+        labelEl.textContent = '⛄ 北海道雪國之旅進行中！';
+        timerEl.innerHTML = '<span class="bg-amber-400 text-slate-950 font-black text-xs px-3 py-1.5 rounded-xl">旅途愉快 ❄️</span>';
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+      const dEl = document.getElementById('cd-days');
+      const hEl = document.getElementById('cd-hours');
+      const mEl = document.getElementById('cd-mins');
+      const sEl = document.getElementById('cd-secs');
+      if (dEl) dEl.textContent = String(days).padStart(2, '0');
+      if (hEl) hEl.textContent = String(hours).padStart(2, '0');
+      if (mEl) mEl.textContent = String(mins).padStart(2, '0');
+      if (sEl) sEl.textContent = String(secs).padStart(2, '0');
     }
 
-    function resetChecklist() {
-      checkedState = {};
-      localStorage.removeItem('hokkaido_2026_checklist');
-      renderChecklist();
-      showToast('已重置打包清單');
-    }
-
-    // 初始化渲染
-    renderChecklist();
-
-    // ==================== 匯率計算機邏輯 ====================
-    const rateInput = document.getElementById('exchange-rate');
-    const jpyInput = document.getElementById('input-jpy');
-    const twdInput = document.getElementById('input-twd');
-    const rateStatusBadge = document.getElementById('rate-status-badge');
-
-    // 先載入上次快取的匯率（離線時也能立即使用）
-    const savedRate = localStorage.getItem('hokkaido_2026_rate');
-    if (savedRate) {
-      rateInput.value = savedRate;
-    }
+    // ==================== 匯率與分帳計算機邏輯 ====================
+    const RATE_STORAGE_KEY = 'hokkaido_2026_jpy_rate';
 
     function getRate() {
-      const r = parseFloat(rateInput.value);
-      return isNaN(r) || r <= 0 ? 0.215 : r;
+      const el = document.getElementById('exchange-rate');
+      const val = el ? parseFloat(el.value) : 0.215;
+      return (!isNaN(val) && val > 0) ? val : 0.215;
     }
 
-    // 自動抓取 JPY -> TWD 即時匯率（備援雙 API，確保離線或異常時不報錯）
-    async function fetchLiveExchangeRate(isManual = false) {
-      if (rateStatusBadge) {
-        rateStatusBadge.textContent = '抓取即時匯率...';
-        rateStatusBadge.className = 'text-[10px] font-bold bg-sky-100 text-sky-700 px-1.5 py-0.5 rounded';
-      }
-      try {
-        let liveRate = null;
-        try {
-          const res = await fetch('https://open.er-api.com/v6/latest/JPY');
-          if (res.ok) {
-            const data = await res.json();
-            if (data && data.rates && data.rates.TWD) {
-              liveRate = Number(data.rates.TWD).toFixed(4);
-            }
-          }
-        } catch (e) {
-          // 切換備援匯率 API
-        }
-
-        if (!liveRate) {
-          const fallbackRes = await fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/jpy.json');
-          if (fallbackRes.ok) {
-            const fallbackData = await fallbackRes.json();
-            if (fallbackData && fallbackData.jpy && fallbackData.jpy.twd) {
-              liveRate = Number(fallbackData.jpy.twd).toFixed(4);
-            }
-          }
-        }
-
-        if (liveRate) {
-          rateInput.value = liveRate;
-          localStorage.setItem('hokkaido_2026_rate', liveRate);
-          if (rateStatusBadge) {
-            rateStatusBadge.textContent = '🟢 即時匯率';
-            rateStatusBadge.className = 'text-[10px] font-bold bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded';
-          }
-          if (jpyInput.value) {
-            convertFromJPY();
-          } else if (twdInput.value) {
-            convertFromTWD();
-          }
-          if (typeof renderExpenses === 'function') {
-            renderExpenses();
-          }
-          if (isManual) {
-            showToast(`已更新最新即時匯率：${liveRate}`);
-          }
-        } else {
-          throw new Error('No rate data');
-        }
-      } catch (err) {
-        if (rateStatusBadge) {
-          rateStatusBadge.textContent = '快取/手動匯率';
-          rateStatusBadge.className = 'text-[10px] font-bold bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded';
-        }
-        if (isManual) {
-          showToast('目前無網路，使用快取匯率');
-        }
-      }
+    function updateRateBadges(rate) {
+      const expBadge = document.getElementById('expense-rate-badge');
+      if (expBadge) expBadge.textContent = '匯率 ' + rate;
     }
 
     function saveRateAndRecalc() {
-      localStorage.setItem('hokkaido_2026_rate', rateInput.value);
-      if (rateStatusBadge) {
-        rateStatusBadge.textContent = '✏️ 手動調整';
-        rateStatusBadge.className = 'text-[10px] font-bold bg-slate-200 text-slate-700 px-1.5 py-0.5 rounded';
+      const rate = getRate();
+      localStorage.setItem(RATE_STORAGE_KEY, rate.toString());
+      updateRateBadges(rate);
+      const badge = document.getElementById('rate-status-badge');
+      if (badge) {
+        badge.textContent = '手動設定';
+        badge.className = 'text-[10px] font-bold bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded';
       }
-      if (jpyInput.value) {
-        convertFromJPY();
-      } else if (twdInput.value) {
-        convertFromTWD();
-      }
-      if (typeof renderExpenses === 'function') {
-        renderExpenses();
-      }
+      convertFromJPY();
+      if (typeof renderExpenseList === 'function') renderExpenseList();
     }
 
-    function updateExtras(jpyVal) {
-      const rate = getRate();
-      const jpy = parseFloat(jpyVal) || 0;
+    async function fetchLiveExchangeRate(showNotify = false) {
+      const badge = document.getElementById('rate-status-badge');
+      const rateInput = document.getElementById('exchange-rate');
+      if (badge) {
+        badge.textContent = '同步中...';
+        badge.className = 'text-[10px] font-bold bg-sky-100 text-sky-700 px-1.5 py-0.5 rounded';
+      }
 
-      // 退稅 10% (除以 1.1)
-      const taxFreeJpy = Math.round(jpy / 1.1);
-      const taxFreeTwd = Math.round(taxFreeJpy * rate);
-
-      // 7人與9人均分
-      const split7Jpy = Math.round(jpy / 7);
-      const split7Twd = Math.round(split7Jpy * rate);
-      const split9Jpy = Math.round(jpy / 9);
-      const split9Twd = Math.round(split9Jpy * rate);
-
-      document.getElementById('tax-free-twd').textContent = `NT$ ${taxFreeTwd.toLocaleString()}`;
-      document.getElementById('tax-free-jpy').textContent = `¥${taxFreeJpy.toLocaleString()}`;
-      document.getElementById('split-7-twd').textContent = `NT$ ${split7Twd.toLocaleString()}`;
-      document.getElementById('split-7-jpy').textContent = `¥${split7Jpy.toLocaleString()} / 人`;
-      document.getElementById('split-9-twd').textContent = `NT$ ${split9Twd.toLocaleString()}`;
-      document.getElementById('split-9-jpy').textContent = `¥${split9Jpy.toLocaleString()} / 人`;
+      try {
+        const res = await fetch('https://open.er-api.com/v6/latest/JPY');
+        const data = await res.json();
+        if (data && data.result === 'success' && data.rates && data.rates.TWD) {
+          const liveRate = parseFloat(data.rates.TWD.toFixed(4));
+          if (rateInput) rateInput.value = liveRate;
+          localStorage.setItem(RATE_STORAGE_KEY, liveRate.toString());
+          updateRateBadges(liveRate);
+          if (badge) {
+            badge.textContent = '● 即時匯率';
+            badge.className = 'text-[10px] font-bold bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded';
+          }
+          convertFromJPY();
+          if (typeof renderExpenseList === 'function') renderExpenseList();
+          if (showNotify) showToast('已更新最新即時匯率：1 JPY = ' + liveRate + ' TWD');
+          return;
+        }
+        throw new Error('Invalid rate data');
+      } catch (e) {
+        const saved = localStorage.getItem(RATE_STORAGE_KEY);
+        const fallbackRate = saved ? parseFloat(saved) : 0.215;
+        if (rateInput) rateInput.value = fallbackRate;
+        updateRateBadges(fallbackRate);
+        if (badge) {
+          badge.textContent = saved ? '離線快取匯率' : '預設匯率';
+          badge.className = 'text-[10px] font-bold bg-slate-200 text-slate-700 px-1.5 py-0.5 rounded';
+        }
+        convertFromJPY();
+        if (showNotify) showToast('目前無網路，沿用快取匯率：' + fallbackRate);
+      }
     }
 
     function convertFromJPY() {
-      const jpy = parseFloat(jpyInput.value);
-      if (isNaN(jpy)) {
-        twdInput.value = '';
-        updateExtras(0);
+      const jpyEl = document.getElementById('input-jpy');
+      const twdEl = document.getElementById('input-twd');
+      if (!jpyEl || !twdEl) return;
+
+      const jpy = parseFloat(jpyEl.value);
+      const rate = getRate();
+
+      if (isNaN(jpy) || jpy <= 0) {
+        twdEl.value = '';
+        updateSplitStats(0, rate);
         return;
       }
-      const twd = Math.round(jpy * getRate());
-      twdInput.value = twd;
-      updateExtras(jpy);
+
+      const twd = Math.round(jpy * rate);
+      twdEl.value = twd;
+      updateSplitStats(jpy, rate);
     }
 
     function convertFromTWD() {
-      const twd = parseFloat(twdInput.value);
-      if (isNaN(twd)) {
-        jpyInput.value = '';
-        updateExtras(0);
+      const jpyEl = document.getElementById('input-jpy');
+      const twdEl = document.getElementById('input-twd');
+      if (!jpyEl || !twdEl) return;
+
+      const twd = parseFloat(twdEl.value);
+      const rate = getRate();
+
+      if (isNaN(twd) || twd <= 0) {
+        jpyEl.value = '';
+        updateSplitStats(0, rate);
         return;
       }
-      const jpy = Math.round(twd / getRate());
-      jpyInput.value = jpy;
-      updateExtras(jpy);
+
+      const jpy = Math.round(twd / rate);
+      jpyEl.value = jpy;
+      updateSplitStats(jpy, rate);
+    }
+
+    function updateSplitStats(jpy, rate) {
+      const taxFreeJpy = Math.round(jpy / 1.1);
+      const taxFreeTwd = Math.round(taxFreeJpy * rate);
+      const split7Jpy = Math.round(jpy / 7);
+      const split7Twd = Math.round((jpy * rate) / 7);
+      const split9Jpy = Math.round(jpy / 9);
+      const split9Twd = Math.round((jpy * rate) / 9);
+
+      const elTfTwd = document.getElementById('tax-free-twd');
+      const elTfJpy = document.getElementById('tax-free-jpy');
+      const elS7Twd = document.getElementById('split-7-twd');
+      const elS7Jpy = document.getElementById('split-7-jpy');
+      const elS9Twd = document.getElementById('split-9-twd');
+      const elS9Jpy = document.getElementById('split-9-jpy');
+
+      if (elTfTwd) elTfTwd.textContent = 'NT$ ' + taxFreeTwd.toLocaleString();
+      if (elTfJpy) elTfJpy.textContent = '¥' + taxFreeJpy.toLocaleString();
+      if (elS7Twd) elS7Twd.textContent = 'NT$ ' + split7Twd.toLocaleString();
+      if (elS7Jpy) elS7Jpy.textContent = '¥' + split7Jpy.toLocaleString() + ' / 人';
+      if (elS9Twd) elS9Twd.textContent = 'NT$ ' + split9Twd.toLocaleString();
+      if (elS9Jpy) elS9Jpy.textContent = '¥' + split9Jpy.toLocaleString() + ' / 人';
     }
 
     function addJpy(amount) {
-      const current = parseFloat(jpyInput.value) || 0;
-      jpyInput.value = current + amount;
+      const jpyEl = document.getElementById('input-jpy');
+      if (!jpyEl) return;
+      const current = parseFloat(jpyEl.value) || 0;
+      jpyEl.value = current + amount;
       convertFromJPY();
     }
 
     function clearCalc() {
-      jpyInput.value = '';
-      twdInput.value = '';
-      updateExtras(0);
+      const jpyEl = document.getElementById('input-jpy');
+      const twdEl = document.getElementById('input-twd');
+      if (jpyEl) jpyEl.value = '';
+      if (twdEl) twdEl.value = '';
+      updateSplitStats(0, getRate());
+      showToast('已清除計算機金額');
     }
 
-    // ==================== 共同記帳與收據拍照邏輯 ====================
-    const tourMembers = ['洹', '吉', 'lin', '哥', '丹', '臻', '歐巴', '德', '歐'];
-    const first7Members = ['洹', '吉', 'lin', '哥', '丹', '臻', '歐巴'];
-    let selectedSplitMembers = [...tourMembers];
+    // ==================== 共同支出記帳與收據紀錄邏輯 ====================
+    const ALL_MEMBERS = ['洹', '吉', 'lin', '勲', '丹', '臻', '歐巴', '德', '歐'];
+    const EARLY_7_MEMBERS = ['洹', '吉', 'lin', '勲', '丹', '臻', '歐巴'];
+    const EXPENSE_STORAGE_KEY = 'hokkaido_2026_expenses_v1';
+
+    let selectedSplitMembers = [...ALL_MEMBERS];
     let currentReceiptBase64 = '';
+    let expensesList = [];
 
-    // 預設三筆包車費用（出發 7 人均分，預設代墊人為 洹，可隨時修改或刪除）
-    const defaultCharterExpenses = [
-      {
-        id: 'exp_charter_1',
-        title: '12/09 包車（新千歲機場 ➔ 星野）',
-        currency: 'JPY',
-        amount: 50000,
-        twdAmount: Math.round(50000 * getRate()),
-        rateUsed: getRate(),
-        payer: '洹',
-        participants: [...first7Members],
-        receipt: '',
-        time: '12/09 預設'
-      },
-      {
-        id: 'exp_charter_2',
-        title: '12/11 包車（星野 ➔ 美瑛・青池 ➔ 旭川）',
-        currency: 'JPY',
-        amount: 80000,
-        twdAmount: Math.round(80000 * getRate()),
-        rateUsed: getRate(),
-        payer: '洹',
-        participants: [...first7Members],
-        receipt: '',
-        time: '12/11 預設'
-      },
-      {
-        id: 'exp_charter_3',
-        title: '12/12 包車（旭川 ➔ 旭山動物園 ➔ 札幌）',
-        currency: 'JPY',
-        amount: 70000,
-        twdAmount: Math.round(70000 * getRate()),
-        rateUsed: getRate(),
-        payer: '洹',
-        participants: [...first7Members],
-        receipt: '',
-        time: '12/12 預設'
-      }
-    ];
-
-    let storedExpenses = localStorage.getItem('hokkaido_2026_expenses');
-    let expensesData = storedExpenses ? JSON.parse(storedExpenses) : defaultCharterExpenses;
-    if (!storedExpenses) {
-      localStorage.setItem('hokkaido_2026_expenses', JSON.stringify(expensesData));
-    }
-
-    function renderSplitMemberButtons() {
+    function initExpenseForm() {
       const grid = document.getElementById('exp-members-grid');
+      if (!grid) return;
       grid.innerHTML = '';
-      tourMembers.forEach(member => {
-        const isSelected = selectedSplitMembers.includes(member);
+      ALL_MEMBERS.forEach(name => {
+        const isChecked = selectedSplitMembers.includes(name);
         const btn = document.createElement('button');
         btn.type = 'button';
-        btn.textContent = member;
-        btn.onclick = () => toggleSplitMember(member);
-        btn.className = `px-2.5 py-1 rounded-lg text-xs font-bold border transition ${
-          isSelected
-            ? 'bg-blue-600 text-white border-blue-600 shadow-xs'
-            : 'bg-white text-slate-500 border-slate-200'
-        }`;
+        btn.textContent = (isChecked ? '✓ ' : '') + name;
+        btn.className = isChecked
+          ? 'text-xs font-bold bg-blue-600 text-white px-2.5 py-1 rounded-lg shadow-2xs transition active:scale-95'
+          : 'text-xs font-bold bg-white text-slate-600 border border-slate-200 px-2.5 py-1 rounded-lg transition active:scale-95';
+        btn.onclick = () => {
+          if (selectedSplitMembers.includes(name)) {
+            if (selectedSplitMembers.length === 1) {
+              showToast('至少需要 1 位分攤成員唷！');
+              return;
+            }
+            selectedSplitMembers = selectedSplitMembers.filter(m => m !== name);
+          } else {
+            selectedSplitMembers.push(name);
+          }
+          initExpenseForm();
+        };
         grid.appendChild(btn);
       });
-      document.getElementById('split-count-label').textContent = selectedSplitMembers.length;
+      const countLabel = document.getElementById('split-count-label');
+      if (countLabel) countLabel.textContent = selectedSplitMembers.length;
     }
 
-    function toggleSplitMember(member) {
-      if (selectedSplitMembers.includes(member)) {
-        if (selectedSplitMembers.length > 1) {
-          selectedSplitMembers = selectedSplitMembers.filter(m => m !== member);
-        } else {
-          showToast('至少需選擇 1 位分攤人');
-        }
-      } else {
-        selectedSplitMembers.push(member);
-      }
-      renderSplitMemberButtons();
+    function selectSplitGroup(type) {
+      selectedSplitMembers = type === '7' ? [...EARLY_7_MEMBERS] : [...ALL_MEMBERS];
+      initExpenseForm();
     }
 
-    function selectSplitGroup(groupType) {
-      selectedSplitMembers = groupType === '7' ? [...first7Members] : [...tourMembers];
-      renderSplitMemberButtons();
-    }
-
-    // 壓縮收據照片以節省儲存空間
     function handleReceiptUpload(event) {
       const file = event.target.files[0];
       if (!file) return;
@@ -1790,24 +1868,25 @@
         img.onload = function() {
           const canvas = document.createElement('canvas');
           const maxWidth = 800;
-          let width = img.width;
-          let height = img.height;
-
-          if (width > maxWidth) {
-            height = Math.round((height * maxWidth) / width);
-            width = maxWidth;
+          let w = img.width;
+          let h = img.height;
+          if (w > maxWidth) {
+            h = Math.round((h * maxWidth) / w);
+            w = maxWidth;
           }
-
-          canvas.width = width;
-          canvas.height = height;
+          canvas.width = w;
+          canvas.height = h;
           const ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0, width, height);
+          ctx.drawImage(img, 0, 0, w, h);
+          currentReceiptBase64 = canvas.toDataURL('image/jpeg', 0.72);
 
-          currentReceiptBase64 = canvas.toDataURL('image/jpeg', 0.65);
-          document.getElementById('receipt-preview-img').src = currentReceiptBase64;
-          document.getElementById('receipt-preview-box').classList.remove('hidden');
-          document.getElementById('btn-clear-receipt').classList.remove('hidden');
-          showToast('收據照片已載入');
+          const prevImg = document.getElementById('receipt-preview-img');
+          const prevBox = document.getElementById('receipt-preview-box');
+          const btnClear = document.getElementById('btn-clear-receipt');
+          if (prevImg) prevImg.src = currentReceiptBase64;
+          if (prevBox) prevBox.classList.remove('hidden');
+          if (btnClear) btnClear.classList.remove('hidden');
+          showToast('已載入收據照片！');
         };
         img.src = e.target.result;
       };
@@ -1816,508 +1895,437 @@
 
     function clearReceiptPreview() {
       currentReceiptBase64 = '';
-      document.getElementById('exp-receipt-input').value = '';
-      document.getElementById('receipt-preview-img').src = '';
-      document.getElementById('receipt-preview-box').classList.add('hidden');
-      document.getElementById('btn-clear-receipt').classList.add('hidden');
+      const input = document.getElementById('exp-receipt-input');
+      const prevBox = document.getElementById('receipt-preview-box');
+      const btnClear = document.getElementById('btn-clear-receipt');
+      if (input) input.value = '';
+      if (prevBox) prevBox.classList.add('hidden');
+      if (btnClear) btnClear.classList.add('hidden');
     }
 
     function addExpense() {
-      const title = document.getElementById('exp-title').value.trim();
-      const currency = document.getElementById('exp-currency').value;
-      const amount = parseFloat(document.getElementById('exp-amount').value);
-      const payer = document.getElementById('exp-payer').value;
+      const titleEl = document.getElementById('exp-title');
+      const currencyEl = document.getElementById('exp-currency');
+      const amountEl = document.getElementById('exp-amount');
+      const payerEl = document.getElementById('exp-payer');
+      if (!titleEl || !currencyEl || !amountEl || !payerEl) return;
+
+      const title = titleEl.value.trim();
+      const currency = currencyEl.value;
+      const amount = parseFloat(amountEl.value);
+      const payer = payerEl.value;
 
       if (!title) {
-        showToast('請輸入消費項目名稱');
+        showToast('請輸入消費項目名稱唷！');
         return;
       }
       if (isNaN(amount) || amount <= 0) {
-        showToast('請輸入正確的消費金額');
+        showToast('請輸入正確的消費金額！');
         return;
       }
 
-      const rate = getRate();
-      const twdAmount = currency === 'JPY' ? Math.round(amount * rate) : Math.round(amount);
       const now = new Date();
-      const timeStr = `${now.getMonth() + 1}/${now.getDate()} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+      const timeStr = (now.getMonth() + 1) + '/' + now.getDate() + ' ' +
+                      String(now.getHours()).padStart(2, '0') + ':' +
+                      String(now.getMinutes()).padStart(2, '0');
 
       const newRecord = {
-        id: 'exp_' + Date.now(),
+        id: Date.now(),
         title,
         currency,
         amount,
-        twdAmount,
-        rateUsed: rate,
         payer,
-        participants: [...selectedSplitMembers],
+        splitMembers: [...selectedSplitMembers],
         receipt: currentReceiptBase64,
         time: timeStr
       };
 
-      try {
-        expensesData.unshift(newRecord);
-        localStorage.setItem('hokkaido_2026_expenses', JSON.stringify(expensesData));
-      } catch (err) {
-        // 若照片過多導致儲存空間滿，提示刪除舊照片
-        expensesData.shift();
-        showToast('手機儲存空間已滿，請刪除部分舊收據照片');
-        return;
-      }
+      expensesList.unshift(newRecord);
+      saveExpenses();
+      renderExpenseList();
 
-      document.getElementById('exp-title').value = '';
-      document.getElementById('exp-amount').value = '';
+      titleEl.value = '';
+      amountEl.value = '';
       clearReceiptPreview();
-      renderExpenses();
-      showToast('已新增共同支出紀錄！');
+      showToast('已新增支出紀錄！');
     }
 
     function deleteExpense(id) {
-      expensesData = expensesData.filter(item => item.id !== id);
-      localStorage.setItem('hokkaido_2026_expenses', JSON.stringify(expensesData));
-      renderExpenses();
+      expensesList = expensesList.filter(item => item.id !== id);
+      saveExpenses();
+      renderExpenseList();
       showToast('已刪除該筆支出');
     }
 
+    function saveExpenses() {
+      try {
+        localStorage.setItem(EXPENSE_STORAGE_KEY, JSON.stringify(expensesList));
+      } catch (e) {
+        showToast('儲存空間已滿，建議刪除部分舊收據照片');
+      }
+    }
+
+    function loadExpenses() {
+      try {
+        const raw = localStorage.getItem(EXPENSE_STORAGE_KEY);
+        expensesList = raw ? JSON.parse(raw) : [];
+      } catch (e) {
+        expensesList = [];
+      }
+    }
+
+    function renderExpenseList() {
+      const rate = getRate();
+      const listEl = document.getElementById('expense-list');
+      const countEl = document.getElementById('expense-count');
+      const totalEl = document.getElementById('total-expense-twd');
+      const settleEl = document.getElementById('settlement-grid');
+      if (!listEl || !countEl || !totalEl || !settleEl) return;
+
+      countEl.textContent = expensesList.length;
+
+      const balances = {};
+      ALL_MEMBERS.forEach(m => balances[m] = 0);
+      let grandTotalTwd = 0;
+
+      expensesList.forEach(item => {
+        const twdVal = item.currency === 'JPY' ? item.amount * rate : item.amount;
+        grandTotalTwd += twdVal;
+        balances[item.payer] = (balances[item.payer] || 0) + twdVal;
+        const share = twdVal / item.splitMembers.length;
+        item.splitMembers.forEach(m => {
+          balances[m] = (balances[m] || 0) - share;
+        });
+      });
+
+      totalEl.textContent = '總計 NT$ ' + Math.round(grandTotalTwd).toLocaleString();
+
+      settleEl.innerHTML = '';
+      ALL_MEMBERS.forEach(m => {
+        const net = Math.round(balances[m]);
+        const card = document.createElement('div');
+        card.className = 'bg-slate-50 border border-slate-100 rounded-xl p-2 text-center';
+        let colorClass = 'text-slate-500';
+        let prefix = '';
+        if (net > 0) {
+          colorClass = 'text-emerald-600';
+          prefix = '+';
+        } else if (net < 0) {
+          colorClass = 'text-rose-600';
+        }
+        card.innerHTML = `
+          <div class="text-xs font-extrabold text-slate-800">${m}</div>
+          <div class="text-xs font-black font-mono mt-0.5 ${colorClass}">${prefix}${net.toLocaleString()}</div>
+        `;
+        settleEl.appendChild(card);
+      });
+
+      if (expensesList.length === 0) {
+        listEl.innerHTML = '<div class="text-center py-6 text-xs text-slate-400">目前還沒有共同支出紀錄，上方輸入即可開始記帳 ✍️</div>';
+        return;
+      }
+
+      listEl.innerHTML = '';
+      expensesList.forEach(item => {
+        const twdVal = Math.round(item.currency === 'JPY' ? item.amount * rate : item.amount);
+        const origStr = item.currency === 'JPY'
+          ? `¥${item.amount.toLocaleString()} (約 NT$ ${twdVal.toLocaleString()})`
+          : `NT$ ${item.amount.toLocaleString()}`;
+
+        const row = document.createElement('div');
+        row.className = 'bg-white border border-slate-200/80 rounded-xl p-3 space-y-2';
+        row.innerHTML = `
+          <div class="flex items-start justify-between gap-2">
+            <div>
+              <div class="flex items-center gap-1.5">
+                <span class="text-xs font-black text-slate-900">${item.title}</span>
+                <span class="text-[10px] text-slate-400">${item.time}</span>
+              </div>
+              <div class="text-xs font-extrabold text-blue-700 font-mono mt-0.5">${origStr}</div>
+            </div>
+            <button onclick="deleteExpense(${item.id})" class="text-[11px] font-bold text-slate-400 hover:text-rose-600 px-1.5 py-0.5">刪除</button>
+          </div>
+          <div class="flex items-center justify-between text-[11px] bg-slate-50 rounded-lg px-2.5 py-1.5">
+            <span><strong class="text-amber-700">${item.payer}</strong> 先付 ・ ${item.splitMembers.length}人分 (${item.splitMembers.join('、')})</span>
+            ${item.receipt ? `<button onclick="openReceiptModal(${item.id})" class="text-blue-600 font-bold underline shrink-0 ml-2">🖼️ 看收據</button>` : ''}
+          </div>
+        `;
+        listEl.appendChild(row);
+      });
+    }
+
     function openReceiptModal(id) {
-      const item = expensesData.find(e => e.id === id);
+      const item = expensesList.find(x => x.id === id);
       if (!item || !item.receipt) return;
-      document.getElementById('modal-receipt-title').textContent = `${item.title}（收據）`;
-      document.getElementById('modal-receipt-img').src = item.receipt;
-      document.getElementById('receipt-modal').classList.remove('hidden');
+      const titleEl = document.getElementById('modal-receipt-title');
+      const imgEl = document.getElementById('modal-receipt-img');
+      const modalEl = document.getElementById('receipt-modal');
+      if (titleEl) titleEl.textContent = item.title + '（收據照片）';
+      if (imgEl) imgEl.src = item.receipt;
+      if (modalEl) modalEl.classList.remove('hidden');
     }
 
     function closeReceiptModal() {
-      document.getElementById('receipt-modal').classList.add('hidden');
-    }
-
-    function renderExpenses() {
-      document.getElementById('expense-rate-badge').textContent = `匯率 ${getRate()}`;
-      document.getElementById('expense-count').textContent = expensesData.length;
-
-      const listEl = document.getElementById('expense-list');
-      listEl.innerHTML = '';
-
-      // 計算每個人的淨收支（台幣）
-      const balances = {};
-      tourMembers.forEach(m => balances[m] = 0);
-      let totalTwd = 0;
-
-      if (expensesData.length === 0) {
-        listEl.innerHTML = `<div class="text-center py-6 text-xs text-slate-400">尚無共同支出紀錄，上方輸入即可開始記帳！</div>`;
-      } else {
-        expensesData.forEach(item => {
-          totalTwd += item.twdAmount;
-          balances[item.payer] = (balances[item.payer] || 0) + item.twdAmount;
-          const share = item.twdAmount / item.participants.length;
-          item.participants.forEach(p => {
-            balances[p] = (balances[p] || 0) - share;
-          });
-
-          const card = document.createElement('div');
-          card.className = 'bg-white border border-slate-200 rounded-xl p-3 space-y-2';
-          const origAmountText = item.currency === 'JPY'
-            ? `¥${item.amount.toLocaleString()} <span class="text-slate-400 font-normal">(約 NT$ ${item.twdAmount.toLocaleString()})</span>`
-            : `NT$ ${item.amount.toLocaleString()}`;
-
-          card.innerHTML = `
-            <div class="flex items-start justify-between gap-2">
-              <div>
-                <div class="flex items-center gap-1.5">
-                  <span class="text-xs font-extrabold text-slate-900">${item.title}</span>
-                  <span class="text-[10px] text-slate-400">${item.time}</span>
-                </div>
-                <div class="text-xs font-black text-blue-700 font-mono mt-0.5">${origAmountText}</div>
-              </div>
-              <button onclick="deleteExpense('${item.id}')" class="text-[11px] text-slate-400 hover:text-red-500 px-1.5 py-0.5">刪除</button>
-            </div>
-            <div class="flex items-center justify-between text-[11px] pt-1 border-t border-slate-100">
-              <div class="text-slate-600">
-                <span class="font-bold text-amber-700">${item.payer}</span> 先付 ・ ${item.participants.length}人分 (${item.participants.join('、')})
-              </div>
-              ${item.receipt ? `<button onclick="openReceiptModal('${item.id}')" class="shrink-0 font-bold text-sky-700 bg-sky-50 border border-sky-200 px-2 py-0.5 rounded-md active:scale-95">🧾 看收據</button>` : ''}
-            </div>
-          `;
-          listEl.appendChild(card);
-        });
-      }
-
-      document.getElementById('total-expense-twd').textContent = `總計 NT$ ${totalTwd.toLocaleString()}`;
-
-      // 渲染每人結算網格
-      const settlementGrid = document.getElementById('settlement-grid');
-      settlementGrid.innerHTML = '';
-      tourMembers.forEach(m => {
-        const net = Math.round(balances[m]);
-        const isPositive = net > 0;
-        const isNegative = net < 0;
-        const box = document.createElement('div');
-        box.className = `rounded-xl p-2 border text-center ${
-          isPositive ? 'bg-emerald-50/70 border-emerald-200' :
-          isNegative ? 'bg-rose-50/70 border-rose-200' : 'bg-slate-50 border-slate-200'
-        }`;
-        box.innerHTML = `
-          <div class="text-xs font-extrabold text-slate-800">${m}</div>
-          <div class="text-xs font-black font-mono mt-0.5 ${
-            isPositive ? 'text-emerald-700' : isNegative ? 'text-rose-600' : 'text-slate-400'
-          }">
-            ${isPositive ? '+' : ''}${net.toLocaleString()}
-          </div>
-        `;
-        settlementGrid.appendChild(box);
-      });
+      const modalEl = document.getElementById('receipt-modal');
+      if (modalEl) modalEl.classList.add('hidden');
     }
 
     function copyExpenseSummary() {
-      if (expensesData.length === 0) {
-        showToast('目前尚無支出紀錄可複製');
+      if (expensesList.length === 0) {
+        showToast('目前沒有支出明細可複製唷！');
         return;
       }
-      let lines = ['📒 【2026 北海道 9人團・共同支出明細】'];
-      expensesData.forEach((item, idx) => {
-        const amt = item.currency === 'JPY' ? `¥${item.amount.toLocaleString()} (約NT$${item.twdAmount})` : `NT$${item.amount.toLocaleString()}`;
-        lines.push(`${idx + 1}. ${item.title}：${amt}｜${item.payer}先付 (${item.participants.length}人分)`);
+      const rate = getRate();
+      let lines = ['📒【2026 北海道之旅 共同支出明細】', `（參考匯率：1 JPY = ${rate} TWD）`, ''];
+      let totalTwd = 0;
+      expensesList.forEach((item, idx) => {
+        const twd = Math.round(item.currency === 'JPY' ? item.amount * rate : item.amount);
+        totalTwd += twd;
+        const amtText = item.currency === 'JPY' ? `¥${item.amount} (約NT$${twd})` : `NT$${item.amount}`;
+        lines.push(`${idx + 1}. ${item.title}：${amtText}｜${item.payer}先付（${item.splitMembers.length}人分）`);
       });
+      lines.push('', `💰 總計約：NT$ ${totalTwd.toLocaleString()}`);
       copyText(lines.join('\n'), '已複製全部支出明細，可直接貼到群組！');
     }
 
-    // 初始化共同記帳介面
-    renderSplitMemberButtons();
-    renderExpenses();
-
-    // 開啟網頁時自動抓取最新即時匯率
-    fetchLiveExchangeRate(false);
-
-    // ==================== Papago & Google 翻譯與手指日文邏輯 ====================
-    function openTranslator(provider) {
-      const text = document.getElementById('trans-input').value.trim();
-      const encoded = encodeURIComponent(text);
-
-      if (provider === 'papago') {
-        // Papago 支援帶入 st 參數自動繁中翻日文
-        const url = text
-          ? `https://papago.naver.com/?sk=zh-TW&tk=ja&st=${encoded}`
-          : `https://papago.naver.com/?sk=zh-TW&tk=ja`;
-        window.open(url, '_blank');
-      } else {
-        // Google 翻譯支援帶入 text 參數自動繁中翻日文
-        const url = text
-          ? `https://translate.google.com/?sl=zh-TW&tl=ja&text=${encoded}&op=translate`
-          : `https://translate.google.com/?sl=zh-TW&tl=ja&op=translate`;
-        window.open(url, '_blank');
-      }
-    }
-
-    const travelPhrases = [
+    // ==================== Papago & Google 翻譯與手指日文卡 ====================
+    const PHRASE_CARDS = [
       {
         tag: '餐廳訂位報到',
         zh: '我有訂位，訂位名字是 Tsai Ming Huan。',
-        jp: '予約しています。予約名は Tsai Ming Huan（ツァイ・ミンファン）です。'
+        jp: '予約しています。予約名は Tsai Ming Huan です。'
       },
       {
-        tag: '寄行李',
-        zh: '我們想把大行李箱寄到札幌的飯店（12/12 入住）。',
-        jp: 'スーツケースを札幌のホテル（12月12日チェックイン）まで宅急便で送りたいです。'
+        tag: '星野寄大行李',
+        zh: '不好意思，我想用黑貓宅急便寄這個大行李箱到札幌的飯店。',
+        jp: 'すみません、このスーツケースをヤマト運輸で札幌のホテルまで送りたいです。'
       },
       {
-        tag: '領取行李',
-        zh: '請問有事先寄到飯店的行李箱到了嗎？（12/12 入住 / Tsai Ming Huan）',
-        jp: '12月12日チェックインの Tsai Ming Huan です。事前に送った荷物は届いていますか？'
+        tag: '札幌飯店領行李',
+        zh: '我有事前寄宅配行李過來，訂房名字是 Tsai Ming Huan。',
+        jp: '事前に宅配便で荷物を送っています。予約名は Tsai Ming Huan です。'
       },
       {
-        tag: '餐廳候位',
-        zh: '不好意思，我們總共有 7 個人（可以分兩桌坐）。',
+        tag: '餐廳候位 7 人分兩桌',
+        zh: '不好意思，我們總共有 7 個人，可以分成兩桌坐沒有關係。',
         jp: 'すみません、全部で7名です。2つのテーブルに分かれても大丈夫です。'
       },
       {
-        tag: '餐廳點餐',
-        zh: '不好意思，請問有中文菜單或推薦的招牌菜嗎？',
-        jp: 'すみません、中国語のメニューはありますか？また、おすすめの料理は何ですか？'
+        tag: '點餐與中文菜單',
+        zh: '請問有中文菜單嗎？請問店裡最推薦的招牌菜是什麼？',
+        jp: '中国語のメニューはありますか？このお店のおすすめは何ですか？'
       },
       {
-        tag: '購物退稅',
+        tag: '購物退稅詢問',
         zh: '請問這筆消費可以辦理免稅（Tax-Free）嗎？',
-        jp: 'すみません、これは免税（タックスフリー）の手続きができますか？'
+        jp: 'すみません、これは免税（タックスフリー）になりますか？'
       }
     ];
 
     function renderPhraseCards() {
       const container = document.getElementById('phrase-cards-container');
+      if (!container) return;
       container.innerHTML = '';
-      travelPhrases.forEach((p, index) => {
+      PHRASE_CARDS.forEach((p, idx) => {
         const card = document.createElement('div');
-        card.onclick = () => openPhraseModal(index);
-        card.className = 'bg-white border border-slate-200 hover:border-blue-300 rounded-xl p-3 cursor-pointer transition active:scale-[0.99] space-y-1';
+        card.className = 'bg-white border border-slate-200/90 hover:border-blue-400 rounded-2xl p-3.5 cursor-pointer transition active:scale-[0.99] shadow-2xs';
+        card.onclick = () => openPhraseModal(idx);
         card.innerHTML = `
-          <div class="flex items-center justify-between">
-            <span class="text-[10px] font-bold bg-sky-50 text-sky-700 px-2 py-0.5 rounded-md">${p.tag}</span>
-            <span class="text-[11px] font-bold text-blue-600">點擊放大 ↗</span>
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-[11px] font-extrabold bg-sky-100 text-sky-800 px-2.5 py-0.5 rounded-full">${p.tag}</span>
+            <span class="text-[11px] font-bold text-blue-600">🔍 點擊放大顯示</span>
           </div>
-          <div class="text-xs sm:text-sm font-extrabold text-slate-900 pt-0.5">${p.jp}</div>
-          <div class="text-xs text-slate-500">${p.zh}</div>
+          <div class="text-sm font-black text-slate-900 mt-1">${p.jp}</div>
+          <div class="text-xs text-slate-500 mt-0.5">${p.zh}</div>
         `;
         container.appendChild(card);
       });
     }
 
-    function openPhraseModal(index) {
-      const p = travelPhrases[index];
-      document.getElementById('modal-phrase-tag').textContent = p.tag;
-      document.getElementById('modal-phrase-jp').textContent = p.jp;
-      document.getElementById('modal-phrase-zh').textContent = p.zh;
-      document.getElementById('modal-phrase-copy-btn').onclick = () => copyText(p.jp, '已複製日文句子！');
-      document.getElementById('phrase-modal').classList.remove('hidden');
+    function openPhraseModal(idx) {
+      const p = PHRASE_CARDS[idx];
+      if (!p) return;
+      const tagEl = document.getElementById('modal-phrase-tag');
+      const jpEl = document.getElementById('modal-phrase-jp');
+      const zhEl = document.getElementById('modal-phrase-zh');
+      const copyBtn = document.getElementById('modal-phrase-copy-btn');
+      const modalEl = document.getElementById('phrase-modal');
+      if (tagEl) tagEl.textContent = p.tag;
+      if (jpEl) jpEl.textContent = p.jp;
+      if (zhEl) zhEl.textContent = p.zh;
+      if (copyBtn) copyBtn.onclick = () => copyText(p.jp, '已複製日文句子！');
+      if (modalEl) modalEl.classList.remove('hidden');
     }
 
     function closePhraseModal() {
-      document.getElementById('phrase-modal').classList.add('hidden');
+      const modalEl = document.getElementById('phrase-modal');
+      if (modalEl) modalEl.classList.add('hidden');
     }
 
-    // ==================== 封面出發倒數計時器邏輯 ====================
-    function updateDepartureCountdown() {
-      // 目標時間：2026/12/09 06:15:00 (台灣時間 UTC+8)
-      const departureTime = new Date('2026-12-09T06:15:00+08:00').getTime();
-      const endTime = new Date('2026-12-14T19:05:00+08:00').getTime();
-      const now = Date.now();
-      const diff = departureTime - now;
-
-      const labelEl = document.getElementById('countdown-label');
-      const timerEl = document.getElementById('countdown-timer');
-      if (!labelEl || !timerEl) return;
-
-      if (diff <= 0) {
-        if (now <= endTime) {
-          labelEl.textContent = '⛄ 北海道雪國之旅進行中！';
-          timerEl.innerHTML = '<span class="text-xs font-black bg-amber-400 text-slate-950 px-3 py-1.5 rounded-xl">🎉 歡樂出發中</span>';
-        } else {
-          labelEl.textContent = '✨ 2026 北海道之旅圓滿完成';
-          timerEl.innerHTML = '<span class="text-xs font-bold bg-white/25 text-white px-3 py-1.5 rounded-xl">回憶滿滿 ❄️</span>';
-        }
-        return;
+    function openTranslator(engine) {
+      const inputEl = document.getElementById('trans-input');
+      const text = inputEl ? inputEl.value.trim() : '';
+      const encoded = encodeURIComponent(text);
+      let url = '';
+      if (engine === 'papago') {
+        url = text
+          ? `https://papago.naver.com/?sk=zh-TW&tk=ja&st=${encoded}`
+          : 'https://papago.naver.com/?sk=zh-TW&tk=ja';
+      } else {
+        url = text
+          ? `https://translate.google.com/?sl=zh-TW&tl=ja&text=${encoded}&op=translate`
+          : 'https://translate.google.com/?sl=zh-TW&tl=ja&op=translate';
       }
-
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const secs = Math.floor((diff % (1000 * 60)) / 1000);
-
-      document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
-      document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
-      document.getElementById('cd-mins').textContent = String(mins).padStart(2, '0');
-      document.getElementById('cd-secs').textContent = String(secs).padStart(2, '0');
+      window.open(url, '_blank');
     }
 
-    updateDepartureCountdown();
-    setInterval(updateDepartureCountdown, 1000);
-
-    // ==================== 北海道伴手禮採買推薦單邏輯 ====================
-    const defaultSouvenirs = [
-      // 美瑛選果
-      {
-        id: 's_biei_1',
-        loc: 'biei',
-        locLabel: '🌽 D3 美瑛選果',
-        name: '美瑛選果「玉米麵包（びえいのコーンぱん）」',
-        tag: '出爐秒殺',
-        desc: '不加一滴水與砂糖的夢幻玉米麵包！若美瑛沒買到，Day 6 新千歲機場國內線 2F 也可排隊碰運氣。'
-      },
-      {
-        id: 's_biei_2',
-        loc: 'biei',
-        locLabel: '🌽 D3 美瑛選果',
-        name: '美瑛選果 凍乾草莓巧克力 / 蘆筍濃湯包',
-        tag: '質感送禮',
-        desc: '美瑛在地農產製成，文青包裝超有質感，適合送長輩或重要親友。'
-      },
-      // 小樽堺町通
-      {
-        id: 's_otaru_1',
-        loc: 'otaru',
-        locLabel: '🍰 D5 小樽堺町通',
-        name: 'LeTAO「雙層起司蛋糕」＆「紅茶巧克力餅乾 (Thé Noir)」',
-        tag: '小樽必買',
-        desc: '起司蛋糕建議本店頂樓現吃（回台改在機場買冷凍版）；紅茶巧克力夾心餅常溫好帶、分送同事首選！'
-      },
-      {
-        id: 's_otaru_2',
-        loc: 'otaru',
-        locLabel: '🍰 D5 小樽堺町通',
-        name: '北菓樓「北海道開拓米菓（おかき）」＆「夢不思議大泡芙」',
-        tag: '鹹香涮嘴',
-        desc: '泡芙現場吃；開拓米菓推薦帆立貝、甜蝦、昆布口味，體積輕巧又涮嘴。'
-      },
-      {
-        id: 's_otaru_3',
-        loc: 'otaru',
-        locLabel: '🍰 D5 小樽堺町通',
-        name: '六花亭「蘭姆葡萄奶油夾心餅」＆「草莓白巧克力」',
-        tag: '經典招牌',
-        desc: '葡萄夾心餅常溫保存約9天（建議 Day 6 機場買最新鮮）；圓鐵盒整顆凍乾草莓巧克力超好送禮。'
-      },
-      // 札幌＆新千歲機場
-      {
-        id: 's_air_1',
-        loc: 'airport',
-        locLabel: '✈️ D4–6 札幌＆機場',
-        name: 'SNOWS「冬季限定 生巧克力夾心餅 (SNOWSAND)」',
-        tag: '冬季限定必搶',
-        desc: '每年11月～4月冬季限定！新千歲機場國內線與大丸百貨常大排長龍，放牧牛乳生巧克力超濃郁。'
-      },
-      {
-        id: 's_air_2',
-        loc: 'airport',
-        locLabel: '✈️ D4–6 札幌＆機場',
-        name: '札幌農學校「北海道牛奶餅乾」＆「現烤起司塔」',
-        tag: '高CP值分送',
-        desc: '奶香濃郁、價格親民（12入約650円），辦公室分送首選；機場分店現烤起司塔與霜淇淋必吃！'
-      },
-      {
-        id: 's_air_3',
-        loc: 'airport',
-        locLabel: '✈️ D4–6 札幌＆機場',
-        name: 'Kinotoya（きのとや）「極上牛乳霜淇淋」＆「BAKE起司塔」',
-        tag: '機場冠軍',
-        desc: '新千歲機場連續多年冠軍霜淇淋，口感像鮮奶油般紮實濃郁，Day 6 報到前必吃一支！'
-      },
-      {
-        id: 's_air_4',
-        loc: 'airport',
-        locLabel: '✈️ D4–6 札幌＆機場',
-        name: "ROYCE'「生巧克力（原味/抹茶）」＆「巧克力洋芋片」",
-        tag: '免稅店買',
-        desc: '出境前在機場免稅店直接買生巧克力＋保冷袋（約100円）最方便，不用一路冰在飯店。'
-      },
-      {
-        id: 's_air_5',
-        loc: 'airport',
-        locLabel: '✈️ D4–6 札幌＆機場',
-        name: 'Calbee「薯塊三姐妹」＆「黃金馬鈴薯 (インカのめざめ)」',
-        tag: '人氣零嘴',
-        desc: '紫色包裝薯塊三姐妹（馬鈴薯片＋昆布）與北海道限定黃金馬鈴薯，香氣甜度比一般薯條三兄弟更濃！'
-      },
-      {
-        id: 's_air_6',
-        loc: 'airport',
-        locLabel: '✈️ D4–6 札幌＆機場',
-        name: '柳月「三方六年輪蛋糕（小割獨立包裝版）」',
-        tag: '白樺樹年輪',
-        desc: '記得買「三方六の小割」獨立小包裝版本，不用自己切、分送親友超方便。'
-      }
+    // ==================== 伴手禮採買推薦單邏輯 ====================
+    const SOUVENIR_STORAGE_KEY = 'hokkaido_2026_souvenirs_v1';
+    const DEFAULT_SOUVENIRS = [
+      { id: 's1', cat: 'biei', loc: 'D3 美瑛選果', name: '美瑛選果「現烤玉米麵包」', desc: '不加一滴水與糖的夢幻限定麵包（新千歲機場國內線 2F 也有分店可碰運氣）。', tag: '限時秒殺' },
+      { id: 's2', cat: 'biei', loc: 'D3 美瑛選果', name: '美瑛選果 凍乾草莓巧克力／黑豆茶', desc: '文青質感包裝，美瑛當地農產製成，送長輩超體面。', tag: '質感伴手禮' },
+      { id: 's3', cat: 'otaru', loc: 'D5 小樽堺町通', name: 'LeTAO 紅茶巧克力餅乾 (Thé Noir)', desc: '大吉嶺紅茶香氣夾心餅乾，常溫保存好攜帶，分送同事首選。', tag: '常溫好帶' },
+      { id: 's4', cat: 'otaru', loc: 'D5 小樽堺町通', name: 'LeTAO 雙層起司蛋糕 (Fromage Double)', desc: '小樽必吃經典！回台建議 Day 6 在機場買冷凍版＋保冷袋。', tag: '招牌必買' },
+      { id: 's5', cat: 'otaru', loc: 'D5 小樽堺町通', name: '北菓樓 北海道開拓米菓 (おかき)', desc: '帆立貝、甜蝦、昆布、秋鮭口味，鹹香酥脆輕巧不佔重量。', tag: '鹹食首選' },
+      { id: 's6', cat: 'otaru', loc: 'D5 小樽堺町通', name: '六花亭 蘭姆葡萄奶油夾心餅＆草莓巧克力', desc: '蘭姆葡萄夾心保存期約 9 天，建議留到 Day 6 機場買最新鮮。', tag: '經典不敗' },
+      { id: 's7', cat: 'airport', loc: 'D4–6 札幌＆機場', name: 'SNOWS 冬季限定 生巧克力夾心餅', desc: '每年 11月–4月冬季限定！放牧牛乳生巧克力配貓舌餅，看到必搶。', tag: '冬季限定⭐' },
+      { id: 's8', cat: 'airport', loc: 'D4–6 札幌＆機場', name: '札幌農學校 北海道牛奶餅乾', desc: '奶香極濃、價格親民，CP 值最高的辦公室分送伴手禮。', tag: '高CP值' },
+      { id: 's9', cat: 'airport', loc: 'D4–6 札幌＆機場', name: "ROYCE' 生巧克力 (原味／抹茶)＆巧克力洋芋片", desc: 'Day 6 出境前在機場免稅店直接買＋保冷袋最方便，不用一路冰飯店。', tag: '機場必掃' },
+      { id: 's10', cat: 'airport', loc: 'D4–6 札幌＆機場', name: 'Calbee 薯塊三姐妹 (いも子とこぶ太郎)／黃金馬鈴薯', desc: '紫色包裝馬鈴薯片配酥脆昆布超涮嘴，比薯條三兄弟更稀有！', tag: '北海道限定' },
+      { id: 's11', cat: 'airport', loc: 'D4–6 札幌＆機場', name: '柳月 三方六年輪蛋糕（小割獨立包裝版）', desc: '白樺樹紋路年輪蛋糕，買「小割」獨立小包裝不用自己切。', tag: '獨立包裝' }
     ];
 
-    let customSouvenirs = JSON.parse(localStorage.getItem('hokkaido_2026_custom_souvenirs') || '[]');
-    let souvenirChecked = JSON.parse(localStorage.getItem('hokkaido_2026_souvenir_checked') || '{}');
+    let souvenirState = { checked: {}, custom: [] };
     let currentSouvenirFilter = 'all';
 
-    function filterSouvenir(loc, btnEl) {
-      currentSouvenirFilter = loc;
-      document.querySelectorAll('.souvenir-filter-btn').forEach(btn => {
-        btn.classList.remove('bg-slate-800', 'text-white');
-        btn.classList.add('bg-white', 'text-slate-600', 'border', 'border-slate-200');
-      });
-      if (btnEl) {
-        btnEl.classList.remove('bg-white', 'text-slate-600', 'border', 'border-slate-200');
-        btnEl.classList.add('bg-slate-800', 'text-white');
+    function loadSouvenirState() {
+      try {
+        const raw = localStorage.getItem(SOUVENIR_STORAGE_KEY);
+        if (raw) souvenirState = JSON.parse(raw);
+      } catch (e) {
+        souvenirState = { checked: {}, custom: [] };
       }
+    }
+
+    function saveSouvenirState() {
+      try {
+        localStorage.setItem(SOUVENIR_STORAGE_KEY, JSON.stringify(souvenirState));
+      } catch (e) {}
+    }
+
+    function filterSouvenir(cat, btn) {
+      currentSouvenirFilter = cat;
+      document.querySelectorAll('.souvenir-filter-btn').forEach(b => {
+        b.classList.remove('bg-slate-800', 'text-white');
+        b.classList.add('bg-white', 'text-slate-600', 'border', 'border-slate-200');
+      });
+      if (btn) {
+        btn.classList.remove('bg-white', 'text-slate-600', 'border', 'border-slate-200');
+        btn.classList.add('bg-slate-800', 'text-white');
+      }
+      renderSouvenirs();
+    }
+
+    function toggleSouvenir(id) {
+      souvenirState.checked[id] = !souvenirState.checked[id];
+      saveSouvenirState();
       renderSouvenirs();
     }
 
     function addCustomSouvenir() {
       const input = document.getElementById('custom-souvenir-input');
-      const name = input.value.trim();
-      if (!name) {
-        showToast('請輸入想買的伴手禮名稱');
+      if (!input) return;
+      const val = input.value.trim();
+      if (!val) {
+        showToast('請輸入想買的伴手禮名稱唷！');
         return;
       }
-      const newItem = {
-        id: 's_custom_' + Date.now(),
-        loc: 'custom',
-        locLabel: '📝 我的自訂清單',
-        name: name,
-        tag: '自訂項目',
-        desc: '自行新增的採買目標（點擊右側可刪除）',
-        isCustom: true
-      };
-      customSouvenirs.unshift(newItem);
-      localStorage.setItem('hokkaido_2026_custom_souvenirs', JSON.stringify(customSouvenirs));
+      souvenirState.custom.unshift({
+        id: 'c_' + Date.now(),
+        cat: 'custom',
+        loc: '我的自訂清單',
+        name: val,
+        desc: '自行新增的採買目標',
+        tag: '自訂'
+      });
       input.value = '';
+      saveSouvenirState();
       renderSouvenirs();
-      showToast(`已加入伴手禮清單：${name}`);
+      showToast('已加入伴手禮清單！');
     }
 
-    function deleteCustomSouvenir(e, id) {
-      e.stopPropagation();
-      customSouvenirs = customSouvenirs.filter(item => item.id !== id);
-      delete souvenirChecked[id];
-      localStorage.setItem('hokkaido_2026_custom_souvenirs', JSON.stringify(customSouvenirs));
-      localStorage.setItem('hokkaido_2026_souvenir_checked', JSON.stringify(souvenirChecked));
+    function deleteCustomSouvenir(id, event) {
+      if (event) event.stopPropagation();
+      souvenirState.custom = souvenirState.custom.filter(x => x.id !== id);
+      delete souvenirState.checked[id];
+      saveSouvenirState();
       renderSouvenirs();
-      showToast('已移除該自訂項目');
-    }
-
-    function toggleSouvenirCheck(id) {
-      souvenirChecked[id] = !souvenirChecked[id];
-      localStorage.setItem('hokkaido_2026_souvenir_checked', JSON.stringify(souvenirChecked));
-      renderSouvenirs();
+      showToast('已移除自訂項目');
     }
 
     function renderSouvenirs() {
       const container = document.getElementById('souvenir-list-container');
+      const badge = document.getElementById('souvenir-progress-badge');
       if (!container) return;
 
-      const allItems = [...customSouvenirs, ...defaultSouvenirs];
-      const boughtCount = allItems.filter(item => !!souvenirChecked[item.id]).length;
-      const badge = document.getElementById('souvenir-progress-badge');
-      if (badge) {
-        badge.textContent = `已買 ${boughtCount} / ${allItems.length} 件`;
-      }
+      const allItems = [...souvenirState.custom, ...DEFAULT_SOUVENIRS];
+      const boughtCount = allItems.filter(item => souvenirState.checked[item.id]).length;
+      if (badge) badge.textContent = `已買 ${boughtCount} / ${allItems.length} 件`;
 
       const filtered = currentSouvenirFilter === 'all'
         ? allItems
-        : allItems.filter(item => item.loc === currentSouvenirFilter);
+        : allItems.filter(item => item.cat === currentSouvenirFilter);
 
-      container.innerHTML = '';
       if (filtered.length === 0) {
-        container.innerHTML = `<div class="text-center py-6 text-xs text-slate-400">此分類目前沒有項目，可在上方輸入新增！</div>`;
+        container.innerHTML = '<div class="text-center py-6 text-xs text-slate-400">此分類目前沒有項目，可在上方輸入框自行新增 🎁</div>';
         return;
       }
 
+      container.innerHTML = '';
       filtered.forEach(item => {
-        const isBought = !!souvenirChecked[item.id];
+        const isDone = !!souvenirState.checked[item.id];
         const card = document.createElement('div');
-        card.onclick = () => toggleSouvenirCheck(item.id);
-        card.className = `p-3 rounded-xl border cursor-pointer transition-all select-none space-y-1.5 ${
-          isBought
-            ? 'bg-slate-50 border-slate-200 opacity-70'
-            : 'bg-white border-slate-200/90 hover:border-pink-300 shadow-xs'
+        card.onclick = () => toggleSouvenir(item.id);
+        card.className = `flex items-start gap-3 p-3 rounded-2xl border transition cursor-pointer select-none ${
+          isDone
+            ? 'bg-pink-50/70 border-pink-200 opacity-75'
+            : 'bg-white border-slate-200/90 hover:border-pink-300 shadow-2xs'
         }`;
 
         card.innerHTML = `
-          <div class="flex items-start justify-between gap-2">
-            <div class="flex items-start gap-2.5">
-              <div class="w-5 h-5 mt-0.5 rounded-md flex items-center justify-center shrink-0 border transition-colors ${
-                isBought ? 'bg-pink-500 border-pink-500 text-white' : 'border-slate-300 bg-white'
-              }">
-                ${isBought ? '<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>' : ''}
-              </div>
-              <div>
-                <div class="flex flex-wrap items-center gap-1.5 mb-0.5">
-                  <span class="text-[10px] font-bold bg-sky-50 text-sky-700 px-2 py-0.5 rounded-md">${item.locLabel}</span>
-                  <span class="text-[10px] font-bold bg-pink-50 text-pink-700 px-2 py-0.5 rounded-md">${item.tag}</span>
-                </div>
-                <div class="text-xs sm:text-sm font-extrabold ${isBought ? 'line-through text-slate-400' : 'text-slate-900'}">${item.name}</div>
+          <div class="mt-0.5 w-5 h-5 rounded-lg flex items-center justify-center shrink-0 transition ${
+            isDone ? 'bg-pink-500 text-white' : 'border-2 border-slate-300 bg-white'
+          }">
+            ${isDone ? '<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>' : ''}
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center justify-between gap-1.5 flex-wrap">
+              <span class="text-[10px] font-bold bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md">${item.loc}</span>
+              <div class="flex items-center gap-1.5">
+                <span class="text-[10px] font-bold bg-amber-100 text-amber-800 px-2 py-0.5 rounded-md">${item.tag}</span>
+                ${item.cat === 'custom' ? `<button type="button" onclick="deleteCustomSouvenir('${item.id}', event)" class="text-[11px] font-bold text-slate-400 hover:text-rose-600 px-1">✕</button>` : ''}
               </div>
             </div>
-            ${item.isCustom ? `<button type="button" onclick="deleteCustomSouvenir(event, '${item.id}')" class="shrink-0 text-[11px] text-slate-400 hover:text-red-500 px-1.5 py-0.5">刪除</button>` : ''}
+            <div class="text-xs sm:text-sm font-black mt-1 ${isDone ? 'line-through text-slate-400' : 'text-slate-900'}">${item.name}</div>
+            <p class="text-[11px] text-slate-500 mt-0.5 leading-relaxed">${item.desc}</p>
           </div>
-          <p class="text-[11px] text-slate-600 leading-relaxed pl-7">${item.desc}</p>
         `;
         container.appendChild(card);
       });
     }
 
-    renderSouvenirs();
-    renderPhraseCards();
+    // 頁面載入完成後統一初始化
+    window.addEventListener('DOMContentLoaded', () => {
+      updateDepartureCountdown();
+      setInterval(updateDepartureCountdown, 1000);
+      fetchLiveExchangeRate(false);
+      initExpenseForm();
+      loadExpenses();
+      renderExpenseList();
+      renderPhraseCards();
+      loadSouvenirState();
+      renderSouvenirs();
+    });
   </script>
 </body>
 </html>
