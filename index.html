@@ -402,7 +402,7 @@
                 <span class="text-amber-700 font-bold">✨ 建議時段：</span>Day 1 下午 15:30、晚上 21:30；Day 2 下午 16:30。
               </li>
               <li>• <strong>🥂 免費迎賓茶飲：</strong>The Tower 1F「<strong>Cafe Lounge Yukku Yukku</strong>」免費供應咖啡、紅茶、氣泡酒與果汁（10:00–22:00）。</li>
-              <li>• <strong>🚌 免費園區巡迴巴士：</strong>串聯 The Tower、螢火蟲街道、森林餐廳、霧冰平台纜車站與愛絲冰城（約 15–20 分一班）。</li>
+              <li>• <strong>🚌 免費園區巡迴巴士：</strong>串聯 The Tower、螢火蟲街道、森林餐廳、微笑海灘＆木林之湯與霧冰平台纜車站（約 15–20 分一班）。</li>
             </ul>
           </div>
 
@@ -579,12 +579,15 @@
         <div id="itinerary-map" class="w-full h-64 sm:h-72 rounded-2xl overflow-hidden border-2 border-sky-200 cute-map-bg relative shadow-inner select-none"></div>
 
         <!-- 點選站點後的可愛氣泡資訊卡（固定高度防止上下跳動） -->
-        <div id="cute-map-popup" class="h-[88px] overflow-hidden bg-sky-50/90 border border-sky-200 rounded-xl px-3 py-2 flex items-center justify-between gap-2 text-xs">
-          <div class="flex items-center gap-2 min-w-0">
-            <span id="cute-popup-emoji" class="text-xl leading-none shrink-0">⛄</span>
+        <div id="cute-map-popup" class="h-[116px] overflow-hidden bg-sky-50/90 border border-sky-200 rounded-xl px-3.5 py-2.5 flex items-center justify-between gap-2 text-xs">
+          <div class="flex items-start gap-2.5 min-w-0">
+            <span id="cute-popup-emoji" class="text-2xl leading-none shrink-0 mt-0.5">⛄</span>
             <div class="min-w-0">
-              <div id="cute-popup-title" class="font-black text-slate-900 truncate">點選地圖上的可愛圖釘查看詳情！</div>
-              <div id="cute-popup-note" class="text-[11px] text-slate-600 line-clamp-2 leading-snug mt-0.5">支援 D1–D6 每日專屬路線放大預覽</div>
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <span id="cute-popup-title" class="font-black text-slate-900 truncate">點選地圖上的可愛圖釘查看詳情！</span>
+                <span id="cute-popup-time" class="text-[11px] font-extrabold bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full">全天導覽</span>
+              </div>
+              <div id="cute-popup-note" class="text-xs text-slate-600 line-clamp-2 leading-snug mt-1">支援 D1–D6 每日專屬路線放大預覽，文字已鎖定防閃爍</div>
             </div>
           </div>
           <span class="shrink-0 text-[10px] font-black bg-white text-sky-700 border border-sky-200 px-2 py-0.5 rounded-full">詳細資訊</span>
@@ -637,23 +640,18 @@
         <div class="space-y-3 border-l-2 border-slate-200 ml-2 pl-3.5 text-xs sm:text-sm">
           <div class="relative">
             <span class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-blue-600 ring-4 ring-white"></span>
-            <div class="font-bold text-slate-900">07:15 出發 ➔ 07:30 SORA 高空早餐 🍣</div>
-            <p class="text-slate-600 text-xs mt-0.5">走室內連通道到 Risonare 北館搭電梯上 31 樓，大口吃海鮮刺身跟鮭魚親子丼！</p>
+            <div class="font-bold text-slate-900">09:30–11:30 霧冰平台纜車 ➔ GAO 雪地玩樂 ⛄</div>
+            <p class="text-slate-600 text-xs mt-0.5">搭乘雲海纜車登上海拔 1,088m 霧冰平台，欣賞雪白樹冰與日高山脈絕景、走 Cloud Walk 喝棉花糖熱飲，下山玩雪盆。</p>
           </div>
           <div class="relative">
             <span class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-blue-600 ring-4 ring-white"></span>
-            <div class="font-bold text-slate-900">09:00 霧冰平台纜車 ➔ 11:00 GAO 雪地玩樂 ⛄</div>
-            <p class="text-slate-600 text-xs mt-0.5">08:45 在 Risonare 門口搭接駁車去纜車站；上山走 Cloud Walk、喝棉花糖熱飲，下山玩雪盆或雪上摩托車。</p>
-          </div>
-          <div class="relative">
-            <span class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-blue-600 ring-4 ring-white"></span>
-            <div class="font-bold text-slate-900">12:30 Foresta Mall 午餐 ➔ 14:30 微笑海灘 ➔ 16:30 木林之湯 ♨️</div>
-            <p class="text-slate-600 text-xs mt-0.5">午餐吃成吉思汗 KING 或居酒屋；下午去 30°C 人造浪泳池玩水，<strong>16:30 接續旁邊的木林之湯</strong>泡露天雪見風呂！</p>
+            <div class="font-bold text-slate-900">12:30 午餐 ➔ 14:00–17:00 微笑海灘＆木林之湯 ♨️</div>
+            <p class="text-slate-600 text-xs mt-0.5">下午先到日本最大室內造浪泳池「微笑海灘」玩水，傍晚接續享受雪見露天風呂「木林之湯」與桑拿！</p>
           </div>
           <div class="relative">
             <span class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-amber-500 ring-4 ring-white"></span>
-            <div class="font-bold text-amber-800">18:30 hal 晚餐 ➔ 20:30【重要】大廳寄大行李 📦</div>
-            <p class="text-slate-600 text-xs mt-0.5">大啖長腳蟹腳跟牛排；飯後回一樓櫃檯把大行李箱寄去札幌飯店（21:00 還有聖誕無人機燈光秀唷）。</p>
+            <div class="font-bold text-amber-800">17:30 螢火蟲街道散步 ➔ 19:00 森林餐廳 Nininupuri ➔ 20:30 寄大行李 📦</div>
+            <p class="text-slate-600 text-xs mt-0.5">17:30–18:30 逛 Ski-in/Ski-out 螢火蟲街道選品店與雪景；19:00–20:30 享用百年蝦夷松林環繞的森林餐廳自助晚餐；飯後回 The Tower 櫃檯把大行李寄去札幌飯店。</p>
           </div>
         </div>
       </article>
@@ -674,8 +672,8 @@
         <div class="space-y-3 border-l-2 border-amber-200 ml-2 pl-3.5 text-xs sm:text-sm">
           <div class="relative">
             <span class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-amber-500 ring-4 ring-white"></span>
-            <div class="font-bold text-slate-900">07:00 早鳥早餐 ➔ 08:00 戶外大合照 ➔ 09:15 退房</div>
-            <p class="text-slate-600 text-xs mt-0.5">森林餐廳或 hal 一開門入場免排隊；雙塔前雪地拍團體合照。</p>
+            <div class="font-bold text-slate-900">13:40 聖誕樹之木 ➔ 14:15 ひとさじ農場製造所＆美瑛選果散策</div>
+            <p class="text-slate-600 text-xs mt-0.5">聖誕樹雪景拍照；順路視冬季營業狀況機動停留<strong>ひとさじ農場製造所</strong>（手工果醬餅乾），再到美瑛選果逛<strong>美瑛小麥工房</strong>（100%美瑛產夢之力小麥吐司、黑豆／紅豆麵包；註：玉米麵包為新千歲機場店限定）。</p>
           </div>
           <div class="relative">
             <span class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-amber-500 ring-4 ring-white"></span>
@@ -890,7 +888,7 @@
         <div class="space-y-3 border-l-2 border-slate-200 ml-2 pl-3.5 text-xs sm:text-sm">
           <div class="relative">
             <span class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-4 ring-white"></span>
-            <div class="font-bold text-slate-900">09:15 札幌東急 Stay 退房 ➔ 步行 5 分鐘至「南 3 條薄野」巴士站</div>
+            <div class="font-bold text-slate-900">09:20 札幌東急 Stay 退房 ➔ 步行 5–6 分鐘至「南 3 條薄野」巴士站</div>
             <p class="text-slate-600 text-xs mt-0.5">7 位回程團員直接推大行李步行前往巴士站（沿札幌站前通往南步行約 5–6 分鐘；若遇雪大亦可走地下街「Pole Town」直通薄野站出口避雪），搭 <strong>09:25 或 09:40 利木津巴士</strong>直達機場國內線。</p>
             <a href="https://www.google.com/maps/search/?api=1&query=南3条すすきの+空港連絡バス乗り場" target="_blank" class="inline-flex items-center gap-1 mt-1.5 text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-lg">
               📍 開啟 Google 地圖 (南 3 條薄野機場巴士站)
@@ -1731,27 +1729,42 @@
     }
 
     // ==================== 可愛插畫版每日行程路線地圖 (Custom Cute SVG Map) ====================
-    // 經緯度對應可愛北海道地圖畫布座標 (viewBox 0 0 420 260)
-    function geoToCuteXY(lat, lng) {
-      // 北海道主要區域經緯度範圍：lat 42.65~43.95, lng 140.85~142.85
-      const x = ((lng - 140.82) / (142.88 - 140.82)) * 330 + 45;
-      const y = ((43.92 - lat) / (43.92 - 42.65)) * 195 + 32;
-      return { x: Math.round(x * 10) / 10, y: Math.round(y * 10) / 10 };
+    function getLabelOffset(align, labelW) {
+      switch (align) {
+        case 'top':
+          return { rx: -labelW / 2, ry: -58, tx: 0, ty: -46.5, anchor: 'middle' };
+        case 'top-left':
+          return { rx: -labelW - 10, ry: -46, tx: -labelW / 2 - 10, ty: -34.5, anchor: 'middle' };
+        case 'top-right':
+          return { rx: 14, ry: -46, tx: 14 + labelW / 2, ty: -34.5, anchor: 'middle' };
+        case 'left':
+          return { rx: -labelW - 18, ry: -34, tx: -18 - labelW / 2, ty: -22.5, anchor: 'middle' };
+        case 'right':
+          return { rx: 18, ry: -34, tx: 18 + labelW / 2, ty: -22.5, anchor: 'middle' };
+        case 'bottom-left':
+          return { rx: -labelW + 8, ry: 7, tx: 8 - labelW / 2, ty: 18.5, anchor: 'middle' };
+        case 'bottom-right':
+          return { rx: -8, ry: 7, tx: -8 + labelW / 2, ty: 18.5, anchor: 'middle' };
+        case 'bottom':
+        default:
+          return { rx: -labelW / 2, ry: 7, tx: 0, ty: 18.5, anchor: 'middle' };
+      }
     }
 
     const DAILY_MAP_DATA = {
       all: {
         title: '⛄ 6天北海道雪國環線可愛地圖',
-        subtitle: '新千歲 ➔ 星野 ➔ 美瑛 ➔ 旭川 ➔ 札幌・小樽 ➔ 新千歲',
+        subtitle: '新千歲 ➔ 星野 ➔ 美瑛 ➔ 旭川 ➔ 小樽 ➔ 札幌 ➔ 新千歲',
         gmapsUrl: 'https://www.google.com/maps/dir/New+Chitose+Airport/Hoshino+Resorts+TOMAMU/Biei+Station/Asahiyama+Zoo/Otaru+Canal/Sapporo+Station/New+Chitose+Airport',
         color: '#2563eb',
+        viewBox: '0 0 420 260',
         stops: [
-          { name: '1. 新千歲機場', emoji: '✈️', coords: [42.7752, 141.6923], note: '12/09 抵達 ＆ 12/14 掃貨返台' },
-          { name: '2. 星野 TOMAMU', emoji: '🏔️', coords: [43.0631, 142.6256], note: 'D1–D2 連住2晚・霧冰平台・木林之湯' },
-          { name: '3. 美瑛・白金青池', emoji: '🎄', coords: [43.4936, 142.6140], note: 'D3 包車・聖誕樹＆16:30青池點燈' },
-          { name: '4. 旭川・旭山動物園', emoji: '🐧', coords: [43.7681, 142.4796], note: 'D3 宿旭川大浴場・D4 企鵝散步' },
-          { name: '5. 札幌市區 (東急Stay)', emoji: '🏨', coords: [43.0588, 141.3563], note: 'D4–D5 9人合體・大通白色燈樹節' },
-          { name: '6. 小樽運河＆堺町通', emoji: '🍰', coords: [43.1993, 141.0016], note: 'D5 JR 浪漫一日遊・海鮮甜點' }
+          { name: '1. 新千歲機場', emoji: '✈️', time: 'D1 ＆ D6', x: 176, y: 205, align: 'bottom', note: '12/09 11:00 抵達包車出發；12/14 國內線掃貨返台' },
+          { name: '2. 星野 TOMAMU', emoji: '🏔️', time: 'D1–D2', x: 282, y: 172, align: 'right', note: '連住2晚・霧冰平台、微笑海灘＆木林之湯、森林餐廳' },
+          { name: '3. 美瑛雪原', emoji: '🎄', time: 'D3 白天', x: 278, y: 108, align: 'right', note: 'D3 包車・純平炸蝦丼、聖誕樹、美瑛選果＆青池點燈' },
+          { name: '4. 旭川＆動物園', emoji: '🐧', time: 'D3–D4', x: 256, y: 54, align: 'top', note: 'D3 宿 JR INN 旭川大浴場；D4 旭山動物園企鵝散步' },
+          { name: '5. 小樽運河', emoji: '🍰', time: 'D5 全日', x: 84, y: 128, align: 'top', note: 'D5 搭 JR 浪漫一日遊・三角市場海鮮、堺町通＆運河點燈' },
+          { name: '6. 札幌市區', emoji: '🏨', time: 'D4–D6', x: 136, y: 156, align: 'left', note: '9人合體宿東急 Stay・大通白色燈樹節＆薄野美食泡湯' }
         ]
       },
       d1: {
@@ -1759,22 +1772,24 @@
         subtitle: '新千歲機場 ➔ 永旺千歲店採買 ➔ 星野 TOMAMU The Tower',
         gmapsUrl: 'https://www.google.com/maps/dir/New+Chitose+Airport/AEON+Chitose/Hoshino+Resorts+TOMAMU+The+Tower',
         color: '#0284c7',
+        viewBox: '85 110 265 145',
         stops: [
-          { name: '1. 新千歲機場', emoji: '✈️', coords: [42.7752, 141.6923], note: '11:00 抵達・12:00 包車出發' },
-          { name: '2. 永旺千歲店 (AEON)', emoji: '🛒', coords: [42.8256, 141.6517], note: '12:10 中停買午餐與鮮奶零食' },
-          { name: '3. 星野 TOMAMU', emoji: '🏔️', coords: [43.0631, 142.6256], note: '15:00 入住・木林之湯・水之教會' }
+          { name: '1. 新千歲機場', emoji: '✈️', time: '11:00–12:00', x: 170, y: 215, align: 'bottom', note: '11:00 抵達・領行李後 12:00 包車準時出發' },
+          { name: '2. 永旺千歲店 (AEON)', emoji: '🛒', time: '12:10–13:10', x: 148, y: 175, align: 'left', note: '中停吃午餐、採買北海道鮮奶、水果與零食飲料' },
+          { name: '3. 星野 TOMAMU', emoji: '🏔️', time: '15:00 入住', x: 278, y: 168, align: 'top', note: 'The Tower 入住・迎賓茶飲、木林之湯＆20:30 水之教會' }
         ]
       },
       d2: {
-        title: '🏔️ DAY 2 (12/10) 星野度假村全區體驗地圖',
-        subtitle: 'The Tower ➔ Risonare SORA ➔ 霧冰平台 ➔ 微笑海灘＆木林之湯',
+        title: '🏔️ DAY 2 (12/10) 星野 TOMAMU 度假村全體驗地圖',
+        subtitle: '霧冰平台 ➔ 微笑海灘＆木林之湯 ➔ 螢火蟲街道 ➔ 森林餐廳 Nininupuri',
         gmapsUrl: 'https://www.google.com/maps/search/?api=1&query=Hoshino+Resorts+TOMAMU',
         color: '#2563eb',
+        viewBox: '185 185 110 90',
         stops: [
-          { name: '1. The Tower 雙塔', emoji: '🏨', coords: [43.0631, 142.6256], note: '出發＆晚上 20:30 櫃檯寄大行李' },
-          { name: '2. Risonare SORA', emoji: '🍣', coords: [43.0684, 142.6285], note: '07:30 31F 高空海鮮親子丼早餐' },
-          { name: '3. 霧冰平台纜車站', emoji: '🚡', coords: [43.0660, 142.6186], note: '09:00 搭纜車看霧冰・GAO雪地玩樂' },
-          { name: '4. 微笑海灘＆木林之湯', emoji: '♨️', coords: [43.0604, 142.6341], note: '14:30 恆溫泳池・16:30 露天風呂' }
+          { name: '1. 霧冰平台 ❄️', emoji: '❄️', time: '09:30–11:30', x: 222, y: 214, align: 'top-left', note: '搭乘雲海纜車登上海拔 1,088m 霧冰平台，欣賞雪白樹冰與日高山脈絕景。' },
+          { name: '2. 微笑海灘＆木林之湯 ♨️', emoji: '♨️', time: '14:00–17:00', x: 248, y: 226, align: 'right', note: '日本最大室內造浪泳池玩水，傍晚享受雪見露天風呂「木林之湯」。' },
+          { name: '3. 螢火蟲街道 🌲', emoji: '🌲', time: '17:30–18:30', x: 218, y: 244, align: 'left', note: 'Ski-in/Ski-out 商店街與夜間雪地散步，逛限定戶外選品店與甜點咖啡。' },
+          { name: '4. 森林餐廳 Nininupuri 🍖', emoji: '🍖', time: '19:00–20:30', x: 246, y: 254, align: 'bottom-right', note: '百年蝦夷松林環繞的玻璃餐廳，享用海陸燒烤與鮭魚卵丼自助晚餐。' }
         ]
       },
       d3: {
@@ -1782,14 +1797,15 @@
         subtitle: '星野 ➔ 純平洋食 ➔ 聖誕樹 ➔ 美瑛選果 ➔ 青池＆白鬚瀑布 ➔ 旭川',
         gmapsUrl: 'https://www.google.com/maps/dir/Hoshino+Resorts+TOMAMU/Junpei+Biei/Christmas+Tree+Biei/Biei+Senka/Shirogane+Blue+Pond/Shirahige+Waterfall/JR+Inn+Asahikawa',
         color: '#d97706',
+        viewBox: '165 25 215 175',
         stops: [
-          { name: '1. 星野 TOMAMU', emoji: '🚐', coords: [43.0631, 142.6256], note: '10:00 包車準時出發' },
-          { name: '2. 純平洋食 junpei', emoji: '🍤', coords: [43.5882, 142.4675], note: '12:00 訂位午餐・招牌炸蝦丼' },
-          { name: '3. 聖誕樹之木', emoji: '🎄', coords: [43.6186, 142.4331], note: '13:40 雪原拍照 35 分鐘' },
-          { name: '4. 美瑛選果', emoji: '🍞', coords: [43.5918, 142.4632], note: '14:25 美瑛小麥工房麵包伴手禮' },
-          { name: '5. 白金青池', emoji: '💎', coords: [43.4936, 142.6140], note: '15:50 抵達・16:30 冬季點燈' },
-          { name: '6. 白鬚瀑布', emoji: '🌊', coords: [43.4754, 142.6391], note: '17:05 夜間藍色冰瀑點燈' },
-          { name: '7. JR INN 旭川', emoji: '♨️', coords: [43.7629, 142.3585], note: '18:45 入住・晚餐大黑屋烤羊肉' }
+          { name: '1. 星野 TOMAMU', emoji: '🚐', time: '10:00 出發', x: 282, y: 175, align: 'bottom', note: '09:15 退房・10:00 包車準時北上美瑛' },
+          { name: '2. 純平洋食 junpei', emoji: '🍤', time: '12:00 訂位', x: 238, y: 126, align: 'left', note: '已訂位 12:00 午餐（用餐 1.5 小時，必點招牌炸蝦丼）' },
+          { name: '3. 聖誕樹之木', emoji: '🎄', time: '13:40–14:15', x: 222, y: 96, align: 'left', note: '雪原上的孤獨聖誕樹拍照 35 分鐘（建議用 2x 長焦拍）' },
+          { name: '4. 美瑛選果＆農場', emoji: '🍞', time: '14:15–15:25', x: 282, y: 102, align: 'right', note: '美瑛小麥工房買夢之力吐司與黑豆麵包（玉米麵包為機場限定）' },
+          { name: '5. 白金青池點燈', emoji: '💎', time: '15:50–17:00', x: 312, y: 130, align: 'right', note: '16:30 冬季點燈・把握 16:15–16:45 藍調時刻拍倒影' },
+          { name: '6. 白鬚瀑布', emoji: '🌊', time: '17:05–17:30', x: 325, y: 154, align: 'right', note: '夜間藍色河水與白色冰瀑點燈，停留 25 分鐘' },
+          { name: '7. JR INN 旭川', emoji: '♨️', time: '18:45 入住', x: 256, y: 54, align: 'top', note: '入住旭川站直結飯店・19:30 大黑屋烤羊肉＆5F大浴場' }
         ]
       },
       d4: {
@@ -1797,11 +1813,12 @@
         subtitle: 'JR INN 旭川 ➔ 旭山動物園企鵝散步 ➔ 札幌東急 Stay ➔ 薄野爐端燒',
         gmapsUrl: 'https://www.google.com/maps/dir/JR+Inn+Asahikawa/Asahiyama+Zoo/Tokyu+Stay+Sapporo/Susukino',
         color: '#ea580c',
+        viewBox: '75 25 265 170',
         stops: [
-          { name: '1. JR INN 旭川', emoji: '🚐', coords: [43.7629, 142.3585], note: '09:50 退房上包車' },
-          { name: '2. 旭山動物園', emoji: '🐧', coords: [43.7681, 142.4796], note: '11:00 國王企鵝散步・海豹北極熊' },
-          { name: '3. 札幌東急 Stay', emoji: '🧳', coords: [43.0588, 141.3563], note: '17:15 入住・領取星野寄來的大行李' },
-          { name: '4. 薄野「肉海鮮炉端 芯々」', emoji: '🍻', coords: [43.0542, 141.3526], note: '18:30 與德、歐會合・9人合體晚餐' }
+          { name: '1. JR INN 旭川', emoji: '🚐', time: '09:50 出發', x: 242, y: 66, align: 'left', note: '退房後行李直接放包車免寄物，前往旭山動物園' },
+          { name: '2. 旭山動物園', emoji: '🐧', time: '10:30–15:00', x: 288, y: 62, align: 'right', note: '11:00 國王企鵝散步・海豹館圓柱水槽＆北極熊館' },
+          { name: '3. 札幌東急 Stay', emoji: '🧳', time: '17:15 入住', x: 145, y: 142, align: 'left', note: '辦理入住並領取從星野寄來的大行李箱' },
+          { name: '4. 薄野「肉海鮮炉端 芯々」', emoji: '🍻', time: '18:30 晚餐', x: 162, y: 168, align: 'bottom', note: '與德、歐會合・全團 9 人大合體！餐後逛大通白色燈樹節' }
         ]
       },
       d5: {
@@ -1809,12 +1826,13 @@
         subtitle: 'JR 札幌站 ➔ 小樽三角市場 ➔ 堺町通 ➔ 小樽運河 ➔ 薄野風土燒肉＆湯香郷',
         gmapsUrl: 'https://www.google.com/maps/dir/Sapporo+Station/Otaru+Sankaku+Market/Otaru+Music+Box+Museum/Otaru+Canal/Susukino',
         color: '#4f46e5',
+        viewBox: '35 85 215 115',
         stops: [
-          { name: '1. JR 札幌站', emoji: '🚆', coords: [43.0686, 141.3508], note: '09:33 搭快速 Airport 31 號往小樽' },
-          { name: '2. 小樽三角市場', emoji: '🦀', coords: [43.1982, 140.9930], note: '10:15 帝王蟹、海膽鮭魚卵早午餐' },
-          { name: '3. 堺町通 (LeTAO/音樂盒)', emoji: '🍰', coords: [43.1922, 141.0065], note: '12:00 甜點散步＆玻璃工藝' },
-          { name: '4. 小樽運河 (淺草橋)', emoji: '🏮', coords: [43.1993, 141.0016], note: '16:00 藍調點燈・17:00 搭 JR 回札幌' },
-          { name: '5. 薄野風土燒肉＆湯香郷', emoji: '♨️', coords: [43.0528, 141.3548], note: '19:00 訂位燒肉・餐後天然溫泉泡湯' }
+          { name: '1. JR 札幌站', emoji: '🚆', time: '09:33 出發', x: 168, y: 148, align: 'right', note: '搭快速 Airport 31 號往小樽（建議加購 u-Seat 指定席）' },
+          { name: '2. 小樽三角市場', emoji: '🦀', time: '10:15–11:45', x: 88, y: 112, align: 'top', note: '出站步行 1 分鐘・現剖帝王蟹與海膽鮭魚卵早午餐' },
+          { name: '3. 堺町通甜點街', emoji: '🍰', time: '12:00–15:45', x: 112, y: 138, align: 'right', note: 'LeTAO 觀景台、北菓樓泡芙、六花亭＆小樽音樂盒堂' },
+          { name: '4. 小樽運河 (淺草橋)', emoji: '🏮', time: '16:00 點燈', x: 82, y: 134, align: 'left', note: '16:00 日落拍藍調煤油燈夜景，17:00 搭 JR 回札幌' },
+          { name: '5. 薄野風土燒肉＆湯香郷', emoji: '♨️', time: '19:00 晚餐', x: 162, y: 172, align: 'bottom', note: '19:00 訂位和牛燒肉・餐後步行至湯香郷天然溫泉泡湯' }
         ]
       },
       d6: {
@@ -1822,11 +1840,12 @@
         subtitle: '札幌東急 Stay ➔ 步行至南3條薄野巴士站 ➔ 新千歲機場國內線＆國際線',
         gmapsUrl: 'https://www.google.com/maps/dir/Tokyu+Stay+Sapporo/南3条すすきの+空港連絡バス乗り場/New+Chitose+Airport',
         color: '#059669',
+        viewBox: '75 115 210 130',
         stops: [
-          { name: '1. 札幌東急 Stay', emoji: '🧳', coords: [43.0588, 141.3563], note: '09:15 退房・7人推大行李步行約5分鐘' },
-          { name: '2. 南3條薄野巴士站', emoji: '🚌', coords: [43.0566, 141.3536], note: '搭 09:25 或 09:40 利木津巴士 (¥1,300)' },
-          { name: '3. 新千歲國內線 1F–3F', emoji: '🌽', coords: [42.7875, 141.6813], note: '10:40 1F人工寄物 ➔ 2F玉米麵包 ➔ 12:00領行李' },
-          { name: '4. 新千歲國際線 3F', emoji: '✈️', coords: [42.7752, 141.6923], note: '12:10 連通道步行 ➔ 12:30報到・華航 14:40 起飛' }
+          { name: '1. 札幌東急 Stay', emoji: '🧳', time: '09:15 退房', x: 134, y: 146, align: 'top', note: '7 位回程團員退房，推大行李步行約 5–6 分鐘出發' },
+          { name: '2. 南3條薄野巴士站', emoji: '🚌', time: '09:25 / 09:40', x: 126, y: 174, align: 'left', note: '搭利木津巴士（¥1,300 可刷西瓜卡）直達機場國內線' },
+          { name: '3. 新千歲國內線 1F–3F', emoji: '🌽', time: '10:40–12:00', x: 186, y: 196, align: 'right', note: '1F 人工寄物 ➔ 2F 搶玉米麵包 ➔ 3F 拉麵 ➔ 12:00 領行李' },
+          { name: '4. 新千歲國際線 3F', emoji: '✈️', time: '12:10 移動', x: 205, y: 222, align: 'bottom', note: '12:10 連通道步行 ➔ 12:30 報到・華航 14:40／長榮 15:20 起飛' }
         ]
       }
     };
@@ -1845,9 +1864,11 @@
       if (!stop) return;
       const emojiEl = document.getElementById('cute-popup-emoji');
       const titleEl = document.getElementById('cute-popup-title');
+      const timeEl = document.getElementById('cute-popup-time');
       const noteEl = document.getElementById('cute-popup-note');
       if (emojiEl) emojiEl.textContent = stop.emoji;
       if (titleEl) titleEl.textContent = stop.name;
+      if (timeEl) timeEl.textContent = stop.time || '重點站點';
       if (noteEl) noteEl.textContent = stop.note;
 
       // 僅切換已存在 DOM 節點的選取狀態，不重建 SVG 避免閃爍
@@ -1886,41 +1907,18 @@
 
       if (!mapEl) return;
 
-      // 計算各站點畫布座標並自動縮放 viewBox 聚焦當日路線
-      const pts = data.stops.map(s => geoToCuteXY(s.coords[0], s.coords[1]));
-      const xs = pts.map(p => p.x);
-      const ys = pts.map(p => p.y);
-      const minX = Math.min(...xs);
-      const maxX = Math.max(...xs);
-      const minY = Math.min(...ys);
-      const maxY = Math.max(...ys);
-
-      let vx = 0, vy = 0, vw = 420, vh = 260;
-      if (dayId !== 'all') {
-        const spanX = Math.max(maxX - minX, 75);
-        const spanY = Math.max(maxY - minY, 55);
-        const cx = (minX + maxX) / 2;
-        const cy = (minY + maxY) / 2;
-        vw = Math.min(420, Math.max(175, spanX + 115));
-        vh = vw * (260 / 420);
-        if (vh < spanY + 95) {
-          vh = Math.min(260, spanY + 95);
-          vw = vh * (420 / 260);
-        }
-        vx = Math.max(0, Math.min(420 - vw, cx - vw / 2));
-        vy = Math.max(0, Math.min(260 - vh, cy - vh / 2));
-      }
-
+      const vbParts = data.viewBox.split(' ').map(Number);
+      const vw = vbParts[2] || 420;
       const scaleFactor = vw / 420;
-      const pinScale = Math.max(0.55, Math.min(1, scaleFactor * 1.15));
+      const pinScale = Math.max(0.32, Math.min(1, scaleFactor * 1.15));
 
-      const pathD = pts.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
+      const pathD = data.stops.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
 
       const pinsSvg = data.stops.map((stop, idx) => {
-        const p = pts[idx];
         const labelW = stop.name.length * 7.8 + 14;
+        const pos = getLabelOffset(stop.align, labelW);
         return `
-          <g class="cute-pin-group ${idx === 0 ? 'is-selected' : ''}" onclick="selectCutePin('${dayId}', ${idx}, event)" transform="translate(${p.x}, ${p.y}) scale(${pinScale})">
+          <g class="cute-pin-group ${idx === 0 ? 'is-selected' : ''}" onclick="selectCutePin('${dayId}', ${idx}, event)" transform="translate(${stop.x}, ${stop.y}) scale(${pinScale})">
             <!-- 透明擴大觸控熱區，讓手指點擊圖釘精準無誤 -->
             <circle cx="0" cy="-22" r="24" fill="transparent" />
             <!-- 選中時的柔和外光圈 -->
@@ -1935,15 +1933,15 @@
             <!-- 左上角序號小徽章 -->
             <circle cx="-12" cy="-38" r="7" fill="#f59e0b" stroke="#ffffff" stroke-width="1.5" />
             <text x="-12" y="-35" text-anchor="middle" fill="#ffffff" font-size="8.5" font-weight="900" pointer-events="none">${idx + 1}</text>
-            <!-- 站名圓角白底標籤（設為穿透點擊，避免點文字閃爍） -->
-            <rect class="cute-label-pill" x="${-labelW / 2}" y="7" width="${labelW}" height="17" rx="8.5" fill="#ffffff" stroke="${data.color}" stroke-width="1.5" pointer-events="none" />
-            <text x="0" y="18.5" text-anchor="middle" fill="#0f172a" font-size="9.5" font-weight="900" pointer-events="none">${stop.name}</text>
+            <!-- 站名圓角白底標籤（依 align 方位錯開、設為穿透點擊防閃爍） -->
+            <rect class="cute-label-pill" x="${pos.rx}" y="${pos.ry}" width="${labelW}" height="17" rx="8.5" fill="#ffffff" stroke="${data.color}" stroke-width="1.5" pointer-events="none" />
+            <text x="${pos.tx}" y="${pos.ty}" text-anchor="${pos.anchor}" fill="#0f172a" font-size="9.5" font-weight="900" pointer-events="none">${stop.name}</text>
           </g>
         `;
       }).join('');
 
       mapEl.innerHTML = `
-        <svg viewBox="${vx.toFixed(1)} ${vy.toFixed(1)} ${vw.toFixed(1)} ${vh.toFixed(1)}" class="w-full h-full select-none" preserveAspectRatio="xMidYMid meet">
+        <svg viewBox="${data.viewBox}" class="w-full h-full select-none" preserveAspectRatio="xMidYMid meet">
           <defs>
             <filter id="snowIslandShadow" x="-10%" y="-10%" width="120%" height="120%">
               <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#0284c7" flood-opacity="0.22"/>
@@ -1959,12 +1957,10 @@
 
           <!-- 可愛裝飾小雪山、松樹與小雪人 -->
           <g opacity="0.55" pointer-events="none">
-            <!-- 大雪山系小山脈 -->
             <polygon points="295,95 312,68 329,95" fill="#bae6fd" />
             <polygon points="306,78 312,68 318,78" fill="#ffffff" />
             <polygon points="318,100 333,76 348,100" fill="#93c5fd" />
             <polygon points="328,84 333,76 338,84" fill="#ffffff" />
-            <!-- 可愛針葉樹林 -->
             <text x="235" y="135" font-size="14" pointer-events="none">🌲</text>
             <text x="252" y="142" font-size="11" pointer-events="none">🌲</text>
             <text x="155" y="168" font-size="13" pointer-events="none">❄️</text>
@@ -1978,7 +1974,7 @@
           <text x="315" y="246" font-size="11" fill="#0369a1" opacity="0.45" font-weight="900" pointer-events="none">太平洋 🌊</text>
 
           <!-- 路線白色底線＋彩色動態虛線 -->
-          ${pts.length > 1 ? `
+          ${data.stops.length > 1 ? `
             <path d="${pathD}" fill="none" stroke="#ffffff" stroke-width="${6.5 * pinScale}" stroke-linecap="round" stroke-linejoin="round" pointer-events="none" />
             <path d="${pathD}" fill="none" stroke="${data.color}" stroke-width="${3.5 * pinScale}" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 7" class="cute-route-line" pointer-events="none" />
           ` : ''}
@@ -2569,6 +2565,7 @@
     const DEFAULT_SOUVENIRS = [
       { id: 's1', cat: 'biei', loc: 'D3 美瑛選果（美瑛小麥工房）', name: '美瑛小麥工房「吐司／黑豆麵包／紅豆麵包」', desc: '使用 100% 美瑛產「夢之力」小麥製作（註：美瑛本店沒有販售玉米麵包，玉米麵包為新千歲機場店限定）。', tag: '美瑛本店限定' },
       { id: 's2', cat: 'biei', loc: 'D3 美瑛選果', name: '美瑛選果 凍乾草莓巧克力／黑豆茶', desc: '文青質感包裝，美瑛當地農產製成，送長輩超體面。', tag: '質感伴手禮' },
+      { id: 's2_farm', cat: 'biei', loc: 'D3 美瑛丘陵（機動順遊）', name: 'ひとさじ農場製造所 手工水果果醬／烤餅乾', desc: '北海道有機水果熬製手工果醬，包裝質感極佳（冬季營業日不固定，出發前確認 IG 若有開門可順遊）。', tag: '視營業順遊' },
       { id: 's1_airport', cat: 'airport', loc: 'D6 新千歲機場（美瑛選果）', name: '美瑛選果「新千歲機場限定 玉米麵包」', desc: '新千歲機場國內線 2F 分店限定！不加一滴水與糖、只用美瑛甜玉米烘焙，出爐即秒殺。', tag: '機場店限定⭐' },
       { id: 's3', cat: 'otaru', loc: 'D5 小樽堺町通', name: 'LeTAO 紅茶巧克力餅乾 (Thé Noir)', desc: '大吉嶺紅茶香氣夾心餅乾，常溫保存好攜帶，分送同事首選。', tag: '常溫好帶' },
       { id: 's4', cat: 'otaru', loc: 'D5 小樽堺町通', name: 'LeTAO 雙層起司蛋糕 (Fromage Double)', desc: '小樽必吃經典！回台建議 Day 6 在機場買冷凍版＋保冷袋。', tag: '招牌必買' },
