@@ -79,12 +79,18 @@
       background: linear-gradient(180deg, #e0f2fe 0%, #f8fafc 28%, #f1f5f9 100%);
       min-height: 100vh;
       -webkit-tap-highlight-color: transparent;
+      top: 0 !important;
     }
     .glass-card {
       background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 255, 255, 0.8);
+    }
+    /* 隱藏 Google 翻譯頂部預設白條，維持版面美觀 */
+    .goog-te-banner-frame.skiptranslate,
+    body > .skiptranslate {
+      display: none !important;
     }
     /* 可愛插畫風地圖專屬動畫與特效 */
     @keyframes dashFlow {
@@ -101,7 +107,14 @@
     #itinerary-map text,
     #itinerary-map rect,
     #itinerary-map circle,
-    #itinerary-map path {
+    #itinerary-map path,
+    #milk-map-canvas,
+    #milk-map-canvas svg,
+    #milk-map-canvas g,
+    #milk-map-canvas text,
+    #milk-map-canvas rect,
+    #milk-map-canvas circle,
+    #milk-map-canvas path {
       -webkit-tap-highlight-color: transparent;
       tap-highlight-color: transparent;
       -webkit-user-select: none;
@@ -109,7 +122,9 @@
       touch-action: manipulation;
     }
     #itinerary-map text,
-    #itinerary-map .cute-label-pill {
+    #itinerary-map .cute-label-pill,
+    #milk-map-canvas text,
+    #milk-map-canvas .cute-label-pill {
       pointer-events: none;
     }
     .cute-pin-group {
@@ -135,15 +150,27 @@
     <div class="absolute -top-10 -right-10 w-44 h-44 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
     <div class="absolute bottom-2 right-4 opacity-15 pointer-events-none">
       <svg class="w-24 h-24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M19.07 4.93L4.93 19.07M12 6l-2-2m2 2l2-2M12 18l-2 2m2-2l2 2M6 12l-2-2m2 2l-2 2M18 12l2-2m-2 2l2 2"/>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M19.07 4.93L4.93 19.07M12 6l-2-2m2 2l2-2M12 18l-2 2m2-2l2 2M6 12l-2-2m2 2l-2 2M18 12l-2-2m-2 2l2 2"/>
       </svg>
     </div>
 
     <div class="max-w-lg mx-auto relative z-10">
-      <div class="inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full px-3.5 py-1 text-xs font-bold tracking-wider mb-2.5 shadow-xs">
-        <span>⛄❄️</span>
-        <span>HOKKAIDO 2026・歡樂雪國團</span>
+      <!-- 頂部膠囊＋一鍵整頁翻韓文按鈕 -->
+      <div class="flex items-center justify-between gap-2 mb-2.5 flex-wrap">
+        <div class="inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full px-3.5 py-1 text-xs font-bold tracking-wider shadow-xs">
+          <span>⛄❄️</span>
+          <span>HOKKAIDO 2026・歡樂雪國團</span>
+        </div>
+
+        <!-- 一鍵整頁翻韓文 / 切回繁中按鈕 -->
+        <button type="button" id="btn-toggle-korean" onclick="togglePageKorean()" class="notranslate inline-flex items-center gap-1.5 bg-rose-500 hover:bg-rose-600 active:scale-95 text-white border border-rose-200/70 rounded-full px-3.5 py-1 text-xs font-black shadow-md transition">
+          <span id="ko-btn-flag">🇰🇷</span>
+          <span id="ko-btn-text">한국어 번역 (韓文)</span>
+        </button>
       </div>
+      <!-- 隱藏式 Google 整頁翻譯引擎掛載點 -->
+      <div id="google_translate_element" class="hidden"></div>
+
       <h1 class="font-cute text-2xl sm:text-3xl tracking-wide leading-snug drop-shadow-xs">
         ✨ 2026 北海道冬日雪祭之旅
       </h1>
@@ -226,6 +253,9 @@
       </button>
       <button type="button" onclick="switchTab('souvenirs')" id="tab-souvenirs" class="tab-btn flex-1 min-w-[88px] py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-slate-100">
         🎁 伴手禮清單
+      </button>
+      <button type="button" onclick="switchTab('milkmap')" id="tab-milkmap" class="tab-btn flex-1 min-w-[92px] py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-slate-100">
+        🥛 北海道牛乳
       </button>
     </div>
   </nav>
@@ -578,19 +608,18 @@
         <!-- 互動地圖畫布 -->
         <div id="itinerary-map" class="w-full h-64 sm:h-72 rounded-2xl overflow-hidden border-2 border-sky-200 cute-map-bg relative shadow-inner select-none"></div>
 
-        <!-- 點選站點後的可愛氣泡資訊卡（固定高度防止上下跳動） -->
-        <div id="cute-map-popup" class="h-[116px] overflow-hidden bg-sky-50/90 border border-sky-200 rounded-xl px-3.5 py-2.5 flex items-center justify-between gap-2 text-xs">
-          <div class="flex items-start gap-2.5 min-w-0">
-            <span id="cute-popup-emoji" class="text-2xl leading-none shrink-0 mt-0.5">⛄</span>
-            <div class="min-w-0">
-              <div class="flex items-center gap-1.5 flex-wrap">
-                <span id="cute-popup-title" class="font-black text-slate-900 truncate">點選地圖上的可愛圖釘查看詳情！</span>
-                <span id="cute-popup-time" class="text-[11px] font-extrabold bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full">全天導覽</span>
-              </div>
-              <div id="cute-popup-note" class="text-xs text-slate-600 line-clamp-2 leading-snug mt-1">支援 D1–D6 每日專屬路線放大預覽，文字已鎖定防閃爍</div>
+        <!-- 點選站點後的加大型氣泡資訊卡（寬敞不截斷、高度穩定不跳動） -->
+        <div id="cute-map-popup" class="min-h-[146px] bg-white border-2 border-sky-200 rounded-2xl p-3.5 shadow-xs flex flex-col justify-between gap-2">
+          <div class="flex items-center justify-between gap-2 border-b border-sky-100 pb-2">
+            <div class="flex items-center gap-2 min-w-0">
+              <span id="cute-popup-emoji" class="text-2xl leading-none shrink-0">⛄</span>
+              <span id="cute-popup-title" class="font-black text-slate-900 text-base leading-snug">點選地圖上的可愛圖釘查看詳情！</span>
             </div>
+            <span id="cute-popup-time" class="shrink-0 text-xs font-extrabold bg-amber-100 text-amber-900 px-2.5 py-1 rounded-full">全天導覽</span>
           </div>
-          <span class="shrink-0 text-[10px] font-black bg-white text-sky-700 border border-sky-200 px-2 py-0.5 rounded-full">詳細資訊</span>
+          <p id="cute-popup-note" class="text-sm text-slate-700 font-medium leading-relaxed">
+            支援 D1–D6 每日專屬路線放大預覽，文字完整展開不截斷，閱讀更輕鬆！
+          </p>
         </div>
 
         <!-- 站點順序膠囊提示列 -->
@@ -1323,8 +1352,54 @@
               </select>
             </div>
             <div class="col-span-2">
-              <label class="block text-xs font-bold text-slate-700 mb-1">消費金額</label>
-              <input type="number" id="exp-amount" inputmode="decimal" placeholder="輸入金額" class="w-full text-base font-black font-mono bg-white border border-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-blue-500">
+              <div class="flex items-center justify-between mb-1">
+                <label class="block text-xs font-bold text-slate-700">消費金額</label>
+                <button type="button" onclick="toggleExpCalc()" class="text-[11px] font-extrabold text-amber-800 bg-amber-100 hover:bg-amber-200 border border-amber-300 px-2 py-0.5 rounded-lg flex items-center gap-1 transition active:scale-95">
+                  <span>🧮</span>
+                  <span id="exp-calc-toggle-text">展開計算機</span>
+                </button>
+              </div>
+              <input type="number" id="exp-amount" inputmode="decimal" placeholder="輸入金額或用計算機加總" class="w-full text-base font-black font-mono bg-white border border-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-blue-500">
+            </div>
+          </div>
+
+          <!-- 共同記帳專屬內建四則運算計算機 -->
+          <div id="exp-mini-calc" class="hidden bg-slate-900 text-white rounded-2xl p-3.5 space-y-2.5 shadow-md border border-slate-700">
+            <div class="flex items-center justify-between text-[11px] text-slate-400">
+              <span class="font-bold text-amber-300">🧮 記帳專用計算機（算好按「帶入金額」）</span>
+              <button type="button" onclick="toggleExpCalc()" class="text-slate-300 hover:text-white font-bold px-1.5 py-0.5 rounded bg-slate-800">收合 ✕</button>
+            </div>
+            <!-- 算式與結果顯示螢幕 -->
+            <div class="bg-slate-950 border border-slate-700/90 rounded-xl px-3 py-2 text-right font-mono">
+              <div id="exp-calc-expr" class="text-xs text-slate-400 min-h-[18px] truncate">0</div>
+              <div id="exp-calc-result" class="text-xl font-black text-emerald-400 truncate mt-0.5">0</div>
+            </div>
+            <!-- 計算機按鍵盤 -->
+            <div class="grid grid-cols-4 gap-1.5 font-mono text-base font-black">
+              <button type="button" onclick="expCalcClear()" class="bg-rose-600/90 hover:bg-rose-600 text-white py-2.5 rounded-xl active:scale-95">C</button>
+              <button type="button" onclick="expCalcBackspace()" class="bg-slate-700 hover:bg-slate-600 text-amber-300 py-2.5 rounded-xl active:scale-95">⌫</button>
+              <button type="button" onclick="expCalcInput('/')" class="bg-slate-700 hover:bg-slate-600 text-sky-300 py-2.5 rounded-xl active:scale-95">÷</button>
+              <button type="button" onclick="expCalcInput('*')" class="bg-slate-700 hover:bg-slate-600 text-sky-300 py-2.5 rounded-xl active:scale-95">×</button>
+
+              <button type="button" onclick="expCalcInput('7')" class="bg-slate-800 hover:bg-slate-700 text-white py-2.5 rounded-xl active:scale-95">7</button>
+              <button type="button" onclick="expCalcInput('8')" class="bg-slate-800 hover:bg-slate-700 text-white py-2.5 rounded-xl active:scale-95">8</button>
+              <button type="button" onclick="expCalcInput('9')" class="bg-slate-800 hover:bg-slate-700 text-white py-2.5 rounded-xl active:scale-95">9</button>
+              <button type="button" onclick="expCalcInput('-')" class="bg-slate-700 hover:bg-slate-600 text-sky-300 py-2.5 rounded-xl active:scale-95">－</button>
+
+              <button type="button" onclick="expCalcInput('4')" class="bg-slate-800 hover:bg-slate-700 text-white py-2.5 rounded-xl active:scale-95">4</button>
+              <button type="button" onclick="expCalcInput('5')" class="bg-slate-800 hover:bg-slate-700 text-white py-2.5 rounded-xl active:scale-95">5</button>
+              <button type="button" onclick="expCalcInput('6')" class="bg-slate-800 hover:bg-slate-700 text-white py-2.5 rounded-xl active:scale-95">6</button>
+              <button type="button" onclick="expCalcInput('+')" class="bg-slate-700 hover:bg-slate-600 text-sky-300 py-2.5 rounded-xl active:scale-95">＋</button>
+
+              <button type="button" onclick="expCalcInput('1')" class="bg-slate-800 hover:bg-slate-700 text-white py-2.5 rounded-xl active:scale-95">1</button>
+              <button type="button" onclick="expCalcInput('2')" class="bg-slate-800 hover:bg-slate-700 text-white py-2.5 rounded-xl active:scale-95">2</button>
+              <button type="button" onclick="expCalcInput('3')" class="bg-slate-800 hover:bg-slate-700 text-white py-2.5 rounded-xl active:scale-95">3</button>
+              <button type="button" onclick="expCalcEval()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 py-2.5 rounded-xl active:scale-95">＝</button>
+
+              <button type="button" onclick="expCalcInput('0')" class="bg-slate-800 hover:bg-slate-700 text-white py-2.5 rounded-xl active:scale-95">0</button>
+              <button type="button" onclick="expCalcInput('00')" class="bg-slate-800 hover:bg-slate-700 text-white py-2.5 rounded-xl active:scale-95">00</button>
+              <button type="button" onclick="expCalcInput('.')" class="bg-slate-800 hover:bg-slate-700 text-white py-2.5 rounded-xl active:scale-95">.</button>
+              <button type="button" onclick="applyExpCalcResult()" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-black py-2.5 px-1 rounded-xl active:scale-95">✓ 帶入</button>
             </div>
           </div>
 
@@ -1428,20 +1503,36 @@
           </div>
 
           <div class="grid grid-cols-2 gap-2.5">
-            <!-- Papago 翻譯按鈕 -->
-            <button onclick="openTranslator('papago')" class="flex flex-col items-center justify-center gap-1 bg-gradient-to-br from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white rounded-2xl p-3 shadow-sm transition active:scale-95">
+            <!-- Papago 日文翻譯按鈕 -->
+            <button onclick="openTranslator('papago', 'ja')" class="flex flex-col items-center justify-center gap-1 bg-gradient-to-br from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white rounded-2xl p-3 shadow-sm transition active:scale-95">
               <div class="flex items-center gap-1.5 text-sm font-black">
-                <span>🦜 Papago 翻譯</span>
+                <span>🇯🇵 Papago 日文</span>
               </div>
-              <span class="text-[10px] text-emerald-100 font-medium">日韓口語最自然・支援拍照</span>
+              <span class="text-[10px] text-emerald-100 font-medium">問店員司機・支援拍照</span>
             </button>
 
-            <!-- Google 翻譯按鈕 -->
-            <button onclick="openTranslator('google')" class="flex flex-col items-center justify-center gap-1 bg-gradient-to-br from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white rounded-2xl p-3 shadow-sm transition active:scale-95">
+            <!-- Google 日文翻譯按鈕 -->
+            <button onclick="openTranslator('google', 'ja')" class="flex flex-col items-center justify-center gap-1 bg-gradient-to-br from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white rounded-2xl p-3 shadow-sm transition active:scale-95">
               <div class="flex items-center gap-1.5 text-sm font-black">
-                <span>🌐 Google 翻譯</span>
+                <span>🇯🇵 Google 日文</span>
               </div>
-              <span class="text-[10px] text-blue-100 font-medium">即時帶入文字・相機掃菜單</span>
+              <span class="text-[10px] text-blue-100 font-medium">即時帶入・相機掃菜單</span>
+            </button>
+
+            <!-- Papago 韓文翻譯按鈕（同行韓國夥伴溝通專用） -->
+            <button onclick="openTranslator('papago', 'ko')" class="flex flex-col items-center justify-center gap-1 bg-gradient-to-br from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700 text-white rounded-2xl p-3 shadow-sm transition active:scale-95">
+              <div class="flex items-center gap-1.5 text-sm font-black">
+                <span>🇰🇷 Papago 韓文</span>
+              </div>
+              <span class="text-[10px] text-rose-100 font-medium">跟韓國夥伴聊天超自然</span>
+            </button>
+
+            <!-- Google 韓文翻譯按鈕 -->
+            <button onclick="openTranslator('google', 'ko')" class="flex flex-col items-center justify-center gap-1 bg-gradient-to-br from-violet-500 to-purple-600 hover:from-violet-600 hover:to-purple-700 text-white rounded-2xl p-3 shadow-sm transition active:scale-95">
+              <div class="flex items-center gap-1.5 text-sm font-black">
+                <span>🇰🇷 Google 韓文</span>
+              </div>
+              <span class="text-[10px] text-violet-100 font-medium">中韓雙向即時互譯</span>
             </button>
           </div>
         </div>
@@ -1633,6 +1724,171 @@
 
     </section>
 
+    <!-- ==================== 分頁 11：北海道牛乳地圖與神級鮮乳介紹 ==================== -->
+    <section id="panel-milkmap" class="tab-panel hidden space-y-4">
+      
+      <!-- 可愛北海道牛乳產區互動地圖 -->
+      <div class="glass-card rounded-2xl p-4 shadow-sm border-2 border-sky-200 space-y-3">
+        <div class="flex items-center justify-between border-b border-sky-100 pb-2.5">
+          <div>
+            <h2 class="text-base font-black text-slate-900 flex items-center gap-2">
+              <span class="w-7 h-7 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center text-sm">🥛</span>
+              北海道夢幻牛乳產區地圖
+            </h2>
+            <p class="text-xs text-slate-500 mt-0.5">點擊地圖上的小牛與奶瓶圖釘，查看各產區風味與購買點</p>
+          </div>
+          <span class="text-xs font-black bg-sky-600 text-white px-2.5 py-1 rounded-xl">生乳產量占日本 55%</span>
+        </div>
+
+        <!-- 可愛牛乳地圖畫布 -->
+        <div id="milk-map-canvas" class="w-full h-64 sm:h-72 rounded-2xl overflow-hidden border-2 border-sky-200 cute-map-bg relative shadow-inner select-none"></div>
+
+        <!-- 點選產區後的加大型詳情氣泡框（完整顯示不截斷） -->
+        <div id="milk-map-popup" class="min-h-[154px] bg-white border-2 border-sky-200 rounded-2xl p-3.5 shadow-xs flex flex-col justify-between gap-2">
+          <div class="flex items-center justify-between gap-2 border-b border-sky-100 pb-2">
+            <div class="flex items-center gap-2 min-w-0">
+              <span id="milk-popup-emoji" class="text-2xl leading-none shrink-0">🐄</span>
+              <span id="milk-popup-title" class="font-black text-slate-900 text-base leading-snug">1. 星野 TOMAMU 農場鮮奶</span>
+            </div>
+            <span id="milk-popup-spot" class="shrink-0 text-xs font-extrabold bg-sky-100 text-sky-800 px-2.5 py-1 rounded-full">D1–2 必喝</span>
+          </div>
+          <div class="space-y-1.5">
+            <span id="milk-popup-fat" class="inline-block text-xs font-extrabold bg-amber-100 text-amber-900 px-2.5 py-0.5 rounded-full">冬季乳脂高達 4.0%+</span>
+            <p id="milk-popup-desc" class="text-sm text-slate-700 font-medium leading-relaxed">
+              星野自有牧場低溫殺菌鮮乳！12月冬季乳脂肪最濃郁，喝起來像融化的香草冰淇淋，就在 Day 1–2 The Tower 大廳商店與早餐餐廳！
+            </p>
+          </div>
+        </div>
+
+        <!-- 6大牛乳產區快速切換膠囊 -->
+        <div id="milk-region-pills" class="flex flex-wrap gap-1.5 pt-0.5"></div>
+      </div>
+
+      <!-- 日本鮮奶挑法黃金法則（43歲以上長輩也超好懂的圖解） -->
+      <div class="glass-card rounded-2xl p-4 shadow-sm border border-amber-200 bg-amber-50/50 space-y-2.5">
+        <div class="flex items-center justify-between border-b border-amber-200/70 pb-2">
+          <h3 class="text-sm font-black text-amber-950 flex items-center gap-1.5">
+            <span>🔍</span> 超市＆超商買鮮奶「不踩雷 3 秘訣」
+          </h3>
+          <span class="text-[11px] font-bold bg-amber-500 text-white px-2 py-0.5 rounded-md">看包裝背面</span>
+        </div>
+        <div class="grid grid-cols-1 gap-2 text-xs">
+          <div class="bg-white rounded-xl p-2.5 border border-amber-200/80 flex items-start gap-2.5">
+            <span class="text-lg leading-none mt-0.5">⭕</span>
+            <div>
+              <div class="font-black text-slate-900">1. 認明「種類別：牛乳」＋「成分無調整」</div>
+              <p class="text-[11px] text-slate-600 mt-0.5 leading-relaxed">
+                包裝正面或側面一定要寫「<strong>牛乳</strong>」才是 100% 純生乳！若寫「加工乳」或「乳飲料」則有額外添加物。
+              </p>
+            </div>
+          </div>
+          <div class="bg-white rounded-xl p-2.5 border border-amber-200/80 flex items-start gap-2.5">
+            <span class="text-lg leading-none mt-0.5">📦</span>
+            <div>
+              <div class="font-black text-slate-900">2. 紙盒上方有「半圓形小凹槽（切欠き）」</div>
+              <p class="text-[11px] text-slate-600 mt-0.5 leading-relaxed">
+                日本規定只有 <strong>100% 純鮮奶（500ml 以上紙盒）</strong>頂端封口處才會有半圓形小缺口，閉著眼睛摸就知道是純鮮奶！
+              </p>
+            </div>
+          </div>
+          <div class="bg-white rounded-xl p-2.5 border border-amber-200/80 flex items-start gap-2.5">
+            <span class="text-lg leading-none mt-0.5">❄️</span>
+            <div>
+              <div class="font-black text-slate-900">3. 12 月冬季是北海道鮮奶「一年中最濃郁」的季節！</div>
+              <p class="text-[11px] text-slate-600 mt-0.5 leading-relaxed">
+                冬天乳牛為了禦寒，生乳中的<strong>乳脂肪含量最高（常達 3.8%～4.3%）</strong>，隨便一瓶超商鮮奶都香甜到像在喝鮮奶油。
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 行程沿線 6 款必喝神級牛乳介紹卡 -->
+      <div class="glass-card rounded-2xl p-4 shadow-sm space-y-3">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+          <h3 class="text-sm font-black text-slate-900 flex items-center gap-1.5">
+            <span>🏆</span> 跟著 6 天行程喝遍「北海道 6 大神級鮮奶」
+          </h3>
+          <span class="text-[11px] font-bold text-sky-600">順路買得到</span>
+        </div>
+
+        <div class="space-y-2.5 text-xs">
+          <!-- 款式 1 -->
+          <div class="bg-sky-50/70 border border-sky-200 rounded-xl p-3 space-y-1">
+            <div class="flex items-center justify-between gap-2">
+              <span class="font-black text-sky-950 text-sm">1. 星野農場鮮奶（TOMAMU Milk）</span>
+              <span class="text-[10px] font-extrabold bg-sky-600 text-white px-2 py-0.5 rounded-md shrink-0">D1–D2 星野園區</span>
+            </div>
+            <p class="text-[11px] text-slate-700 leading-relaxed">
+              • <strong>特色風味：</strong>採 65°C 低溫慢速殺菌保留生乳自然甜味，瓶口常會浮起一層天然奶油蓋（Cream Line），搖勻後香濃無比。<br>
+              • <strong>哪裡買：</strong>The Tower 大廳商店、螢火蟲街道咖啡廳、SORA 與森林餐廳早餐吧台。
+            </p>
+          </div>
+
+          <!-- 款式 2 -->
+          <div class="bg-emerald-50/70 border border-emerald-200 rounded-xl p-3 space-y-1">
+            <div class="flex items-center justify-between gap-2">
+              <span class="font-black text-emerald-950 text-sm">2. 函館「山川牧場自然牛乳」</span>
+              <span class="text-[10px] font-extrabold bg-emerald-600 text-white px-2 py-0.5 rounded-md shrink-0">D1 千歲永旺超市</span>
+            </div>
+            <p class="text-[11px] text-slate-700 leading-relaxed">
+              • <strong>特色風味：</strong>北海道老字號名門牧場，玻璃瓶裝（也有紙盒裝）口感極為純淨滑順，尾韻帶有淡淡牧草清香，完全無腥味。<br>
+              • <strong>哪裡買：</strong>Day 1 中停「永旺千歲店（AEON）」冷藏鮮奶櫃，以及札幌百貨超市。
+            </p>
+          </div>
+
+          <!-- 款式 3 -->
+          <div class="bg-amber-50/70 border border-amber-200 rounded-xl p-3 space-y-1">
+            <div class="flex items-center justify-between gap-2">
+              <span class="font-black text-amber-950 text-sm">3. 美瑛放牧酪農場「美瑛牛乳」</span>
+              <span class="text-[10px] font-extrabold bg-amber-600 text-white px-2 py-0.5 rounded-md shrink-0">D3 美瑛選果</span>
+            </div>
+            <p class="text-[11px] text-slate-700 leading-relaxed">
+              • <strong>特色風味：</strong>使用美瑛丘陵放牧牛隻生乳，乳香濃厚且清爽不膩，搭配美瑛小麥工房的現烤紅豆麵包或吐司簡直是夢幻早餐組合！<br>
+              • <strong>哪裡買：</strong>Day 3 美瑛選果、以及新千歲機場國內線 2F「美瑛選果」分店。
+            </p>
+          </div>
+
+          <!-- 款式 4 -->
+          <div class="bg-indigo-50/70 border border-indigo-200 rounded-xl p-3 space-y-1">
+            <div class="flex items-center justify-between gap-2">
+              <span class="font-black text-indigo-950 text-sm">4. 北海道限定「四葉特選 4.0 牛乳（よつ葉）」</span>
+              <span class="text-[10px] font-extrabold bg-indigo-600 text-white px-2 py-0.5 rounded-md shrink-0">全行程超商・超市</span>
+            </div>
+            <p class="text-[11px] text-slate-700 leading-relaxed">
+              • <strong>特色風味：</strong>十勝產區王牌！金色／深藍包裝的「特選よつ葉 4.0 牛乳」乳脂肪高達 4.0% 以上，CP 值最高、7-11 與 Lawson 隨時買得到。<br>
+              • <strong>哪裡買：</strong>全北海道 7-11、Lawson、Seicomart 與 AEON 超市。
+            </p>
+          </div>
+
+          <!-- 款式 5 -->
+          <div class="bg-rose-50/70 border border-rose-200 rounded-xl p-3 space-y-1">
+            <div class="flex items-center justify-between gap-2">
+              <span class="font-black text-rose-950 text-sm">5. Seicomart 便利商店「豐富町（とよとみ）牛乳」</span>
+              <span class="text-[10px] font-extrabold bg-rose-600 text-white px-2 py-0.5 rounded-md shrink-0">北海道橘色超商限定</span>
+            </div>
+            <p class="text-[11px] text-slate-700 leading-relaxed">
+              • <strong>特色風味：</strong>北海道第一名連鎖超商 Seicomart（橘色招牌）獨家！產自日本最北端酪農聖地「豐富町」，入口甜度驚人、喝過就回不去。<br>
+              • <strong>哪裡買：</strong>札幌市區（大通・薄野周邊）與旭川各地的 Seicomart 便利商店。
+            </p>
+          </div>
+
+          <!-- 款式 6 -->
+          <div class="bg-purple-50/70 border border-purple-200 rounded-xl p-3 space-y-1">
+            <div class="flex items-center justify-between gap-2">
+              <span class="font-black text-purple-950 text-sm">6. 倉島牧場「倉島 3.7 牛乳」（岩內／小樽周邊）</span>
+              <span class="text-[10px] font-extrabold bg-purple-600 text-white px-2 py-0.5 rounded-md shrink-0">D5 小樽・札幌超市</span>
+            </div>
+            <p class="text-[11px] text-slate-700 leading-relaxed">
+              • <strong>特色風味：</strong>後志地區（小樽・積丹一帶）代表性牧場，紅白復古牛牛包裝超可愛，奶香醇厚順口，也是許多小樽甜點店指定原料。<br>
+              • <strong>哪裡買：</strong>小樽車站周邊超市、札幌大丸百貨地下超市與新千歲機場。
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
   </main>
 
   <!-- Toast 提示框 -->
@@ -1653,6 +1909,37 @@
     </div>
   </div>
 
+  <!-- 韓文整頁翻譯說明彈窗（若在預覽沙盒無法載入外部翻譯腳本時的備援指引） -->
+  <div id="ko-help-modal" onclick="closeKoHelpModal()" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-xs hidden flex items-center justify-center p-4">
+    <div class="max-w-md w-full bg-white rounded-3xl overflow-hidden shadow-2xl p-5 space-y-3.5" onclick="event.stopPropagation()">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
+        <h3 class="text-base font-black text-slate-900 flex items-center gap-1.5">
+          <span>🇰🇷</span> 한국어 번역 안내 (韓文翻譯)
+        </h3>
+        <button onclick="closeKoHelpModal()" class="text-xs font-bold bg-slate-100 text-slate-600 px-2.5 py-1 rounded-lg">✕</button>
+      </div>
+      <div class="text-xs text-slate-700 space-y-2 leading-relaxed">
+        <p class="font-bold text-rose-700">한국인 친구를 위한 원클릭 번역 방법：</p>
+        <div class="bg-sky-50 border border-sky-200 rounded-xl p-3 space-y-1">
+          <div class="font-black text-sky-900">1. Safari / Chrome 브라우저 번역</div>
+          <p class="text-[11px] text-slate-600">• <strong>iPhone (Safari)：</strong>주소창 왼쪽 <strong>[가] / [AA]</strong> 아이콘 클릭 ➔ <strong>「한국어로 번역」</strong> 선택<br>• <strong>Android / Chrome：</strong>우측 상단 <strong>[⋮]</strong> 메뉴 ➔ <strong>「번역...」</strong> 선택</p>
+        </div>
+        <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 space-y-1">
+          <div class="font-black text-emerald-900">2. 텍스트 복사 후 Papago 바로 번역</div>
+          <p class="text-[11px] text-slate-600">아래 버튼을 누르면 네이버 파파고(번체중문 ➔ 한국어)가 바로 열립니다.</p>
+        </div>
+      </div>
+      <div class="flex gap-2 pt-1">
+        <a href="https://papago.naver.com/?sk=zh-TW&tk=ko" target="_blank" class="flex-1 text-center bg-emerald-600 text-white font-bold text-xs py-3 rounded-xl shadow-xs">
+          🇰🇷 Papago 열기
+        </a>
+        <button onclick="closeKoHelpModal()" class="flex-1 bg-slate-100 text-slate-700 font-bold text-xs py-3 rounded-xl">
+          닫기 (關閉)
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- 收據大圖檢視彈窗 (Modal) -->
   <div id="receipt-modal" onclick="closeReceiptModal()" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-xs hidden flex items-center justify-center p-4">
     <div class="max-w-md w-full bg-white rounded-2xl overflow-hidden shadow-2xl" onclick="event.stopPropagation()">
@@ -1667,6 +1954,88 @@
   </div>
 
   <script>
+    // ==================== 一鍵整頁翻譯成韓文 (Google Translate Widget + 備援指引) ====================
+    let isKoreanMode = false;
+    let googleTranslateLoaded = false;
+
+    function googleTranslateElementInit() {
+      if (window.google && window.google.translate) {
+        new google.translate.TranslateElement({
+          pageLanguage: 'zh-TW',
+          includedLanguages: 'ko,zh-TW,ja,en',
+          autoDisplay: false
+        }, 'google_translate_element');
+        googleTranslateLoaded = true;
+      }
+    }
+
+    // 動態非同步載入 Google 網頁翻譯元件（不影響離線與其他功能）
+    (function loadGoogleTranslateScript() {
+      const s = document.createElement('script');
+      s.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+      s.async = true;
+      document.head.appendChild(s);
+    })();
+
+    function setGoogleTranslateCookie(langPair) {
+      document.cookie = 'googtrans=' + langPair + '; path=/';
+      try {
+        document.cookie = 'googtrans=' + langPair + '; domain=' + window.location.hostname + '; path=/';
+      } catch (e) {}
+    }
+
+    function updateKoreanBtnUI(activeKo) {
+      const btn = document.getElementById('btn-toggle-korean');
+      const flag = document.getElementById('ko-btn-flag');
+      const text = document.getElementById('ko-btn-text');
+      if (!btn || !flag || !text) return;
+      if (activeKo) {
+        btn.classList.remove('bg-rose-500', 'hover:bg-rose-600');
+        btn.classList.add('bg-emerald-600', 'hover:bg-emerald-700');
+        flag.textContent = '🇹🇼';
+        text.textContent = '원문 보기 (繁中)';
+      } else {
+        btn.classList.remove('bg-emerald-600', 'hover:bg-emerald-700');
+        btn.classList.add('bg-rose-500', 'hover:bg-rose-600');
+        flag.textContent = '🇰🇷';
+        text.textContent = '한국어 번역 (韓文)';
+      }
+    }
+
+    function togglePageKorean() {
+      const combo = document.querySelector('.goog-te-combo');
+      if (!isKoreanMode) {
+        isKoreanMode = true;
+        updateKoreanBtnUI(true);
+        setGoogleTranslateCookie('/zh-TW/ko');
+        if (combo) {
+          combo.value = 'ko';
+          combo.dispatchEvent(new Event('change'));
+          showToast('🇰🇷 한국어로 번역 중입니다...');
+        } else {
+          // 若預覽環境阻擋外部翻譯腳本，顯示韓文瀏覽器一鍵翻譯指引視窗
+          const modal = document.getElementById('ko-help-modal');
+          if (modal) modal.classList.remove('hidden');
+        }
+      } else {
+        isKoreanMode = false;
+        updateKoreanBtnUI(false);
+        setGoogleTranslateCookie('/zh-TW/zh-TW');
+        if (combo) {
+          combo.value = 'zh-TW';
+          combo.dispatchEvent(new Event('change'));
+          showToast('🇹🇼 已切換回繁體中文');
+        } else {
+          window.location.reload();
+        }
+      }
+    }
+
+    function closeKoHelpModal() {
+      const modal = document.getElementById('ko-help-modal');
+      if (modal) modal.classList.add('hidden');
+    }
+
     // 分頁切換邏輯（確保任何分頁都能正常點擊切換）
     function switchTab(tabName) {
       try {
@@ -1695,6 +2064,10 @@
         // 若切換至每日行程分頁，重新繪製可愛版地圖
         if (tabName === 'itinerary') {
           renderMapForDay(currentMapDay);
+        }
+        // 若切換至北海道牛乳分頁，繪製牛乳產區可愛地圖
+        if (tabName === 'milkmap') {
+          renderMilkMap();
         }
 
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -2203,146 +2576,114 @@
     let selectedSplitMembers = [...ALL_MEMBERS];
     let currentReceiptBase64 = '';
     let expensesList = [];
+    let expCalcBuffer = '';
 
-    function initExpenseForm() {
-      const grid = document.getElementById('exp-members-grid');
-      if (!grid) return;
-      grid.innerHTML = '';
-      ALL_MEMBERS.forEach(name => {
-        const isChecked = selectedSplitMembers.includes(name);
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.textContent = (isChecked ? '✓ ' : '') + name;
-        btn.className = isChecked
-          ? 'text-xs font-bold bg-blue-600 text-white px-2.5 py-1 rounded-lg shadow-2xs transition active:scale-95'
-          : 'text-xs font-bold bg-white text-slate-600 border border-slate-200 px-2.5 py-1 rounded-lg transition active:scale-95';
-        btn.onclick = () => {
-          if (selectedSplitMembers.includes(name)) {
-            if (selectedSplitMembers.length === 1) {
-              showToast('至少需要 1 位分攤成員唷！');
-              return;
-            }
-            selectedSplitMembers = selectedSplitMembers.filter(m => m !== name);
-          } else {
-            selectedSplitMembers.push(name);
-          }
-          initExpenseForm();
-        };
-        grid.appendChild(btn);
-      });
-      const countLabel = document.getElementById('split-count-label');
-      if (countLabel) countLabel.textContent = selectedSplitMembers.length;
-    }
-
-    function selectSplitGroup(type) {
-      selectedSplitMembers = type === '7' ? [...EARLY_7_MEMBERS] : [...ALL_MEMBERS];
-      initExpenseForm();
-    }
-
-    function handleReceiptUpload(event) {
-      const file = event.target.files[0];
-      if (!file) return;
-
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        const img = new Image();
-        img.onload = function() {
-          const canvas = document.createElement('canvas');
-          const maxWidth = 800;
-          let w = img.width;
-          let h = img.height;
-          if (w > maxWidth) {
-            h = Math.round((h * maxWidth) / w);
-            w = maxWidth;
-          }
-          canvas.width = w;
-          canvas.height = h;
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0, w, h);
-          currentReceiptBase64 = canvas.toDataURL('image/jpeg', 0.72);
-
-          const prevImg = document.getElementById('receipt-preview-img');
-          const prevBox = document.getElementById('receipt-preview-box');
-          const btnClear = document.getElementById('btn-clear-receipt');
-          if (prevImg) prevImg.src = currentReceiptBase64;
-          if (prevBox) prevBox.classList.remove('hidden');
-          if (btnClear) btnClear.classList.remove('hidden');
-          showToast('已載入收據照片！');
-        };
-        img.src = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    }
-
-    function clearReceiptPreview() {
-      currentReceiptBase64 = '';
-      const input = document.getElementById('exp-receipt-input');
-      const prevBox = document.getElementById('receipt-preview-box');
-      const btnClear = document.getElementById('btn-clear-receipt');
-      if (input) input.value = '';
-      if (prevBox) prevBox.classList.add('hidden');
-      if (btnClear) btnClear.classList.add('hidden');
-    }
-
-    function addExpense() {
-      const titleEl = document.getElementById('exp-title');
-      const currencyEl = document.getElementById('exp-currency');
-      const amountEl = document.getElementById('exp-amount');
-      const payerEl = document.getElementById('exp-payer');
-      if (!titleEl || !currencyEl || !amountEl || !payerEl) return;
-
-      const title = titleEl.value.trim();
-      const currency = currencyEl.value;
-      const amount = parseFloat(amountEl.value);
-      const payer = payerEl.value;
-
-      if (!title) {
-        showToast('請輸入消費項目名稱唷！');
-        return;
+    function toggleExpCalc() {
+      const box = document.getElementById('exp-mini-calc');
+      const label = document.getElementById('exp-calc-toggle-text');
+      if (!box) return;
+      const isHidden = box.classList.contains('hidden');
+      if (isHidden) {
+        box.classList.remove('hidden');
+        if (label) label.textContent = '收合計算機';
+        const curVal = document.getElementById('exp-amount')?.value;
+        if (curVal && !expCalcBuffer) {
+          expCalcBuffer = String(curVal);
+          updateExpCalcDisplay();
+        }
+      } else {
+        box.classList.add('hidden');
+        if (label) label.textContent = '展開計算機';
       }
-      if (isNaN(amount) || amount <= 0) {
-        showToast('請輸入正確的消費金額！');
-        return;
-      }
-
-      const now = new Date();
-      const timeStr = (now.getMonth() + 1) + '/' + now.getDate() + ' ' +
-                      String(now.getHours()).padStart(2, '0') + ':' +
-                      String(now.getMinutes()).padStart(2, '0');
-
-      const newRecord = {
-        id: Date.now(),
-        title,
-        currency,
-        amount,
-        payer,
-        splitMembers: [...selectedSplitMembers],
-        receipt: currentReceiptBase64,
-        time: timeStr
-      };
-
-      expensesList.unshift(newRecord);
-      saveExpenses();
-      renderExpenseList();
-
-      titleEl.value = '';
-      amountEl.value = '';
-      clearReceiptPreview();
-      showToast('已新增支出紀錄！');
     }
 
-    function deleteExpense(id) {
-      expensesList = expensesList.filter(item => item.id !== id);
-      saveExpenses();
-      renderExpenseList();
-      showToast('已刪除該筆支出');
-    }
-
-    function saveExpenses() {
+    function safeEvalMath(expr) {
+      const sanitized = expr.replace(/[^0-9+\-*/.]/g, '');
+      if (!sanitized) return 0;
+      const trimmed = sanitized.replace(/[+\-*/.]+$/, '');
+      if (!trimmed) return 0;
       try {
-        localStorage.setItem(EXPENSE_STORAGE_KEY, JSON.stringify(expensesList));
-      } catch (e) {
-        showToast('儲存空間已滿，建議刪除部分舊收據照片');
+        const val = Function('"use strict"; return (' + trimmed + ')')();
+        if (typeof val === 'number' && isFinite(val)) {
+          return Math.round(val * 100) / 100;
+        }
+      } catch (e) {}
+      return null;
+    }
+
+    function updateExpCalcDisplay() {
+      const exprEl = document.getElementById('exp-calc-expr');
+      const resEl = document.getElementById('exp-calc-result');
+      if (!exprEl || !resEl) return;
+      if (!expCalcBuffer) {
+        exprEl.textContent = '0';
+        resEl.textContent = '0';
+        return;
+      }
+      const prettyExpr = expCalcBuffer.replace(/\*/g, '×').replace(/\//g, '÷');
+      exprEl.textContent = prettyExpr;
+      const preview = safeEvalMath(expCalcBuffer);
+      if (preview !== null) {
+        resEl.textContent = preview.toLocaleString();
+      }
+    }
+
+    function expCalcInput(token) {
+      const isOp = ['+', '-', '*', '/'].includes(token);
+      if (isOp) {
+        if (!expCalcBuffer) return;
+        if (/[+\-*/]$/.test(expCalcBuffer)) {
+          expCalcBuffer = expCalcBuffer.slice(0, -1) + token;
+        } else {
+          expCalcBuffer += token;
+        }
+      } else if (token === '.') {
+        const parts = expCalcBuffer.split(/[+\-*/]/);
+        const lastNum = parts[parts.length - 1];
+        if (lastNum.includes('.')) return;
+        expCalcBuffer += lastNum === '' ? '0.' : '.';
+      } else {
+        if (expCalcBuffer === '0' && token !== '00') {
+          expCalcBuffer = token;
+        } else if (expCalcBuffer === '0' && token === '00') {
+          return;
+        } else {
+          expCalcBuffer += token;
+        }
+      }
+      updateExpCalcDisplay();
+    }
+
+    function expCalcBackspace() {
+      expCalcBuffer = expCalcBuffer.slice(0, -1);
+      updateExpCalcDisplay();
+    }
+
+    function expCalcClear() {
+      expCalcBuffer = '';
+      updateExpCalcDisplay();
+    }
+
+    function expCalcEval() {
+      const val = safeEvalMath(expCalcBuffer);
+      if (val !== null) {
+        expCalcBuffer = String(val);
+        updateExpCalcDisplay();
+      }
+    }
+
+    function applyExpCalcResult() {
+      const val = safeEvalMath(expCalcBuffer);
+      const amountInput = document.getElementById('exp-amount');
+      if (val !== null && val > 0 && amountInput) {
+        amountInput.value = val;
+        showToast('已帶入金額：' + val.toLocaleString());
+        const box = document.getElementById('exp-mini-calc');
+        const label = document.getElementById('exp-calc-toggle-text');
+        if (box) box.classList.add('hidden');
+        if (label) label.textContent = '展開計算機';
+      } else {
+        showToast('請先計算出有效金額唷！');
       }
     }
 
@@ -2543,19 +2884,19 @@
       if (modalEl) modalEl.classList.add('hidden');
     }
 
-    function openTranslator(engine) {
+    function openTranslator(engine, targetLang = 'ja') {
       const inputEl = document.getElementById('trans-input');
       const text = inputEl ? inputEl.value.trim() : '';
       const encoded = encodeURIComponent(text);
       let url = '';
       if (engine === 'papago') {
         url = text
-          ? `https://papago.naver.com/?sk=zh-TW&tk=ja&st=${encoded}`
-          : 'https://papago.naver.com/?sk=zh-TW&tk=ja';
+          ? `https://papago.naver.com/?sk=zh-TW&tk=${targetLang}&st=${encoded}`
+          : `https://papago.naver.com/?sk=zh-TW&tk=${targetLang}`;
       } else {
         url = text
-          ? `https://translate.google.com/?sl=zh-TW&tl=ja&text=${encoded}&op=translate`
-          : 'https://translate.google.com/?sl=zh-TW&tl=ja&op=translate';
+          ? `https://translate.google.com/?sl=zh-TW&tl=${targetLang}&text=${encoded}&op=translate`
+          : `https://translate.google.com/?sl=zh-TW&tl=${targetLang}&op=translate`;
       }
       window.open(url, '_blank');
     }
@@ -2702,6 +3043,7 @@
       updateDepartureCountdown();
       setInterval(updateDepartureCountdown, 1000);
       initItineraryMap();
+      renderMilkMap();
       fetchLiveExchangeRate(false);
       initExpenseForm();
       loadExpenses();
@@ -2710,6 +3052,189 @@
       loadSouvenirState();
       renderSouvenirs();
     });
+
+    // ==================== 北海道夢幻牛乳產區可愛地圖邏輯 ====================
+    const MILK_REGIONS = [
+      {
+        id: 'tomamu',
+        name: '1. 星野 TOMAMU 牧場',
+        shortName: '星野牧場',
+        emoji: '🏔️',
+        fat: '低溫殺菌・冬脂 4.0%+',
+        spot: 'D1–2 星野必喝',
+        x: 256,
+        y: 168,
+        align: 'right',
+        desc: '星野自有牧場 65°C 低溫殺菌鮮乳！12月冬季乳脂肪最濃郁，瓶口常浮一層天然奶油蓋，就在 The Tower 商店與早餐餐廳！'
+      },
+      {
+        id: 'biei',
+        name: '2. 美瑛放牧酪農場',
+        shortName: '美瑛牛乳',
+        emoji: '🎄',
+        fat: '放牧生乳・清甜濃厚',
+        spot: 'D3 美瑛＆機場',
+        x: 248,
+        y: 112,
+        align: 'right',
+        desc: '美瑛丘陵放牧牛隻生乳製成，奶香濃厚卻清爽不膩，推薦在美瑛選果配剛出爐的「美瑛小麥工房」紅豆／黑豆麵包一起享用！'
+      },
+      {
+        id: 'tokachi',
+        name: '3. 十勝・四葉特選 4.0',
+        shortName: '十勝四葉4.0',
+        emoji: '🍀',
+        fat: '乳脂肪 4.0% 以上',
+        spot: '全行程超商必買',
+        x: 306,
+        y: 178,
+        align: 'bottom',
+        desc: '北海道十勝平原王牌「よつ葉特選 4.0 牛乳」！7-11、Lawson 與超市隨手可得，金色深藍包裝、濃醇度滿分！'
+      },
+      {
+        id: 'toyotomi',
+        name: '4. 豐富町牛乳 (Seicomart)',
+        shortName: '豐富町牛乳',
+        emoji: '🧡',
+        fat: '日本最北酪農聖地',
+        spot: '橘色超商限定',
+        x: 222,
+        y: 34,
+        align: 'left',
+        desc: '北海道橘色超商 Seicomart 獨家販售！來自最北端稚內旁「豐富町」，入口甜度驚人，許多台灣旅客公認第一名！'
+      },
+      {
+        id: 'kura',
+        name: '5. 後志・倉島牧場 3.7',
+        shortName: '倉島 3.7 牛乳',
+        emoji: '🐄',
+        fat: '後志小樽名產・3.7%',
+        spot: 'D5 小樽・札幌',
+        x: 132,
+        y: 152,
+        align: 'left',
+        desc: '小樽、岩內一帶代表性牧場，紅白可愛牛牛紙盒包裝，也是許多小樽甜點老店指定使用的香濃鮮乳！'
+      },
+      {
+        id: 'hakodate',
+        name: '6. 函館・山川牧場自然牛乳',
+        shortName: '山川牧場',
+        emoji: '🍼',
+        fat: '老字號經典玻璃瓶',
+        spot: 'D1 千歲永旺超市',
+        x: 102,
+        y: 222,
+        align: 'right',
+        desc: '道南大沼名門牧場，口感極度純淨滑順、毫無腥味，Day 1 中停「永旺千歲店（AEON）」冷藏櫃就能買到！'
+      }
+    ];
+
+    function selectMilkRegion(idx, event) {
+      if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      const item = MILK_REGIONS[idx];
+      if (!item) return;
+
+      const emojiEl = document.getElementById('milk-popup-emoji');
+      const titleEl = document.getElementById('milk-popup-title');
+      const fatEl = document.getElementById('milk-popup-fat');
+      const descEl = document.getElementById('milk-popup-desc');
+      const spotEl = document.getElementById('milk-popup-spot');
+
+      if (emojiEl) emojiEl.textContent = item.emoji;
+      if (titleEl) titleEl.textContent = item.name;
+      if (fatEl) fatEl.textContent = item.fat;
+      if (descEl) descEl.textContent = item.desc;
+      if (spotEl) spotEl.textContent = item.spot;
+
+      const canvasEl = document.getElementById('milk-map-canvas');
+      if (canvasEl) {
+        canvasEl.querySelectorAll('.milk-pin-group').forEach((el, i) => {
+          if (i === idx) {
+            el.classList.add('is-selected');
+          } else {
+            el.classList.remove('is-selected');
+          }
+        });
+      }
+
+      document.querySelectorAll('.milk-pill-btn').forEach((btn, i) => {
+        if (i === idx) {
+          btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-200');
+          btn.classList.add('bg-sky-600', 'text-white', 'border-sky-600');
+        } else {
+          btn.classList.remove('bg-sky-600', 'text-white', 'border-sky-600');
+          btn.classList.add('bg-white', 'text-slate-700', 'border-slate-200');
+        }
+      });
+    }
+
+    function renderMilkMap() {
+      const canvasEl = document.getElementById('milk-map-canvas');
+      const pillsEl = document.getElementById('milk-region-pills');
+      if (!canvasEl) return;
+
+      if (pillsEl) {
+        pillsEl.innerHTML = MILK_REGIONS.map((r, idx) => `
+          <button type="button" onclick="selectMilkRegion(${idx}, event)" class="milk-pill-btn inline-flex items-center gap-1 ${idx === 0 ? 'bg-sky-600 text-white border-sky-600' : 'bg-white text-slate-700 border-slate-200'} border text-xs font-bold px-2.5 py-1 rounded-full shadow-2xs transition active:scale-95">
+            <span>${r.emoji}</span>
+            <span>${r.shortName}</span>
+          </button>
+        `).join('');
+      }
+
+      const pinsSvg = MILK_REGIONS.map((r, idx) => {
+        const labelW = r.shortName.length * 9.5 + 18;
+        const pos = getLabelOffset(r.align, labelW);
+        return `
+          <g class="cute-pin-group milk-pin-group ${idx === 0 ? 'is-selected' : ''}" onclick="selectMilkRegion(${idx}, event)" transform="translate(${r.x}, ${r.y})">
+            <circle cx="0" cy="-22" r="24" fill="transparent" />
+            <circle class="pin-ring" cx="0" cy="-27" r="22" fill="none" stroke="#f59e0b" stroke-width="3.5" />
+            <ellipse cx="0" cy="4" rx="10" ry="4" fill="rgba(15, 23, 42, 0.2)" pointer-events="none" />
+            <path d="M 0 2 C -12 -10, -16 -20, -16 -27 A 16 16 0 1 1 16 -27 C 16 -20, 12 -10, 0 2 Z" fill="#0284c7" stroke="#ffffff" stroke-width="2.5" />
+            <circle cx="0" cy="-27" r="11.5" fill="#ffffff" />
+            <text x="0" y="-22.5" text-anchor="middle" font-size="13" pointer-events="none">${r.emoji}</text>
+            <circle cx="-12" cy="-38" r="7" fill="#f59e0b" stroke="#ffffff" stroke-width="1.5" />
+            <text x="-12" y="-35" text-anchor="middle" fill="#ffffff" font-size="8.5" font-weight="900" pointer-events="none">${idx + 1}</text>
+            <rect class="cute-label-pill" x="${pos.rx}" y="${pos.ry}" width="${labelW}" height="18" rx="9" fill="#ffffff" stroke="#0284c7" stroke-width="1.6" pointer-events="none" />
+            <text x="${pos.tx}" y="${pos.ty + 0.5}" text-anchor="${pos.anchor}" fill="#0f172a" font-size="9.5" font-weight="900" pointer-events="none">${r.shortName}</text>
+          </g>
+        `;
+      }).join('');
+
+      canvasEl.innerHTML = `
+        <svg viewBox="0 0 420 260" class="w-full h-full select-none" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <filter id="milkIslandShadow" x="-10%" y="-10%" width="120%" height="120%">
+              <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#0284c7" flood-opacity="0.22"/>
+            </filter>
+          </defs>
+
+          <!-- Q版北海道全島雪白牛奶輪廓（含道北稚內豐富町、道央、道東十勝、道南函館） -->
+          <path d="M 218 14 Q 246 28, 275 68 Q 332 82, 392 78 Q 406 112, 376 144 Q 345 178, 315 215 Q 282 222, 255 192 Q 212 182, 172 194 Q 142 212, 132 238 Q 96 248, 84 224 Q 94 196, 118 182 Q 106 154, 134 134 Q 168 122, 198 86 Q 204 42, 218 14 Z"
+                fill="#ffffff" stroke="#7dd3fc" stroke-width="3.5" filter="url(#milkIslandShadow)" pointer-events="none" />
+          <path d="M 220 24 Q 244 38, 270 74 Q 324 88, 380 84 Q 392 112, 366 140 Q 336 172, 310 204 Q 280 210, 256 184 Q 212 174, 170 186 Q 140 202, 128 228 Q 102 236, 94 218 Q 104 194, 126 180 Q 116 154, 140 138 Q 172 126, 202 90 Q 208 50, 220 24 Z"
+                fill="#f0f9ff" opacity="0.8" pointer-events="none" />
+
+          <!-- 可愛牧場小元素 -->
+          <g opacity="0.6" pointer-events="none">
+            <text x="275" y="128" font-size="15">🐄</text>
+            <text x="178" y="156" font-size="14">🥛</text>
+            <text x="335" y="122" font-size="13">🌿</text>
+            <text x="215" y="72" font-size="12">❄️</text>
+          </g>
+
+          <text x="24" y="42" font-size="11" fill="#0369a1" opacity="0.45" font-weight="900" pointer-events="none">🥛 北海道生乳王國</text>
+          <text x="318" y="244" font-size="11" fill="#0369a1" opacity="0.45" font-weight="900" pointer-events="none">太平洋 🌊</text>
+
+          ${pinsSvg}
+        </svg>
+      `;
+
+      selectMilkRegion(0);
+    }
   </script>
 </body>
 </html>
