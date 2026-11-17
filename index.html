@@ -86,6 +86,25 @@
       -webkit-backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 255, 255, 0.8);
     }
+    /* 可愛插畫風地圖專屬動畫與特效 */
+    @keyframes dashFlow {
+      to {
+        stroke-dashoffset: -28;
+      }
+    }
+    .cute-route-line {
+      animation: dashFlow 1.4s linear infinite;
+    }
+    @keyframes pinBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+    .cute-pin-group:hover {
+      animation: pinBounce 0.6s ease-in-out infinite;
+    }
+    .cute-map-bg {
+      background: radial-gradient(circle at 20% 20%, #e0f2fe 0%, #bae6fd 55%, #93c5fd 100%);
+    }
   </style>
 </head>
 <body class="text-slate-800 antialiased pb-24 text-base">
@@ -246,9 +265,9 @@
               <span class="bg-indigo-600 text-white px-2 py-0.5 rounded-md">吉、洹、lin、勲、丹</span>
             </div>
             <div class="flex items-center justify-between text-sm font-black text-slate-800 mt-1">
-              <span>15:05 新千歲</span>
+              <span>14:40 新千歲</span>
               <span class="text-indigo-400 text-xs">➔</span>
-              <span>18:15 桃園</span>
+              <span>17:50 桃園</span>
             </div>
           </div>
 
@@ -457,7 +476,7 @@
             </div>
             <p class="text-[11px] text-slate-700 leading-relaxed">
               • <strong>📍 地址位置：</strong>札幌市中央區南 7 條西 3 丁目（Jasmac Plaza 飯店 2F–4F；地鐵「豐水すすきの站」步行約 4 分鐘，就在風土燒肉附近）。<br>
-              • <strong>🕒 營業時間：</strong>10:00–24:00（最終入場時間出發前再確認官網，建議 Day 5 晚餐後前往）。<br>
+              • <strong>🕒 營業時間：</strong>營業時間待確認，出發前查官網（建議 Day 5 晚餐後前往）。<br>
               • <strong>♨️ 泉質類型：</strong><strong>天然溫泉（鈉-氯化物泉）</strong>，附檜木露天風呂、三溫暖，男女分浴（含館內服與毛巾）。
             </p>
             <div class="flex items-center gap-2 pt-0.5">
@@ -510,7 +529,7 @@
       
       <!-- 日期快速選擇膠囊（自動換行排版，確保所有天數按鈕完整呈現） -->
       <div class="bg-white/80 backdrop-blur-xs border border-slate-200/80 rounded-2xl p-2.5 shadow-xs">
-        <div class="text-[11px] font-bold text-slate-500 mb-1.5 px-1">📅 點選日期快速切換：</div>
+        <div class="text-[11px] font-bold text-slate-500 mb-1.5 px-1">📅 點選日期快速切換（同步更新下方路線地圖）：</div>
         <div class="flex flex-wrap gap-1.5">
           <button type="button" onclick="filterDay('all', this)" class="day-filter-btn bg-slate-800 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-xs">全部 6 天 ✨</button>
           <button type="button" onclick="filterDay('d1', this)" class="day-filter-btn bg-white text-slate-700 border border-slate-300 text-xs font-bold px-2.5 py-1.5 rounded-full">D1 12/09</button>
@@ -520,6 +539,39 @@
           <button type="button" onclick="filterDay('d5', this)" class="day-filter-btn bg-white text-slate-700 border border-slate-300 text-xs font-bold px-2.5 py-1.5 rounded-full">D5 12/13</button>
           <button type="button" onclick="filterDay('d6', this)" class="day-filter-btn bg-white text-slate-700 border border-slate-300 text-xs font-bold px-2.5 py-1.5 rounded-full">D6 12/14</button>
         </div>
+      </div>
+
+      <!-- 每日行程路線互動地圖卡片 -->
+      <div class="glass-card rounded-2xl p-3.5 shadow-sm border border-sky-200/90 space-y-2.5">
+        <div class="flex items-center justify-between gap-2">
+          <div>
+            <h3 id="map-route-title" class="text-sm font-black text-slate-900 flex items-center gap-1.5">
+              <span>🗺️</span> 6天北海道環線總覽地圖
+            </h3>
+            <p id="map-route-subtitle" class="text-[11px] text-slate-500 font-medium mt-0.5">點擊上方 D1–D6 膠囊可檢視當日各站順序與路線</p>
+          </div>
+          <a id="map-gmaps-link" href="https://www.google.com/maps/dir/New+Chitose+Airport/Hoshino+Resorts+TOMAMU/Biei+Station/Asahiyama+Zoo/Otaru+Canal/Sapporo+Station/New+Chitose+Airport" target="_blank" class="shrink-0 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 px-3 py-1.5 rounded-xl shadow-xs transition">
+            📍 開啟路線
+          </a>
+        </div>
+
+        <!-- 互動地圖畫布 -->
+        <div id="itinerary-map" class="w-full h-64 sm:h-72 rounded-2xl overflow-hidden border-2 border-sky-200 cute-map-bg relative shadow-inner"></div>
+
+        <!-- 點選站點後的可愛氣泡資訊卡 -->
+        <div id="cute-map-popup" class="bg-sky-50/90 border border-sky-200 rounded-xl px-3 py-2 flex items-center justify-between gap-2 text-xs">
+          <div class="flex items-center gap-2">
+            <span id="cute-popup-emoji" class="text-xl leading-none">⛄</span>
+            <div>
+              <div id="cute-popup-title" class="font-black text-slate-900">點選地圖上的可愛圖釘查看詳情！</div>
+              <div id="cute-popup-note" class="text-[11px] text-slate-600">支援 D1–D6 每日專屬路線放大預覽</div>
+            </div>
+          </div>
+          <span class="shrink-0 text-[10px] font-black bg-white text-sky-700 border border-sky-200 px-2 py-0.5 rounded-full">詳細資訊</span>
+        </div>
+
+        <!-- 站點順序膠囊提示列 -->
+        <div id="map-stops-pills" class="flex flex-wrap items-center gap-1.5 text-[11px] font-bold text-slate-700 pt-0.5"></div>
       </div>
 
       <!-- DAY 1 -->
@@ -773,35 +825,77 @@
         <div class="flex items-start justify-between gap-2 mb-2">
           <div>
             <span class="text-xs font-black text-emerald-600 uppercase tracking-wider">DAY 6｜12/14 (一)</span>
-            <h3 class="text-base font-black text-slate-900">札幌退房 ➔ 新千歲機場最後掃貨 🛍️</h3>
+            <h3 class="text-base font-black text-slate-900">札幌退房步行搭巴士 ➔ 新千歲機場掃貨 🛍️</h3>
           </div>
           <span class="shrink-0 text-xs font-bold bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-full">平安回家 ✈️</span>
         </div>
         <div class="flex flex-wrap gap-1.5 mb-3">
           <span class="text-[11px] font-bold bg-sky-50 text-sky-800 border border-sky-200/80 px-2.5 py-0.5 rounded-full">🌡️ 札幌・千歲：-4°C ~ +1°C</span>
-          <span class="text-[11px] font-bold bg-indigo-50 text-indigo-800 border border-indigo-200/80 px-2.5 py-0.5 rounded-full">✈️ 華航 15:05 ／ 長榮 15:20 起飛</span>
+          <span class="text-[11px] font-bold bg-indigo-50 text-indigo-800 border border-indigo-200/80 px-2.5 py-0.5 rounded-full">✈️ 華航 14:40 ／ 長榮 15:20 起飛</span>
         </div>
+
+        <!-- 南3條薄野 -> 新千歲機場 利木津巴士時刻表 -->
+        <div class="bg-emerald-50/75 border border-emerald-200/90 rounded-xl p-3 mb-3.5 space-y-2">
+          <div class="flex items-center justify-between border-b border-emerald-200/70 pb-1.5 gap-2">
+            <span class="text-xs font-black text-emerald-950 flex items-center gap-1.5">
+              <span>🚌</span> 南 3 條薄野 ➔ 新千歲機場 巴士時刻表
+            </span>
+            <a href="https://www.google.com/maps/search/?api=1&query=南3条すすきの+空港連絡バス乗り場" target="_blank" class="shrink-0 text-[11px] font-bold text-white bg-emerald-600 hover:bg-emerald-700 px-2.5 py-1 rounded-lg shadow-2xs transition">
+              📍 巴士站地圖
+            </a>
+          </div>
+          <div class="grid grid-cols-2 gap-1.5 font-mono text-[11px] text-slate-800">
+            <div class="bg-amber-50 rounded-lg px-2.5 py-1.5 border border-amber-300 flex justify-between items-center font-black text-amber-950">
+              <span>09:25 發⭐</span>
+              <span>➔ 10:40 國內線</span>
+            </div>
+            <div class="bg-amber-50 rounded-lg px-2.5 py-1.5 border border-amber-300 flex justify-between items-center font-black text-amber-950">
+              <span>09:40 發⭐</span>
+              <span>➔ 10:55 國內線</span>
+            </div>
+            <div class="bg-white rounded-lg px-2.5 py-1.5 border border-emerald-100 flex justify-between items-center">
+              <span class="font-bold">09:55 發</span>
+              <span class="text-slate-500">➔ 11:10 國內線</span>
+            </div>
+            <div class="bg-white rounded-lg px-2.5 py-1.5 border border-emerald-100 flex justify-between items-center">
+              <span class="font-bold">10:10 發</span>
+              <span class="text-slate-500">➔ 11:25 國內線</span>
+            </div>
+          </div>
+          <p class="text-[11px] text-emerald-950/85 leading-relaxed">
+            💡 <strong>7人＋7大箱搭乘秘訣：</strong>免預約現場排隊，<strong>09:20–09:30 到站牌排隊</strong>（搭 09:25 或 09:40 最從容）；票價 <strong>¥1,300</strong>（可直接刷 Suica / ICOCA），大行李放巴士下層貨艙，全員記得在「<strong>國內線航廈</strong>」下車！
+          </p>
+        </div>
+
         <div class="space-y-3 border-l-2 border-slate-200 ml-2 pl-3.5 text-xs sm:text-sm">
           <div class="relative">
             <span class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-4 ring-white"></span>
-            <div class="font-bold text-slate-900">10:00 札幌東急 Stay 辦理退房 ➔ 前往新千歲機場</div>
-            <p class="text-slate-600 text-xs mt-0.5">推行李步行 5 分鐘內至機場巴士站（或搭 JR 快速 Airport 號，約 37 分鐘直達新千歲機場）。</p>
+            <div class="font-bold text-slate-900">09:15 札幌東急 Stay 退房 ➔ 步行 5 分鐘至「南 3 條薄野」巴士站</div>
+            <p class="text-slate-600 text-xs mt-0.5">7 位回程團員直接推大行李步行前往巴士站（沿札幌站前通往南步行約 5–6 分鐘；若遇雪大亦可走地下街「Pole Town」直通薄野站出口避雪），搭 <strong>09:25 或 09:40 利木津巴士</strong>直達機場國內線。</p>
+            <a href="https://www.google.com/maps/search/?api=1&query=南3条すすきの+空港連絡バス乗り場" target="_blank" class="inline-flex items-center gap-1 mt-1.5 text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-lg">
+              📍 開啟 Google 地圖 (南 3 條薄野機場巴士站)
+            </a>
           </div>
           <div class="relative">
             <span class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-4 ring-white"></span>
-            <div class="font-bold text-slate-900">11:15–13:00 新千歲機場國內線 2F–3F 最後掃貨</div>
-            <p class="text-slate-600 text-xs mt-0.5">午餐吃拉麵道場（一幻拉麵）或湯咖哩，搶購 <strong>美瑛選果機場店限定「玉米麵包」、SNOWS、Kinotoya 霜淇淋、ROYCE'、六花亭</strong>。</p>
+            <div class="font-bold text-slate-900">10:40–12:00 新千歲機場國內線 1F 寄放行李 ➔ 2F–3F 午餐＆掃貨</div>
+            <p class="text-slate-600 text-xs mt-0.5 leading-relaxed">
+              巴士於<strong>國內線航廈 1F</strong> 下車後，直接到 <strong>1F 抵達大廳「人工行李寄放櫃檯」</strong>（ANA／JAL 側，約 07:30–21:00，大型行李箱每件 <strong>¥600–¥1,000／日</strong>；另有 1F/2F 大型投幣置物櫃 ¥800–¥1,000 支援交通卡）集中寄放 7 件大行李箱，免找空櫃超省事！<br>
+              雙手空空上 <strong>2F 搶購新千歲機場限定「美瑛選果玉米麵包」、SNOWS、Kinotoya 霜淇淋、ROYCE'、六花亭</strong>，並至 <strong>3F 北海道拉麵道場（一幻拉麵）</strong>吃午餐。
+            </p>
           </div>
           <div class="relative">
             <span class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-amber-500 ring-4 ring-white"></span>
-            <div class="font-bold text-amber-900">13:00 移動至國際線航廈 ➔【先辦退稅確認再託運】</div>
-            <p class="text-slate-600 text-xs mt-0.5">有買免稅品者<strong>託運行李前先刷護照過海關 KIOSK</strong>，完成後再前往航空公司櫃檯辦理登機託運。</p>
+            <div class="font-bold text-amber-900">12:00 領行李 ➔ 12:10（最晚 12:15）走室內連通道至國際線 3F【先過退稅 KIOSK 再託運】</div>
+            <p class="text-slate-600 text-xs mt-0.5 leading-relaxed">
+              <strong>12:00 準時下 1F 領出所有寄放行李</strong>，搭電梯上 2F 或 3F 順著「國際線航廈」指標走室內連通道（純步行約 8–10 分鐘，推大行李抓 <strong>15 分鐘</strong>），<strong>12:30 準時抵達國際線 3F 報到托運</strong>（華航 14:40 起飛前 2 小時 10 分鐘）。有買免稅品者<strong>託運前先刷護照過海關 KIOSK</strong>；出境後搭華航可前往 4F <strong>Royal Lounge（皇家貴賓室）</strong>休息！
+            </p>
           </div>
           <div class="relative">
             <span class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-blue-600 ring-4 ring-white"></span>
-            <div class="font-bold text-blue-900">15:05 ＆ 15:20 分流搭機返台 🛫</div>
+            <div class="font-bold text-blue-900">14:40 ＆ 15:20 分流搭機返台 🛫</div>
             <p class="text-slate-600 text-xs mt-0.5 leading-relaxed">
-              • <strong>中華航空 CI131（15:05 新千歲 ➔ 18:15 桃園）：</strong>吉、洹、lin、勲、丹<br>
+              • <strong>中華航空 CI131（14:40 新千歲 ➔ 17:50 桃園）：</strong>吉、洹、lin、勲、丹<br>
               • <strong>長榮航空 BR115（15:20 新千歲 ➔ 19:05 桃園 T2）：</strong>臻、歐巴
             </p>
           </div>
@@ -1580,44 +1674,20 @@
           activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-sm');
         }
 
+        // 若切換至每日行程分頁，重新繪製可愛版地圖
+        if (tabName === 'itinerary') {
+          renderMapForDay(currentMapDay);
+        }
+
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } catch (err) {
         console.error('Switch tab error:', err);
       }
     }
-
-    // 複製文字與 Toast 提示
-    function copyText(text, successMsg) {
-      const textarea = document.createElement('textarea');
-      textarea.value = text;
-      textarea.style.position = 'fixed';
-      textarea.style.opacity = '0';
-      document.body.appendChild(textarea);
-      textarea.select();
-      try {
-        document.execCommand('copy');
-        showToast(successMsg || '已複製到剪貼簿！');
-      } catch (err) {
-        showToast('複製失敗，請手動選取複製');
-      }
-      document.body.removeChild(textarea);
-    }
-
-    let toastTimer;
-    function showToast(msg) {
-      const toast = document.getElementById('toast');
-      const toastMsg = document.getElementById('toast-msg');
-      if (!toast || !toastMsg) return;
-      toastMsg.textContent = msg;
-      toast.classList.remove('opacity-0', 'translate-y-2');
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => {
-        toast.classList.add('opacity-0', 'translate-y-2');
-      }, 2200);
-    }
-
-    // 每日行程日期快速篩選
+    // 每日行程日期快速篩選（同步更新地圖）
+    let currentMapDay = 'all';
     function filterDay(dayId, clickedBtn) {
+      currentMapDay = dayId;
       document.querySelectorAll('.day-filter-btn').forEach(btn => {
         btn.classList.remove('bg-slate-800', 'text-white', 'shadow-xs');
         btn.classList.add('bg-white', 'text-slate-700', 'border', 'border-slate-300');
@@ -1636,6 +1706,281 @@
           card.style.display = 'none';
         }
       });
+
+      renderMapForDay(dayId);
+    }
+
+    // ==================== 可愛插畫版每日行程路線地圖 (Custom Cute SVG Map) ====================
+    // 經緯度對應可愛北海道地圖畫布座標 (viewBox 0 0 420 260)
+    function geoToCuteXY(lat, lng) {
+      // 北海道主要區域經緯度範圍：lat 42.65~43.95, lng 140.85~142.85
+      const x = ((lng - 140.82) / (142.88 - 140.82)) * 330 + 45;
+      const y = ((43.92 - lat) / (43.92 - 42.65)) * 195 + 32;
+      return { x: Math.round(x * 10) / 10, y: Math.round(y * 10) / 10 };
+    }
+
+    const DAILY_MAP_DATA = {
+      all: {
+        title: '⛄ 6天北海道雪國環線可愛地圖',
+        subtitle: '新千歲 ➔ 星野 ➔ 美瑛 ➔ 旭川 ➔ 札幌・小樽 ➔ 新千歲',
+        gmapsUrl: 'https://www.google.com/maps/dir/New+Chitose+Airport/Hoshino+Resorts+TOMAMU/Biei+Station/Asahiyama+Zoo/Otaru+Canal/Sapporo+Station/New+Chitose+Airport',
+        color: '#2563eb',
+        stops: [
+          { name: '1. 新千歲機場', emoji: '✈️', coords: [42.7752, 141.6923], note: '12/09 抵達 ＆ 12/14 掃貨返台' },
+          { name: '2. 星野 TOMAMU', emoji: '🏔️', coords: [43.0631, 142.6256], note: 'D1–D2 連住2晚・霧冰平台・木林之湯' },
+          { name: '3. 美瑛・白金青池', emoji: '🎄', coords: [43.4936, 142.6140], note: 'D3 包車・聖誕樹＆16:30青池點燈' },
+          { name: '4. 旭川・旭山動物園', emoji: '🐧', coords: [43.7681, 142.4796], note: 'D3 宿旭川大浴場・D4 企鵝散步' },
+          { name: '5. 札幌市區 (東急Stay)', emoji: '🏨', coords: [43.0588, 141.3563], note: 'D4–D5 9人合體・大通白色燈樹節' },
+          { name: '6. 小樽運河＆堺町通', emoji: '🍰', coords: [43.1993, 141.0016], note: 'D5 JR 浪漫一日遊・海鮮甜點' }
+        ]
+      },
+      d1: {
+        title: '✈️ DAY 1 (12/09) 機場 ➔ 超市 ➔ 星野可愛路線',
+        subtitle: '新千歲機場 ➔ 永旺千歲店採買 ➔ 星野 TOMAMU The Tower',
+        gmapsUrl: 'https://www.google.com/maps/dir/New+Chitose+Airport/AEON+Chitose/Hoshino+Resorts+TOMAMU+The+Tower',
+        color: '#0284c7',
+        stops: [
+          { name: '1. 新千歲機場', emoji: '✈️', coords: [42.7752, 141.6923], note: '11:00 抵達・12:00 包車出發' },
+          { name: '2. 永旺千歲店 (AEON)', emoji: '🛒', coords: [42.8256, 141.6517], note: '12:10 中停買午餐與鮮奶零食' },
+          { name: '3. 星野 TOMAMU', emoji: '🏔️', coords: [43.0631, 142.6256], note: '15:00 入住・木林之湯・水之教會' }
+        ]
+      },
+      d2: {
+        title: '🏔️ DAY 2 (12/10) 星野度假村全區體驗地圖',
+        subtitle: 'The Tower ➔ Risonare SORA ➔ 霧冰平台 ➔ 微笑海灘＆木林之湯',
+        gmapsUrl: 'https://www.google.com/maps/search/?api=1&query=Hoshino+Resorts+TOMAMU',
+        color: '#2563eb',
+        stops: [
+          { name: '1. The Tower 雙塔', emoji: '🏨', coords: [43.0631, 142.6256], note: '出發＆晚上 20:30 櫃檯寄大行李' },
+          { name: '2. Risonare SORA', emoji: '🍣', coords: [43.0684, 142.6285], note: '07:30 31F 高空海鮮親子丼早餐' },
+          { name: '3. 霧冰平台纜車站', emoji: '🚡', coords: [43.0660, 142.6186], note: '09:00 搭纜車看霧冰・GAO雪地玩樂' },
+          { name: '4. 微笑海灘＆木林之湯', emoji: '♨️', coords: [43.0604, 142.6341], note: '14:30 恆溫泳池・16:30 露天風呂' }
+        ]
+      },
+      d3: {
+        title: '🎄 DAY 3 (12/11) 美瑛雪原＆青池點燈包車路線',
+        subtitle: '星野 ➔ 純平洋食 ➔ 聖誕樹 ➔ 美瑛選果 ➔ 青池＆白鬚瀑布 ➔ 旭川',
+        gmapsUrl: 'https://www.google.com/maps/dir/Hoshino+Resorts+TOMAMU/Junpei+Biei/Christmas+Tree+Biei/Biei+Senka/Shirogane+Blue+Pond/Shirahige+Waterfall/JR+Inn+Asahikawa',
+        color: '#d97706',
+        stops: [
+          { name: '1. 星野 TOMAMU', emoji: '🚐', coords: [43.0631, 142.6256], note: '10:00 包車準時出發' },
+          { name: '2. 純平洋食 junpei', emoji: '🍤', coords: [43.5882, 142.4675], note: '12:00 訂位午餐・招牌炸蝦丼' },
+          { name: '3. 聖誕樹之木', emoji: '🎄', coords: [43.6186, 142.4331], note: '13:40 雪原拍照 35 分鐘' },
+          { name: '4. 美瑛選果', emoji: '🍞', coords: [43.5918, 142.4632], note: '14:25 美瑛小麥工房麵包伴手禮' },
+          { name: '5. 白金青池', emoji: '💎', coords: [43.4936, 142.6140], note: '15:50 抵達・16:30 冬季點燈' },
+          { name: '6. 白鬚瀑布', emoji: '🌊', coords: [43.4754, 142.6391], note: '17:05 夜間藍色冰瀑點燈' },
+          { name: '7. JR INN 旭川', emoji: '♨️', coords: [43.7629, 142.3585], note: '18:45 入住・晚餐大黑屋烤羊肉' }
+        ]
+      },
+      d4: {
+        title: '🐧 DAY 4 (12/12) 旭山動物園 ➔ 札幌9人合體路線',
+        subtitle: 'JR INN 旭川 ➔ 旭山動物園企鵝散步 ➔ 札幌東急 Stay ➔ 薄野爐端燒',
+        gmapsUrl: 'https://www.google.com/maps/dir/JR+Inn+Asahikawa/Asahiyama+Zoo/Tokyu+Stay+Sapporo/Susukino',
+        color: '#ea580c',
+        stops: [
+          { name: '1. JR INN 旭川', emoji: '🚐', coords: [43.7629, 142.3585], note: '09:50 退房上包車' },
+          { name: '2. 旭山動物園', emoji: '🐧', coords: [43.7681, 142.4796], note: '11:00 國王企鵝散步・海豹北極熊' },
+          { name: '3. 札幌東急 Stay', emoji: '🧳', coords: [43.0588, 141.3563], note: '17:15 入住・領取星野寄來的大行李' },
+          { name: '4. 薄野「肉海鮮炉端 芯々」', emoji: '🍻', coords: [43.0542, 141.3526], note: '18:30 與德、歐會合・9人合體晚餐' }
+        ]
+      },
+      d5: {
+        title: '🍰 DAY 5 (12/13) 小樽浪漫一日遊 ➔ 薄野燒肉泡湯',
+        subtitle: 'JR 札幌站 ➔ 小樽三角市場 ➔ 堺町通 ➔ 小樽運河 ➔ 薄野風土燒肉＆湯香郷',
+        gmapsUrl: 'https://www.google.com/maps/dir/Sapporo+Station/Otaru+Sankaku+Market/Otaru+Music+Box+Museum/Otaru+Canal/Susukino',
+        color: '#4f46e5',
+        stops: [
+          { name: '1. JR 札幌站', emoji: '🚆', coords: [43.0686, 141.3508], note: '09:33 搭快速 Airport 31 號往小樽' },
+          { name: '2. 小樽三角市場', emoji: '🦀', coords: [43.1982, 140.9930], note: '10:15 帝王蟹、海膽鮭魚卵早午餐' },
+          { name: '3. 堺町通 (LeTAO/音樂盒)', emoji: '🍰', coords: [43.1922, 141.0065], note: '12:00 甜點散步＆玻璃工藝' },
+          { name: '4. 小樽運河 (淺草橋)', emoji: '🏮', coords: [43.1993, 141.0016], note: '16:00 藍調點燈・17:00 搭 JR 回札幌' },
+          { name: '5. 薄野風土燒肉＆湯香郷', emoji: '♨️', coords: [43.0528, 141.3548], note: '19:00 訂位燒肉・餐後天然溫泉泡湯' }
+        ]
+      },
+      d6: {
+        title: '🛍️ DAY 6 (12/14) 札幌步行搭巴士 ➔ 新千歲機場寄物掃貨返台',
+        subtitle: '札幌東急 Stay ➔ 步行至南3條薄野巴士站 ➔ 新千歲機場國內線＆國際線',
+        gmapsUrl: 'https://www.google.com/maps/dir/Tokyu+Stay+Sapporo/南3条すすきの+空港連絡バス乗り場/New+Chitose+Airport',
+        color: '#059669',
+        stops: [
+          { name: '1. 札幌東急 Stay', emoji: '🧳', coords: [43.0588, 141.3563], note: '09:15 退房・7人推大行李步行約5分鐘' },
+          { name: '2. 南3條薄野巴士站', emoji: '🚌', coords: [43.0566, 141.3536], note: '搭 09:25 或 09:40 利木津巴士 (¥1,300)' },
+          { name: '3. 新千歲國內線 1F–3F', emoji: '🌽', coords: [42.7875, 141.6813], note: '10:40 1F人工寄物 ➔ 2F玉米麵包 ➔ 12:00領行李' },
+          { name: '4. 新千歲國際線 3F', emoji: '✈️', coords: [42.7752, 141.6923], note: '12:10 連通道步行 ➔ 12:30報到・華航 14:40 起飛' }
+        ]
+      }
+    };
+
+    function initItineraryMap() {
+      renderMapForDay('all');
+    }
+
+    function selectCutePin(dayId, idx) {
+      const data = DAILY_MAP_DATA[dayId] || DAILY_MAP_DATA.all;
+      const stop = data.stops[idx];
+      if (!stop) return;
+      const emojiEl = document.getElementById('cute-popup-emoji');
+      const titleEl = document.getElementById('cute-popup-title');
+      const noteEl = document.getElementById('cute-popup-note');
+      if (emojiEl) emojiEl.textContent = stop.emoji;
+      if (titleEl) titleEl.textContent = stop.name;
+      if (noteEl) noteEl.textContent = stop.note;
+    }
+
+    function renderMapForDay(dayId) {
+      const data = DAILY_MAP_DATA[dayId] || DAILY_MAP_DATA.all;
+      const titleEl = document.getElementById('map-route-title');
+      const subEl = document.getElementById('map-route-subtitle');
+      const linkEl = document.getElementById('map-gmaps-link');
+      const pillsEl = document.getElementById('map-stops-pills');
+      const mapEl = document.getElementById('itinerary-map');
+
+      if (titleEl) titleEl.textContent = data.title;
+      if (subEl) subEl.textContent = data.subtitle;
+      if (linkEl) linkEl.href = data.gmapsUrl;
+
+      // 更新站點膠囊列（點膠囊也能同步顯示該站氣泡）
+      if (pillsEl) {
+        pillsEl.innerHTML = data.stops.map((s, idx) => `
+          <button type="button" onclick="selectCutePin('${dayId}', ${idx})" class="inline-flex items-center gap-1 bg-white hover:bg-sky-50 border border-slate-200 px-2 py-0.5 rounded-lg shadow-2xs transition active:scale-95">
+            <span>${s.emoji}</span><span>${s.name}</span>
+          </button>${idx < data.stops.length - 1 ? '<span class="text-slate-400">➔</span>' : ''}
+        `).join('');
+      }
+
+      // 預設顯示第 1 站提示
+      selectCutePin(dayId, 0);
+
+      if (!mapEl) return;
+
+      // 計算各站點畫布座標並自動縮放 viewBox 聚焦當日路線
+      const pts = data.stops.map(s => geoToCuteXY(s.coords[0], s.coords[1]));
+      const xs = pts.map(p => p.x);
+      const ys = pts.map(p => p.y);
+      const minX = Math.min(...xs);
+      const maxX = Math.max(...xs);
+      const minY = Math.min(...ys);
+      const maxY = Math.max(...ys);
+
+      let vx = 0, vy = 0, vw = 420, vh = 260;
+      if (dayId !== 'all') {
+        const spanX = Math.max(maxX - minX, 75);
+        const spanY = Math.max(maxY - minY, 55);
+        const cx = (minX + maxX) / 2;
+        const cy = (minY + maxY) / 2;
+        vw = Math.min(420, Math.max(175, spanX + 115));
+        vh = vw * (260 / 420);
+        if (vh < spanY + 95) {
+          vh = Math.min(260, spanY + 95);
+          vw = vh * (420 / 260);
+        }
+        vx = Math.max(0, Math.min(420 - vw, cx - vw / 2));
+        vy = Math.max(0, Math.min(260 - vh, cy - vh / 2));
+      }
+
+      const scaleFactor = vw / 420;
+      const pinScale = Math.max(0.55, Math.min(1, scaleFactor * 1.15));
+
+      const pathD = pts.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
+
+      const pinsSvg = data.stops.map((stop, idx) => {
+        const p = pts[idx];
+        const labelW = stop.name.length * 7.8 + 14;
+        return `
+          <g class="cute-pin-group cursor-pointer" onclick="selectCutePin('${dayId}', ${idx})" transform="translate(${p.x}, ${p.y}) scale(${pinScale})">
+            <!-- 底部陰影 -->
+            <ellipse cx="0" cy="4" rx="10" ry="4" fill="rgba(15, 23, 42, 0.2)" />
+            <!-- 可愛氣球水滴外框 -->
+            <path d="M 0 2 C -12 -10, -16 -20, -16 -27 A 16 16 0 1 1 16 -27 C 16 -20, 12 -10, 0 2 Z" fill="${data.color}" stroke="#ffffff" stroke-width="2.5" />
+            <!-- 白色內圓與 Emoji -->
+            <circle cx="0" cy="-27" r="11.5" fill="#ffffff" />
+            <text x="0" y="-22.5" text-anchor="middle" font-size="13">${stop.emoji}</text>
+            <!-- 左上角序號小徽章 -->
+            <circle cx="-12" cy="-38" r="7" fill="#f59e0b" stroke="#ffffff" stroke-width="1.5" />
+            <text x="-12" y="-35" text-anchor="middle" fill="#ffffff" font-size="8.5" font-weight="900">${idx + 1}</text>
+            <!-- 站名圓角白底標籤 -->
+            <rect x="${-labelW / 2}" y="7" width="${labelW}" height="17" rx="8.5" fill="#ffffff" stroke="${data.color}" stroke-width="1.5" />
+            <text x="0" y="18.5" text-anchor="middle" fill="#0f172a" font-size="9.5" font-weight="900">${stop.name}</text>
+          </g>
+        `;
+      }).join('');
+
+      mapEl.innerHTML = `
+        <svg viewBox="${vx.toFixed(1)} ${vy.toFixed(1)} ${vw.toFixed(1)} ${vh.toFixed(1)}" class="w-full h-full select-none" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <filter id="snowIslandShadow" x="-10%" y="-10%" width="120%" height="120%">
+              <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#0284c7" flood-opacity="0.22"/>
+            </filter>
+          </defs>
+
+          <!-- Q版北海道雪白島嶼輪廓（涵蓋道央・小樽・千歲・星野・美瑛・旭川） -->
+          <path d="M 22 92 Q 48 68, 86 78 Q 112 52, 152 38 Q 215 16, 295 14 Q 355 24, 398 58 Q 412 108, 385 155 Q 355 202, 292 238 Q 230 254, 175 242 Q 135 224, 102 232 Q 62 246, 26 218 Q 12 182, 34 150 Q 10 124, 22 92 Z"
+                fill="#ffffff" stroke="#7dd3fc" stroke-width="3.5" filter="url(#snowIslandShadow)" />
+          <!-- 島內粉雪光暈 -->
+          <path d="M 34 96 Q 56 76, 90 85 Q 116 62, 154 48 Q 214 28, 288 26 Q 344 35, 384 65 Q 396 108, 372 150 Q 344 192, 286 226 Q 228 240, 178 228 Q 138 212, 104 220 Q 68 232, 36 208 Q 24 178, 44 148 Q 22 124, 34 96 Z"
+                fill="#f0f9ff" opacity="0.75" />
+
+          <!-- 可愛裝飾小雪山、松樹與小雪人 -->
+          <g opacity="0.55">
+            <!-- 大雪山系小山脈 -->
+            <polygon points="295,95 312,68 329,95" fill="#bae6fd" />
+            <polygon points="306,78 312,68 318,78" fill="#ffffff" />
+            <polygon points="318,100 333,76 348,100" fill="#93c5fd" />
+            <polygon points="328,84 333,76 338,84" fill="#ffffff" />
+            <!-- 可愛針葉樹林 -->
+            <text x="235" y="135" font-size="14">🌲</text>
+            <text x="252" y="142" font-size="11">🌲</text>
+            <text x="155" y="168" font-size="13">❄️</text>
+            <text x="342" y="172" font-size="14">⛄</text>
+            <text x="68" y="185" font-size="13">❄️</text>
+            <text x="195" y="55" font-size="12">✨</text>
+          </g>
+
+          <!-- 海洋波浪點綴 -->
+          <text x="16" y="42" font-size="11" fill="#0369a1" opacity="0.45" font-weight="900">🌊 日本海</text>
+          <text x="315" y="246" font-size="11" fill="#0369a1" opacity="0.45" font-weight="900">太平洋 🌊</text>
+
+          <!-- 路線白色底線＋彩色動態虛線 -->
+          ${pts.length > 1 ? `
+            <path d="${pathD}" fill="none" stroke="#ffffff" stroke-width="${6.5 * pinScale}" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="${pathD}" fill="none" stroke="${data.color}" stroke-width="${3.5 * pinScale}" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 7" class="cute-route-line" />
+          ` : ''}
+
+          <!-- 可愛站點圖釘 -->
+          ${pinsSvg}
+        </svg>
+      `;
+    }
+
+    // 一鍵複製文字並顯示 Toast 提示（相容 iFrame 與手機瀏覽器）
+    function copyText(text, toastMessage = '已複製到剪貼簿！') {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.left = '-9999px';
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand('copy');
+        showToast(toastMessage);
+      } catch (err) {
+        showToast('複製失敗，請手動長按選取');
+      }
+      document.body.removeChild(textarea);
+    }
+
+    let toastTimer;
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-msg');
+      if (!toast || !toastMsg) return;
+      toastMsg.textContent = msg;
+      toast.classList.remove('opacity-0', 'translate-y-2');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-2');
+      }, 2200);
     }
 
     // ==================== 出發倒數計時器 ====================
@@ -2319,6 +2664,7 @@
     window.addEventListener('DOMContentLoaded', () => {
       updateDepartureCountdown();
       setInterval(updateDepartureCountdown, 1000);
+      initItineraryMap();
       fetchLiveExchangeRate(false);
       initExpenseForm();
       loadExpenses();
