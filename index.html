@@ -589,13 +589,25 @@
           <button type="button" onclick="filterDay('d5', this)" class="day-filter-btn bg-white text-slate-700 border border-slate-300 text-xs font-bold px-2.5 py-1.5 rounded-full">D5 12/13</button>
           <button type="button" onclick="filterDay('d6', this)" class="day-filter-btn bg-white text-slate-700 border border-slate-300 text-xs font-bold px-2.5 py-1.5 rounded-full">D6 12/14</button>
         </div>
-        <!-- 點選站點後的加大型氣泡資訊卡（寬敞不截斷、高度穩定不跳動） -->
-        <div id="cute-map-popup" class="min-h-[146px] bg-white border-2 border-sky-200 rounded-2xl p-3.5 shadow-xs flex flex-col justify-between gap-2">
-          <!-- 景點實景照片預覽（有照片時自動展開） -->
-          <div id="cute-popup-photo-wrap" class="hidden relative rounded-xl overflow-hidden border border-sky-100 bg-slate-100">
-            <img id="cute-popup-photo" src="" alt="景點實景照" class="w-full h-44 sm:h-52 object-cover">
-            <span id="cute-popup-photo-caption" class="absolute bottom-2 left-2 bg-slate-950/70 backdrop-blur-xs text-white text-[11px] font-bold px-2.5 py-0.5 rounded-full"></span>
+      </div>
+
+      <!-- 可愛插畫版路線地圖卡片 -->
+      <div class="glass-card rounded-2xl p-3.5 shadow-sm border-2 border-sky-200 space-y-2.5">
+        <div class="flex items-start justify-between gap-2">
+          <div class="min-w-0">
+            <h2 id="map-route-title" class="text-sm sm:text-base font-black text-slate-900">⛄ 6天北海道雪國環線可愛地圖</h2>
+            <p id="map-route-subtitle" class="text-xs text-slate-500 mt-0.5">新千歲 ➔ 星野 ➔ 美瑛 ➔ 旭川 ➔ 小樽 ➔ 札幌 ➔ 新千歲</p>
           </div>
+          <a id="map-gmaps-link" href="https://www.google.com/maps/dir/New+Chitose+Airport/Hoshino+Resorts+TOMAMU/Biei+Station/Asahiyama+Zoo/Otaru+Canal/Sapporo+Station/New+Chitose+Airport" target="_blank" class="shrink-0 text-xs font-extrabold text-white bg-blue-600 hover:bg-blue-700 px-2.5 py-1.5 rounded-xl shadow-2xs transition">
+            🗺️ Google導航
+          </a>
+        </div>
+
+        <!-- 可愛路線 SVG 地圖畫布 -->
+        <div id="itinerary-map" class="w-full h-60 sm:h-68 rounded-2xl overflow-hidden border-2 border-sky-200 cute-map-bg relative shadow-inner select-none"></div>
+
+        <!-- 點選站點後的加大型氣泡資訊卡（無照片格子、寬敞不截斷） -->
+        <div id="cute-map-popup" class="min-h-[128px] bg-white border-2 border-sky-200 rounded-2xl p-3.5 shadow-xs flex flex-col justify-between gap-2">
           <div class="flex items-center justify-between gap-2 border-b border-sky-100 pb-2">
             <div class="flex items-center gap-2 min-w-0">
               <span id="cute-popup-emoji" class="text-2xl leading-none shrink-0">⛄</span>
@@ -606,14 +618,6 @@
           <p id="cute-popup-note" class="text-sm text-slate-700 font-medium leading-relaxed">
             支援 D1–D6 每日專屬路線放大預覽，文字完整展開不截斷，閱讀更輕鬆！
           </p>
-          <!-- 自訂上傳景點照片按鈕 -->
-          <div class="flex items-center justify-between pt-1 border-t border-slate-100">
-            <span class="text-[11px] text-slate-400 font-bold">📸 可為此站點換上自己的實景美照</span>
-            <label class="cursor-pointer inline-flex items-center gap-1 text-[11px] font-extrabold text-sky-700 bg-sky-50 hover:bg-sky-100 border border-sky-200 px-2.5 py-1 rounded-lg transition active:scale-95">
-              <span>📷 上傳／更換照片</span>
-              <input type="file" accept="image/*" onchange="handleSpotPhotoUpload(event)" class="hidden">
-            </label>
-          </div>
         </div>
 
         <!-- 站點順序膠囊提示列 -->
@@ -629,22 +633,9 @@
           </div>
           <span class="shrink-0 text-xs font-bold bg-sky-100 text-sky-800 px-2.5 py-1 rounded-full">宿：星野 Tower</span>
         </div>
-        <!-- 星野 TOMAMU 實景美照 -->
-        <div class="relative rounded-2xl overflow-hidden border border-sky-200/80 mb-3 shadow-xs">
-          <img src="https://www.snowtomamu.jp/winter/img/hotel/tower/main_01.jpg" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Alpha_Resort_Tomamu_%E6%98%9F%E9%87%8E%E6%B8%A1%E5%81%87%E6%9D%91_-_panoramio.jpg/1280px-Alpha_Resort_Tomamu_%E6%98%9F%E9%87%8E%E6%B8%A1%E5%81%87%E6%9D%91_-_panoramio.jpg';" alt="星野 TOMAMU The Tower 雪景" class="w-full h-44 sm:h-52 object-cover">
-          <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950/80 via-slate-950/35 to-transparent px-3 py-2 flex items-center justify-between">
-            <span class="text-white text-xs font-black">🏔️ 星野 TOMAMU The Tower 霧冰雙塔雪景</span>
-            <span class="text-[10px] font-bold bg-white/25 backdrop-blur-xs text-white px-2 py-0.5 rounded-full">連住 2 晚</span>
-          </div>
-        </div>
         <div class="flex flex-wrap gap-1.5 mb-3">
           <span class="text-[11px] font-bold bg-sky-50 text-sky-800 border border-sky-200/80 px-2.5 py-0.5 rounded-full">🌡️ 星野預估：-8°C ~ -1°C</span>
           <span class="text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200/80 px-2.5 py-0.5 rounded-full">🌅 日落：約 16:00</span>
-        </div>
-        <!-- Day 1 雙景點專屬明信片 -->
-        <div class="grid grid-cols-2 gap-2 mb-3">
-          <div class="day-postcard rounded-xl overflow-hidden border border-sky-100 h-28 relative" data-scene="tomamu" data-caption="星野 TOMAMU 雙塔雪景"></div>
-          <div class="day-postcard rounded-xl overflow-hidden border border-sky-100 h-28 relative" data-scene="chapel" data-caption="夜間水之教會藍光十字架"></div>
         </div>
         <div class="space-y-3 border-l-2 border-slate-200 ml-2 pl-3.5 text-xs sm:text-sm">
           <div class="relative">
@@ -674,22 +665,9 @@
           </div>
           <span class="shrink-0 text-xs font-bold bg-blue-100 text-blue-800 px-2.5 py-1 rounded-full">宿：星野 Tower</span>
         </div>
-        <!-- 星野 TOMAMU 實景美照 -->
-        <div class="relative rounded-2xl overflow-hidden border border-blue-200/80 mb-3 shadow-xs">
-          <img src="https://www.snowtomamu.jp/winter/img/hotel/tower/main_01.jpg" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Alpha_Resort_Tomamu_%E6%98%9F%E9%87%8E%E6%B8%A1%E5%81%87%E6%9D%91_-_panoramio.jpg/1280px-Alpha_Resort_Tomamu_%E6%98%9F%E9%87%8E%E6%B8%A1%E5%81%87%E6%9D%91_-_panoramio.jpg';" alt="星野 TOMAMU The Tower 雪景" class="w-full h-44 sm:h-52 object-cover">
-          <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950/80 via-slate-950/35 to-transparent px-3 py-2 flex items-center justify-between">
-            <span class="text-white text-xs font-black">⛄ 星野 TOMAMU 銀白霧冰森林與雙塔</span>
-            <span class="text-[10px] font-bold bg-white/25 backdrop-blur-xs text-white px-2 py-0.5 rounded-full">霧冰平台・木林之湯</span>
-          </div>
-        </div>
         <div class="flex flex-wrap gap-1.5 mb-3">
           <span class="text-[11px] font-bold bg-sky-50 text-sky-800 border border-sky-200/80 px-2.5 py-0.5 rounded-full">🌡️ 星野預估：-9°C ~ -2°C (山頂約 -12°C)</span>
           <span class="text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200/80 px-2.5 py-0.5 rounded-full">🌅 日落：約 16:00</span>
-        </div>
-        <!-- Day 2 雙景點專屬明信片 -->
-        <div class="grid grid-cols-2 gap-2 mb-3">
-          <div class="day-postcard rounded-xl overflow-hidden border border-blue-100 h-28 relative" data-scene="muhyo" data-caption="海拔 1,088m 霧冰平台樹冰"></div>
-          <div class="day-postcard rounded-xl overflow-hidden border border-blue-100 h-28 relative" data-scene="onsen" data-caption="木林之湯雪見露天風呂"></div>
         </div>
         <div class="space-y-3 border-l-2 border-slate-200 ml-2 pl-3.5 text-xs sm:text-sm">
           <div class="relative">
@@ -717,17 +695,6 @@
 
       <!-- DAY 3 -->
       <article id="card-d3" class="day-card glass-card rounded-2xl p-4 shadow-sm border-l-4 border-l-amber-500">
-        <!-- Day 3 景點實景雙圖廊 -->
-        <div class="grid grid-cols-2 gap-2 mb-3">
-          <div class="relative h-28 rounded-xl overflow-hidden bg-sky-100 border border-amber-200/70">
-            <img src="https://images.unsplash.com/photo-1511184150666-9bb7d41a88f4?auto=format&fit=crop&w=600&q=80" alt="美瑛雪原聖誕樹" onerror="this.onerror=null;this.src='https://placehold.co/600x320/fef3c7/92400e?text=Biei+Snow+Tree';" class="w-full h-full object-cover">
-            <span class="absolute bottom-1.5 left-1.5 bg-slate-900/75 text-white text-[10px] font-bold px-2 py-0.5 rounded-md">🎄 美瑛雪原丘陵</span>
-          </div>
-          <div class="relative h-28 rounded-xl overflow-hidden bg-sky-100 border border-amber-200/70">
-            <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=600&q=80" alt="白金青池藍調點燈" onerror="this.onerror=null;this.src='https://placehold.co/600x320/dbeafe/1e40af?text=Shirogane+Blue+Pond';" class="w-full h-full object-cover">
-            <span class="absolute bottom-1.5 left-1.5 bg-slate-900/75 text-white text-[10px] font-bold px-2 py-0.5 rounded-md">💎 白金青池點燈</span>
-          </div>
-        </div>
         <div class="flex items-start justify-between gap-2 mb-2">
           <div>
             <span class="text-xs font-black text-amber-600 uppercase tracking-wider">DAY 3｜12/11 (五) 包車日</span>
@@ -738,11 +705,6 @@
         <div class="flex flex-wrap gap-1.5 mb-3">
           <span class="text-[11px] font-bold bg-sky-50 text-sky-800 border border-sky-200/80 px-2.5 py-0.5 rounded-full">🌡️ 美瑛・旭川：-8°C ~ -2°C</span>
           <span class="text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200/80 px-2.5 py-0.5 rounded-full">🌅 日落：約 15:55（16:30 點燈）</span>
-        </div>
-        <!-- Day 3 雙景點專屬明信片 -->
-        <div class="grid grid-cols-2 gap-2 mb-3">
-          <div class="day-postcard rounded-xl overflow-hidden border border-amber-100 h-28 relative" data-scene="biei_tree" data-caption="美瑛雪原孤獨聖誕樹之木"></div>
-          <div class="day-postcard rounded-xl overflow-hidden border border-amber-100 h-28 relative" data-scene="blue_pond" data-caption="白金青池 16:30 藍調點燈"></div>
         </div>
         <div class="space-y-3 border-l-2 border-slate-200 ml-2 pl-3.5 text-xs sm:text-sm">
           <div class="relative">
@@ -775,17 +737,6 @@
 
       <!-- DAY 4 -->
       <article id="card-d4" class="day-card glass-card rounded-2xl p-4 shadow-sm border-l-4 border-l-orange-500">
-        <!-- Day 4 景點實景雙圖廊 -->
-        <div class="grid grid-cols-2 gap-2 mb-3">
-          <div class="relative h-28 rounded-xl overflow-hidden bg-sky-100 border border-orange-200/70">
-            <img src="https://images.unsplash.com/photo-1551986782-d0169b3f8fa7?auto=format&fit=crop&w=600&q=80" alt="旭山動物園企鵝散步" onerror="this.onerror=null;this.src='https://placehold.co/600x320/ffedd5/9a3412?text=Asahiyama+Penguins';" class="w-full h-full object-cover">
-            <span class="absolute bottom-1.5 left-1.5 bg-slate-900/75 text-white text-[10px] font-bold px-2 py-0.5 rounded-md">🐧 旭山企鵝散步</span>
-          </div>
-          <div class="relative h-28 rounded-xl overflow-hidden bg-sky-100 border border-orange-200/70">
-            <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=600&q=80" alt="砂川 SHIRO 玻璃森林工廠" onerror="this.onerror=null;this.src='https://placehold.co/600x320/f1f5f9/334155?text=SHIRO+Factory';" class="w-full h-full object-cover">
-            <span class="absolute bottom-1.5 left-1.5 bg-slate-900/75 text-white text-[10px] font-bold px-2 py-0.5 rounded-md">🧴 砂川 SHIRO 工廠</span>
-          </div>
-        </div>
         <div class="flex items-start justify-between gap-2 mb-2">
           <div>
             <span class="text-xs font-black text-orange-600 uppercase tracking-wider">DAY 4｜12/12 (六) 包車日</span>
@@ -796,11 +747,6 @@
         <div class="flex flex-wrap gap-1.5 mb-3">
           <span class="text-[11px] font-bold bg-sky-50 text-sky-800 border border-sky-200/80 px-2.5 py-0.5 rounded-full">🌡️ 旭川・札幌：-5°C ~ +1°C</span>
           <span class="text-[11px] font-bold bg-indigo-50 text-indigo-800 border border-indigo-200/80 px-2.5 py-0.5 rounded-full">🤝 德、歐晚上札幌會合！</span>
-        </div>
-        <!-- Day 4 雙景點專屬明信片 -->
-        <div class="grid grid-cols-2 gap-2 mb-3">
-          <div class="day-postcard rounded-xl overflow-hidden border border-orange-100 h-28 relative" data-scene="penguin" data-caption="旭山動物園 11:00 企鵝散步"></div>
-          <div class="day-postcard rounded-xl overflow-hidden border border-orange-100 h-28 relative" data-scene="shiro" data-caption="砂川 SHIRO 純白玻璃森林工廠"></div>
         </div>
         <div class="space-y-3 border-l-2 border-slate-200 ml-2 pl-3.5 text-xs sm:text-sm">
           <div class="relative">
@@ -836,17 +782,6 @@
 
       <!-- DAY 5 -->
       <article id="card-d5" class="day-card glass-card rounded-2xl p-4 shadow-sm border-l-4 border-l-indigo-600">
-        <!-- Day 5 景點實景雙圖廊 -->
-        <div class="grid grid-cols-2 gap-2 mb-3">
-          <div class="relative h-28 rounded-xl overflow-hidden bg-sky-100 border border-indigo-200/70">
-            <img src="https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=600&q=80" alt="小樽三角市場海鮮丼" onerror="this.onerror=null;this.src='https://placehold.co/600x320/e0e7ff/3730a3?text=Otaru+Seafood';" class="w-full h-full object-cover">
-            <span class="absolute bottom-1.5 left-1.5 bg-slate-900/75 text-white text-[10px] font-bold px-2 py-0.5 rounded-md">🦀 三角市場海鮮</span>
-          </div>
-          <div class="relative h-28 rounded-xl overflow-hidden bg-sky-100 border border-indigo-200/70">
-            <img src="https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=600&q=80" alt="小樽運河黃昏點燈" onerror="this.onerror=null;this.src='https://placehold.co/600x320/e0e7ff/3730a3?text=Otaru+Canal+Night';" class="w-full h-full object-cover">
-            <span class="absolute bottom-1.5 left-1.5 bg-slate-900/75 text-white text-[10px] font-bold px-2 py-0.5 rounded-md">🏮 小樽運河點燈</span>
-          </div>
-        </div>
         <div class="flex items-start justify-between gap-2 mb-2">
           <div>
             <span class="text-xs font-black text-indigo-600 uppercase tracking-wider">DAY 5｜12/13 (日)</span>
@@ -857,11 +792,6 @@
         <div class="flex flex-wrap gap-1.5 mb-3">
           <span class="text-[11px] font-bold bg-sky-50 text-sky-800 border border-sky-200/80 px-2.5 py-0.5 rounded-full">🌡️ 小樽・札幌：-3°C ~ +2°C (海風微涼)</span>
           <span class="text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200/80 px-2.5 py-0.5 rounded-full">🌅 日落：約 16:02</span>
-        </div>
-        <!-- Day 5 雙景點專屬明信片 -->
-        <div class="grid grid-cols-2 gap-2 mb-3">
-          <div class="day-postcard rounded-xl overflow-hidden border border-indigo-100 h-28 relative" data-scene="otaru_canal" data-caption="小樽運河 16:00 煤油燈藍調夜景"></div>
-          <div class="day-postcard rounded-xl overflow-hidden border border-indigo-100 h-28 relative" data-scene="seafood" data-caption="小樽三角市場海膽帝王蟹丼"></div>
         </div>
 
         <!-- 札幌 ⇄ 小樽 JR 快速 Airport 參考時刻表 -->
@@ -936,17 +866,6 @@
 
       <!-- DAY 6 -->
       <article id="card-d6" class="day-card glass-card rounded-2xl p-4 shadow-sm border-l-4 border-l-emerald-500">
-        <!-- Day 6 景點實景雙圖廊 -->
-        <div class="grid grid-cols-2 gap-2 mb-3">
-          <div class="relative h-28 rounded-xl overflow-hidden bg-sky-100 border border-emerald-200/70">
-            <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80" alt="美瑛選果現烤麵包伴手禮" onerror="this.onerror=null;this.src='https://placehold.co/600x320/d1fae5/065f46?text=Airport+Souvenirs';" class="w-full h-full object-cover">
-            <span class="absolute bottom-1.5 left-1.5 bg-slate-900/75 text-white text-[10px] font-bold px-2 py-0.5 rounded-md">🌽 機場限定伴手禮</span>
-          </div>
-          <div class="relative h-28 rounded-xl overflow-hidden bg-sky-100 border border-emerald-200/70">
-            <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=600&q=80" alt="新千歲機場返台班機" onerror="this.onerror=null;this.src='https://placehold.co/600x320/d1fae5/065f46?text=New+Chitose+Flight';" class="w-full h-full object-cover">
-            <span class="absolute bottom-1.5 left-1.5 bg-slate-900/75 text-white text-[10px] font-bold px-2 py-0.5 rounded-md">✈️ 新千歲滿載返台</span>
-          </div>
-        </div>
         <div class="flex items-start justify-between gap-2 mb-2">
           <div>
             <span class="text-xs font-black text-emerald-600 uppercase tracking-wider">DAY 6｜12/14 (一)</span>
@@ -957,11 +876,6 @@
         <div class="flex flex-wrap gap-1.5 mb-3">
           <span class="text-[11px] font-bold bg-sky-50 text-sky-800 border border-sky-200/80 px-2.5 py-0.5 rounded-full">🌡️ 札幌・千歲：-4°C ~ +1°C</span>
           <span class="text-[11px] font-bold bg-indigo-50 text-indigo-800 border border-indigo-200/80 px-2.5 py-0.5 rounded-full">✈️ 華航 14:40 ／ 長榮 15:20 起飛</span>
-        </div>
-        <!-- Day 6 雙景點專屬明信片 -->
-        <div class="grid grid-cols-2 gap-2 mb-3">
-          <div class="day-postcard rounded-xl overflow-hidden border border-emerald-100 h-28 relative" data-scene="sapporo_night" data-caption="札幌大通公園白色燈樹節"></div>
-          <div class="day-postcard rounded-xl overflow-hidden border border-emerald-100 h-28 relative" data-scene="airport" data-caption="新千歲機場掃貨＆平安返台"></div>
         </div>
 
         <!-- 南3條薄野 -> 新千歲機場 利木津巴士時刻表 -->
@@ -1955,7 +1869,7 @@
   <div id="phrase-modal" onclick="closePhraseModal()" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-xs hidden flex items-center justify-center p-4">
     <div class="max-w-md w-full bg-white rounded-3xl overflow-hidden shadow-2xl p-6 text-center space-y-4" onclick="event.stopPropagation()">
       <span id="modal-phrase-tag" class="inline-block text-xs font-bold bg-sky-100 text-sky-800 px-3 py-1 rounded-full">溝通句型</span>
-      <div id="modal-phrase-jp" class="text-2xl sm:text-3xl font-black text-slate-900 leading-relaxed py-2"></div>
+      <div id="modal-phrase-jp" class="notranslate text-2xl sm:text-3xl font-black text-slate-900 leading-relaxed py-2" translate="no"></div>
       <div id="modal-phrase-zh" class="text-sm font-bold text-slate-500 border-t border-slate-100 pt-3"></div>
       <div class="flex gap-2 pt-2">
         <button id="modal-phrase-copy-btn" class="flex-1 bg-blue-600 text-white font-bold text-xs py-3 rounded-xl active:scale-95">📋 複製日文</button>
@@ -3184,8 +3098,17 @@
           ? 'bg-amber-100 text-amber-900 border border-amber-300'
           : 'bg-blue-50 text-blue-700 border border-blue-200';
         const displayPayer = getDisplayMemberName(item.payer);
-        const payerLabel = isPf ? '🏦 公費基金扣款' : `💳 ${displayPayer} 先付`;
-        const membersText = (item.splitMembers || []).map(m => getDisplayMemberName(m)).join('、');
+        const payerLabel = isPf
+          ? (isKoreanMode ? '🏦 공비 기금 차감' : '🏦 公費基金扣款')
+          : (isKoreanMode
+              ? `💳 <span class="notranslate" translate="no">${displayPayer}</span> 선결제`
+              : `💳 <span class="notranslate" translate="no">${displayPayer}</span> 先付`);
+        const membersHtml = (item.splitMembers || [])
+          .map(m => `<span class="notranslate" translate="no">${getDisplayMemberName(m)}</span>`)
+          .join('、');
+        const splitPrefix = isKoreanMode
+          ? `분담 (${(item.splitMembers || []).length}명)：`
+          : `分攤（${(item.splitMembers || []).length}人）：`;
 
         return `
           <div class="bg-white border border-slate-200 rounded-xl p-3 space-y-1.5">
@@ -3193,7 +3116,7 @@
               <div class="min-w-0">
                 <div class="font-extrabold text-slate-900 text-sm break-words">${item.title}</div>
                 <div class="flex flex-wrap items-center gap-1.5 mt-1">
-                  <span class="notranslate text-[11px] font-bold px-2 py-0.5 rounded-md ${badgeCls}" translate="no">${payerLabel}</span>
+                  <span class="text-[11px] font-bold px-2 py-0.5 rounded-md ${badgeCls}">${payerLabel}</span>
                   <span class="text-[11px] text-slate-400">${item.time || ''}</span>
                 </div>
               </div>
@@ -3203,7 +3126,7 @@
               </div>
             </div>
             <div class="text-[11px] text-slate-500 pt-1 border-t border-slate-100 flex items-center justify-between gap-2">
-              <span class="notranslate" translate="no">分攤（${(item.splitMembers || []).length}人）：${membersText}</span>
+              <span>${splitPrefix}${membersHtml}</span>
               ${item.receipt ? `<button type="button" onclick="openReceiptModal('${item.title.replace(/'/g, "\\'")}', '${item.receipt}')" class="shrink-0 text-blue-600 font-bold underline">檢視收據</button>` : ''}
             </div>
           </div>
@@ -3240,11 +3163,10 @@
     const PHRASE_CARDS = [
       { tag: '購物退稅', jp: '免税（めんぜい）の手続きをお願いできますか？', zh: '請問可以幫我辦理免稅手續嗎？' },
       { tag: '信用卡結帳', jp: 'クレジットカードで、日本円（にほんえん）払いでお願いします。', zh: '我要用信用卡結帳，請幫我用「日圓」計價。' },
-      { tag: '餐廳人數', jp: '予約（よやく）している〇〇です。大人9名（きゅうめい）です。', zh: '我們是有訂位的〇〇，大人總共 9 位。' },
+      { tag: '餐廳人數', jp: '予約（よやく）している〇〇です。大人7名（ななめい）です。', zh: '我們是有訂位的〇〇，大人總共 7 位。' },
       { tag: '分開結帳', jp: '別々（べつべつ）にお会計（かいけい）をお願いできますか？', zh: '請問可以幫我們分開結帳嗎？' },
       { tag: '寄放行李', jp: 'チェックイン前ですが、荷物を預かっていただけますか？', zh: '還沒到入住時間，請問可以先寄放行李嗎？' },
-      { tag: '黑貓宅急便', jp: 'このスーツケースを札幌のホテルまでクール便ではなく通常便で送りたいです。', zh: '我想把這個行李箱用一般宅急便寄到札幌的飯店。' },
-      { tag: '點餐不吃牛/生食', jp: '牛肉（ぎゅうにく）と生もの（なまもの）が食べられません。', zh: '我不吃牛肉以及生食。' }
+      { tag: '黑貓宅急便', jp: 'このスーツケースを札幌のホテルまでクール便ではなく通常便で送りたいです。', zh: '我想把這個行李箱用一般宅急便寄到札幌的飯店。' }
     ];
 
     function initPhraseCards() {
@@ -3256,7 +3178,7 @@
             <span class="text-[10px] font-extrabold bg-sky-100 text-sky-800 px-2 py-0.5 rounded">${p.tag}</span>
             <span class="text-[11px] font-bold text-blue-600">點擊放大 ↗</span>
           </div>
-          <div class="text-sm font-black text-slate-900">${p.jp}</div>
+          <div class="notranslate text-sm font-black text-slate-900" translate="no">${p.jp}</div>
           <div class="text-xs text-slate-500">${p.zh}</div>
         </div>
       `).join('');
