@@ -6,7 +6,7 @@
   <title>2026 北海道冬日雪祭之旅｜旅遊手冊</title>
   <!-- 載入 Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- 載入圓潤可愛的 Google Fonts: Mochiy Pop One, Zen Maru Gothic & Noto Sans TC -->
+  <!-- 載入圓潤可愛的 Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Noto+Sans+TC:wght@400;500;700;900&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
@@ -17,39 +17,16 @@
           fontFamily: {
             sans: ['"Zen Maru Gothic"', '"Noto Sans TC"', 'sans-serif'],
             cute: ['"Mochiy Pop One"', '"Zen Maru Gothic"', 'sans-serif'],
-          },
-          colors: {
-            snow: {
-              50: '#f8fafc',
-              100: '#f1f5f9',
-              200: '#e2e8f0',
-            },
-            ice: {
-              50: '#eff6ff',
-              100: '#dbeafe',
-              500: '#3b82f6',
-              600: '#2563eb',
-              800: '#1e40af',
-              900: '#1e3a8a',
-            },
-            amber: {
-              50: '#fffbeb',
-              100: '#fef3c7',
-              500: '#f59e0b',
-              600: '#d97706',
-              800: '#92400e',
-            }
           }
         }
       }
     }
   </script>
   <style>
-    /* 針對 43 歲以上夥伴優化全站基準字級，讓所有 rem 單位整體放大更清晰 */
+    /* 放大全站基準字級，方便手機清楚閱讀 */
     html {
       font-size: 18px;
     }
-    /* 放大原本偏小的輔助文字級距，避免手機閱讀吃力 */
     .text-\[10px\] {
       font-size: 13px !important;
       line-height: 1.45 !important;
@@ -66,7 +43,6 @@
       font-size: 16.5px !important;
       line-height: 1.6 !important;
     }
-    /* 隱藏水平捲軸但保持可滑動 */
     .no-scrollbar::-webkit-scrollbar {
       display: none;
     }
@@ -74,7 +50,6 @@
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
-    /* 柔和雪花背景點綴 */
     body {
       background: linear-gradient(180deg, #e0f2fe 0%, #f8fafc 28%, #f1f5f9 100%);
       min-height: 100vh;
@@ -82,17 +57,15 @@
       top: 0 !important;
     }
     .glass-card {
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.94);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.85);
     }
-    /* 隱藏 Google 翻譯頂部預設白條，維持版面美觀 */
     .goog-te-banner-frame.skiptranslate,
     body > .skiptranslate {
       display: none !important;
     }
-    /* 可愛插畫風地圖專屬動畫與特效 */
     @keyframes dashFlow {
       to {
         stroke-dashoffset: -28;
@@ -103,20 +76,9 @@
     }
     #itinerary-map,
     #itinerary-map svg,
-    #itinerary-map g,
-    #itinerary-map text,
-    #itinerary-map rect,
-    #itinerary-map circle,
-    #itinerary-map path,
     #milk-map-canvas,
-    #milk-map-canvas svg,
-    #milk-map-canvas g,
-    #milk-map-canvas text,
-    #milk-map-canvas rect,
-    #milk-map-canvas circle,
-    #milk-map-canvas path {
+    #milk-map-canvas svg {
       -webkit-tap-highlight-color: transparent;
-      tap-highlight-color: transparent;
       -webkit-user-select: none;
       user-select: none;
       touch-action: manipulation;
@@ -142,33 +104,24 @@
     }
   </style>
 </head>
-<body class="text-slate-800 antialiased pb-24 text-base">
+<body class="text-slate-800 antialiased pb-24 text-base overflow-x-hidden">
 
   <!-- 頂部 Hero 橫幅 -->
   <header class="relative overflow-hidden bg-gradient-to-br from-sky-600 via-blue-700 to-indigo-900 text-white rounded-b-3xl shadow-lg px-5 pt-7 pb-6">
-    <!-- 裝飾光暈與雪花 SVG -->
     <div class="absolute -top-10 -right-10 w-44 h-44 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
-    <div class="absolute bottom-2 right-4 opacity-15 pointer-events-none">
-      <svg class="w-24 h-24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M19.07 4.93L4.93 19.07M12 6l-2-2m2 2l2-2M12 18l-2 2m2-2l2 2M6 12l-2-2m2 2l-2 2M18 12l-2-2m-2 2l2 2"/>
-      </svg>
-    </div>
 
     <div class="max-w-lg mx-auto relative z-10">
-      <!-- 頂部膠囊＋一鍵整頁翻韓文按鈕 -->
       <div class="flex items-center justify-between gap-2 mb-2.5 flex-wrap">
         <div class="inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full px-3.5 py-1 text-xs font-bold tracking-wider shadow-xs">
           <span>⛄❄️</span>
           <span>HOKKAIDO 2026・歡樂雪國團</span>
         </div>
 
-        <!-- 一鍵整頁翻韓文 / 切回繁中按鈕 -->
-        <button type="button" id="btn-toggle-korean" onclick="togglePageKorean()" class="notranslate inline-flex items-center gap-1.5 bg-rose-500 hover:bg-rose-600 active:scale-95 text-white border border-rose-200/70 rounded-full px-3.5 py-1 text-xs font-black shadow-md transition">
+        <button type="button" id="btn-toggle-korean" onclick="togglePageKorean()" class="notranslate inline-flex items-center gap-1.5 bg-rose-500 hover:bg-rose-600 active:scale-95 text-white border border-rose-200/70 rounded-full px-3.5 py-1 text-xs font-black shadow-md transition" translate="no">
           <span id="ko-btn-flag">🇰🇷</span>
           <span id="ko-btn-text">한국어 번역 (韓文)</span>
         </button>
       </div>
-      <!-- 隱藏式 Google 整頁翻譯引擎掛載點 -->
       <div id="google_translate_element" class="hidden"></div>
 
       <h1 class="font-cute text-2xl sm:text-3xl tracking-wide leading-snug drop-shadow-xs">
@@ -178,7 +131,7 @@
         🗓️ 12/09 (三) – 12/14 (一)｜6天5夜隨身小手冊 🧣
       </p>
 
-      <!-- 出發倒數計時器 -->
+      <!-- 出發倒數計時器（數字隔離翻譯，避免韓文模式跳動） -->
       <div id="countdown-banner" class="mt-3.5 bg-white/15 backdrop-blur-md border border-white/25 rounded-2xl px-3.5 py-2.5 flex items-center justify-between gap-2 shadow-xs">
         <div class="flex items-center gap-2 min-w-0">
           <span class="text-lg leading-none shrink-0">⏳</span>
@@ -224,37 +177,37 @@
     </div>
   </header>
 
-  <!-- 黏性導覽切換列 (Sticky Tabs) -->
+  <!-- 黏性導覽切換列 -->
   <nav class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm">
     <div class="max-w-lg mx-auto px-3 py-2 flex gap-1.5 overflow-x-auto no-scrollbar">
-      <button type="button" onclick="switchTab('flights')" id="tab-flights" class="tab-btn flex-1 min-w-[96px] py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all bg-blue-600 text-white shadow-sm">
+      <button type="button" onclick="switchTab('flights')" id="tab-flights" class="tab-btn shrink-0 py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all bg-blue-600 text-white shadow-sm">
         ✈️ 航班＆貴賓室
       </button>
-      <button type="button" onclick="switchTab('hotels')" id="tab-hotels" class="tab-btn flex-1 min-w-[88px] py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-slate-100">
+      <button type="button" onclick="switchTab('hotels')" id="tab-hotels" class="tab-btn shrink-0 py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-slate-100">
         🏨 住宿資訊
       </button>
-      <button type="button" onclick="switchTab('itinerary')" id="tab-itinerary" class="tab-btn flex-1 min-w-[84px] py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-slate-100">
+      <button type="button" onclick="switchTab('itinerary')" id="tab-itinerary" class="tab-btn shrink-0 py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-slate-100">
         🗺️ 每日行程
       </button>
-      <button type="button" onclick="switchTab('currency')" id="tab-currency" class="tab-btn flex-1 min-w-[84px] py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-slate-100">
+      <button type="button" onclick="switchTab('currency')" id="tab-currency" class="tab-btn shrink-0 py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-slate-100">
         💱 匯率速算
       </button>
-      <button type="button" onclick="switchTab('expense')" id="tab-expense" class="tab-btn flex-1 min-w-[84px] py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-slate-100">
+      <button type="button" onclick="switchTab('expense')" id="tab-expense" class="tab-btn shrink-0 py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-slate-100">
         📒 共同記帳
       </button>
-      <button type="button" onclick="switchTab('translate')" id="tab-translate" class="tab-btn flex-1 min-w-[84px] py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-slate-100">
+      <button type="button" onclick="switchTab('translate')" id="tab-translate" class="tab-btn shrink-0 py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-slate-100">
         🗣️ 翻譯助手
       </button>
-      <button type="button" onclick="switchTab('photoguide')" id="tab-photoguide" class="tab-btn flex-1 min-w-[92px] py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-slate-100">
+      <button type="button" onclick="switchTab('photoguide')" id="tab-photoguide" class="tab-btn shrink-0 py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-slate-100">
         📸 拍照穿搭
       </button>
-      <button type="button" onclick="switchTab('taxrefund')" id="tab-taxrefund" class="tab-btn flex-1 min-w-[84px] py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-slate-100">
+      <button type="button" onclick="switchTab('taxrefund')" id="tab-taxrefund" class="tab-btn shrink-0 py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-slate-100">
         🧾 退稅新制
       </button>
-      <button type="button" onclick="switchTab('souvenirs')" id="tab-souvenirs" class="tab-btn flex-1 min-w-[88px] py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-slate-100">
+      <button type="button" onclick="switchTab('souvenirs')" id="tab-souvenirs" class="tab-btn shrink-0 py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-slate-100">
         🎁 伴手禮清單
       </button>
-      <button type="button" onclick="switchTab('milkmap')" id="tab-milkmap" class="tab-btn flex-1 min-w-[92px] py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-slate-100">
+      <button type="button" onclick="switchTab('milkmap')" id="tab-milkmap" class="tab-btn shrink-0 py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-slate-100">
         🥛 北海道牛乳
       </button>
     </div>
@@ -265,8 +218,6 @@
 
     <!-- ==================== 分頁 1：航班與貴賓室總覽 ==================== -->
     <section id="panel-flights" class="tab-panel space-y-4">
-      
-      <!-- 航班資訊總覽卡片 -->
       <div class="glass-card rounded-2xl p-4 shadow-sm space-y-3.5">
         <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
           <h2 class="text-base font-black text-slate-900 flex items-center gap-2">
@@ -276,7 +227,6 @@
           <span class="text-xs font-bold text-slate-400">桃園 TPE ⇄ 新千歲 CTS</span>
         </div>
 
-        <!-- 去程 -->
         <div class="bg-sky-50/80 border border-sky-200/80 rounded-2xl p-3.5 space-y-2">
           <div class="flex items-center justify-between text-xs font-bold text-sky-800">
             <span>🛫 去程｜12/09 (週三) 桃園第二航廈 (T2)</span>
@@ -301,14 +251,12 @@
           </div>
         </div>
 
-        <!-- 回程分流 -->
         <div class="space-y-2.5 pt-1">
           <div class="text-xs font-extrabold text-slate-600 px-1 flex items-center justify-between">
             <span>🛬 回程｜12/14 (週一) 兩班不同航空分流</span>
             <span class="text-[11px] font-bold text-rose-600">先過退稅再託運</span>
           </div>
-          
-          <!-- 華航 -->
+
           <div class="bg-indigo-50/60 border border-indigo-200/80 rounded-xl p-3">
             <div class="flex items-center justify-between text-xs font-bold mb-1">
               <span class="text-indigo-800 font-black">華航 CI131（國際線航廈）</span>
@@ -321,7 +269,6 @@
             </div>
           </div>
 
-          <!-- 長榮 -->
           <div class="bg-emerald-50/60 border border-emerald-200/80 rounded-xl p-3">
             <div class="flex items-center justify-between text-xs font-bold mb-1">
               <span class="text-emerald-800 font-black">長榮 BR115（國際線航廈）</span>
@@ -345,7 +292,6 @@
           <span class="text-[11px] font-bold text-indigo-600">12/14 離境前必看</span>
         </div>
 
-        <!-- 1. 華航配合貴賓室 -->
         <div class="bg-indigo-50/70 border border-indigo-200/80 rounded-xl p-3 space-y-1.5 text-xs">
           <div class="flex items-center justify-between">
             <span class="font-black text-indigo-950">1. 華航配合貴賓室｜Royal Lounge（皇家貴賓室）</span>
@@ -358,49 +304,41 @@
           </p>
         </div>
 
-        <!-- 2. Café Sky Library（龍騰卡 / PP卡 / AE白金卡） -->
         <div class="bg-amber-50/80 border border-amber-200 rounded-xl p-3 space-y-1.5 text-xs">
           <div class="flex items-center justify-between">
             <span class="font-black text-amber-950">2. Café Sky Library（Portom 飯店 4F）</span>
             <span class="text-[10px] font-bold bg-amber-500 text-white px-2 py-0.5 rounded">管制區外・安檢前</span>
           </div>
           <p class="text-[11px] text-slate-700 leading-relaxed">
-            • <strong>適用卡片：</strong><strong>龍騰卡 (DragonPass)、Priority Pass (PP卡)、LoungeKey、美國運通簽帳白金卡</strong>（持台灣各銀行信用卡附贈之龍騰／PP 卡權益即可進場）。<br>
+            • <strong>適用卡片：</strong><strong>龍騰卡 (DragonPass)、Priority Pass (PP卡)、LoungeKey、美國運通簽帳白金卡</strong>。<br>
             • <strong>位置與時間：</strong>位於<strong>國際線航廈 4F 連通「Portom International Hokkaido」飯店 4 樓</strong>（安檢報到前使用），營業時間 <strong>09:00–20:00</strong>，每次限時 2 小時。<br>
-            • <strong>提供內容：</strong>提供精選<strong>三明治輕食套餐＋甜點、咖啡軟性飲料，外加 1 杯免費酒精飲品</strong>（生啤酒／紅白酒），空間安靜有書牆與沙發，適合 11:30–13:30 報到前休息！
+            • <strong>提供內容：</strong>提供精選<strong>三明治輕食套餐＋甜點、咖啡軟性飲料，外加 1 杯免費酒精飲品</strong>（生啤酒／紅白酒）。
           </p>
         </div>
 
-        <!-- 3. 國內線 Super Lounge（台灣 JCB 卡免費） -->
         <div class="bg-sky-50/70 border border-sky-200/80 rounded-xl p-3 space-y-1.5 text-xs">
           <div class="flex items-center justify-between">
             <span class="font-black text-sky-950">3. 國內線 3F「Super Lounge」</span>
             <span class="text-[10px] font-bold bg-sky-600 text-white px-2 py-0.5 rounded">JCB 白金卡以上免費</span>
           </div>
           <p class="text-[11px] text-slate-700 leading-relaxed">
-            • <strong>適用卡片：</strong>台灣發行的 <strong>JCB 白金卡、晶緻卡、極緻卡</strong>（如富邦 J 卡、玉山 Unicard JCB、台新 Richart JCB 等），出示<strong>實體 JCB 卡＋當日國際線登機證（或電子機票）</strong>即可免費入場。<br>
-            • <strong>位置與服務：</strong>位於<strong>國內線航廈 3F（管制區外）</strong>，提供落地窗停機坪景觀座位、免費咖啡飲料機與充電插座（無熱食），逛完國內線伴手禮可順道歇腳。
+            • <strong>適用卡片：</strong>台灣發行的 <strong>JCB 白金卡、晶緻卡、極緻卡</strong>，出示<strong>實體 JCB 卡＋當日國際線登機證（或電子機票）</strong>即可免費入場。<br>
+            • <strong>位置與服務：</strong>位於<strong>國內線航廈 3F（管制區外）</strong>，提供落地窗停機坪景觀座位、免費咖啡飲料機與充電插座。
           </p>
         </div>
       </div>
-
     </section>
 
-    <!-- ==================== 分頁 2：住宿資訊總覽（無付款與分帳資訊） ==================== -->
+    <!-- ==================== 分頁 2：住宿資訊總覽 ==================== -->
     <section id="panel-hotels" class="tab-panel hidden space-y-4">
-      
-      <!-- 重要行動提醒橫幅 -->
       <div class="bg-amber-50 border-2 border-amber-200/90 rounded-2xl p-3.5 flex items-start gap-3 shadow-sm">
-        <div class="bg-amber-400 text-white rounded-2xl p-2 shrink-0 mt-0.5 text-lg leading-none shadow-xs">
-          📢
-        </div>
+        <div class="bg-amber-400 text-white rounded-2xl p-2 shrink-0 mt-0.5 text-lg leading-none shadow-xs">📢</div>
         <div class="text-xs sm:text-sm">
           <p class="font-black text-amber-900">Day 2 (12/10) 晚上記得幫大行李箱寄宅配唷！</p>
           <p class="text-amber-800 mt-0.5 leading-relaxed font-medium">在星野櫃檯直接把大行李寄去札幌東急 Stay，記得先收好 <strong>2 天份的隨身過夜包</strong>（行動電源要放隨身包裡～）。</p>
         </div>
       </div>
 
-      <!-- 住宿資訊卡片（純住宿與設施資訊） -->
       <div class="glass-card rounded-2xl p-4 shadow-sm space-y-3">
         <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
           <h2 class="text-base font-black text-slate-900 flex items-center gap-2">
@@ -420,26 +358,23 @@
             <span class="shrink-0 text-xs font-bold bg-sky-50 text-sky-700 border border-sky-200 px-2.5 py-1 rounded-lg">4間雙人房・7人</span>
           </div>
 
-          <!-- 飯店設施與免費福利 -->
           <div class="bg-sky-50/70 border border-sky-100 rounded-xl p-2.5 space-y-1.5 text-xs">
             <div class="font-extrabold text-sky-900 flex items-center gap-1">
               <span>♨️</span> 泡湯設施＆迎賓免費茶飲
             </div>
             <ul class="space-y-1.5 text-slate-700 text-[11px] leading-relaxed">
               <li>
-                • <strong>♨️ 木林之湯（Kirin-no-Yu）：</strong>位於星野 Tomamu 度假村內、微笑海灘旁（從 The Tower 大廳搭接駁車約 5 分鐘）。<br>
-                <span class="text-sky-800 font-bold">🕒 營業時間：</span>約 <strong>15:00–23:00</strong>（依時期調整）｜露天風呂＋三溫暖（非天然溫泉），男女分浴，<strong>住客免費</strong>（現場附毛巾）。<br>
-                <span class="text-amber-700 font-bold">✨ 建議時段：</span>Day 1 下午 15:30、晚上 21:30；Day 2 下午 16:30。
+                • <strong>♨️ 木林之湯（Kirin-no-Yu）：</strong>位於星野度假村內、微笑海灘旁（從 The Tower 大廳搭接駁車約 5 分鐘）。<br>
+                <span class="text-sky-800 font-bold">🕒 營業時間：</span>約 <strong>15:00–23:00</strong>｜露天風呂＋三溫暖，男女分浴，<strong>住客免費</strong>（現場附毛巾）。
               </li>
               <li>• <strong>🥂 免費迎賓茶飲：</strong>The Tower 1F「<strong>Cafe Lounge Yukku Yukku</strong>」免費供應咖啡、紅茶、氣泡酒與果汁（10:00–22:00）。</li>
-              <li>• <strong>🚌 免費園區巡迴巴士：</strong>串聯 The Tower、螢火蟲街道、森林餐廳、微笑海灘＆木林之湯與霧冰平台纜車站（約 15–20 分一班）。</li>
             </ul>
           </div>
 
           <div class="bg-slate-50 rounded-lg p-2.5 border border-slate-100">
             <div class="flex items-center justify-between mb-1">
               <span class="text-[11px] font-semibold text-slate-500">預訂號碼（櫃檯安排相鄰房用）</span>
-              <button onclick="copyText('1VPF8K2ZDU / 1VPEW1C8X6 / 1VPFM7U3E5 / 1VPFNZ2C58', '已複製星野預訂編號')" class="text-[11px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded active:scale-95">
+              <button type="button" onclick="copyText('1VPF8K2ZDU / 1VPEW1C8X6 / 1VPFM7U3E5 / 1VPFNZ2C58', '已複製星野預訂編號')" class="text-[11px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded active:scale-95">
                 複製編號
               </button>
             </div>
@@ -449,7 +384,7 @@
           </div>
 
           <div class="flex items-center gap-2 pt-1">
-            <button onclick="copyText('〒079-2204 北海道勇払郡占冠村字中トマム', '已複製星野 TOMAMU 日文地址')" class="flex-1 text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 py-2 px-3 rounded-lg transition active:scale-95">
+            <button type="button" onclick="copyText('〒079-2204 北海道勇払郡占冠村字中トマム', '已複製星野 TOMAMU 日文地址')" class="flex-1 text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 py-2 px-3 rounded-lg transition active:scale-95">
               📋 複製日文地址
             </button>
             <a href="https://www.google.com/maps/place//data=!4m2!3m1!19sChIJcw7lj0Vhc18RGuVjEFL_9hY" target="_blank" class="flex-1 text-center text-xs font-bold text-blue-600 bg-blue-50 hover:bg-blue-100 py-2 px-3 rounded-lg transition">
@@ -468,24 +403,19 @@
             <span class="shrink-0 text-xs font-bold bg-amber-100 text-amber-800 px-2.5 py-1 rounded-lg">4間雙人房・7人</span>
           </div>
 
-          <!-- 飯店設施與免費福利 -->
           <div class="bg-white/90 border border-amber-200/80 rounded-xl p-2.5 space-y-1.5 text-xs">
             <div class="font-extrabold text-amber-900 flex items-center gap-1">
               <span>♨️</span> 5F 大浴場＆房客專屬休憩空間
             </div>
             <ul class="space-y-1.5 text-slate-700 text-[11px] leading-relaxed">
               <li>• <strong>📍 飯店位置：</strong>旭川市宮下通 7-2-5（JR 旭川站直結、AEON 永旺樓上）。</li>
-              <li>
-                • <strong>♨️ JR INN 旭川大浴場（5F）：</strong><br>
-                <span class="text-amber-800 font-bold">🕒 營業時間：</span><strong>15:00–凌晨 01:00</strong>；<strong>05:00–10:00</strong>｜大浴場＋半露天風呂（非天然溫泉），男女分浴，<strong>住客免費使用</strong>（需從房間帶毛巾）。<br>
-                <span class="text-amber-700 font-bold">✨ 建議時段：</span>Day 3 晚上、Day 4 早上。
-              </li>
-              <li>• <strong>☕ 免費茶飲＆漫畫 Lounge（5F）：</strong>大浴場旁設有 <strong>JR INN Lounge</strong>，泡完湯可免費喝咖啡、茶飲，還有整面牆漫畫雜誌可翻閱（1F 電梯旁可免費選枕頭）。</li>
+              <li>• <strong>♨️ JR INN 旭川大浴場（5F）：</strong><strong>15:00–凌晨 01:00</strong>；<strong>05:00–10:00</strong>｜大浴場＋半露天風呂，<strong>住客免費使用</strong>（需從房間帶毛巾）。</li>
+              <li>• <strong>☕ 免費茶飲＆漫畫 Lounge（5F）：</strong>大浴場旁設有 <strong>JR INN Lounge</strong>，免費喝咖啡茶飲、整面牆漫畫雜誌可翻閱。</li>
             </ul>
           </div>
 
           <div class="flex items-center gap-2 pt-1">
-            <button onclick="copyText('〒070-0030 北海道旭川市宮下通7丁目2-5', '已複製 JR INN 旭川日文地址')" class="flex-1 text-xs font-bold text-slate-700 bg-white border border-amber-200 hover:bg-amber-50 py-2 px-3 rounded-lg transition active:scale-95">
+            <button type="button" onclick="copyText('〒070-0030 北海道旭川市宮下通7丁目2-5', '已複製 JR INN 旭川日文地址')" class="flex-1 text-xs font-bold text-slate-700 bg-white border border-amber-200 hover:bg-amber-50 py-2 px-3 rounded-lg transition active:scale-95">
               📋 複製日文地址
             </button>
             <a href="https://www.google.com/maps/place//data=!4m2!3m1!19sChIJOdlckhDmDF8RBCotONjS4B4" target="_blank" class="flex-1 text-center text-xs font-bold text-blue-600 bg-blue-50 hover:bg-blue-100 py-2 px-3 rounded-lg transition">
@@ -504,19 +434,17 @@
             <span class="shrink-0 text-xs font-bold bg-indigo-50 text-indigo-700 border border-indigo-200 px-2.5 py-1 rounded-lg">4間房・9人合體</span>
           </div>
 
-          <!-- 飯店設施與免費福利 -->
           <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-2.5 space-y-1.5 text-xs">
             <div class="font-extrabold text-slate-900 flex items-center gap-1">
               <span>🧺</span> 房內設備＆大廳茶飲資訊
             </div>
             <ul class="space-y-1 text-slate-700 text-[11px] leading-relaxed">
               <li>• <strong>✨ 9人合體＆絕佳位置：</strong><strong>德、歐在此會合</strong>；步行 5 分鐘內可達大通站、狸小路與新千歲機場巴士站。</li>
-              <li>• <strong>🚿 房內獨立衛浴（無大浴場）：</strong>本館無公共大浴場，但每間房皆有獨立浴缸，並配備<strong>獨立洗脫烘衣機（附免費洗衣精）</strong>與<strong>微波爐</strong>！</li>
+              <li>• <strong>🚿 房內獨立衛浴＆洗脫烘衣機：</strong>本館無公共大浴場，但每間房皆有獨立浴缸、<strong>獨立洗脫烘衣機（附免費洗衣精）</strong>與<strong>微波爐</strong>！</li>
               <li>• <strong>☕ 1F 大廳免費咖啡茶飲：</strong>大廳休息區提供房客免費現磨咖啡與茶包（<strong>15:00–23:00</strong>）。</li>
             </ul>
           </div>
 
-          <!-- Day 5 晚餐後外湯推薦：すすきの天然温泉 湯香郷 -->
           <div class="bg-rose-50/70 border border-rose-200/80 rounded-xl p-2.5 space-y-1.5 text-xs">
             <div class="flex items-center justify-between">
               <span class="font-extrabold text-rose-950 flex items-center gap-1">
@@ -525,12 +453,11 @@
               <span class="text-[10px] font-bold bg-rose-600 text-white px-2 py-0.5 rounded">¥2,750 起</span>
             </div>
             <p class="text-[11px] text-slate-700 leading-relaxed">
-              • <strong>📍 地址位置：</strong>札幌市中央區南 7 條西 3 丁目（Jasmac Plaza 飯店 2F–4F；地鐵「豐水すすきの站」步行約 4 分鐘，就在風土燒肉附近）。<br>
-              • <strong>🕒 營業時間：</strong>營業時間待確認，出發前查官網（建議 Day 5 晚餐後前往）。<br>
-              • <strong>♨️ 泉質類型：</strong><strong>天然溫泉（鈉-氯化物泉）</strong>，附檜木露天風呂、三溫暖，男女分浴（含館內服與毛巾）。
+              • <strong>📍 地址位置：</strong>札幌市中央區南 7 條西 3 丁目（Jasmac Plaza 飯店 2F–4F，就在風土燒肉附近）。<br>
+              • <strong>♨️ 泉質類型：</strong><strong>天然溫泉（鈉-氯化物泉）</strong>，附檜木露天風呂、三溫暖（含館內服與毛巾，出發前再確認當日最終入場時間）。
             </p>
             <div class="flex items-center gap-2 pt-0.5">
-              <button onclick="copyText('〒064-8533 北海道札幌市中央区南7条西3丁目 ジャスマックプラザ', '已複製湯香郷日文地址')" class="flex-1 text-[11px] font-bold text-slate-700 bg-white border border-rose-200 hover:bg-rose-50 py-1.5 px-2.5 rounded-lg transition active:scale-95">
+              <button type="button" onclick="copyText('〒064-8533 北海道札幌市中央区南7条西3丁目 ジャスマックプラザ', '已複製湯香郷日文地址')" class="flex-1 text-[11px] font-bold text-slate-700 bg-white border border-rose-200 hover:bg-rose-50 py-1.5 px-2.5 rounded-lg transition active:scale-95">
                 📋 複製溫泉地址
               </button>
               <a href="https://www.google.com/maps/place//data=!4m2!3m1!19sChIJDyeEt4cpC18R3KbNqPJ-k-g" target="_blank" class="flex-1 text-center text-[11px] font-bold text-rose-700 bg-rose-100 hover:bg-rose-200 py-1.5 px-2.5 rounded-lg transition">
@@ -542,7 +469,7 @@
           <div class="bg-indigo-50/60 rounded-lg p-2.5 border border-indigo-100 space-y-1.5">
             <div class="flex items-center justify-between">
               <span class="text-[11px] font-semibold text-indigo-900">札幌東急 Stay 預約號碼（共 4 間 / 2 晚）</span>
-              <button onclick="copyText('T4840B0840F7D / TF42CBE9F2CA8 / TB20A966B3725', '已複製札幌東急 Stay 全部預約號碼')" class="text-[11px] font-bold text-indigo-700 bg-white border border-indigo-200 px-2 py-0.5 rounded active:scale-95">
+              <button type="button" onclick="copyText('T4840B0840F7D / TF42CBE9F2CA8 / TB20A966B3725', '已複製札幌東急 Stay 全部預約號碼')" class="text-[11px] font-bold text-indigo-700 bg-white border border-indigo-200 px-2 py-0.5 rounded active:scale-95">
                 複製全部編號
               </button>
             </div>
@@ -562,7 +489,7 @@
             </div>
           </div>
           <div class="flex items-center gap-2 pt-1">
-            <button onclick="copyText('〒060-0061 北海道札幌市中央区南1条西1-13-4', '已複製札幌飯店日文地址')" class="flex-1 text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 py-2 px-3 rounded-lg transition active:scale-95">
+            <button type="button" onclick="copyText('〒060-0061 北海道札幌市中央区南1条西1-13-4', '已複製札幌飯店日文地址')" class="flex-1 text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 py-2 px-3 rounded-lg transition active:scale-95">
               📋 複製日文地址
             </button>
             <a href="https://www.google.com/maps/place//data=!4m2!3m1!19sChIJo13_5oIpC18RWnRe2r68XCk" target="_blank" class="flex-1 text-center text-xs font-bold text-blue-600 bg-blue-50 hover:bg-blue-100 py-2 px-3 rounded-lg transition">
@@ -570,15 +497,14 @@
             </a>
           </div>
         </div>
-
       </div>
     </section>
 
-    <!-- ==================== 分頁 3：每日詳細行程 ==================== -->
+    <!-- ==================== 分頁 3：每日詳細行程（無照片格子・防跑版） ==================== -->
     <section id="panel-itinerary" class="tab-panel hidden space-y-3">
       
-      <!-- 日期快速選擇膠囊（自動換行排版，確保所有天數按鈕完整呈現） -->
-      <div class="bg-white/80 backdrop-blur-xs border border-slate-200/80 rounded-2xl p-2.5 shadow-xs">
+      <!-- 日期快速選擇膠囊 -->
+      <div class="bg-white/90 border border-slate-200/80 rounded-2xl p-2.5 shadow-xs">
         <div class="text-[11px] font-bold text-slate-500 mb-1.5 px-1">📅 點選日期快速切換（同步更新下方路線地圖）：</div>
         <div class="flex flex-wrap gap-1.5">
           <button type="button" onclick="filterDay('all', this)" class="day-filter-btn bg-slate-800 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-xs">全部 6 天 ✨</button>
@@ -591,12 +517,12 @@
         </div>
       </div>
 
-      <!-- 可愛插畫版路線地圖卡片 -->
+      <!-- 可愛插畫版路線地圖卡片（無照片格子、固定響應式高度防跑版） -->
       <div class="glass-card rounded-2xl p-3.5 shadow-sm border-2 border-sky-200 space-y-2.5">
         <div class="flex items-start justify-between gap-2">
-          <div class="min-w-0">
-            <h2 id="map-route-title" class="text-sm sm:text-base font-black text-slate-900">⛄ 6天北海道雪國環線可愛地圖</h2>
-            <p id="map-route-subtitle" class="text-xs text-slate-500 mt-0.5">新千歲 ➔ 星野 ➔ 美瑛 ➔ 旭川 ➔ 小樽 ➔ 札幌 ➔ 新千歲</p>
+          <div class="min-w-0 flex-1">
+            <h2 id="map-route-title" class="text-sm sm:text-base font-black text-slate-900 leading-snug">⛄ 6天北海道雪國環線可愛地圖</h2>
+            <p id="map-route-subtitle" class="text-xs text-slate-500 mt-0.5 leading-snug">新千歲 ➔ 星野 ➔ 美瑛 ➔ 旭川 ➔ 小樽 ➔ 札幌 ➔ 新千歲</p>
           </div>
           <a id="map-gmaps-link" href="https://www.google.com/maps/dir/New+Chitose+Airport/Hoshino+Resorts+TOMAMU/Biei+Station/Asahiyama+Zoo/Otaru+Canal/Sapporo+Station/New+Chitose+Airport" target="_blank" class="shrink-0 text-xs font-extrabold text-white bg-blue-600 hover:bg-blue-700 px-2.5 py-1.5 rounded-xl shadow-2xs transition">
             🗺️ Google導航
@@ -604,18 +530,18 @@
         </div>
 
         <!-- 可愛路線 SVG 地圖畫布 -->
-        <div id="itinerary-map" class="w-full h-60 sm:h-68 rounded-2xl overflow-hidden border-2 border-sky-200 cute-map-bg relative shadow-inner select-none"></div>
+        <div id="itinerary-map" class="w-full h-64 sm:h-72 rounded-2xl overflow-hidden border-2 border-sky-200 cute-map-bg relative shadow-inner select-none"></div>
 
-        <!-- 點選站點後的加大型氣泡資訊卡（無照片格子、寬敞不截斷） -->
-        <div id="cute-map-popup" class="min-h-[128px] bg-white border-2 border-sky-200 rounded-2xl p-3.5 shadow-xs flex flex-col justify-between gap-2">
+        <!-- 點選站點後的加大型氣泡資訊卡（無照片格子） -->
+        <div id="cute-map-popup" class="bg-white border-2 border-sky-200 rounded-2xl p-3.5 shadow-xs space-y-2">
           <div class="flex items-center justify-between gap-2 border-b border-sky-100 pb-2">
-            <div class="flex items-center gap-2 min-w-0">
+            <div class="flex items-center gap-2 min-w-0 flex-1">
               <span id="cute-popup-emoji" class="text-2xl leading-none shrink-0">⛄</span>
-              <span id="cute-popup-title" class="font-black text-slate-900 text-base leading-snug">點選地圖上的可愛圖釘查看詳情！</span>
+              <span id="cute-popup-title" class="font-black text-slate-900 text-base leading-snug break-words">點選地圖上的可愛圖釘查看詳情！</span>
             </div>
             <span id="cute-popup-time" class="shrink-0 text-xs font-extrabold bg-amber-100 text-amber-900 px-2.5 py-1 rounded-full">全天導覽</span>
           </div>
-          <p id="cute-popup-note" class="text-sm text-slate-700 font-medium leading-relaxed">
+          <p id="cute-popup-note" class="text-sm text-slate-700 font-medium leading-relaxed break-words">
             支援 D1–D6 每日專屬路線放大預覽，文字完整展開不截斷，閱讀更輕鬆！
           </p>
         </div>
@@ -627,7 +553,7 @@
       <!-- DAY 1 -->
       <article id="card-d1" class="day-card glass-card rounded-2xl p-4 shadow-sm border-l-4 border-l-sky-500">
         <div class="flex items-start justify-between gap-2 mb-2">
-          <div>
+          <div class="min-w-0 flex-1">
             <span class="text-xs font-black text-sky-600 uppercase tracking-wider">DAY 1｜12/09 (三)</span>
             <h3 class="text-base font-black text-slate-900">出發北海道 ➔ 超市掃貨 ➔ 星野 ❄️</h3>
           </div>
@@ -659,7 +585,7 @@
       <!-- DAY 2 -->
       <article id="card-d2" class="day-card glass-card rounded-2xl p-4 shadow-sm border-l-4 border-l-blue-600">
         <div class="flex items-start justify-between gap-2 mb-2">
-          <div>
+          <div class="min-w-0 flex-1">
             <span class="text-xs font-black text-blue-600 uppercase tracking-wider">DAY 2｜12/10 (四)</span>
             <h3 class="text-base font-black text-slate-900">星野設施玩透透 ➔ 晚上寄大行李 🧳</h3>
           </div>
@@ -693,10 +619,10 @@
         </div>
       </article>
 
-      <!-- DAY 3 -->
+      <!-- DAY 3（已同步更新：純平洋食無法事先訂位／備案調整中＋大黑屋僅能現場排隊抽整理券） -->
       <article id="card-d3" class="day-card glass-card rounded-2xl p-4 shadow-sm border-l-4 border-l-amber-500">
         <div class="flex items-start justify-between gap-2 mb-2">
-          <div>
+          <div class="min-w-0 flex-1">
             <span class="text-xs font-black text-amber-600 uppercase tracking-wider">DAY 3｜12/11 (五) 包車日</span>
             <h3 class="text-base font-black text-slate-900">美瑛雪原包車 ➔ 青池點燈 ➔ 旭川烤羊肉 🎄</h3>
           </div>
@@ -714,8 +640,8 @@
           </div>
           <div class="relative">
             <span class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-amber-500 ring-4 ring-white"></span>
-            <div class="font-bold text-slate-900">12:00 午餐：美瑛「純平洋食 junpei」🍤</div>
-            <p class="text-slate-600 text-xs mt-0.5"><strong>已訂位 12:00 午餐</strong>（用餐約 1.5 小時），必點超人氣招牌炸蝦丼！</p>
+            <div class="font-bold text-slate-900">12:00 午餐：美瑛「純平洋食 junpei」（或備案餐廳）🍤</div>
+            <p class="text-slate-600 text-xs mt-0.5"><strong>無法事先訂位・需現場候位（目前同步尋找替代備案餐廳中，視現場排隊狀況彈性調整）</strong>，主打超人氣招牌炸蝦丼。</p>
           </div>
           <div class="relative">
             <span class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-amber-500 ring-4 ring-white"></span>
@@ -730,7 +656,7 @@
           <div class="relative">
             <span class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-amber-500 ring-4 ring-white"></span>
             <div class="font-bold text-slate-900">18:45 入住「JR INN 旭川」➔ 19:30 晚餐：成吉思汗大黑屋 🔥</div>
-            <p class="text-slate-600 text-xs mt-0.5">飯店與 JR 旭川站、AEON 共構；步行約 10–12 分鐘吃旭川必吃烤小羊肉大黑屋，回飯店享受 <strong>5F 半露天大浴場＆免費漫畫 Lounge</strong>。</p>
+            <p class="text-slate-600 text-xs mt-0.5">飯店與 JR 旭川站、AEON 共構；<strong>大黑屋無法預約・僅能現場排隊抽整理券</strong>（18:45 一抵達旭川可先派人去抽號碼牌，現場設有室內候位室避寒），餐後回飯店享受 <strong>5F 半露天大浴場＆免費漫畫 Lounge</strong>。</p>
           </div>
         </div>
       </article>
@@ -738,7 +664,7 @@
       <!-- DAY 4 -->
       <article id="card-d4" class="day-card glass-card rounded-2xl p-4 shadow-sm border-l-4 border-l-orange-500">
         <div class="flex items-start justify-between gap-2 mb-2">
-          <div>
+          <div class="min-w-0 flex-1">
             <span class="text-xs font-black text-orange-600 uppercase tracking-wider">DAY 4｜12/12 (六) 包車日</span>
             <h3 class="text-base font-black text-slate-900">旭山動物園 ➔ SHIRO 工廠 ➔ 札幌 9 人大合體 🐧</h3>
           </div>
@@ -783,7 +709,7 @@
       <!-- DAY 5 -->
       <article id="card-d5" class="day-card glass-card rounded-2xl p-4 shadow-sm border-l-4 border-l-indigo-600">
         <div class="flex items-start justify-between gap-2 mb-2">
-          <div>
+          <div class="min-w-0 flex-1">
             <span class="text-xs font-black text-indigo-600 uppercase tracking-wider">DAY 5｜12/13 (日)</span>
             <h3 class="text-base font-black text-slate-900">小樽浪漫慢遊一日 ➔ 薄野吃燒肉 🏮</h3>
           </div>
@@ -794,7 +720,6 @@
           <span class="text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200/80 px-2.5 py-0.5 rounded-full">🌅 日落：約 16:02</span>
         </div>
 
-        <!-- 札幌 ⇄ 小樽 JR 快速 Airport 參考時刻表 -->
         <div class="bg-indigo-50/70 border border-indigo-200/80 rounded-xl p-3 mb-3.5 space-y-2.5">
           <div class="flex items-center justify-between border-b border-indigo-100 pb-1.5">
             <span class="text-xs font-black text-indigo-950 flex items-center gap-1.5">
@@ -805,7 +730,6 @@
             </a>
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-            <!-- 去程：札幌 -> 小樽 -->
             <div class="bg-white rounded-lg p-2.5 border border-indigo-100 space-y-1">
               <div class="font-extrabold text-sky-800 flex items-center justify-between">
                 <span>➡️ 去程：札幌 ➔ 小樽</span>
@@ -818,7 +742,6 @@
                 <div class="flex justify-between"><span>• 10:30 發 ➔ 11:02 到</span><span class="text-amber-700">特別快速41號</span></div>
               </div>
             </div>
-            <!-- 回程：小樽 -> 札幌 -->
             <div class="bg-white rounded-lg p-2.5 border border-indigo-100 space-y-1">
               <div class="font-extrabold text-indigo-800 flex items-center justify-between">
                 <span>⬅️ 回程：小樽 ➔ 札幌</span>
@@ -833,7 +756,7 @@
             </div>
           </div>
           <p class="text-[11px] text-indigo-900/80 leading-snug">
-            💡 <strong>9人團搭車秘訣：</strong>單程車資 800 円；去程札幌上車人較多，建議加購 <strong>u-Seat 指定席（+840 円，4號車廂）</strong>確保全團有座位；回程小樽為起點站，提早 10 分鐘排隊自由席就有座位！
+            💡 <strong>搭車秘訣：</strong>單程車資 800 円；去程札幌上車人較多，建議加購 <strong>u-Seat 指定席（+840 円，4號車廂）</strong>確保全團有座位；回程小樽為起點站，提早 10 分鐘排隊自由席就有座位！
           </p>
         </div>
 
@@ -851,7 +774,7 @@
           <div class="relative">
             <span class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-indigo-600 ring-4 ring-white"></span>
             <div class="font-bold text-indigo-900">19:00 晚餐：風土 燒肉 ➔ 餐後：すすきの天然温泉 湯香郷 ♨️</div>
-            <p class="text-slate-600 text-xs mt-0.5"><strong>已訂位（薄野南6條西4丁目）</strong>！餐後可步行前往 Jasmac Plaza 飯店內的<strong>「すすきの天然温泉 湯香郷」</strong>（天然鈉-氯化物泉＋檜木露天風呂，¥2,750 起，出發前再確認當日最終入場時間）。</p>
+            <p class="text-slate-600 text-xs mt-0.5"><strong>已訂位（薄野南6條西4丁目）</strong>！餐後可步行前往 Jasmac Plaza 飯店內的<strong>「すすきの天然温泉 湯香郷」</strong>（天然鈉-氯化物泉＋檜木露天風呂，¥2,750 起）。</p>
             <div class="flex flex-wrap gap-1.5 mt-1.5">
               <a href="https://maps.app.goo.gl/XZyBUQ8ZERfnuewb7" target="_blank" class="inline-flex items-center gap-1 text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-lg">
                 📍 開啟地圖 (風土燒肉)
@@ -867,7 +790,7 @@
       <!-- DAY 6 -->
       <article id="card-d6" class="day-card glass-card rounded-2xl p-4 shadow-sm border-l-4 border-l-emerald-500">
         <div class="flex items-start justify-between gap-2 mb-2">
-          <div>
+          <div class="min-w-0 flex-1">
             <span class="text-xs font-black text-emerald-600 uppercase tracking-wider">DAY 6｜12/14 (一)</span>
             <h3 class="text-base font-black text-slate-900">札幌退房步行搭巴士 ➔ 新千歲機場掃貨 🛍️</h3>
           </div>
@@ -878,7 +801,6 @@
           <span class="text-[11px] font-bold bg-indigo-50 text-indigo-800 border border-indigo-200/80 px-2.5 py-0.5 rounded-full">✈️ 華航 14:40 ／ 長榮 15:20 起飛</span>
         </div>
 
-        <!-- 南3條薄野 -> 新千歲機場 利木津巴士時刻表 -->
         <div class="bg-emerald-50/75 border border-emerald-200/90 rounded-xl p-3 mb-3.5 space-y-2">
           <div class="flex items-center justify-between border-b border-emerald-200/70 pb-1.5 gap-2">
             <span class="text-xs font-black text-emerald-950 flex items-center gap-1.5">
@@ -915,7 +837,7 @@
           <div class="relative">
             <span class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-4 ring-white"></span>
             <div class="font-bold text-slate-900">09:20 札幌東急 Stay 退房 ➔ 步行 5–6 分鐘至「南 3 條薄野」巴士站</div>
-            <p class="text-slate-600 text-xs mt-0.5">7 位回程團員直接推大行李步行前往巴士站（沿札幌站前通往南步行約 5–6 分鐘；若遇雪大亦可走地下街「Pole Town」直通薄野站出口避雪），搭 <strong>09:25 或 09:40 利木津巴士</strong>直達機場國內線。</p>
+            <p class="text-slate-600 text-xs mt-0.5">7 位回程團員直接推大行李步行前往巴士站（若遇雪大亦可走地下街「Pole Town」直通薄野站出口避雪），搭 <strong>09:25 或 09:40 利木津巴士</strong>直達機場國內線。</p>
             <a href="https://www.google.com/maps/search/?api=1&query=南3条すすきの+空港連絡バス乗り場" target="_blank" class="inline-flex items-center gap-1 mt-1.5 text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-lg">
               📍 開啟 Google 地圖 (南 3 條薄野機場巴士站)
             </a>
@@ -924,15 +846,14 @@
             <span class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-4 ring-white"></span>
             <div class="font-bold text-slate-900">10:40–12:00 新千歲機場國內線 1F 寄放行李 ➔ 2F–3F 午餐＆掃貨</div>
             <p class="text-slate-600 text-xs mt-0.5 leading-relaxed">
-              巴士於<strong>國內線航廈 1F</strong> 下車後，直接到 <strong>1F 抵達大廳「人工行李寄放櫃檯」</strong>（ANA／JAL 側，約 07:30–21:00，大型行李箱每件 <strong>¥600–¥1,000／日</strong>；另有 1F/2F 大型投幣置物櫃 ¥800–¥1,000 支援交通卡）集中寄放 7 件大行李箱，免找空櫃超省事！<br>
-              雙手空空上 <strong>2F 搶購新千歲機場限定「美瑛選果玉米麵包」、SNOWS、Kinotoya 霜淇淋、ROYCE'、六花亭</strong>，並至 <strong>3F 北海道拉麵道場（一幻拉麵）</strong>吃午餐。
+              巴士於<strong>國內線航廈 1F</strong> 下車後，直接到 <strong>1F 抵達大廳「人工行李寄放櫃檯」</strong>（大型行李箱每件 <strong>¥600–¥1,000／日</strong>）集中寄放 7 件大行李箱，免找空櫃超省事！雙手空空上 <strong>2F 搶購新千歲機場限定「美瑛選果玉米麵包」、SNOWS、Kinotoya 霜淇淋、ROYCE'、六花亭</strong>，並至 <strong>3F 北海道拉麵道場</strong>吃午餐。
             </p>
           </div>
           <div class="relative">
             <span class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-amber-500 ring-4 ring-white"></span>
             <div class="font-bold text-amber-900">12:00 領行李 ➔ 12:10（最晚 12:15）走室內連通道至國際線 3F【先過退稅 KIOSK 再託運】</div>
             <p class="text-slate-600 text-xs mt-0.5 leading-relaxed">
-              <strong>12:00 準時下 1F 領出所有寄放行李</strong>，搭電梯上 2F 或 3F 順著「國際線航廈」指標走室內連通道（純步行約 8–10 分鐘，推大行李抓 <strong>15 分鐘</strong>），<strong>12:30 準時抵達國際線 3F 報到托運</strong>（華航 14:40 起飛前 2 小時 10 分鐘）。有買免稅品者<strong>託運前先刷護照過海關 KIOSK</strong>；出境後搭華航可前往 4F <strong>Royal Lounge（皇家貴賓室）</strong>休息！
+              <strong>12:00 準時下 1F 領出所有寄放行李</strong>，走室內連通道（推大行李抓 <strong>15 分鐘</strong>），<strong>12:30 準時抵達國際線 3F 報到托運</strong>。有買免稅品者<strong>託運前先刷護照過海關 KIOSK</strong>；出境後搭華航可前往 4F <strong>Royal Lounge（皇家貴賓室）</strong>休息！
             </p>
           </div>
           <div class="relative">
@@ -945,194 +866,9 @@
           </div>
         </div>
       </article>
-
     </section>
 
-    <!-- ==================== 分頁 4：拍照小技巧・建議穿著雪況・必吃必買必拍 ==================== -->
-    <section id="panel-photoguide" class="tab-panel hidden space-y-4">
-      
-      <!-- 區塊一：12月中旬雪況提示＆每日建議穿著 -->
-      <div class="glass-card rounded-2xl p-4 shadow-sm border-2 border-sky-200 space-y-3">
-        <div class="flex items-center justify-between border-b border-sky-100 pb-2.5">
-          <div>
-            <h2 class="text-base font-black text-slate-900 flex items-center gap-2">
-              <span class="w-7 h-7 rounded-xl bg-sky-100 text-sky-600 flex items-center justify-center text-sm">🧥</span>
-              12月中旬雪況提示＆建議穿著
-            </h2>
-            <p class="text-xs text-slate-500 mt-0.5">北海道 12/09–12/14 進入初冬積雪期（-9°C ~ +2°C）</p>
-          </div>
-          <span class="text-xs font-black bg-sky-600 text-white px-2.5 py-1 rounded-xl">洋蔥式穿搭</span>
-        </div>
-
-        <!-- 各地區雪況狀態卡 -->
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
-          <div class="bg-sky-50/80 border border-sky-200/80 rounded-xl p-2.5 space-y-1">
-            <div class="font-black text-sky-900">🏔️ 星野・美瑛（D1–D3）</div>
-            <div class="text-[11px] font-bold text-blue-700">厚積雪・鬆軟粉雪</div>
-            <p class="text-[11px] text-slate-600 leading-snug">全天零下（-9°C~-1°C），霧冰平台山頂體感約 -12°C，雪深及踝，需穿<strong>中筒防水雪靴</strong>。</p>
-          </div>
-          <div class="bg-amber-50/80 border border-amber-200/80 rounded-xl p-2.5 space-y-1">
-            <div class="font-black text-amber-900">🐧 旭山動物園（D4）</div>
-            <div class="text-[11px] font-bold text-amber-700">雪地＋長時間站立</div>
-            <p class="text-[11px] text-slate-600 leading-snug">早上排隊卡位企鵝散步腳底最容易冷！務必穿<strong>厚羊毛襪＋貼腳底暖暖包</strong>。</p>
-          </div>
-          <div class="bg-indigo-50/80 border border-indigo-200/80 rounded-xl p-2.5 space-y-1">
-            <div class="font-black text-indigo-900">🏙️ 札幌・小樽（D4–D6）</div>
-            <div class="text-[11px] font-bold text-indigo-700">⚠️ 融雪結冰（黑冰路面）</div>
-            <p class="text-[11px] text-slate-600 leading-snug">白天近 0°C~2°C 易融雪、傍晚結成透明薄冰最滑！走路採「<strong>企鵝小碎步</strong>、全腳掌著地」。</p>
-          </div>
-        </div>
-
-        <!-- 黃金三層穿衣公式＋上鏡配色建議 -->
-        <div class="bg-white border border-slate-200 rounded-xl p-3 space-y-2 text-xs">
-          <div class="font-extrabold text-slate-900">✨ 黃金三層穿搭＋拍雪景上鏡秘訣：</div>
-          <ul class="space-y-1.5 text-slate-600 leading-relaxed">
-            <li>• <strong>內層（排汗發熱）：</strong>穿發熱衣（勿穿純棉，流汗進暖氣房會變冷）。</li>
-            <li>• <strong>中層（保暖好脫）：</strong>毛衣、刷毛衛衣或針織衫（進餐廳、百貨與星野室內連通道直接脫外套）。</li>
-            <li>• <strong>外層（防風防水）：</strong>長版羽絨衣或防風防水衝鋒外套（下雪時雪花拍掉就乾，不會濕透）。</li>
-            <li>• <strong>📸 拍照配色心機：</strong>背景全是白雪時，<strong>避免穿全白外套</strong>（容易跟雪地融為一體）；穿<strong>焦糖棕、酒紅、薑黃、寶藍或亮色圍巾毛帽</strong>，在雪地裡超級顯白又亮眼！</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- 區塊二：各景點拍照小技巧 -->
-      <div class="glass-card rounded-2xl p-4 shadow-sm space-y-3">
-        <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
-          <h2 class="text-base font-black text-slate-900 flex items-center gap-2">
-            <span class="w-7 h-7 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-sm">📸</span>
-            五大景點手機拍照小技巧
-          </h2>
-          <span class="text-xs font-bold text-slate-400">出大片必看</span>
-        </div>
-
-        <div class="space-y-2.5 text-xs">
-          <!-- 1. 星野霧冰平台＆水之教會 -->
-          <div class="bg-sky-50/60 border border-sky-100 rounded-xl p-3 space-y-1">
-            <div class="font-black text-sky-950 text-sm">1. 星野 霧冰平台 ＆ 水之教會</div>
-            <p class="text-slate-700 leading-relaxed">
-              • <strong>霧冰平台：</strong>大晴天雪地反光極強，手機點擊人臉對焦後<strong>手動將「小太陽（曝光）」往上拉 +0.3 ~ +0.7</strong>，雪才不會拍起來灰灰髒髒的！<br>
-              • <strong>水之教會：</strong>夜間 20:30 開放時室內全暗、戶外打藍光，<strong>務必關閉閃光燈</strong>，開啟手機「夜間模式」並將雙手靠在欄杆上穩定 2 秒，就能拍出靜謐的水面十字架倒影。
-            </p>
-          </div>
-
-          <!-- 2. 美瑛聖誕樹之木 -->
-          <div class="bg-emerald-50/60 border border-emerald-100 rounded-xl p-3 space-y-1">
-            <div class="font-black text-emerald-950 text-sm">2. 美瑛 聖誕樹之木（Christmas Tree）</div>
-            <p class="text-slate-700 leading-relaxed">
-              • <strong>長焦壓縮構圖：</strong>不要只用 1x 廣角拍（樹會變很小），請改用手機 <strong>2x 或 3x 長焦鏡頭</strong>，人站在路邊雪地上（切勿踏入私人農田），讓背景的聖誕樹放大並與人物形成孤寂電影感！
-            </p>
-          </div>
-
-          <!-- 3. 白金青池＆白鬚瀑布點燈 -->
-          <div class="bg-blue-50/70 border border-blue-100 rounded-xl p-3 space-y-1">
-            <div class="font-black text-blue-950 text-sm">3. 白金青池 ＆ 白鬚瀑布（16:30 點燈）</div>
-            <p class="text-slate-700 leading-relaxed">
-              • <strong>黃金藍調時刻：</strong>15:50 抵達青池時剛好接近日落，<strong>16:15–16:45 天空呈現深藍色「藍調時刻」</strong>是色彩最夢幻的 30 分鐘（全黑後反而只剩樹影）。<br>
-              • <strong>白鬚瀑布：</strong>在橋上欄杆架穩手機，用 <strong>2x 鏡頭＋夜間模式</strong> 拍出藍色河水與白色冰瀑的強烈對比。
-            </p>
-          </div>
-
-          <!-- 4. 旭山動物園企鵝散步 -->
-          <div class="bg-amber-50/70 border border-amber-100 rounded-xl p-3 space-y-1">
-            <div class="font-black text-amber-950 text-sm">4. 旭山動物園 企鵝散步＆海豹館</div>
-            <p class="text-slate-700 leading-relaxed">
-              • <strong>低角度企鵝視角：</strong>蹲低將手機貼近雪地高度（約膝蓋高度），開啟 <strong>4K 60fps 錄影</strong>（邊錄邊按快門鍵截圖），就能拍出國王企鵝搖搖擺擺朝你走來的超萌正面照！<br>
-              • <strong>海豹館圓柱水槽：</strong>鏡頭貼近玻璃可減少反光，抓拍海豹垂直衝上水面的瞬間。
-            </p>
-          </div>
-
-          <!-- 5. 小樽運河藍調點燈 -->
-          <div class="bg-indigo-50/70 border border-indigo-100 rounded-xl p-3 space-y-1">
-            <div class="font-black text-indigo-950 text-sm">5. 小樽運河 黃昏點燈（16:00 日落）</div>
-            <p class="text-slate-700 leading-relaxed">
-              • <strong>淺草橋經典機位：</strong>15:55 先到「淺草橋」卡位，趁煤油燈剛亮、天空還是深藍色時拍倉庫與運河倒影；人像建議站橋側讓煤油燈當背景光暈，開啟「人像模式」超浪漫！<br>
-              • <strong>🔋 低溫電池保護：</strong>-5°C 以下 iPhone 掉電極快，<strong>備用行動電源與暖暖包放同一個內袋保溫</strong>！
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 區塊三：各站點「必吃・必買・必拍」一覽表 -->
-      <div class="glass-card rounded-2xl p-4 shadow-sm space-y-3">
-        <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
-          <h2 class="text-base font-black text-slate-900 flex items-center gap-2">
-            <span class="w-7 h-7 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center text-sm">🏆</span>
-            6天行程「必吃・必買・必拍」精華表
-          </h2>
-          <span class="text-xs font-bold text-slate-400">跟著玩不踩雷</span>
-        </div>
-
-        <div class="space-y-3 text-xs">
-          <!-- 1. 星野 TOMAMU -->
-          <div class="border border-sky-200 bg-white rounded-xl p-3 space-y-1.5">
-            <div class="font-black text-sky-800 text-sm flex items-center justify-between">
-              <span>🏔️ 星野 TOMAMU（Day 1–2）</span>
-              <span class="text-[10px] bg-sky-50 text-sky-700 px-2 py-0.5 rounded-md">度假村全體驗</span>
-            </div>
-            <div class="space-y-1 text-slate-700 leading-relaxed">
-              <div><span class="font-extrabold text-rose-600">🍴 必吃：</span>SORA 鮭魚親子丼、hal 長腳蟹腳、湯咖哩 GARAKU、山頂 Kumo Cafe 棉花糖熱飲。</div>
-              <div><span class="font-extrabold text-amber-600">🛍️ 必買：</span>The Tower 大廳商店「星野農場鮮奶＆優格飲」、牧場起司餅乾。</div>
-              <div><span class="font-extrabold text-blue-600">📷 必拍：</span>霧冰平台 Cloud Walk 雲朵步道、水之教會夜間十字架、雙塔雪地團體大合照。</div>
-            </div>
-          </div>
-
-          <!-- 2. 美瑛・白金溫泉 -->
-          <div class="border border-emerald-200 bg-white rounded-xl p-3 space-y-1.5">
-            <div class="font-black text-emerald-800 text-sm flex items-center justify-between">
-              <span>🎄 美瑛・白金青池（Day 3）</span>
-              <span class="text-[10px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-md">雪原絕景</span>
-            </div>
-            <div class="space-y-1 text-slate-700 leading-relaxed">
-              <div><span class="font-extrabold text-rose-600">🍴 必吃：</span>純平洋食 junpei 炸蝦丼、美瑛選果北海道鮮奶霜淇淋。</div>
-              <div><span class="font-extrabold text-amber-600">🛍️ 必買：</span>美瑛小麥工房「100%夢之力小麥吐司、黑豆麵包、紅豆麵包」（註：美瑛本店無售玉米麵包）、凍乾草莓巧克力。</div>
-              <div><span class="font-extrabold text-blue-600">📷 必拍：</span>雪原上的孤獨聖誕樹之木、16:30 白金青池藍調點燈、白鬚瀑布藍河冰瀑。</div>
-            </div>
-          </div>
-
-          <!-- 3. 旭川・旭山動物園 -->
-          <div class="border border-amber-200 bg-white rounded-xl p-3 space-y-1.5">
-            <div class="font-black text-amber-800 text-sm flex items-center justify-between">
-              <span>🐧 旭川・旭山動物園＆砂川 SHIRO（Day 3–4）</span>
-              <span class="text-[10px] bg-amber-50 text-amber-700 px-2 py-0.5 rounded-md">萌獸＆香氛</span>
-            </div>
-            <div class="space-y-1 text-slate-700 leading-relaxed">
-              <div><span class="font-extrabold text-rose-600">🍴 必吃：</span>成吉思汗大黑屋烤小羊肉、砂川 <strong>SHIRO CAFE</strong> 野菜咖哩與甜點飲品。</div>
-              <div><span class="font-extrabold text-amber-600">🛍️ 必買：</span><strong>みんなの工場 by SHIRO 砂川限定調香＆保養品</strong>、旭山動物園毛絨企鵝玩偶、旭川壺屋「き花」。</div>
-              <div><span class="font-extrabold text-blue-600">📷 必拍：</span>11:00 國王企鵝雪地散步、海豹館圓柱水槽、<strong>SHIRO 純白玻璃森林工廠雪景建築</strong>。</div>
-            </div>
-          </div>
-
-          <!-- 4. 小樽浪漫一日 -->
-          <div class="border border-indigo-200 bg-white rounded-xl p-3 space-y-1.5">
-            <div class="font-black text-indigo-800 text-sm flex items-center justify-between">
-              <span>🍰 小樽三角市場＆堺町通（Day 5）</span>
-              <span class="text-[10px] bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded-md">海鮮甜點</span>
-            </div>
-            <div class="space-y-1 text-slate-700 leading-relaxed">
-              <div><span class="font-extrabold text-rose-600">🍴 必吃：</span>三角市場現剖帝王蟹＆海膽鮭魚卵丼、北菓樓夢不思議大泡芙、LeTAO 雙層起司蛋糕、北一廳煤油燈皇家奶茶。</div>
-              <div><span class="font-extrabold text-amber-600">🛍️ 必買：</span>LeTAO 紅茶巧克力餅乾、北菓樓開拓米菓、小樽音樂盒堂精緻八音盒、北一硝子玻璃杯。</div>
-              <div><span class="font-extrabold text-blue-600">📷 必拍：</span>LeTAO 本店頂樓免費觀景台俯瞰雪景、音樂盒堂門口蒸汽鐘、16:00 淺草橋小樽運河藍調點燈。</div>
-            </div>
-          </div>
-
-          <!-- 5. 札幌市區＆新千歲機場 -->
-          <div class="border border-rose-200 bg-white rounded-xl p-3 space-y-1.5">
-            <div class="font-black text-rose-800 text-sm flex items-center justify-between">
-              <span>✈️ 札幌市區＆新千歲機場（Day 4–6）</span>
-              <span class="text-[10px] bg-rose-50 text-rose-700 px-2 py-0.5 rounded-md">壓軸掃貨</span>
-            </div>
-            <div class="space-y-1 text-slate-700 leading-relaxed">
-              <div><span class="font-extrabold text-rose-600">🍴 必吃：</span>肉海鮮炉端 芯々、風土和牛燒肉、機場冠軍 Kinotoya 極上牛乳霜淇淋、一幻拉麵／北海道拉麵道場。</div>
-              <div><span class="font-extrabold text-amber-600">🛍️ 必買：</span>美瑛選果「機場店限定玉米麵包」、冬季限定 SNOWS 生巧克力夾心餅、札幌農學校牛奶餅乾、ROYCE' 生巧克力、六花亭蘭姆葡萄夾心、Calbee 薯塊三姐妹。</div>
-              <div><span class="font-extrabold text-blue-600">📷 必拍：</span>大通公園「札幌白色燈樹節」聖誕樹燈飾、薄野 NIKKA 威士忌霓虹招牌、新千歲機場國內線微笑之路。</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </section>
-
-    <!-- ==================== 分頁 5：日幣匯率與分帳計算機 ==================== -->
+    <!-- ==================== 分頁 4：匯率速算 ==================== -->
     <section id="panel-currency" class="tab-panel hidden space-y-4">
       <div class="glass-card rounded-2xl p-4 shadow-sm space-y-4">
         <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
@@ -1143,12 +879,11 @@
             </h2>
             <p class="text-xs text-slate-500 mt-0.5">輸入日幣或台幣即時雙向換算，支援團體均分</p>
           </div>
-          <button onclick="clearCalc()" class="text-xs font-bold text-slate-500 bg-slate-100 hover:bg-slate-200 px-2.5 py-1.5 rounded-lg active:scale-95">
+          <button type="button" onclick="clearCalc()" class="text-xs font-bold text-slate-500 bg-slate-100 hover:bg-slate-200 px-2.5 py-1.5 rounded-lg active:scale-95">
             清除歸零
           </button>
         </div>
 
-        <!-- 匯率設定列 -->
         <div class="bg-sky-50/80 border border-sky-100 rounded-xl p-3 flex items-center justify-between gap-2">
           <div class="text-xs">
             <div class="flex items-center gap-1.5">
@@ -1165,9 +900,7 @@
           </div>
         </div>
 
-        <!-- 雙向金額輸入框 -->
         <div class="space-y-3">
-          <!-- 日幣輸入 -->
           <div class="bg-white border-2 border-blue-200 focus-within:border-blue-500 rounded-2xl p-3.5 transition-colors">
             <div class="flex items-center justify-between text-xs font-bold text-slate-500 mb-1">
               <span>🇯🇵 日幣金額 (JPY)</span>
@@ -1179,15 +912,13 @@
             </div>
           </div>
 
-          <!-- 快捷金額按鈕 -->
           <div class="flex gap-1.5 overflow-x-auto no-scrollbar">
-            <button onclick="addJpy(1000)" class="shrink-0 text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-lg active:scale-95">+1,000円</button>
-            <button onclick="addJpy(2500)" class="shrink-0 text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-lg active:scale-95">+2,500円</button>
-            <button onclick="addJpy(5000)" class="shrink-0 text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-lg active:scale-95">+5,000円</button>
-            <button onclick="addJpy(10000)" class="shrink-0 text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-lg active:scale-95">+10,000円</button>
+            <button type="button" onclick="addJpy(1000)" class="shrink-0 text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-lg active:scale-95">+1,000円</button>
+            <button type="button" onclick="addJpy(2500)" class="shrink-0 text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-lg active:scale-95">+2,500円</button>
+            <button type="button" onclick="addJpy(5000)" class="shrink-0 text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-lg active:scale-95">+5,000円</button>
+            <button type="button" onclick="addJpy(10000)" class="shrink-0 text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-lg active:scale-95">+10,000円</button>
           </div>
 
-          <!-- 台幣輸入 -->
           <div class="bg-slate-50 border border-slate-200 focus-within:border-emerald-500 focus-within:bg-white rounded-2xl p-3.5 transition-colors">
             <div class="flex items-center justify-between text-xs font-bold text-slate-500 mb-1">
               <span>🇹🇼 換算台幣 (TWD)</span>
@@ -1200,7 +931,6 @@
           </div>
         </div>
 
-        <!-- 含稅 / 免稅與團體均分試算 -->
         <div class="bg-amber-50/70 border border-amber-200/80 rounded-2xl p-3.5 space-y-2.5">
           <div class="flex items-center justify-between">
             <span class="text-xs font-extrabold text-amber-900">🧮 血拼退稅＆聚餐均分速算</span>
@@ -1227,7 +957,7 @@
       </div>
     </section>
 
-    <!-- ==================== 分頁 6：共同支出記帳與收據紀錄 ==================== -->
+    <!-- ==================== 分頁 5：共同支出記帳與公費基金 ==================== -->
     <section id="panel-expense" class="tab-panel hidden space-y-4">
       
       <!-- 團體公費基金帳戶總覽卡（7人：實算 ¥29,572，整數收 ¥40,000 × 7 ＝ ¥280,000） -->
@@ -1244,10 +974,8 @@
           </button>
         </div>
 
-        <!-- 7位成員繳費狀態膠囊（點擊可切換已繳/未繳） -->
         <div id="public-fund-members-grid" class="flex flex-wrap gap-1.5"></div>
 
-        <!-- 公費基金即時收支與餘額儀表板 -->
         <div class="grid grid-cols-3 gap-2 text-center">
           <div class="bg-white rounded-xl p-2 border border-amber-200">
             <div class="text-[10px] font-bold text-slate-500">公費實收總額</div>
@@ -1266,7 +994,6 @@
           </div>
         </div>
 
-        <!-- 第一階段公費明細摺疊摘要 -->
         <div class="bg-white/95 rounded-xl p-3 border border-amber-200/80 space-y-1.5 text-xs">
           <div class="flex justify-between items-center text-slate-700">
             <span>• D1 接機包車（12/09 機場➔永旺➔星野）</span>
@@ -1304,7 +1031,6 @@
           <span id="expense-rate-badge" class="text-[11px] font-bold bg-sky-50 text-sky-700 px-2 py-1 rounded-lg">匯率 0.215</span>
         </div>
 
-        <!-- 項目名稱與金額 -->
         <div class="space-y-2.5">
           <div>
             <label class="block text-xs font-bold text-slate-700 mb-1">消費項目 / 店家名稱</label>
@@ -1331,18 +1057,15 @@
             </div>
           </div>
 
-          <!-- 共同記帳專屬內建四則運算計算機 -->
           <div id="exp-mini-calc" class="hidden bg-slate-900 text-white rounded-2xl p-3.5 space-y-2.5 shadow-md border border-slate-700">
             <div class="flex items-center justify-between text-[11px] text-slate-400">
               <span class="font-bold text-amber-300">🧮 記帳專用計算機（算好按「帶入金額」）</span>
               <button type="button" onclick="toggleExpCalc()" class="text-slate-300 hover:text-white font-bold px-1.5 py-0.5 rounded bg-slate-800">收合 ✕</button>
             </div>
-            <!-- 算式與結果顯示螢幕 -->
             <div class="bg-slate-950 border border-slate-700/90 rounded-xl px-3 py-2 text-right font-mono">
               <div id="exp-calc-expr" class="text-xs text-slate-400 min-h-[18px] truncate">0</div>
               <div id="exp-calc-result" class="text-xl font-black text-emerald-400 truncate mt-0.5">0</div>
             </div>
-            <!-- 計算機按鍵盤 -->
             <div class="grid grid-cols-4 gap-1.5 font-mono text-base font-black">
               <button type="button" onclick="expCalcClear()" class="bg-rose-600/90 hover:bg-rose-600 text-white py-2.5 rounded-xl active:scale-95">C</button>
               <button type="button" onclick="expCalcBackspace()" class="bg-slate-700 hover:bg-slate-600 text-amber-300 py-2.5 rounded-xl active:scale-95">⌫</button>
@@ -1371,7 +1094,6 @@
             </div>
           </div>
 
-          <!-- 誰先代墊 -->
           <div>
             <label class="block text-xs font-bold text-slate-700 mb-1">誰先付款（代墊人 / 公費基金）</label>
             <select id="exp-payer" class="w-full text-sm font-bold bg-white border border-slate-200 rounded-xl px-3 py-2.5 focus:outline-none focus:border-blue-500">
@@ -1388,7 +1110,6 @@
             </select>
           </div>
 
-          <!-- 分攤成員勾選 -->
           <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3 space-y-2">
             <div class="flex items-center justify-between">
               <span class="text-xs font-bold text-slate-700">參與分攤的人（<span id="split-count-label" class="text-blue-600">9</span>人）</span>
@@ -1400,7 +1121,6 @@
             <div id="exp-members-grid" class="flex flex-wrap gap-1.5"></div>
           </div>
 
-          <!-- 拍照或上傳收據 -->
           <div>
             <label class="block text-xs font-bold text-slate-700 mb-1">收據照片紀錄（選填，可現場拍照）</label>
             <div class="flex items-center gap-2">
@@ -1412,7 +1132,6 @@
                 移除照片
               </button>
             </div>
-            <!-- 照片預覽區 -->
             <div id="receipt-preview-box" class="hidden mt-2 relative rounded-xl overflow-hidden border border-slate-200 bg-slate-100">
               <img id="receipt-preview-img" src="" alt="收據預覽" class="w-full max-h-48 object-contain mx-auto">
             </div>
@@ -1438,19 +1157,16 @@
       <div class="glass-card rounded-2xl p-4 shadow-sm space-y-3">
         <div class="flex items-center justify-between border-b border-slate-100 pb-2">
           <h3 class="text-sm font-extrabold text-slate-900">🧾 支出明細與收據（<span id="expense-count">0</span>筆）</h3>
-          <button onclick="copyExpenseSummary()" class="text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-lg active:scale-95">
+          <button type="button" onclick="copyExpenseSummary()" class="text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-lg active:scale-95">
             📋 複製明細貼群組
           </button>
         </div>
         <div id="expense-list" class="space-y-2.5"></div>
       </div>
-
     </section>
 
-    <!-- ==================== 分頁 7：Papago & Google 翻譯溝通助手 ==================== -->
+    <!-- ==================== 分頁 6：翻譯助手 ==================== -->
     <section id="panel-translate" class="tab-panel hidden space-y-4">
-      
-      <!-- 翻譯快捷入口卡片 -->
       <div class="glass-card rounded-2xl p-4 shadow-sm space-y-3.5">
         <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
           <div>
@@ -1462,42 +1178,37 @@
           </div>
         </div>
 
-        <!-- 輸入框與翻譯跳轉按鈕 -->
         <div class="space-y-2.5">
           <div class="relative">
             <textarea id="trans-input" rows="3" placeholder="輸入想跟日本店員或司機說的中文（例如：請問這個可以退稅嗎？、我們有7個人...）" class="w-full text-sm bg-white border border-slate-200 rounded-2xl p-3 focus:outline-none focus:border-blue-500 resize-none"></textarea>
-            <button onclick="document.getElementById('trans-input').value=''" class="absolute bottom-2.5 right-2.5 text-[11px] font-bold text-slate-400 hover:text-slate-600 bg-slate-100 px-2 py-0.5 rounded-md">
+            <button type="button" onclick="document.getElementById('trans-input').value=''" class="absolute bottom-2.5 right-2.5 text-[11px] font-bold text-slate-400 hover:text-slate-600 bg-slate-100 px-2 py-0.5 rounded-md">
               清除
             </button>
           </div>
 
           <div class="grid grid-cols-2 gap-2.5">
-            <!-- Papago 日文翻譯按鈕 -->
-            <button onclick="openTranslator('papago', 'ja')" class="flex flex-col items-center justify-center gap-1 bg-gradient-to-br from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white rounded-2xl p-3 shadow-sm transition active:scale-95">
+            <button type="button" onclick="openTranslator('papago', 'ja')" class="flex flex-col items-center justify-center gap-1 bg-gradient-to-br from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white rounded-2xl p-3 shadow-sm transition active:scale-95">
               <div class="flex items-center gap-1.5 text-sm font-black">
                 <span>🇯🇵 Papago 日文</span>
               </div>
               <span class="text-[10px] text-emerald-100 font-medium">問店員司機・支援拍照</span>
             </button>
 
-            <!-- Google 日文翻譯按鈕 -->
-            <button onclick="openTranslator('google', 'ja')" class="flex flex-col items-center justify-center gap-1 bg-gradient-to-br from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white rounded-2xl p-3 shadow-sm transition active:scale-95">
+            <button type="button" onclick="openTranslator('google', 'ja')" class="flex flex-col items-center justify-center gap-1 bg-gradient-to-br from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white rounded-2xl p-3 shadow-sm transition active:scale-95">
               <div class="flex items-center gap-1.5 text-sm font-black">
                 <span>🇯🇵 Google 日文</span>
               </div>
               <span class="text-[10px] text-blue-100 font-medium">即時帶入・相機掃菜單</span>
             </button>
 
-            <!-- Papago 韓文翻譯按鈕 -->
-            <button onclick="openTranslator('papago', 'ko')" class="flex flex-col items-center justify-center gap-1 bg-gradient-to-br from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700 text-white rounded-2xl p-3 shadow-sm transition active:scale-95">
+            <button type="button" onclick="openTranslator('papago', 'ko')" class="flex flex-col items-center justify-center gap-1 bg-gradient-to-br from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700 text-white rounded-2xl p-3 shadow-sm transition active:scale-95">
               <div class="flex items-center gap-1.5 text-sm font-black">
                 <span>🇰🇷 Papago 韓文</span>
               </div>
               <span class="text-[10px] text-rose-100 font-medium">跟韓國夥伴聊天超自然</span>
             </button>
 
-            <!-- Google 韓文翻譯按鈕 -->
-            <button onclick="openTranslator('google', 'ko')" class="flex flex-col items-center justify-center gap-1 bg-gradient-to-br from-violet-500 to-purple-600 hover:from-violet-600 hover:to-purple-700 text-white rounded-2xl p-3 shadow-sm transition active:scale-95">
+            <button type="button" onclick="openTranslator('google', 'ko')" class="flex flex-col items-center justify-center gap-1 bg-gradient-to-br from-violet-500 to-purple-600 hover:from-violet-600 hover:to-purple-700 text-white rounded-2xl p-3 shadow-sm transition active:scale-95">
               <div class="flex items-center gap-1.5 text-sm font-black">
                 <span>🇰🇷 Google 韓文</span>
               </div>
@@ -1511,18 +1222,156 @@
       <div class="glass-card rounded-2xl p-4 shadow-sm space-y-3">
         <div class="flex items-center justify-between border-b border-slate-100 pb-2">
           <h3 class="text-sm font-extrabold text-slate-900">👆 手指日文卡（點擊可放大給對方看）</h3>
-          <span class="text-[11px] font-semibold text-slate-400">全團專屬句型</span>
+          <span class="text-[11px] font-semibold text-slate-400">7人專屬句型</span>
         </div>
 
         <div id="phrase-cards-container" class="space-y-2.5"></div>
       </div>
-
     </section>
 
-    <!-- ==================== 分頁 8：2026/11 日本退稅新制＆退稅公司總整理 ==================== -->
+    <!-- ==================== 分頁 7：拍照小技巧・建議穿著雪況・必吃必買必拍 ==================== -->
+    <section id="panel-photoguide" class="tab-panel hidden space-y-4">
+      <div class="glass-card rounded-2xl p-4 shadow-sm border-2 border-sky-200 space-y-3">
+        <div class="flex items-center justify-between border-b border-sky-100 pb-2.5">
+          <div>
+            <h2 class="text-base font-black text-slate-900 flex items-center gap-2">
+              <span class="w-7 h-7 rounded-xl bg-sky-100 text-sky-600 flex items-center justify-center text-sm">🧥</span>
+              12月中旬雪況提示＆建議穿著
+            </h2>
+            <p class="text-xs text-slate-500 mt-0.5">北海道 12/09–12/14 進入初冬積雪期（-9°C ~ +2°C）</p>
+          </div>
+          <span class="text-xs font-black bg-sky-600 text-white px-2.5 py-1 rounded-xl">洋蔥式穿搭</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+          <div class="bg-sky-50/80 border border-sky-200/80 rounded-xl p-2.5 space-y-1">
+            <div class="font-black text-sky-900">🏔️ 星野・美瑛（D1–D3）</div>
+            <div class="text-[11px] font-bold text-blue-700">厚積雪・鬆軟粉雪</div>
+            <p class="text-[11px] text-slate-600 leading-snug">全天零下（-9°C~-1°C），霧冰平台山頂體感約 -12°C，雪深及踝，需穿<strong>中筒防水雪靴</strong>。</p>
+          </div>
+          <div class="bg-amber-50/80 border border-amber-200/80 rounded-xl p-2.5 space-y-1">
+            <div class="font-black text-amber-900">🐧 旭山動物園（D4）</div>
+            <div class="text-[11px] font-bold text-amber-700">雪地＋長時間站立</div>
+            <p class="text-[11px] text-slate-600 leading-snug">早上排隊卡位企鵝散步腳底最容易冷！務必穿<strong>厚羊毛襪＋貼腳底暖暖包</strong>。</p>
+          </div>
+          <div class="bg-indigo-50/80 border border-indigo-200/80 rounded-xl p-2.5 space-y-1">
+            <div class="font-black text-indigo-900">🏙️ 札幌・小樽（D4–D6）</div>
+            <div class="text-[11px] font-bold text-indigo-700">⚠️ 融雪結冰（黑冰路面）</div>
+            <p class="text-[11px] text-slate-600 leading-snug">白天近 0°C~2°C 易融雪、傍晚結成透明薄冰最滑！走路採「<strong>企鵝小碎步</strong>、全腳掌著地」。</p>
+          </div>
+        </div>
+
+        <div class="bg-white border border-slate-200 rounded-xl p-3 space-y-2 text-xs">
+          <div class="font-extrabold text-slate-900">✨ 黃金三層穿搭＋拍雪景上鏡秘訣：</div>
+          <ul class="space-y-1.5 text-slate-600 leading-relaxed">
+            <li>• <strong>內層（排汗發熱）：</strong>穿發熱衣（勿穿純棉，流汗進暖氣房會變冷）。</li>
+            <li>• <strong>中層（保暖好脫）：</strong>毛衣、刷毛衛衣或針織衫（進餐廳、百貨與星野室內連通道直接脫外套）。</li>
+            <li>• <strong>外層（防風防水）：</strong>長版羽絨衣或防風防水衝鋒外套（下雪時雪花拍掉就乾，不會濕透）。</li>
+            <li>• <strong>📸 拍照配色心機：</strong>背景全是白雪時，<strong>避免穿全白外套</strong>（容易跟雪地融為一體）；穿<strong>焦糖棕、酒紅、薑黃、寶藍或亮色圍巾毛帽</strong>，在雪地裡超級顯白又亮眼！</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="glass-card rounded-2xl p-4 shadow-sm space-y-3">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
+          <h2 class="text-base font-black text-slate-900 flex items-center gap-2">
+            <span class="w-7 h-7 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-sm">📸</span>
+            五大景點手機拍照小技巧
+          </h2>
+          <span class="text-xs font-bold text-slate-400">出大片必看</span>
+        </div>
+
+        <div class="space-y-2.5 text-xs">
+          <div class="bg-sky-50/60 border border-sky-100 rounded-xl p-3 space-y-1">
+            <div class="font-black text-sky-950 text-sm">1. 星野 霧冰平台 ＆ 水之教會</div>
+            <p class="text-slate-700 leading-relaxed">
+              • <strong>霧冰平台：</strong>大晴天雪地反光極強，手機點擊人臉對焦後<strong>手動將「小太陽（曝光）」往上拉 +0.3 ~ +0.7</strong>，雪才不會拍起來灰灰髒髒的！<br>
+              • <strong>水之教會：</strong>夜間 20:30 開放時室內全暗、戶外打藍光，<strong>務必關閉閃光燈</strong>，開啟手機「夜間模式」並將雙手靠在欄杆上穩定 2 秒。
+            </p>
+          </div>
+          <div class="bg-emerald-50/60 border border-emerald-100 rounded-xl p-3 space-y-1">
+            <div class="font-black text-emerald-950 text-sm">2. 美瑛 聖誕樹之木（Christmas Tree）</div>
+            <p class="text-slate-700 leading-relaxed">
+              • <strong>長焦壓縮構圖：</strong>改用手機 <strong>2x 或 3x 長焦鏡頭</strong>，人站在路邊雪地上（切勿踏入私人農田），讓背景的聖誕樹放大並與人物形成孤寂電影感！
+            </p>
+          </div>
+          <div class="bg-blue-50/70 border border-blue-100 rounded-xl p-3 space-y-1">
+            <div class="font-black text-blue-950 text-sm">3. 白金青池 ＆ 白鬚瀑布（16:30 點燈）</div>
+            <p class="text-slate-700 leading-relaxed">
+              • <strong>黃金藍調時刻：</strong><strong>16:15–16:45 天空呈現深藍色「藍調時刻」</strong>是色彩最夢幻的 30 分鐘；白鬚瀑布在橋上欄杆架穩手機，用 <strong>2x 鏡頭＋夜間模式</strong> 拍出藍色河水與白色冰瀑。
+            </p>
+          </div>
+          <div class="bg-amber-50/70 border border-amber-100 rounded-xl p-3 space-y-1">
+            <div class="font-black text-amber-950 text-sm">4. 旭山動物園 企鵝散步＆海豹館</div>
+            <p class="text-slate-700 leading-relaxed">
+              • <strong>低角度企鵝視角：</strong>蹲低將手機貼近雪地高度（約膝蓋高度），開啟 <strong>4K 60fps 錄影</strong>（邊錄邊按快門鍵截圖），拍出國王企鵝搖搖擺擺朝你走來的超萌正面照！
+            </p>
+          </div>
+          <div class="bg-indigo-50/70 border border-indigo-100 rounded-xl p-3 space-y-1">
+            <div class="font-black text-indigo-950 text-sm">5. 小樽運河 黃昏點燈（16:00 日落）</div>
+            <p class="text-slate-700 leading-relaxed">
+              • <strong>淺草橋經典機位：</strong>15:55 先到「淺草橋」卡位，趁煤油燈剛亮、天空還是深藍色時拍倉庫與運河倒影；<strong>備用行動電源與暖暖包放同一個內袋保溫</strong>！
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card rounded-2xl p-4 shadow-sm space-y-3">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
+          <h2 class="text-base font-black text-slate-900 flex items-center gap-2">
+            <span class="w-7 h-7 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center text-sm">🏆</span>
+            6天行程「必吃・必買・必拍」精華表
+          </h2>
+          <span class="text-xs font-bold text-slate-400">跟著玩不踩雷</span>
+        </div>
+
+        <div class="space-y-3 text-xs">
+          <div class="border border-sky-200 bg-white rounded-xl p-3 space-y-1.5">
+            <div class="font-black text-sky-800 text-sm">🏔️ 星野 TOMAMU（Day 1–2）</div>
+            <div class="space-y-1 text-slate-700 leading-relaxed">
+              <div><span class="font-extrabold text-rose-600">🍴 必吃：</span>SORA 鮭魚親子丼、hal 長腳蟹腳、湯咖哩 GARAKU、山頂 Kumo Cafe 棉花糖熱飲。</div>
+              <div><span class="font-extrabold text-amber-600">🛍️ 必買：</span>The Tower 大廳商店「星野農場鮮奶＆優格飲」、牧場起司餅乾。</div>
+              <div><span class="font-extrabold text-blue-600">📷 必拍：</span>霧冰平台 Cloud Walk 雲朵步道、水之教會夜間十字架、雙塔雪地團體大合照。</div>
+            </div>
+          </div>
+          <div class="border border-emerald-200 bg-white rounded-xl p-3 space-y-1.5">
+            <div class="font-black text-emerald-800 text-sm">🎄 美瑛・白金青池（Day 3）</div>
+            <div class="space-y-1 text-slate-700 leading-relaxed">
+              <div><span class="font-extrabold text-rose-600">🍴 必吃：</span>純平洋食 junpei 炸蝦丼（或備案餐廳）、美瑛選果北海道鮮奶霜淇淋。</div>
+              <div><span class="font-extrabold text-amber-600">🛍️ 必買：</span>美瑛小麥工房「100%夢之力小麥吐司、黑豆麵包、紅豆麵包」（註：美瑛本店無售玉米麵包）。</div>
+              <div><span class="font-extrabold text-blue-600">📷 必拍：</span>雪原上的孤獨聖誕樹之木、16:30 白金青池藍調點燈、白鬚瀑布藍河冰瀑。</div>
+            </div>
+          </div>
+          <div class="border border-amber-200 bg-white rounded-xl p-3 space-y-1.5">
+            <div class="font-black text-amber-800 text-sm">🐧 旭川・旭山動物園＆砂川 SHIRO（Day 3–4）</div>
+            <div class="space-y-1 text-slate-700 leading-relaxed">
+              <div><span class="font-extrabold text-rose-600">🍴 必吃：</span>成吉思汗大黑屋烤小羊肉、砂川 <strong>SHIRO CAFE</strong> 野菜咖哩與甜點飲品。</div>
+              <div><span class="font-extrabold text-amber-600">🛍️ 必買：</span><strong>みんなの工場 by SHIRO 砂川限定調香＆保養品</strong>、旭山動物園毛絨企鵝玩偶。</div>
+              <div><span class="font-extrabold text-blue-600">📷 必拍：</span>11:00 國王企鵝雪地散步、海豹館圓柱水槽、<strong>SHIRO 純白玻璃森林工廠雪景建築</strong>。</div>
+            </div>
+          </div>
+          <div class="border border-indigo-200 bg-white rounded-xl p-3 space-y-1.5">
+            <div class="font-black text-indigo-800 text-sm">🍰 小樽三角市場＆堺町通（Day 5）</div>
+            <div class="space-y-1 text-slate-700 leading-relaxed">
+              <div><span class="font-extrabold text-rose-600">🍴 必吃：</span>三角市場現剖帝王蟹＆海膽鮭魚卵丼、北菓樓夢不思議大泡芙、LeTAO 雙層起司蛋糕。</div>
+              <div><span class="font-extrabold text-amber-600">🛍️ 必買：</span>LeTAO 紅茶巧克力餅乾、北菓樓開拓米菓、小樽音樂盒堂精緻八音盒。</div>
+              <div><span class="font-extrabold text-blue-600">📷 必拍：</span>LeTAO 本店頂樓免費觀景台俯瞰雪景、音樂盒堂門口蒸汽鐘、16:00 淺草橋小樽運河藍調點燈。</div>
+            </div>
+          </div>
+          <div class="border border-rose-200 bg-white rounded-xl p-3 space-y-1.5">
+            <div class="font-black text-rose-800 text-sm">✈️ 札幌市區＆新千歲機場（Day 4–6）</div>
+            <div class="space-y-1 text-slate-700 leading-relaxed">
+              <div><span class="font-extrabold text-rose-600">🍴 必吃：</span>肉海鮮炉端 芯々、風土和牛燒肉、機場冠軍 Kinotoya 極上牛乳霜淇淋、一幻拉麵。</div>
+              <div><span class="font-extrabold text-amber-600">🛍️ 必買：</span>美瑛選果「機場店限定玉米麵包」、冬季限定 SNOWS 生巧克力夾心餅、札幌農學校牛奶餅乾、ROYCE'、六花亭。</div>
+              <div><span class="font-extrabold text-blue-600">📷 必拍：</span>大通公園「札幌白色燈樹節」聖誕樹燈飾、薄野 NIKKA 威士忌霓虹招牌。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 分頁 8：2026/11 日本退稅新制 ==================== -->
     <section id="panel-taxrefund" class="tab-panel hidden space-y-4">
-      
-      <!-- 核心變革總覽卡 -->
       <div class="glass-card rounded-2xl p-4 shadow-sm border-2 border-rose-200 space-y-3">
         <div class="flex items-start justify-between gap-2 border-b border-rose-100 pb-2.5">
           <div>
@@ -1536,7 +1385,6 @@
           我們 12 月出發<strong>全部適用新制</strong>！結帳時先付「含稅全額」，離境當天在<strong>新千歲機場託運行李前</strong>刷護照確認，才會將消費稅退回帳戶。
         </p>
 
-        <!-- 4 大新舊制核心變化 -->
         <div class="grid grid-cols-2 gap-2 text-xs">
           <div class="bg-rose-50/70 border border-rose-100 rounded-xl p-2.5">
             <div class="font-extrabold text-rose-900">1. 先付含稅・機場後退</div>
@@ -1557,23 +1405,21 @@
         </div>
       </div>
 
-      <!-- 新千歲機場 3 步驟實操流程 -->
       <div class="glass-card rounded-2xl p-4 shadow-sm space-y-3">
         <h3 class="text-sm font-black text-slate-900 border-b border-slate-100 pb-2">✈️ 購物 ➔ 新千歲機場退稅 3 步驟</h3>
-        
         <div class="space-y-3 border-l-2 border-blue-200 ml-2 pl-3.5 text-xs">
           <div class="relative">
             <span class="absolute -left-[21px] top-0.5 w-3 h-3 rounded-full bg-blue-600 ring-4 ring-white"></span>
             <div class="font-extrabold text-slate-900">STEP 1｜店內結帳：付含稅價＋登記退稅管道</div>
             <p class="text-slate-600 mt-0.5 leading-relaxed">
-              出示<strong>護照正本</strong>（或 VJW 免稅 QR Code）以含稅價結帳（刷卡請選<strong>日圓</strong>）。掃店員提供的 QR Code 登記退款方式：<strong>首選「退回信用卡」</strong>（勿選台灣銀行帳戶，跨國匯費會吃光小額退稅）。
+              出示<strong>護照正本</strong>以含稅價結帳（刷卡請選<strong>日圓</strong>）。掃店員提供的 QR Code 登記退款方式：<strong>首選「退回信用卡」</strong>。
             </p>
           </div>
           <div class="relative">
             <span class="absolute -left-[21px] top-0.5 w-3 h-3 rounded-full bg-amber-500 ring-4 ring-white"></span>
             <div class="font-extrabold text-amber-900">STEP 2｜新千歲機場：【託運行李前】先過海關確認！</div>
             <p class="text-slate-600 mt-0.5 leading-relaxed">
-              12/14 抵達國際線大廳後，<strong>千萬不要先去航空櫃檯託運！</strong>先找「免稅手續自助機 (KIOSK)」掃護照，或連上大廳專用 Wi-Fi 用 <strong>Visit Japan Web</strong> 線上確認：<br>
+              12/14 抵達國際線大廳後，<strong>千萬不要先去航空櫃檯託運！</strong>先找「免稅手續自助機 (KIOSK)」掃護照：<br>
               • <span class="font-bold text-emerald-700">🟢 顯示綠色：</span>免查驗直接完成，可去託運行李。<br>
               • <span class="font-bold text-rose-600">🔴 顯示紅色：</span>帶護照、收據與商品至海關人工櫃檯核對。
             </p>
@@ -1582,77 +1428,15 @@
             <span class="absolute -left-[21px] top-0.5 w-3 h-3 rounded-full bg-emerald-500 ring-4 ring-white"></span>
             <div class="font-extrabold text-slate-900">STEP 3｜自動撥款入帳</div>
             <p class="text-slate-600 mt-0.5 leading-relaxed">
-              海關確認完成後，系統會通知退稅平台撥款，約 1～2 週退回原登記信用卡（部分店家會扣除約 1.5%～3% 系統手續費，<strong>唐吉訶德</strong>則免收退稅手續費）。
+              海關確認完成後，約 1～2 週退回原登記信用卡。
             </p>
           </div>
         </div>
-
-        <div class="bg-amber-50 border border-amber-200 rounded-xl p-2.5 text-[11px] text-amber-900 font-medium leading-relaxed">
-          ⚠️ <strong>9人團購物防雷口訣：</strong><br>
-          1. 要在日本馬上吃掉或拆用的零食藥妝，結帳時務必<strong>分開結帳</strong>！<br>
-          2. <strong>誰的護照退稅，商品就要放誰的行李箱</strong>，不可幫朋友代刷或分裝給別人帶過海關。
-        </div>
       </div>
-
-      <!-- 日本 4 大退稅系統平台一覽 -->
-      <div class="glass-card rounded-2xl p-4 shadow-sm space-y-3">
-        <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-          <h3 class="text-sm font-black text-slate-900">🏢 北海道常見 4 大退稅公司平台</h3>
-          <span class="text-[11px] font-semibold text-slate-400">逛街結帳會遇到</span>
-        </div>
-        <p class="text-xs text-slate-600 leading-relaxed">
-          新制上路後，退稅由店家配合的第三方平台撥款，我們在札幌、小樽與機場最常遇到以下 4 家：
-        </p>
-
-        <div class="space-y-2.5 text-xs">
-          <!-- 1. J&J Tax Free -->
-          <div class="bg-white border border-slate-200 rounded-xl p-3 space-y-1">
-            <div class="flex items-center justify-between">
-              <span class="font-black text-blue-800 text-sm">1. J&J Tax Free (J-TaxRefund)</span>
-              <span class="text-[10px] font-bold bg-blue-50 text-blue-700 px-2 py-0.5 rounded">網頁填報</span>
-            </div>
-            <p class="text-slate-600 text-[11px]">由 JTB 與 JCB 合資成立，全日本導入店數最多。</p>
-            <p class="text-slate-700 font-medium text-[11px]">📍 <strong>常見通路：</strong>大型連鎖藥妝店、商店街免稅店、百貨公司、便利商店。</p>
-          </div>
-
-          <!-- 2. Smart Detax / JP Refund -->
-          <div class="bg-white border border-slate-200 rounded-xl p-3 space-y-1">
-            <div class="flex items-center justify-between">
-              <span class="font-black text-indigo-800 text-sm">2. Smart Detax (JPrefund)</span>
-              <span class="text-[10px] font-bold bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded">掃 QR 登記</span>
-            </div>
-            <p class="text-slate-600 text-[11px]">滲透率極高的數位退稅系統，結帳掃碼填寫信用卡即可。</p>
-            <p class="text-slate-700 font-medium text-[11px]">📍 <strong>常見通路：</strong>AEON 永旺商場、PARCO、3COINS、HANDS 台隆手創館、AOKI、藥妝店。</p>
-          </div>
-
-          <!-- 3. PIE VAT -->
-          <div class="bg-white border border-slate-200 rounded-xl p-3 space-y-1">
-            <div class="flex items-center justify-between">
-              <span class="font-black text-emerald-800 text-sm">3. PIE VAT (Pie Systems)</span>
-              <span class="text-[10px] font-bold bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded">App / 網頁</span>
-            </div>
-            <p class="text-slate-600 text-[11px]">介面簡潔的數位退稅平台，支援追蹤退款進度。</p>
-            <p class="text-slate-700 font-medium text-[11px]">📍 <strong>常見通路：</strong>札幌與小樽獨立特色選品店、潮流服飾店、部分百貨與運動用品店。</p>
-          </div>
-
-          <!-- 4. Global Blue -->
-          <div class="bg-white border border-slate-200 rounded-xl p-3 space-y-1">
-            <div class="flex items-center justify-between">
-              <span class="font-black text-sky-900 text-sm">4. Global Blue (環球藍聯)</span>
-              <span class="text-[10px] font-bold bg-sky-100 text-sky-800 px-2 py-0.5 rounded">國際巨頭</span>
-            </div>
-            <p class="text-slate-600 text-[11px]">全球最大退稅公司，可先註冊帳號綁定護照與信用卡加速辦理。</p>
-            <p class="text-slate-700 font-medium text-[11px]">📍 <strong>常見通路：</strong>大丸百貨、三越伊勢丹、國際精品專賣店、大型電器行（Yodobashi / BicCamera）。</p>
-          </div>
-        </div>
-      </div>
-
     </section>
 
     <!-- ==================== 分頁 9：北海道伴手禮採買推薦單 ==================== -->
     <section id="panel-souvenirs" class="tab-panel hidden space-y-4">
-      
-      <!-- 伴手禮總覽與自訂新增卡 -->
       <div class="glass-card rounded-2xl p-4 shadow-sm space-y-3">
         <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
           <div>
@@ -1665,16 +1449,14 @@
           <span id="souvenir-progress-badge" class="text-xs font-black bg-pink-50 text-pink-700 border border-pink-200 px-2.5 py-1 rounded-xl">已買 0 件</span>
         </div>
 
-        <!-- 地點快速篩選膠囊 -->
-        <div class="flex gap-1.5 overflow-x-auto no-scrollbar pb-0.5">
-          <button onclick="filterSouvenir('all', this)" class="souvenir-filter-btn bg-slate-800 text-white text-xs font-bold px-3 py-1.5 rounded-full shrink-0">全部推薦 ✨</button>
-          <button onclick="filterSouvenir('biei', this)" class="souvenir-filter-btn bg-white text-slate-600 border border-slate-200 text-xs font-bold px-3 py-1.5 rounded-full shrink-0">🌽 D3 美瑛選果</button>
-          <button onclick="filterSouvenir('otaru', this)" class="souvenir-filter-btn bg-white text-slate-600 border border-slate-200 text-xs font-bold px-3 py-1.5 rounded-full shrink-0">🍰 D5 小樽堺町通</button>
-          <button onclick="filterSouvenir('airport', this)" class="souvenir-filter-btn bg-white text-slate-600 border border-slate-200 text-xs font-bold px-3 py-1.5 rounded-full shrink-0">✈️ D4–6 札幌＆機場</button>
-          <button onclick="filterSouvenir('custom', this)" class="souvenir-filter-btn bg-white text-slate-600 border border-slate-200 text-xs font-bold px-3 py-1.5 rounded-full shrink-0">📝 我的自訂</button>
+        <div class="flex flex-wrap gap-1.5 pb-0.5">
+          <button type="button" onclick="filterSouvenir('all', this)" class="souvenir-filter-btn bg-slate-800 text-white text-xs font-bold px-3 py-1.5 rounded-full">全部推薦 ✨</button>
+          <button type="button" onclick="filterSouvenir('biei', this)" class="souvenir-filter-btn bg-white text-slate-600 border border-slate-200 text-xs font-bold px-3 py-1.5 rounded-full">🌽 D3 美瑛選果</button>
+          <button type="button" onclick="filterSouvenir('otaru', this)" class="souvenir-filter-btn bg-white text-slate-600 border border-slate-200 text-xs font-bold px-3 py-1.5 rounded-full">🍰 D5 小樽堺町通</button>
+          <button type="button" onclick="filterSouvenir('airport', this)" class="souvenir-filter-btn bg-white text-slate-600 border border-slate-200 text-xs font-bold px-3 py-1.5 rounded-full">✈️ D4–6 札幌＆機場</button>
+          <button type="button" onclick="filterSouvenir('custom', this)" class="souvenir-filter-btn bg-white text-slate-600 border border-slate-200 text-xs font-bold px-3 py-1.5 rounded-full">📝 我的自訂</button>
         </div>
 
-        <!-- 自訂新增伴手禮輸入列 -->
         <div class="flex gap-1.5 pt-1">
           <input type="text" id="custom-souvenir-input" placeholder="輸入想買的商品（例如：白色戀人、藥妝...）" class="flex-1 text-xs sm:text-sm bg-white border border-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-pink-400">
           <button type="button" onclick="addCustomSouvenir()" class="shrink-0 bg-pink-500 hover:bg-pink-600 text-white font-bold text-xs px-3.5 py-2 rounded-xl shadow-xs active:scale-95">
@@ -1682,21 +1464,16 @@
           </button>
         </div>
 
-        <!-- 採買進度與小叮嚀 -->
         <div class="bg-amber-50/80 border border-amber-200/80 rounded-xl p-2.5 text-[11px] text-amber-900 leading-relaxed">
           💡 <strong>聰明採買攻略：</strong>需冷藏或效期短的（<strong>ROYCE' 生巧克力、LeTAO 起司蛋糕、六花亭葡萄夾心、SNOWS</strong>）統一留到 <strong>Day 6 中午在新千歲機場國內線 2F</strong> 一次掃貨最省力！
         </div>
 
-        <!-- 伴手禮清單列表容器 -->
         <div id="souvenir-list-container" class="space-y-2.5"></div>
       </div>
-
     </section>
 
-    <!-- ==================== 分頁 10：北海道牛乳地圖與神級鮮乳介紹 ==================== -->
+    <!-- ==================== 分頁 10：北海道牛乳地圖 ==================== -->
     <section id="panel-milkmap" class="tab-panel hidden space-y-4">
-      
-      <!-- 可愛北海道牛乳產區互動地圖 -->
       <div class="glass-card rounded-2xl p-4 shadow-sm border-2 border-sky-200 space-y-3">
         <div class="flex items-center justify-between border-b border-sky-100 pb-2.5">
           <div>
@@ -1709,13 +1486,11 @@
           <span class="text-xs font-black bg-sky-600 text-white px-2.5 py-1 rounded-xl">生乳產量占日本 55%</span>
         </div>
 
-        <!-- 可愛牛乳地圖畫布 -->
         <div id="milk-map-canvas" class="w-full h-64 sm:h-72 rounded-2xl overflow-hidden border-2 border-sky-200 cute-map-bg relative shadow-inner select-none"></div>
 
-        <!-- 點選產區後的加大型詳情氣泡框（完整顯示不截斷） -->
-        <div id="milk-map-popup" class="min-h-[154px] bg-white border-2 border-sky-200 rounded-2xl p-3.5 shadow-xs flex flex-col justify-between gap-2">
+        <div id="milk-map-popup" class="bg-white border-2 border-sky-200 rounded-2xl p-3.5 shadow-xs space-y-2">
           <div class="flex items-center justify-between gap-2 border-b border-sky-100 pb-2">
-            <div class="flex items-center gap-2 min-w-0">
+            <div class="flex items-center gap-2 min-w-0 flex-1">
               <span id="milk-popup-emoji" class="text-2xl leading-none shrink-0">🐄</span>
               <span id="milk-popup-title" class="font-black text-slate-900 text-base leading-snug">1. 星野 TOMAMU 農場鮮奶</span>
             </div>
@@ -1729,11 +1504,9 @@
           </div>
         </div>
 
-        <!-- 6大牛乳產區快速切換膠囊 -->
         <div id="milk-region-pills" class="flex flex-wrap gap-1.5 pt-0.5"></div>
       </div>
 
-      <!-- 日本鮮奶挑法黃金法則 -->
       <div class="glass-card rounded-2xl p-4 shadow-sm border border-amber-200 bg-amber-50/50 space-y-2.5">
         <div class="flex items-center justify-between border-b border-amber-200/70 pb-2">
           <h3 class="text-sm font-black text-amber-950 flex items-center gap-1.5">
@@ -1746,116 +1519,25 @@
             <span class="text-lg leading-none mt-0.5">⭕</span>
             <div>
               <div class="font-black text-slate-900">1. 認明「種類別：牛乳」＋「成分無調整」</div>
-              <p class="text-[11px] text-slate-600 mt-0.5 leading-relaxed">
-                包裝正面或側面一定要寫「<strong>牛乳</strong>」才是 100% 純生乳！若寫「加工乳」或「乳飲料」則有額外添加物。
-              </p>
+              <p class="text-[11px] text-slate-600 mt-0.5 leading-relaxed">包裝正面或側面一定要寫「<strong>牛乳</strong>」才是 100% 純生乳！</p>
             </div>
           </div>
           <div class="bg-white rounded-xl p-2.5 border border-amber-200/80 flex items-start gap-2.5">
             <span class="text-lg leading-none mt-0.5">📦</span>
             <div>
               <div class="font-black text-slate-900">2. 紙盒上方有「半圓形小凹槽（切欠き）」</div>
-              <p class="text-[11px] text-slate-600 mt-0.5 leading-relaxed">
-                日本規定只有 <strong>100% 純鮮奶（500ml 以上紙盒）</strong>頂端封口處才會有半圓形小缺口，閉著眼睛摸就知道是純鮮奶！
-              </p>
+              <p class="text-[11px] text-slate-600 mt-0.5 leading-relaxed">日本規定只有 <strong>100% 純鮮奶（500ml 以上紙盒）</strong>頂端封口處才會有半圓形小缺口。</p>
             </div>
           </div>
           <div class="bg-white rounded-xl p-2.5 border border-amber-200/80 flex items-start gap-2.5">
             <span class="text-lg leading-none mt-0.5">❄️</span>
             <div>
               <div class="font-black text-slate-900">3. 12 月冬季是北海道鮮奶「一年中最濃郁」的季節！</div>
-              <p class="text-[11px] text-slate-600 mt-0.5 leading-relaxed">
-                冬天乳牛為了禦寒，生乳中的<strong>乳脂肪含量最高（常達 3.8%～4.3%）</strong>，隨便一瓶超商鮮奶都香甜到像在喝鮮奶油。
-              </p>
+              <p class="text-[11px] text-slate-600 mt-0.5 leading-relaxed">冬天生乳中的<strong>乳脂肪含量最高（常達 3.8%～4.3%）</strong>，香甜濃郁到像鮮奶油。</p>
             </div>
           </div>
         </div>
       </div>
-
-      <!-- 行程沿線 6 款必喝神級牛乳介紹卡 -->
-      <div class="glass-card rounded-2xl p-4 shadow-sm space-y-3">
-        <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-          <h3 class="text-sm font-black text-slate-900 flex items-center gap-1.5">
-            <span>🏆</span> 跟著 6 天行程喝遍「北海道 6 大神級鮮奶」
-          </h3>
-          <span class="text-[11px] font-bold text-sky-600">順路買得到</span>
-        </div>
-
-        <div class="space-y-2.5 text-xs">
-          <!-- 款式 1 -->
-          <div class="bg-sky-50/70 border border-sky-200 rounded-xl p-3 space-y-1">
-            <div class="flex items-center justify-between gap-2">
-              <span class="font-black text-sky-950 text-sm">1. 星野農場鮮奶（TOMAMU Milk）</span>
-              <span class="text-[10px] font-extrabold bg-sky-600 text-white px-2 py-0.5 rounded-md shrink-0">D1–D2 星野園區</span>
-            </div>
-            <p class="text-[11px] text-slate-700 leading-relaxed">
-              • <strong>特色風味：</strong>採 65°C 低溫慢速殺菌保留生乳自然甜味，瓶口常會浮起一層天然奶油蓋（Cream Line），搖勻後香濃無比。<br>
-              • <strong>哪裡買：</strong>The Tower 大廳商店、螢火蟲街道咖啡廳、SORA 與森林餐廳早餐吧台。
-            </p>
-          </div>
-
-          <!-- 款式 2 -->
-          <div class="bg-emerald-50/70 border border-emerald-200 rounded-xl p-3 space-y-1">
-            <div class="flex items-center justify-between gap-2">
-              <span class="font-black text-emerald-950 text-sm">2. 函館「山川牧場自然牛乳」</span>
-              <span class="text-[10px] font-extrabold bg-emerald-600 text-white px-2 py-0.5 rounded-md shrink-0">D1 千歲永旺超市</span>
-            </div>
-            <p class="text-[11px] text-slate-700 leading-relaxed">
-              • <strong>特色風味：</strong>北海道老字號名門牧場，玻璃瓶裝（也有紙盒裝）口感極為純淨滑順，尾韻帶有淡淡牧草清香，完全無腥味。<br>
-              • <strong>哪裡買：</strong>Day 1 中停「永旺千歲店（AEON）」冷藏鮮奶櫃，以及札幌百貨超市。
-            </p>
-          </div>
-
-          <!-- 款式 3 -->
-          <div class="bg-amber-50/70 border border-amber-200 rounded-xl p-3 space-y-1">
-            <div class="flex items-center justify-between gap-2">
-              <span class="font-black text-amber-950 text-sm">3. 美瑛放牧酪農場「美瑛牛乳」</span>
-              <span class="text-[10px] font-extrabold bg-amber-600 text-white px-2 py-0.5 rounded-md shrink-0">D3 美瑛選果</span>
-            </div>
-            <p class="text-[11px] text-slate-700 leading-relaxed">
-              • <strong>特色風味：</strong>使用美瑛丘陵放牧牛隻生乳，乳香濃厚且清爽不膩，搭配美瑛小麥工房的現烤紅豆麵包或吐司簡直是夢幻早餐組合！<br>
-              • <strong>哪裡買：</strong>Day 3 美瑛選果、以及新千歲機場國內線 2F「美瑛選果」分店。
-            </p>
-          </div>
-
-          <!-- 款式 4 -->
-          <div class="bg-indigo-50/70 border border-indigo-200 rounded-xl p-3 space-y-1">
-            <div class="flex items-center justify-between gap-2">
-              <span class="font-black text-indigo-950 text-sm">4. 北海道限定「四葉特選 4.0 牛乳（よつ葉）」</span>
-              <span class="text-[10px] font-extrabold bg-indigo-600 text-white px-2 py-0.5 rounded-md shrink-0">全行程超商・超市</span>
-            </div>
-            <p class="text-[11px] text-slate-700 leading-relaxed">
-              • <strong>特色風味：</strong>十勝產區王牌！金色／深藍包裝的「特選よつ葉 4.0 牛乳」乳脂肪高達 4.0% 以上，CP 值最高、7-11 與 Lawson 隨時買得到。<br>
-              • <strong>哪裡買：</strong>全北海道 7-11、Lawson、Seicomart 與 AEON 超市。
-            </p>
-          </div>
-
-          <!-- 款式 5 -->
-          <div class="bg-rose-50/70 border border-rose-200 rounded-xl p-3 space-y-1">
-            <div class="flex items-center justify-between gap-2">
-              <span class="font-black text-rose-950 text-sm">5. Seicomart 便利商店「豐富町（とよとみ）牛乳」</span>
-              <span class="text-[10px] font-extrabold bg-rose-600 text-white px-2 py-0.5 rounded-md shrink-0">北海道橘色超商限定</span>
-            </div>
-            <p class="text-[11px] text-slate-700 leading-relaxed">
-              • <strong>特色風味：</strong>北海道第一名連鎖超商 Seicomart（橘色招牌）獨家！產自日本最北端酪農聖地「豐富町」，入口甜度驚人、喝過就回不去。<br>
-              • <strong>哪裡買：</strong>札幌市區（大通・薄野周邊）與旭川各地的 Seicomart 便利商店。
-            </p>
-          </div>
-
-          <!-- 款式 6 -->
-          <div class="bg-purple-50/70 border border-purple-200 rounded-xl p-3 space-y-1">
-            <div class="flex items-center justify-between gap-2">
-              <span class="font-black text-purple-950 text-sm">6. 倉島牧場「倉島 3.7 牛乳」（岩內／小樽周邊）</span>
-              <span class="text-[10px] font-extrabold bg-purple-600 text-white px-2 py-0.5 rounded-md shrink-0">D5 小樽・札幌超市</span>
-            </div>
-            <p class="text-[11px] text-slate-700 leading-relaxed">
-              • <strong>特色風味：</strong>後志地區（小樽・積丹一帶）代表性牧場，紅白復古牛牛包裝超可愛，奶香醇厚順口，也是許多小樽甜點店指定原料。<br>
-              • <strong>哪裡買：</strong>小樽車站周邊超市、札幌大丸百貨地下超市與新千歲機場。
-            </p>
-          </div>
-        </div>
-      </div>
-
     </section>
 
   </main>
@@ -1872,8 +1554,8 @@
       <div id="modal-phrase-jp" class="notranslate text-2xl sm:text-3xl font-black text-slate-900 leading-relaxed py-2" translate="no"></div>
       <div id="modal-phrase-zh" class="text-sm font-bold text-slate-500 border-t border-slate-100 pt-3"></div>
       <div class="flex gap-2 pt-2">
-        <button id="modal-phrase-copy-btn" class="flex-1 bg-blue-600 text-white font-bold text-xs py-3 rounded-xl active:scale-95">📋 複製日文</button>
-        <button onclick="closePhraseModal()" class="flex-1 bg-slate-100 text-slate-700 font-bold text-xs py-3 rounded-xl">關閉 ✕</button>
+        <button type="button" id="modal-phrase-copy-btn" class="flex-1 bg-blue-600 text-white font-bold text-xs py-3 rounded-xl active:scale-95">📋 複製日文</button>
+        <button type="button" onclick="closePhraseModal()" class="flex-1 bg-slate-100 text-slate-700 font-bold text-xs py-3 rounded-xl">關閉 ✕</button>
       </div>
     </div>
   </div>
@@ -1885,7 +1567,7 @@
         <h3 class="text-base font-black text-slate-900 flex items-center gap-1.5">
           <span>🇰🇷</span> 한국어 번역 안내 (韓文翻譯)
         </h3>
-        <button onclick="closeKoHelpModal()" class="text-xs font-bold bg-slate-100 text-slate-600 px-2.5 py-1 rounded-lg">✕</button>
+        <button type="button" onclick="closeKoHelpModal()" class="text-xs font-bold bg-slate-100 text-slate-600 px-2.5 py-1 rounded-lg">✕</button>
       </div>
       <div class="text-xs text-slate-700 space-y-2 leading-relaxed">
         <p class="font-bold text-rose-700">한국인 친구를 위한 원클릭 번역 방법：</p>
@@ -1902,19 +1584,19 @@
         <a href="https://papago.naver.com/?sk=zh-TW&tk=ko" target="_blank" class="flex-1 text-center bg-emerald-600 text-white font-bold text-xs py-3 rounded-xl shadow-xs">
           🇰🇷 Papago 열기
         </a>
-        <button onclick="closeKoHelpModal()" class="flex-1 bg-slate-100 text-slate-700 font-bold text-xs py-3 rounded-xl">
+        <button type="button" onclick="closeKoHelpModal()" class="flex-1 bg-slate-100 text-slate-700 font-bold text-xs py-3 rounded-xl">
           닫기 (關閉)
         </button>
       </div>
     </div>
   </div>
 
-  <!-- 收據大圖檢視彈窗 (Modal) -->
+  <!-- 收據大圖檢視彈窗 -->
   <div id="receipt-modal" onclick="closeReceiptModal()" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-xs hidden flex items-center justify-center p-4">
     <div class="max-w-md w-full bg-white rounded-2xl overflow-hidden shadow-2xl" onclick="event.stopPropagation()">
       <div class="flex items-center justify-between px-4 py-3 border-b border-slate-100">
         <span id="modal-receipt-title" class="text-sm font-extrabold text-slate-900">收據照片</span>
-        <button onclick="closeReceiptModal()" class="text-xs font-bold bg-slate-100 text-slate-700 px-3 py-1 rounded-lg">關閉 ✕</button>
+        <button type="button" onclick="closeReceiptModal()" class="text-xs font-bold bg-slate-100 text-slate-700 px-3 py-1 rounded-lg">關閉 ✕</button>
       </div>
       <div class="p-2 bg-slate-900 flex items-center justify-center">
         <img id="modal-receipt-img" src="" alt="收據大圖" class="max-h-[72vh] w-auto object-contain rounded-lg">
@@ -1972,8 +1654,8 @@
         }
       });
 
-      if (typeof initExpenseForm === 'function') initExpenseForm();
-      if (typeof renderExpenseList === 'function') renderExpenseList();
+      initExpenseForm();
+      renderExpenseList();
     }
 
     function googleTranslateElementInit() {
@@ -2053,46 +1735,39 @@
       if (modal) modal.classList.add('hidden');
     }
 
-    // 分頁切換邏輯
+    // ==================== 分頁切換與行程篩選 ====================
+    let currentMapDay = 'all';
+
     function switchTab(tabName) {
-      try {
-        document.querySelectorAll('.tab-panel').forEach(panel => {
-          panel.classList.add('hidden');
-          panel.style.display = 'none';
-        });
+      document.querySelectorAll('.tab-panel').forEach(panel => {
+        panel.classList.add('hidden');
+        panel.style.display = 'none';
+      });
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-blue-600', 'text-white', 'shadow-sm');
+        btn.classList.add('text-slate-600', 'hover:bg-slate-100');
+      });
 
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-          btn.classList.remove('bg-blue-600', 'text-white', 'shadow-sm');
-          btn.classList.add('text-slate-600', 'hover:bg-slate-100');
-        });
-
-        const targetPanel = document.getElementById('panel-' + tabName);
-        if (targetPanel) {
-          targetPanel.classList.remove('hidden');
-          targetPanel.style.display = 'block';
-        }
-
-        const activeBtn = document.getElementById('tab-' + tabName);
-        if (activeBtn) {
-          activeBtn.classList.remove('text-slate-600', 'hover:bg-slate-100');
-          activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-sm');
-        }
-
-        if (tabName === 'itinerary') {
-          renderMapForDay(currentMapDay);
-        }
-        if (tabName === 'milkmap') {
-          renderMilkMap();
-        }
-
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } catch (err) {
-        console.error('Switch tab error:', err);
+      const targetPanel = document.getElementById('panel-' + tabName);
+      if (targetPanel) {
+        targetPanel.classList.remove('hidden');
+        targetPanel.style.display = 'block';
       }
+      const activeBtn = document.getElementById('tab-' + tabName);
+      if (activeBtn) {
+        activeBtn.classList.remove('text-slate-600', 'hover:bg-slate-100');
+        activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-sm');
+      }
+
+      if (tabName === 'itinerary') {
+        renderMapForDay(currentMapDay);
+      }
+      if (tabName === 'milkmap') {
+        renderMilkMap();
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // 每日行程日期快速篩選（同步更新地圖）
-    let currentMapDay = 'all';
     function filterDay(dayId, clickedBtn) {
       currentMapDay = dayId;
       document.querySelectorAll('.day-filter-btn').forEach(btn => {
@@ -2117,15 +1792,23 @@
       renderMapForDay(dayId);
     }
 
-    // ==================== 可愛插畫版每日行程路線地圖 ====================
+    // ==================== 可愛插畫版每日行程路線地圖（無照片格子・不跑版） ====================
+    function estimateTextWidth(str) {
+      let w = 0;
+      for (const ch of str) {
+        w += /[\u3000-\u9fff\uff00-\uffef]/.test(ch) ? 9.6 : 5.6;
+      }
+      return Math.ceil(w) + 14;
+    }
+
     function getLabelOffset(align, labelW) {
       switch (align) {
         case 'top':
           return { rx: -labelW / 2, ry: -58, tx: 0, ty: -46.5, anchor: 'middle' };
         case 'top-left':
-          return { rx: -labelW - 10, ry: -46, tx: -labelW / 2 - 10, ty: -34.5, anchor: 'middle' };
+          return { rx: -labelW - 8, ry: -46, tx: -labelW / 2 - 8, ty: -34.5, anchor: 'middle' };
         case 'top-right':
-          return { rx: 14, ry: -46, tx: 14 + labelW / 2, ty: -34.5, anchor: 'middle' };
+          return { rx: 12, ry: -46, tx: 12 + labelW / 2, ty: -34.5, anchor: 'middle' };
         case 'left':
           return { rx: -labelW - 18, ry: -34, tx: -18 - labelW / 2, ty: -22.5, anchor: 'middle' };
         case 'right':
@@ -2148,12 +1831,12 @@
         color: '#2563eb',
         viewBox: '0 0 420 260',
         stops: [
-          { name: '1. 新千歲機場', emoji: '✈️', time: 'D1 ＆ D6', x: 176, y: 205, align: 'bottom', note: '12/09 11:00 抵達包車出發；12/14 國內線掃貨返台' },
-          { name: '2. 星野 TOMAMU', emoji: '🏔️', time: 'D1–D2', x: 282, y: 172, align: 'right', photo: 'https://www.snowtomamu.jp/winter/img/hotel/tower/main_01.jpg', fallbackPhoto: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Alpha_Resort_Tomamu_%E6%98%9F%E9%87%8E%E6%B8%A1%E5%81%87%E6%9D%91_-_panoramio.jpg/1280px-Alpha_Resort_Tomamu_%E6%98%9F%E9%87%8E%E6%B8%A1%E5%81%87%E6%9D%91_-_panoramio.jpg', note: '連住2晚・霧冰平台、微笑海灘＆木林之湯、森林餐廳' },
-          { name: '3. 美瑛雪原', emoji: '🎄', time: 'D3 白天', x: 278, y: 108, align: 'right', note: 'D3 包車・純平炸蝦丼、聖誕樹、美瑛選果＆青池點燈' },
-          { name: '4. 旭川＆動物園', emoji: '🐧', time: 'D3–D4', x: 256, y: 54, align: 'top', note: 'D3 宿 JR INN 旭川大浴場；D4 旭山動物園企鵝散步' },
-          { name: '5. 小樽運河', emoji: '🍰', time: 'D5 全日', x: 84, y: 128, align: 'top', note: 'D5 搭 JR 浪漫一日遊・三角市場海鮮、堺町通＆運河點燈' },
-          { name: '6. 札幌市區', emoji: '🏨', time: 'D4–D6', x: 136, y: 156, align: 'left', note: '9人合體宿東急 Stay・大通白色燈樹節＆薄野美食泡湯' }
+          { name: '1. 新千歲機場', shortLabel: '新千歲機場', emoji: '✈️', time: 'D1 ＆ D6', x: 176, y: 205, align: 'bottom', note: '12/09 11:00 抵達包車出發；12/14 國內線掃貨返台' },
+          { name: '2. 星野 TOMAMU', shortLabel: '星野 TOMAMU', emoji: '🏔️', time: 'D1–D2', x: 282, y: 172, align: 'right', note: '連住2晚・霧冰平台、微笑海灘＆木林之湯、森林餐廳' },
+          { name: '3. 美瑛雪原', shortLabel: '美瑛雪原', emoji: '🎄', time: 'D3 白天', x: 278, y: 108, align: 'right', note: 'D3 包車・純平洋食（現場候位/備案）、聖誕樹、美瑛選果＆青池點燈' },
+          { name: '4. 旭川＆動物園', shortLabel: '旭川・動物園', emoji: '🐧', time: 'D3–D4', x: 256, y: 54, align: 'top', note: 'D3 宿 JR INN 旭川＆大黑屋排隊；D4 旭山動物園企鵝散步' },
+          { name: '5. 小樽運河', shortLabel: '小樽運河', emoji: '🍰', time: 'D5 全日', x: 84, y: 128, align: 'top', note: 'D5 搭 JR 浪漫一日遊・三角市場海鮮、堺町通＆運河點燈' },
+          { name: '6. 札幌市區', shortLabel: '札幌市區', emoji: '🏨', time: 'D4–D6', x: 136, y: 156, align: 'left', note: '9人合體宿東急 Stay・大通白色燈樹節＆薄野美食泡湯' }
         ]
       },
       d1: {
@@ -2163,38 +1846,38 @@
         color: '#0284c7',
         viewBox: '85 110 265 145',
         stops: [
-          { name: '1. 新千歲機場', emoji: '✈️', time: '11:00–12:00', x: 170, y: 215, align: 'bottom', note: '11:00 抵達・領行李後 12:00 包車準時出發' },
-          { name: '2. 永旺千歲店 (AEON)', emoji: '🛒', time: '12:10–13:10', x: 148, y: 175, align: 'left', note: '中停吃午餐、採買北海道鮮奶、水果與零食飲料' },
-          { name: '3. 星野 TOMAMU', emoji: '🏔️', time: '15:00 入住', x: 278, y: 168, align: 'top', photo: 'https://www.snowtomamu.jp/winter/img/hotel/tower/main_01.jpg', fallbackPhoto: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Alpha_Resort_Tomamu_%E6%98%9F%E9%87%8E%E6%B8%A1%E5%81%87%E6%9D%91_-_panoramio.jpg/1280px-Alpha_Resort_Tomamu_%E6%98%9F%E9%87%8E%E6%B8%A1%E5%81%87%E6%9D%91_-_panoramio.jpg', note: 'The Tower 入住・迎賓茶飲、木林之湯＆20:30 水之教會' }
+          { name: '1. 新千歲機場', shortLabel: '新千歲機場', emoji: '✈️', time: '11:00–12:00', x: 170, y: 215, align: 'bottom', note: '11:00 抵達・領行李後 12:00 包車準時出發' },
+          { name: '2. 永旺千歲店 (AEON)', shortLabel: '永旺千歲店', emoji: '🛒', time: '12:10–13:10', x: 148, y: 175, align: 'left', note: '中停吃午餐、採買北海道鮮奶、水果與零食飲料' },
+          { name: '3. 星野 TOMAMU', shortLabel: '星野 TOMAMU', emoji: '🏔️', time: '15:00 入住', x: 278, y: 168, align: 'top', note: 'The Tower 入住・迎賓茶飲、木林之湯＆20:30 水之教會' }
         ]
       },
       d2: {
         title: '🏔️ DAY 2 (12/10) 星野 TOMAMU 度假村全體驗地圖',
-        subtitle: '霧冰平台 ➔ 微笑海灘＆木林之湯 ➔ 螢火蟲街道 ➔ 森林餐廳 Nininupuri',
+        subtitle: '霧冰平台 ➔ 微笑海灘＆木林之湯 ➔ 螢火蟲街道 ➔ 森林餐廳',
         gmapsUrl: 'https://www.google.com/maps/search/?api=1&query=Hoshino+Resorts+TOMAMU',
         color: '#2563eb',
         viewBox: '185 185 110 90',
         stops: [
-          { name: '1. 霧冰平台 ❄️', emoji: '❄️', time: '09:00–11:30', x: 222, y: 214, align: 'top-left', photo: 'https://www.snowtomamu.jp/winter/img/hotel/tower/main_01.jpg', fallbackPhoto: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Alpha_Resort_Tomamu_%E6%98%9F%E9%87%8E%E6%B8%A1%E5%81%87%E6%9D%91_-_panoramio.jpg/1280px-Alpha_Resort_Tomamu_%E6%98%9F%E9%87%8E%E6%B8%A1%E5%81%87%E6%9D%91_-_panoramio.jpg', note: '搭乘雲海纜車登上海拔 1,088m 霧冰平台，欣賞雪白樹冰與日高山脈絕景。' },
-          { name: '2. 微笑海灘＆木林之湯 ♨️', emoji: '♨️', time: '14:30–17:30', x: 248, y: 226, align: 'right', note: '日本最大室內造浪泳池玩水，傍晚享受雪見露天風呂「木林之湯」。' },
-          { name: '3. 螢火蟲街道 🌲', emoji: '🌲', time: '17:30–18:30', x: 218, y: 244, align: 'left', note: 'Ski-in/Ski-out 商店街與夜間雪地散步，逛限定戶外選品店與甜點咖啡。' },
-          { name: '4. 森林餐廳＆hal 🍖', emoji: '🍖', time: '18:30–20:30', x: 246, y: 254, align: 'bottom-right', note: '享用長腳蟹腳與海陸自助晚餐；20:30 回 Tower 櫃檯將大行李寄往札幌！' }
+          { name: '1. 霧冰平台', shortLabel: '霧冰平台', emoji: '❄️', time: '09:00–11:30', x: 222, y: 214, align: 'top-left', note: '搭乘雲海纜車登上海拔 1,088m 霧冰平台，欣賞雪白樹冰與日高山脈絕景。' },
+          { name: '2. 微笑海灘＆木林之湯', shortLabel: '微笑海灘・湯', emoji: '♨️', time: '14:30–17:30', x: 248, y: 226, align: 'right', note: '日本最大室內造浪泳池玩水，傍晚享受雪見露天風呂「木林之湯」。' },
+          { name: '3. 螢火蟲街道', shortLabel: '螢火蟲街道', emoji: '🌲', time: '17:30–18:30', x: 218, y: 244, align: 'left', note: 'Ski-in/Ski-out 商店街與夜間雪地散步，逛限定戶外選品店與甜點咖啡。' },
+          { name: '4. 森林餐廳＆hal', shortLabel: '森林餐廳・hal', emoji: '🍖', time: '18:30–20:30', x: 246, y: 254, align: 'bottom-right', note: '享用長腳蟹腳與海陸自助晚餐；20:30 回 Tower 櫃檯將大行李寄往札幌！' }
         ]
       },
       d3: {
         title: '🎄 DAY 3 (12/11) 美瑛雪原＆青池點燈包車路線',
-        subtitle: '星野 ➔ 純平洋食 ➔ 聖誕樹 ➔ 美瑛選果 ➔ 青池＆白鬚瀑布 ➔ 旭川',
+        subtitle: '星野 ➔ 純平洋食(候位/備案) ➔ 聖誕樹 ➔ 美瑛選果 ➔ 青池＆瀑布 ➔ 旭川',
         gmapsUrl: 'https://www.google.com/maps/dir/Hoshino+Resorts+TOMAMU/Junpei+Biei/Christmas+Tree+Biei/Biei+Senka/Shirogane+Blue+Pond/Shirahige+Waterfall/JR+Inn+Asahikawa',
         color: '#d97706',
         viewBox: '165 25 215 175',
         stops: [
-          { name: '1. 星野 TOMAMU', emoji: '🚐', time: '10:00 出發', x: 282, y: 175, align: 'bottom', photo: 'https://images.unsplash.com/photo-1548263594-a71ea65a8598?auto=format&fit=crop&w=900&q=80', note: '09:15 退房・10:00 包車準時北上美瑛' },
-          { name: '2. 純平洋食 junpei', emoji: '🍤', time: '12:00 訂位', x: 238, y: 126, align: 'left', photo: 'https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?auto=format&fit=crop&w=900&q=80', note: '已訂位 12:00 午餐（用餐 1.5 小時，必點招牌炸蝦丼）' },
-          { name: '3. 聖誕樹之木', emoji: '🎄', time: '13:40–14:15', x: 222, y: 96, align: 'left', photo: 'https://images.unsplash.com/photo-1511184150666-9bb7d41a88f4?auto=format&fit=crop&w=900&q=80', note: '雪原上的孤獨聖誕樹拍照 35 分鐘（建議用 2x 長焦拍）' },
-          { name: '4. 美瑛選果＆農場', emoji: '🍞', time: '14:25–15:25', x: 282, y: 102, align: 'right', photo: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=80', note: '美瑛小麥工房買夢之力吐司與黑豆麵包（玉米麵包為機場限定）' },
-          { name: '5. 白金青池點燈', emoji: '💎', time: '15:50–17:00', x: 312, y: 130, align: 'right', photo: 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=900&q=80', note: '16:30 冬季點燈・把握 16:15–16:45 藍調時刻拍倒影' },
-          { name: '6. 白鬚瀑布', emoji: '🌊', time: '17:05–17:30', x: 325, y: 154, align: 'right', photo: 'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=900&q=80', note: '夜間藍色河水與白色冰瀑點燈，停留 25 分鐘' },
-          { name: '7. JR INN 旭川', emoji: '♨️', time: '18:45 入住', x: 256, y: 54, align: 'top', photo: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=80', note: '入住旭川站直結飯店・19:30 大黑屋烤羊肉＆5F大浴場' }
+          { name: '1. 星野 TOMAMU', shortLabel: '星野出發', emoji: '🚐', time: '10:00 出發', x: 282, y: 175, align: 'bottom', note: '09:15 退房・10:00 包車準時北上美瑛' },
+          { name: '2. 純平洋食 junpei（或備案）', shortLabel: '純平洋食(候位)', emoji: '🍤', time: '12:00 午餐', x: 238, y: 126, align: 'left', note: '無法事先訂位・現場候位（同步尋找替代備案餐廳中，視現場排隊彈性調整）' },
+          { name: '3. 聖誕樹之木', shortLabel: '聖誕樹之木', emoji: '🎄', time: '13:40–14:15', x: 222, y: 96, align: 'left', note: '雪原上的孤獨聖誕樹拍照 35 分鐘（建議用 2x 長焦拍）' },
+          { name: '4. 美瑛選果＆小麥工房', shortLabel: '美瑛選果', emoji: '🍞', time: '14:25–15:25', x: 282, y: 102, align: 'right', note: '美瑛小麥工房買夢之力吐司與黑豆麵包（玉米麵包為機場限定）' },
+          { name: '5. 白金青池點燈', shortLabel: '白金青池', emoji: '💎', time: '15:50–17:00', x: 312, y: 130, align: 'right', note: '16:30 冬季點燈・把握 16:15–16:45 藍調時刻拍倒影' },
+          { name: '6. 白鬚瀑布', shortLabel: '白鬚瀑布', emoji: '🌊', time: '17:05–17:30', x: 325, y: 154, align: 'right', note: '夜間藍色河水與白色冰瀑點燈，停留 25 分鐘' },
+          { name: '7. JR INN 旭川＆大黑屋', shortLabel: 'JR INN 旭川', emoji: '♨️', time: '18:45 入住', x: 256, y: 54, align: 'top', note: '入住旭川站直結飯店・19:30 大黑屋烤羊肉（無法預約，僅能現場排隊抽整理券）' }
         ]
       },
       d4: {
@@ -2204,11 +1887,11 @@
         color: '#ea580c',
         viewBox: '75 25 265 170',
         stops: [
-          { name: '1. JR INN 旭川', emoji: '🚐', time: '09:50 出發', x: 242, y: 66, align: 'left', photo: 'https://images.unsplash.com/photo-1542718610-a1d656d1884c?auto=format&fit=crop&w=900&q=80', note: '退房後行李直接放包車免寄物，前往旭山動物園' },
-          { name: '2. 旭山動物園', emoji: '🐧', time: '10:30–14:00', x: 288, y: 62, align: 'right', photo: 'https://images.unsplash.com/photo-1551986782-d0169b3f8fa7?auto=format&fit=crop&w=900&q=80', note: '11:00 國王企鵝散步・海豹館圓柱水槽＆北極熊館，14:00 準時出發' },
-          { name: '3. みんなの工場 by SHIRO', emoji: '🧴', time: '15:00–16:30', x: 212, y: 106, align: 'left', photo: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=900&q=80', note: 'Blender Lab 調香免預約・15:00 一進店先抽整理券，可免稅＆SHIRO CAFE下午茶' },
-          { name: '4. 札幌東急 Stay', emoji: '🧳', time: '17:30 入住', x: 142, y: 142, align: 'left', photo: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=80', note: '辦理入住並領取從星野寄來的大行李箱，進房整裝休息 1 小時' },
-          { name: '5. 薄野「肉海鮮炉端 芯々」', emoji: '🍻', time: '18:30 晚餐', x: 162, y: 168, align: 'bottom', photo: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=80', note: '與德、歐會合・全團 9 人大合體！餐後逛大通白色燈樹節' }
+          { name: '1. JR INN 旭川', shortLabel: 'JR INN 旭川', emoji: '🚐', time: '09:50 出發', x: 242, y: 66, align: 'left', note: '退房後行李直接放包車免寄物，前往旭山動物園' },
+          { name: '2. 旭山動物園', shortLabel: '旭山動物園', emoji: '🐧', time: '10:30–14:00', x: 288, y: 62, align: 'right', note: '11:00 國王企鵝散步・海豹館圓柱水槽＆北極熊館，14:00 準時出發' },
+          { name: '3. みんなの工場 by SHIRO', shortLabel: '砂川 SHIRO', emoji: '🧴', time: '15:00–16:30', x: 212, y: 106, align: 'left', note: 'Blender Lab 調香免預約・15:00 一進店先抽整理券，可免稅＆SHIRO CAFE下午茶' },
+          { name: '4. 札幌東急 Stay', shortLabel: '札幌東急Stay', emoji: '🧳', time: '17:30 入住', x: 142, y: 142, align: 'left', note: '辦理入住並領取從星野寄來的大行李箱，進房整裝休息 1 小時' },
+          { name: '5. 薄野「肉海鮮炉端 芯々」', shortLabel: '薄野炉端芯々', emoji: '🍻', time: '18:30 晚餐', x: 162, y: 168, align: 'bottom', note: '與德、歐會合・全團 9 人大合體！餐後逛大通白色燈樹節' }
         ]
       },
       d5: {
@@ -2218,11 +1901,11 @@
         color: '#4f46e5',
         viewBox: '35 85 215 115',
         stops: [
-          { name: '1. JR 札幌站', emoji: '🚆', time: '09:33 出發', x: 168, y: 148, align: 'right', photo: 'https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=900&q=80', note: '搭快速 Airport 31 號往小樽（建議加購 u-Seat 指定席）' },
-          { name: '2. 小樽三角市場', emoji: '🦀', time: '10:15–11:45', x: 88, y: 112, align: 'top', photo: 'https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=900&q=80', note: '出站步行 1 分鐘・現剖帝王蟹與海膽鮭魚卵早午餐' },
-          { name: '3. 堺町通甜點街', emoji: '🍰', time: '12:00–15:45', x: 112, y: 138, align: 'right', photo: 'https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=900&q=80', note: 'LeTAO 觀景台、北菓樓泡芙、六花亭＆小樽音樂盒堂' },
-          { name: '4. 小樽運河 (淺草橋)', emoji: '🏮', time: '16:00 點燈', x: 82, y: 134, align: 'left', photo: 'https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=900&q=80', note: '16:00 日落拍藍調煤油燈夜景，17:00 搭 JR 回札幌' },
-          { name: '5. 薄野風土燒肉＆湯香郷', emoji: '♨️', time: '19:00 晚餐', x: 162, y: 172, align: 'bottom', photo: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=80', note: '19:00 訂位和牛燒肉・餐後步行至湯香郷天然溫泉泡湯' }
+          { name: '1. JR 札幌站', shortLabel: 'JR 札幌站', emoji: '🚆', time: '09:33 出發', x: 168, y: 148, align: 'right', note: '搭快速 Airport 31 號往小樽（建議加購 u-Seat 指定席）' },
+          { name: '2. 小樽三角市場', shortLabel: '三角市場', emoji: '🦀', time: '10:15–11:45', x: 88, y: 112, align: 'top', note: '出站步行 1 分鐘・現剖帝王蟹與海膽鮭魚卵早午餐' },
+          { name: '3. 堺町通甜點街', shortLabel: '堺町通甜點', emoji: '🍰', time: '12:00–15:45', x: 112, y: 138, align: 'right', note: 'LeTAO 觀景台、北菓樓泡芙、六花亭＆小樽音樂盒堂' },
+          { name: '4. 小樽運河 (淺草橋)', shortLabel: '小樽運河', emoji: '🏮', time: '16:00 點燈', x: 82, y: 134, align: 'left', note: '16:00 日落拍藍調煤油燈夜景，17:00 搭 JR 回札幌' },
+          { name: '5. 薄野風土燒肉＆湯香郷', shortLabel: '風土燒肉・湯', emoji: '♨️', time: '19:00 晚餐', x: 162, y: 172, align: 'bottom', note: '19:00 訂位和牛燒肉・餐後步行至湯香郷天然溫泉泡湯' }
         ]
       },
       d6: {
@@ -2232,75 +1915,19 @@
         color: '#059669',
         viewBox: '75 115 210 130',
         stops: [
-          { name: '1. 札幌東急 Stay', emoji: '🧳', time: '09:20 退房', x: 134, y: 146, align: 'top', photo: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=80', note: '7 位回程團員退房，推大行李步行約 5–6 分鐘出發' },
-          { name: '2. 南3條薄野巴士站', emoji: '🚌', time: '09:25 / 09:40', x: 126, y: 174, align: 'left', photo: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=900&q=80', note: '搭利木津巴士（¥1,300 可刷西瓜卡）直達機場國內線' },
-          { name: '3. 新千歲國內線 1F–3F', emoji: '🌽', time: '10:40–12:00', x: 186, y: 196, align: 'right', photo: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=80', note: '1F 人工寄物 ➔ 2F 搶玉米麵包 ➔ 3F 拉麵 ➔ 12:00 領行李' },
-          { name: '4. 新千歲國際線 3F', emoji: '✈️', time: '12:10 移動', x: 205, y: 222, align: 'bottom', photo: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=900&q=80', note: '12:10 連通道步行 ➔ 12:30 報到・華航 14:40／長榮 15:20 起飛' }
+          { name: '1. 札幌東急 Stay', shortLabel: '札幌東急Stay', emoji: '🧳', time: '09:20 退房', x: 134, y: 146, align: 'top', note: '7 位回程團員退房，推大行李步行約 5–6 分鐘出發' },
+          { name: '2. 南3條薄野巴士站', shortLabel: '南3條巴士站', emoji: '🚌', time: '09:25 / 09:40', x: 126, y: 174, align: 'left', note: '搭利木津巴士（¥1,300 可刷西瓜卡）直達機場國內線' },
+          { name: '3. 新千歲國內線 1F–3F', shortLabel: '機場國內線', emoji: '🌽', time: '10:40–12:00', x: 186, y: 196, align: 'right', note: '1F 人工寄物 ➔ 2F 搶玉米麵包 ➔ 3F 拉麵 ➔ 12:00 領行李' },
+          { name: '4. 新千歲國際線 3F', shortLabel: '機場國際線', emoji: '✈️', time: '12:10 移動', x: 205, y: 222, align: 'bottom', note: '12:10 連通道步行 ➔ 12:30 報到・華航 14:40／長榮 15:20 起飛' }
         ]
       }
     };
-
-    function initItineraryMap() {
-      renderMapForDay('all');
-    }
-
-    const CUSTOM_SPOT_PHOTOS_KEY = 'hokkaido_2026_spot_photos_v1';
-    let currentSelectedPin = { dayId: 'all', idx: 0 };
-
-    function getCustomSpotPhotos() {
-      try {
-        return JSON.parse(localStorage.getItem(CUSTOM_SPOT_PHOTOS_KEY) || '{}');
-      } catch (e) {
-        return {};
-      }
-    }
-
-    function handleSpotPhotoUpload(event) {
-      const file = event.target.files && event.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        const img = new Image();
-        img.onload = function() {
-          const canvas = document.createElement('canvas');
-          const maxDim = 960;
-          let w = img.width;
-          let h = img.height;
-          if (w > maxDim || h > maxDim) {
-            if (w > h) {
-              h = Math.round((h * maxDim) / w);
-              w = maxDim;
-            } else {
-              w = Math.round((w * maxDim) / h);
-              h = maxDim;
-            }
-          }
-          canvas.width = w;
-          canvas.height = h;
-          canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-          const dataUrl = canvas.toDataURL('image/jpeg', 0.78);
-          const key = `${currentSelectedPin.dayId}_${currentSelectedPin.idx}`;
-          const saved = getCustomSpotPhotos();
-          saved[key] = dataUrl;
-          try {
-            localStorage.setItem(CUSTOM_SPOT_PHOTOS_KEY, JSON.stringify(saved));
-            selectCutePin(currentSelectedPin.dayId, currentSelectedPin.idx);
-            showToast('📸 已更新此景點的專屬照片！');
-          } catch (err) {
-            showToast('照片檔案過大，請換一張較小的照片唷！');
-          }
-        };
-        img.src = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    }
 
     function selectCutePin(dayId, idx, event) {
       if (event) {
         event.preventDefault();
         event.stopPropagation();
       }
-      currentSelectedPin = { dayId, idx };
       const data = DAILY_MAP_DATA[dayId] || DAILY_MAP_DATA.all;
       const stop = data.stops[idx];
       if (!stop) return;
@@ -2308,43 +1935,17 @@
       const titleEl = document.getElementById('cute-popup-title');
       const timeEl = document.getElementById('cute-popup-time');
       const noteEl = document.getElementById('cute-popup-note');
-      const photoWrapEl = document.getElementById('cute-popup-photo-wrap');
-      const photoImgEl = document.getElementById('cute-popup-photo');
-      const photoCapEl = document.getElementById('cute-popup-photo-caption');
 
       if (emojiEl) emojiEl.textContent = stop.emoji;
       if (titleEl) titleEl.textContent = stop.name;
       if (timeEl) timeEl.textContent = stop.time || '重點站點';
       if (noteEl) noteEl.textContent = stop.note;
 
-      const customPhotos = getCustomSpotPhotos();
-      const customSrc = customPhotos[`${dayId}_${idx}`];
-      const finalPhotoSrc = customSrc || stop.photo || '';
-      if (photoWrapEl && photoImgEl) {
-        if (finalPhotoSrc) {
-          photoImgEl.onerror = function() {
-            if (stop.fallbackPhoto && photoImgEl.src !== stop.fallbackPhoto) {
-              photoImgEl.src = stop.fallbackPhoto;
-            } else {
-              photoWrapEl.classList.add('hidden');
-            }
-          };
-          photoImgEl.src = finalPhotoSrc;
-          if (photoCapEl) photoCapEl.textContent = `${stop.emoji} ${stop.name}`;
-          photoWrapEl.classList.remove('hidden');
-        } else {
-          photoWrapEl.classList.add('hidden');
-        }
-      }
-
       const mapEl = document.getElementById('itinerary-map');
       if (mapEl) {
         mapEl.querySelectorAll('.cute-pin-group').forEach((el, i) => {
-          if (i === idx) {
-            el.classList.add('is-selected');
-          } else {
-            el.classList.remove('is-selected');
-          }
+          if (i === idx) el.classList.add('is-selected');
+          else el.classList.remove('is-selected');
         });
       }
     }
@@ -2364,7 +1965,7 @@
       if (pillsEl) {
         pillsEl.innerHTML = data.stops.map((s, idx) => `
           <button type="button" onclick="selectCutePin('${dayId}', ${idx}, event)" class="inline-flex items-center gap-1 bg-white hover:bg-sky-50 border border-slate-200 px-2 py-0.5 rounded-lg shadow-2xs transition active:scale-95">
-            <span>${s.emoji}</span><span>${s.name}</span>
+            <span>${s.emoji}</span><span>${s.shortLabel || s.name}</span>
           </button>${idx < data.stops.length - 1 ? '<span class="text-slate-400">➔</span>' : ''}
         `).join('');
       }
@@ -2375,11 +1976,11 @@
       const vw = vbParts[2] || 420;
       const scaleFactor = vw / 420;
       const pinScale = Math.max(0.32, Math.min(1, scaleFactor * 1.15));
-
       const pathD = data.stops.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
 
       const pinsSvg = data.stops.map((stop, idx) => {
-        const labelW = stop.name.length * 7.8 + 14;
+        const displayLabel = `${idx + 1}. ${stop.shortLabel || stop.name}`;
+        const labelW = estimateTextWidth(displayLabel);
         const pos = getLabelOffset(stop.align, labelW);
         return `
           <g class="cute-pin-group ${idx === 0 ? 'is-selected' : ''}" onclick="selectCutePin('${dayId}', ${idx}, event)" transform="translate(${stop.x}, ${stop.y}) scale(${pinScale})">
@@ -2392,51 +1993,27 @@
             <circle cx="-12" cy="-38" r="7" fill="#f59e0b" stroke="#ffffff" stroke-width="1.5" />
             <text x="-12" y="-35" text-anchor="middle" fill="#ffffff" font-size="8.5" font-weight="900" pointer-events="none">${idx + 1}</text>
             <rect class="cute-label-pill" x="${pos.rx}" y="${pos.ry}" width="${labelW}" height="17" rx="8.5" fill="#ffffff" stroke="${data.color}" stroke-width="1.5" pointer-events="none" />
-            <text x="${pos.tx}" y="${pos.ty}" text-anchor="${pos.anchor}" fill="#0f172a" font-size="9.5" font-weight="900" pointer-events="none">${stop.name}</text>
+            <text x="${pos.tx}" y="${pos.ty}" text-anchor="${pos.anchor}" fill="#0f172a" font-size="9.5" font-weight="900" pointer-events="none">${displayLabel}</text>
           </g>
         `;
       }).join('');
 
       mapEl.innerHTML = `
         <svg viewBox="${data.viewBox}" class="w-full h-full select-none" preserveAspectRatio="xMidYMid meet">
-          <defs>
-            <filter id="snowIslandShadow" x="-10%" y="-10%" width="120%" height="120%">
-              <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#0284c7" flood-opacity="0.22"/>
-            </filter>
-          </defs>
-
-          <!-- Q版北海道雪白島嶼輪廓 -->
           <path d="M 22 92 Q 48 68, 86 78 Q 112 52, 152 38 Q 215 16, 295 14 Q 355 24, 398 58 Q 412 108, 385 155 Q 355 202, 292 238 Q 230 254, 175 242 Q 135 224, 102 232 Q 62 246, 26 218 Q 12 182, 34 150 Q 10 124, 22 92 Z"
-                fill="#ffffff" stroke="#7dd3fc" stroke-width="3.5" filter="url(#snowIslandShadow)" pointer-events="none" />
-          <!-- 島內粉雪光暈 -->
+                fill="#ffffff" stroke="#7dd3fc" stroke-width="3.5" pointer-events="none" />
           <path d="M 34 96 Q 56 76, 90 85 Q 116 62, 154 48 Q 214 28, 288 26 Q 344 35, 384 65 Q 396 108, 372 150 Q 344 192, 286 226 Q 228 240, 178 228 Q 138 212, 104 220 Q 68 232, 36 208 Q 24 178, 44 148 Q 22 124, 34 96 Z"
-                fill="#f0f9ff" opacity="0.75" pointer-events="none" />
-
-          <!-- 可愛裝飾小雪山、松樹與小雪人 -->
+                fill="#f0f9ff" opacity="0.8" pointer-events="none" />
           <g opacity="0.55" pointer-events="none">
-            <polygon points="295,95 312,68 329,95" fill="#bae6fd" />
-            <polygon points="306,78 312,68 318,78" fill="#ffffff" />
-            <polygon points="318,100 333,76 348,100" fill="#93c5fd" />
-            <polygon points="328,84 333,76 338,84" fill="#ffffff" />
-            <text x="235" y="135" font-size="14" pointer-events="none">🌲</text>
-            <text x="252" y="142" font-size="11" pointer-events="none">🌲</text>
-            <text x="155" y="168" font-size="13" pointer-events="none">❄️</text>
-            <text x="342" y="172" font-size="14" pointer-events="none">⛄</text>
-            <text x="68" y="185" font-size="13" pointer-events="none">❄️</text>
-            <text x="195" y="55" font-size="12" pointer-events="none">✨</text>
+            <text x="235" y="135" font-size="14">🌲</text>
+            <text x="155" y="168" font-size="13">❄️</text>
+            <text x="342" y="172" font-size="14">⛄</text>
+            <text x="195" y="55" font-size="12">✨</text>
           </g>
-
-          <!-- 海洋波浪點綴 -->
-          <text x="16" y="42" font-size="11" fill="#0369a1" opacity="0.45" font-weight="900" pointer-events="none">🌊 日本海</text>
-          <text x="315" y="246" font-size="11" fill="#0369a1" opacity="0.45" font-weight="900" pointer-events="none">太平洋 🌊</text>
-
-          <!-- 路線白色底線＋彩色動態虛線 -->
           ${data.stops.length > 1 ? `
             <path d="${pathD}" fill="none" stroke="#ffffff" stroke-width="${6.5 * pinScale}" stroke-linecap="round" stroke-linejoin="round" pointer-events="none" />
             <path d="${pathD}" fill="none" stroke="${data.color}" stroke-width="${3.5 * pinScale}" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 7" class="cute-route-line" pointer-events="none" />
           ` : ''}
-
-          <!-- 可愛站點圖釘 -->
           ${pinsSvg}
         </svg>
       `;
@@ -2444,7 +2021,7 @@
       selectCutePin(dayId, 0);
     }
 
-    // 一鍵複製文字並顯示 Toast 提示
+    // ==================== 複製與 Toast 提示 ====================
     function copyText(text, toastMessage = '已複製到剪貼簿！') {
       const textarea = document.createElement('textarea');
       textarea.value = text;
@@ -2506,7 +2083,7 @@
       if (sEl) sEl.textContent = String(secs).padStart(2, '0');
     }
 
-    // ==================== 匯率與分帳計算機邏輯 ====================
+    // ==================== 匯率速算 ====================
     const RATE_STORAGE_KEY = 'hokkaido_2026_jpy_rate';
 
     function getRate() {
@@ -2530,7 +2107,7 @@
         badge.className = 'text-[10px] font-bold bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded';
       }
       convertFromJPY();
-      if (typeof renderExpenseList === 'function') renderExpenseList();
+      renderExpenseList();
     }
 
     async function fetchLiveExchangeRate(showNotify = false) {
@@ -2554,7 +2131,7 @@
             badge.className = 'text-[10px] font-bold bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded';
           }
           convertFromJPY();
-          if (typeof renderExpenseList === 'function') renderExpenseList();
+          renderExpenseList();
           if (showNotify) showToast('已更新最新即時匯率：1 JPY = ' + liveRate + ' TWD');
           return;
         }
@@ -2577,18 +2154,14 @@
       const jpyEl = document.getElementById('input-jpy');
       const twdEl = document.getElementById('input-twd');
       if (!jpyEl || !twdEl) return;
-
       const jpy = parseFloat(jpyEl.value);
       const rate = getRate();
-
       if (isNaN(jpy) || jpy <= 0) {
         twdEl.value = '';
         updateSplitStats(0, rate);
         return;
       }
-
-      const twd = Math.round(jpy * rate);
-      twdEl.value = twd;
+      twdEl.value = Math.round(jpy * rate);
       updateSplitStats(jpy, rate);
     }
 
@@ -2596,16 +2169,13 @@
       const jpyEl = document.getElementById('input-jpy');
       const twdEl = document.getElementById('input-twd');
       if (!jpyEl || !twdEl) return;
-
       const twd = parseFloat(twdEl.value);
       const rate = getRate();
-
       if (isNaN(twd) || twd <= 0) {
         jpyEl.value = '';
         updateSplitStats(0, rate);
         return;
       }
-
       const jpy = Math.round(twd / rate);
       jpyEl.value = jpy;
       updateSplitStats(jpy, rate);
@@ -2637,8 +2207,7 @@
     function addJpy(amount) {
       const jpyEl = document.getElementById('input-jpy');
       if (!jpyEl) return;
-      const current = parseFloat(jpyEl.value) || 0;
-      jpyEl.value = current + amount;
+      jpyEl.value = (parseFloat(jpyEl.value) || 0) + amount;
       convertFromJPY();
     }
 
@@ -2651,11 +2220,11 @@
       showToast('已清除計算機金額');
     }
 
-    // ==================== 共同支出記帳與收據紀錄邏輯 ====================
+    // ==================== 共同支出記帳與公費基金 ====================
     const ALL_MEMBERS = ['洹', '吉', 'lin', '勲', '丹', '臻', '歐巴', '德', '歐'];
     const EARLY_7_MEMBERS = ['洹', '吉', 'lin', '勲', '丹', '臻', '歐巴'];
-    const EXPENSE_STORAGE_KEY = 'hokkaido_2026_expenses_v2';
-    const PUBLIC_FUND_STORAGE_KEY = 'hokkaido_2026_public_fund_paid_v1';
+    const EXPENSE_STORAGE_KEY = 'hokkaido_2026_expenses_v3';
+    const PUBLIC_FUND_STORAGE_KEY = 'hokkaido_2026_public_fund_paid_v2';
     const PUBLIC_FUND_PER_PERSON_JPY = 40000;
 
     let selectedSplitMembers = [...ALL_MEMBERS];
@@ -2697,22 +2266,15 @@
       const toggleText = document.getElementById('exp-calc-toggle-text');
       if (!box) return;
       const isHidden = box.classList.contains('hidden');
-      if (isHidden) {
-        box.classList.remove('hidden');
-        if (toggleText) toggleText.textContent = '收合計算機';
-      } else {
-        box.classList.add('hidden');
-        if (toggleText) toggleText.textContent = '展開計算機';
-      }
+      box.classList.toggle('hidden', !isHidden);
+      if (toggleText) toggleText.textContent = isHidden ? '收合計算機' : '展開計算機';
     }
 
     function updateExpCalcDisplay() {
       const exprEl = document.getElementById('exp-calc-expr');
       const resEl = document.getElementById('exp-calc-result');
       if (exprEl) {
-        exprEl.textContent = expCalcBuffer
-          ? expCalcBuffer.replace(/\*/g, '×').replace(/\//g, '÷')
-          : '0';
+        exprEl.textContent = expCalcBuffer ? expCalcBuffer.replace(/\*/g, '×').replace(/\//g, '÷') : '0';
       }
       if (resEl) {
         try {
@@ -2809,11 +2371,7 @@
     }
 
     function selectSplitGroup(groupType) {
-      if (groupType === '7') {
-        selectedSplitMembers = [...EARLY_7_MEMBERS];
-      } else {
-        selectedSplitMembers = [...ALL_MEMBERS];
-      }
+      selectedSplitMembers = groupType === '7' ? [...EARLY_7_MEMBERS] : [...ALL_MEMBERS];
       initExpenseForm();
     }
 
@@ -2879,7 +2437,6 @@
         if (raw) {
           expensesList = JSON.parse(raw);
         } else {
-          // 首次載入預設帶入先行 7 寶第一階段公費支出（三日包車＋旭山動物園門票，由公費基金直接扣款）
           expensesList = [
             {
               id: 2026120901,
@@ -2982,8 +2539,6 @@
 
     function renderExpenseList() {
       const rate = getRate();
-
-      // 1. 計算公費基金收支（實算 ¥29,572，整數收 ¥40,000 × 7 人 ＝ ¥280,000）
       let paidCount = 0;
       const pfGrid = document.getElementById('public-fund-members-grid');
       if (pfGrid) {
@@ -3007,7 +2562,6 @@
       const collectedJpy = paidCount * PUBLIC_FUND_PER_PERSON_JPY;
       let pfSpentJpy = 0;
 
-      // 2. 計算個人代墊結算與總花費
       const paidTwd = {};
       const owedTwd = {};
       ALL_MEMBERS.forEach(m => {
@@ -3054,7 +2608,6 @@
       if (elBalJpy) elBalJpy.textContent = `¥${balanceJpy.toLocaleString()}`;
       if (elBalTwd) elBalTwd.textContent = `約 NT$ ${Math.round(balanceJpy * rate).toLocaleString()}`;
 
-      // 3. 更新結算網格
       const totalEl = document.getElementById('total-expense-twd');
       if (totalEl) totalEl.textContent = `總計 NT$ ${Math.round(totalAllTwd).toLocaleString()}`;
 
@@ -3076,7 +2629,6 @@
         }).join('');
       }
 
-      // 4. 渲染歷史明細列表
       const countEl = document.getElementById('expense-count');
       if (countEl) countEl.textContent = expensesList.length;
 
@@ -3154,12 +2706,13 @@
       expensesList.forEach((item, idx) => {
         const amtTwd = item.currency === 'TWD' ? item.amount : Math.round(item.amount * rate);
         const orig = item.currency === 'JPY' ? `¥${item.amount.toLocaleString()}` : `NT$${item.amount.toLocaleString()}`;
-        lines.push(`${idx + 1}. ${item.title}：${orig} (約 NT$${amtTwd.toLocaleString()})｜${getMemberDisplayName(item.payer)}`);
+        const payerText = item.payer === '公費基金' ? '公費基金扣款' : `${getDisplayMemberName(item.payer)}先付`;
+        lines.push(`${idx + 1}. ${item.title}：${orig} (約 NT$${amtTwd.toLocaleString()})｜${payerText}`);
       });
       copyText(lines.join('\n'), '已複製全部支出明細！');
     }
 
-    // ==================== 翻譯助手與手指日文卡 ====================
+    // ==================== 翻譯助手與手指日文卡（大人 7 位・無牛肉卡片） ====================
     const PHRASE_CARDS = [
       { tag: '購物退稅', jp: '免税（めんぜい）の手続きをお願いできますか？', zh: '請問可以幫我辦理免稅手續嗎？' },
       { tag: '信用卡結帳', jp: 'クレジットカードで、日本円（にほんえん）払いでお願いします。', zh: '我要用信用卡結帳，請幫我用「日圓」計價。' },
@@ -3208,16 +2761,13 @@
       const input = document.getElementById('trans-input');
       const text = input ? input.value.trim() : '';
       const encoded = encodeURIComponent(text);
-      let url = '';
-      if (service === 'papago') {
-        url = `https://papago.naver.com/?sk=zh-TW&tk=${targetLang}&st=${encoded}`;
-      } else {
-        url = `https://translate.google.com/?sl=zh-TW&tl=${targetLang}&text=${encoded}&op=translate`;
-      }
+      const url = service === 'papago'
+        ? `https://papago.naver.com/?sk=zh-TW&tk=${targetLang}&st=${encoded}`
+        : `https://translate.google.com/?sl=zh-TW&tl=${targetLang}&text=${encoded}&op=translate`;
       window.open(url, '_blank');
     }
 
-    // ==================== 伴手禮採買推薦單 ====================
+    // ==================== 伴手禮清單 ====================
     const SOUVENIR_STORAGE_KEY = 'hokkaido_2026_souvenirs_v1';
     const DEFAULT_SOUVENIRS = [
       { id: 's1', cat: 'biei', name: '美瑛小麥工房 100%夢之力吐司＆黑豆麵包', place: 'D3 美瑛選果本店', checked: false },
@@ -3322,14 +2872,14 @@
       `).join('');
     }
 
-    // ==================== 北海道牛乳產區可愛互動地圖 ====================
+    // ==================== 北海道牛乳產區地圖 ====================
     const MILK_REGIONS = [
-      { id: 0, name: '1. 星野 TOMAMU 農場', emoji: '🐄', spot: 'D1–2 必喝', fat: '冬季乳脂高達 4.0%+', x: 278, y: 170, align: 'right', desc: '星野自有牧場低溫殺菌鮮乳！12月冬季乳脂肪最濃郁，喝起來像融化的香草冰淇淋，就在 Day 1–2 The Tower 大廳商店與早餐餐廳！' },
-      { id: 1, name: '2. 美瑛放牧酪農場', emoji: '🥛', spot: 'D3 美瑛選果', fat: '放牧生乳・醇厚清爽', x: 266, y: 108, align: 'right', desc: '使用美瑛丘陵放牧牛隻生乳，乳香濃厚且清爽不膩，搭配美瑛小麥工房的現烤紅豆麵包或吐司簡直是夢幻早餐組合！' },
-      { id: 2, name: '3. 十勝四葉特選 4.0', emoji: '🍀', spot: '全行程超商', fat: '乳脂肪 4.0% 以上', x: 326, y: 185, align: 'bottom', desc: '十勝產區王牌！金色／深藍包裝的「特選よつ葉 4.0 牛乳」乳脂肪高達 4.0% 以上，CP 值最高、7-11 與 Lawson 隨時買得到。' },
-      { id: 3, name: '4. 豐富町牛乳 (Seicomart)', emoji: '🧡', spot: '橘色超商限定', fat: '日本最北酪農聖地', x: 214, y: 34, align: 'top', desc: '北海道第一名連鎖超商 Seicomart 獨家！產自日本最北端酪農聖地「豐富町」，入口甜度驚人、喝過就回不去。' },
-      { id: 4, name: '5. 後志倉島牧場 3.7', emoji: '🐮', spot: 'D5 小樽超市', fat: '後志經典紅白牛牛瓶', x: 96, y: 132, align: 'top', desc: '後志地區（小樽・積丹一帶）代表性牧場，紅白復古牛牛包裝超可愛，奶香醇厚順口，也是許多小樽甜點店指定原料。' },
-      { id: 5, name: '6. 函館山川牧場自然牛乳', emoji: '🍼', spot: 'D1 永旺超市', fat: '老字號名門玻璃瓶裝', x: 74, y: 216, align: 'bottom', desc: '北海道老字號名門牧場，玻璃瓶裝（也有紙盒裝）口感極為純淨滑順，尾韻帶有淡淡牧草清香，Day 1 千歲永旺超市就能買到！' }
+      { id: 0, name: '1. 星野 TOMAMU 農場', shortLabel: '星野農場', emoji: '🐄', spot: 'D1–2 必喝', fat: '冬季乳脂高達 4.0%+', x: 278, y: 170, align: 'right', desc: '星野自有牧場低溫殺菌鮮乳！12月冬季乳脂肪最濃郁，喝起來像融化的香草冰淇淋，就在 Day 1–2 The Tower 大廳商店與早餐餐廳！' },
+      { id: 1, name: '2. 美瑛放牧酪農場', shortLabel: '美瑛牛乳', emoji: '🥛', spot: 'D3 美瑛選果', fat: '放牧生乳・醇厚清爽', x: 266, y: 108, align: 'right', desc: '使用美瑛丘陵放牧牛隻生乳，乳香濃厚且清爽不膩，搭配美瑛小麥工房的現烤紅豆麵包或吐司簡直是夢幻早餐組合！' },
+      { id: 2, name: '3. 十勝四葉特選 4.0', shortLabel: '十勝四葉4.0', emoji: '🍀', spot: '全行程超商', fat: '乳脂肪 4.0% 以上', x: 326, y: 185, align: 'bottom', desc: '十勝產區王牌！金色／深藍包裝的「特選よつ葉 4.0 牛乳」乳脂肪高達 4.0% 以上，CP 值最高、7-11 與 Lawson 隨時買得到。' },
+      { id: 3, name: '4. 豐富町牛乳 (Seicomart)', shortLabel: '豐富町牛乳', emoji: '🧡', spot: '橘色超商限定', fat: '日本最北酪農聖地', x: 214, y: 34, align: 'top', desc: '北海道第一名連鎖超商 Seicomart 獨家！產自日本最北端酪農聖地「豐富町」，入口甜度驚人、喝過就回不去。' },
+      { id: 4, name: '5. 後志倉島牧場 3.7', shortLabel: '倉島 3.7 牛乳', emoji: '🐮', spot: 'D5 小樽超市', fat: '後志經典紅白牛牛瓶', x: 96, y: 132, align: 'top', desc: '後志地區（小樽・積丹一帶）代表性牧場，紅白復古牛牛包裝超可愛，奶香醇厚順口，也是許多小樽甜點店指定原料。' },
+      { id: 5, name: '6. 函館山川牧場自然牛乳', shortLabel: '函館山川牧場', emoji: '🍼', spot: 'D1 永旺超市', fat: '老字號名門玻璃瓶裝', x: 74, y: 216, align: 'bottom', desc: '北海道老字號名門牧場，玻璃瓶裝（也有紙盒裝）口感極為純淨滑順，尾韻帶有淡淡牧草清香，Day 1 千歲永旺超市就能買到！' }
     ];
 
     function selectMilkRegion(idx, event) {
@@ -3365,14 +2915,15 @@
       if (pills) {
         pills.innerHTML = MILK_REGIONS.map((r, i) => `
           <button type="button" onclick="selectMilkRegion(${i}, event)" class="text-xs font-extrabold bg-white hover:bg-sky-50 border border-sky-200 text-slate-800 px-2.5 py-1 rounded-full shadow-2xs transition active:scale-95">
-            ${r.emoji} ${r.name}
+            ${r.emoji} ${r.shortLabel}
           </button>
         `).join('');
       }
       if (!canvas) return;
 
       const pinsSvg = MILK_REGIONS.map((r, idx) => {
-        const labelW = r.name.length * 7.8 + 14;
+        const displayLabel = `${idx + 1}. ${r.shortLabel}`;
+        const labelW = estimateTextWidth(displayLabel);
         const pos = getLabelOffset(r.align, labelW);
         return `
           <g class="cute-pin-group ${idx === 0 ? 'is-selected' : ''}" onclick="selectMilkRegion(${idx}, event)" transform="translate(${r.x}, ${r.y})">
@@ -3383,7 +2934,7 @@
             <circle cx="0" cy="-27" r="11.5" fill="#ffffff" />
             <text x="0" y="-22.5" text-anchor="middle" font-size="13" pointer-events="none">${r.emoji}</text>
             <rect class="cute-label-pill" x="${pos.rx}" y="${pos.ry}" width="${labelW}" height="17" rx="8.5" fill="#ffffff" stroke="#0284c7" stroke-width="1.5" pointer-events="none" />
-            <text x="${pos.tx}" y="${pos.ty}" text-anchor="${pos.anchor}" fill="#0f172a" font-size="9.5" font-weight="900" pointer-events="none">${r.name}</text>
+            <text x="${pos.tx}" y="${pos.ty}" text-anchor="${pos.anchor}" fill="#0f172a" font-size="9.5" font-weight="900" pointer-events="none">${displayLabel}</text>
           </g>
         `;
       }).join('');
@@ -3413,7 +2964,7 @@
         initPhraseCards();
         loadSouvenirs();
         renderSouvenirs();
-        initItineraryMap();
+        renderMapForDay('all');
         renderMilkMap();
       } catch (err) {
         console.error('Initialization error:', err);
