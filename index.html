@@ -589,27 +589,13 @@
           <button type="button" onclick="filterDay('d5', this)" class="day-filter-btn bg-white text-slate-700 border border-slate-300 text-xs font-bold px-2.5 py-1.5 rounded-full">D5 12/13</button>
           <button type="button" onclick="filterDay('d6', this)" class="day-filter-btn bg-white text-slate-700 border border-slate-300 text-xs font-bold px-2.5 py-1.5 rounded-full">D6 12/14</button>
         </div>
-      </div>
-
-      <!-- 每日行程路線互動地圖卡片 -->
-      <div class="glass-card rounded-2xl p-3.5 shadow-sm border border-sky-200/90 space-y-2.5">
-        <div class="flex items-center justify-between gap-2">
-          <div>
-            <h3 id="map-route-title" class="text-sm font-black text-slate-900 flex items-center gap-1.5">
-              <span>🗺️</span> 6天北海道環線總覽地圖
-            </h3>
-            <p id="map-route-subtitle" class="text-[11px] text-slate-500 font-medium mt-0.5">點擊上方 D1–D6 膠囊可檢視當日各站順序與路線</p>
-          </div>
-          <a id="map-gmaps-link" href="https://www.google.com/maps/dir/New+Chitose+Airport/Hoshino+Resorts+TOMAMU/Biei+Station/Asahiyama+Zoo/Otaru+Canal/Sapporo+Station/New+Chitose+Airport" target="_blank" class="shrink-0 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 px-3 py-1.5 rounded-xl shadow-xs transition">
-            📍 開啟路線
-          </a>
-        </div>
-
-        <!-- 互動地圖畫布 -->
-        <div id="itinerary-map" class="w-full h-64 sm:h-72 rounded-2xl overflow-hidden border-2 border-sky-200 cute-map-bg relative shadow-inner select-none"></div>
-
         <!-- 點選站點後的加大型氣泡資訊卡（寬敞不截斷、高度穩定不跳動） -->
         <div id="cute-map-popup" class="min-h-[146px] bg-white border-2 border-sky-200 rounded-2xl p-3.5 shadow-xs flex flex-col justify-between gap-2">
+          <!-- 景點實景照片預覽（有照片時自動展開） -->
+          <div id="cute-popup-photo-wrap" class="hidden relative rounded-xl overflow-hidden border border-sky-100 bg-slate-100">
+            <img id="cute-popup-photo" src="" alt="景點實景照" class="w-full h-44 sm:h-52 object-cover">
+            <span id="cute-popup-photo-caption" class="absolute bottom-2 left-2 bg-slate-950/70 backdrop-blur-xs text-white text-[11px] font-bold px-2.5 py-0.5 rounded-full"></span>
+          </div>
           <div class="flex items-center justify-between gap-2 border-b border-sky-100 pb-2">
             <div class="flex items-center gap-2 min-w-0">
               <span id="cute-popup-emoji" class="text-2xl leading-none shrink-0">⛄</span>
@@ -620,6 +606,14 @@
           <p id="cute-popup-note" class="text-sm text-slate-700 font-medium leading-relaxed">
             支援 D1–D6 每日專屬路線放大預覽，文字完整展開不截斷，閱讀更輕鬆！
           </p>
+          <!-- 自訂上傳景點照片按鈕 -->
+          <div class="flex items-center justify-between pt-1 border-t border-slate-100">
+            <span class="text-[11px] text-slate-400 font-bold">📸 可為此站點換上自己的實景美照</span>
+            <label class="cursor-pointer inline-flex items-center gap-1 text-[11px] font-extrabold text-sky-700 bg-sky-50 hover:bg-sky-100 border border-sky-200 px-2.5 py-1 rounded-lg transition active:scale-95">
+              <span>📷 上傳／更換照片</span>
+              <input type="file" accept="image/*" onchange="handleSpotPhotoUpload(event)" class="hidden">
+            </label>
+          </div>
         </div>
 
         <!-- 站點順序膠囊提示列 -->
@@ -635,9 +629,22 @@
           </div>
           <span class="shrink-0 text-xs font-bold bg-sky-100 text-sky-800 px-2.5 py-1 rounded-full">宿：星野 Tower</span>
         </div>
+        <!-- 星野 TOMAMU 實景美照 -->
+        <div class="relative rounded-2xl overflow-hidden border border-sky-200/80 mb-3 shadow-xs">
+          <img src="https://www.snowtomamu.jp/winter/img/hotel/tower/main_01.jpg" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Alpha_Resort_Tomamu_%E6%98%9F%E9%87%8E%E6%B8%A1%E5%81%87%E6%9D%91_-_panoramio.jpg/1280px-Alpha_Resort_Tomamu_%E6%98%9F%E9%87%8E%E6%B8%A1%E5%81%87%E6%9D%91_-_panoramio.jpg';" alt="星野 TOMAMU The Tower 雪景" class="w-full h-44 sm:h-52 object-cover">
+          <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950/80 via-slate-950/35 to-transparent px-3 py-2 flex items-center justify-between">
+            <span class="text-white text-xs font-black">🏔️ 星野 TOMAMU The Tower 霧冰雙塔雪景</span>
+            <span class="text-[10px] font-bold bg-white/25 backdrop-blur-xs text-white px-2 py-0.5 rounded-full">連住 2 晚</span>
+          </div>
+        </div>
         <div class="flex flex-wrap gap-1.5 mb-3">
           <span class="text-[11px] font-bold bg-sky-50 text-sky-800 border border-sky-200/80 px-2.5 py-0.5 rounded-full">🌡️ 星野預估：-8°C ~ -1°C</span>
           <span class="text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200/80 px-2.5 py-0.5 rounded-full">🌅 日落：約 16:00</span>
+        </div>
+        <!-- Day 1 雙景點專屬明信片 -->
+        <div class="grid grid-cols-2 gap-2 mb-3">
+          <div class="day-postcard rounded-xl overflow-hidden border border-sky-100 h-28 relative" data-scene="tomamu" data-caption="星野 TOMAMU 雙塔雪景"></div>
+          <div class="day-postcard rounded-xl overflow-hidden border border-sky-100 h-28 relative" data-scene="chapel" data-caption="夜間水之教會藍光十字架"></div>
         </div>
         <div class="space-y-3 border-l-2 border-slate-200 ml-2 pl-3.5 text-xs sm:text-sm">
           <div class="relative">
@@ -667,9 +674,22 @@
           </div>
           <span class="shrink-0 text-xs font-bold bg-blue-100 text-blue-800 px-2.5 py-1 rounded-full">宿：星野 Tower</span>
         </div>
+        <!-- 星野 TOMAMU 實景美照 -->
+        <div class="relative rounded-2xl overflow-hidden border border-blue-200/80 mb-3 shadow-xs">
+          <img src="https://www.snowtomamu.jp/winter/img/hotel/tower/main_01.jpg" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Alpha_Resort_Tomamu_%E6%98%9F%E9%87%8E%E6%B8%A1%E5%81%87%E6%9D%91_-_panoramio.jpg/1280px-Alpha_Resort_Tomamu_%E6%98%9F%E9%87%8E%E6%B8%A1%E5%81%87%E6%9D%91_-_panoramio.jpg';" alt="星野 TOMAMU The Tower 雪景" class="w-full h-44 sm:h-52 object-cover">
+          <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950/80 via-slate-950/35 to-transparent px-3 py-2 flex items-center justify-between">
+            <span class="text-white text-xs font-black">⛄ 星野 TOMAMU 銀白霧冰森林與雙塔</span>
+            <span class="text-[10px] font-bold bg-white/25 backdrop-blur-xs text-white px-2 py-0.5 rounded-full">霧冰平台・木林之湯</span>
+          </div>
+        </div>
         <div class="flex flex-wrap gap-1.5 mb-3">
           <span class="text-[11px] font-bold bg-sky-50 text-sky-800 border border-sky-200/80 px-2.5 py-0.5 rounded-full">🌡️ 星野預估：-9°C ~ -2°C (山頂約 -12°C)</span>
           <span class="text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200/80 px-2.5 py-0.5 rounded-full">🌅 日落：約 16:00</span>
+        </div>
+        <!-- Day 2 雙景點專屬明信片 -->
+        <div class="grid grid-cols-2 gap-2 mb-3">
+          <div class="day-postcard rounded-xl overflow-hidden border border-blue-100 h-28 relative" data-scene="muhyo" data-caption="海拔 1,088m 霧冰平台樹冰"></div>
+          <div class="day-postcard rounded-xl overflow-hidden border border-blue-100 h-28 relative" data-scene="onsen" data-caption="木林之湯雪見露天風呂"></div>
         </div>
         <div class="space-y-3 border-l-2 border-slate-200 ml-2 pl-3.5 text-xs sm:text-sm">
           <div class="relative">
@@ -697,6 +717,17 @@
 
       <!-- DAY 3 -->
       <article id="card-d3" class="day-card glass-card rounded-2xl p-4 shadow-sm border-l-4 border-l-amber-500">
+        <!-- Day 3 景點實景雙圖廊 -->
+        <div class="grid grid-cols-2 gap-2 mb-3">
+          <div class="relative h-28 rounded-xl overflow-hidden bg-sky-100 border border-amber-200/70">
+            <img src="https://images.unsplash.com/photo-1511184150666-9bb7d41a88f4?auto=format&fit=crop&w=600&q=80" alt="美瑛雪原聖誕樹" onerror="this.onerror=null;this.src='https://placehold.co/600x320/fef3c7/92400e?text=Biei+Snow+Tree';" class="w-full h-full object-cover">
+            <span class="absolute bottom-1.5 left-1.5 bg-slate-900/75 text-white text-[10px] font-bold px-2 py-0.5 rounded-md">🎄 美瑛雪原丘陵</span>
+          </div>
+          <div class="relative h-28 rounded-xl overflow-hidden bg-sky-100 border border-amber-200/70">
+            <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=600&q=80" alt="白金青池藍調點燈" onerror="this.onerror=null;this.src='https://placehold.co/600x320/dbeafe/1e40af?text=Shirogane+Blue+Pond';" class="w-full h-full object-cover">
+            <span class="absolute bottom-1.5 left-1.5 bg-slate-900/75 text-white text-[10px] font-bold px-2 py-0.5 rounded-md">💎 白金青池點燈</span>
+          </div>
+        </div>
         <div class="flex items-start justify-between gap-2 mb-2">
           <div>
             <span class="text-xs font-black text-amber-600 uppercase tracking-wider">DAY 3｜12/11 (五) 包車日</span>
@@ -707,6 +738,11 @@
         <div class="flex flex-wrap gap-1.5 mb-3">
           <span class="text-[11px] font-bold bg-sky-50 text-sky-800 border border-sky-200/80 px-2.5 py-0.5 rounded-full">🌡️ 美瑛・旭川：-8°C ~ -2°C</span>
           <span class="text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200/80 px-2.5 py-0.5 rounded-full">🌅 日落：約 15:55（16:30 點燈）</span>
+        </div>
+        <!-- Day 3 雙景點專屬明信片 -->
+        <div class="grid grid-cols-2 gap-2 mb-3">
+          <div class="day-postcard rounded-xl overflow-hidden border border-amber-100 h-28 relative" data-scene="biei_tree" data-caption="美瑛雪原孤獨聖誕樹之木"></div>
+          <div class="day-postcard rounded-xl overflow-hidden border border-amber-100 h-28 relative" data-scene="blue_pond" data-caption="白金青池 16:30 藍調點燈"></div>
         </div>
         <div class="space-y-3 border-l-2 border-slate-200 ml-2 pl-3.5 text-xs sm:text-sm">
           <div class="relative">
@@ -739,6 +775,17 @@
 
       <!-- DAY 4 -->
       <article id="card-d4" class="day-card glass-card rounded-2xl p-4 shadow-sm border-l-4 border-l-orange-500">
+        <!-- Day 4 景點實景雙圖廊 -->
+        <div class="grid grid-cols-2 gap-2 mb-3">
+          <div class="relative h-28 rounded-xl overflow-hidden bg-sky-100 border border-orange-200/70">
+            <img src="https://images.unsplash.com/photo-1551986782-d0169b3f8fa7?auto=format&fit=crop&w=600&q=80" alt="旭山動物園企鵝散步" onerror="this.onerror=null;this.src='https://placehold.co/600x320/ffedd5/9a3412?text=Asahiyama+Penguins';" class="w-full h-full object-cover">
+            <span class="absolute bottom-1.5 left-1.5 bg-slate-900/75 text-white text-[10px] font-bold px-2 py-0.5 rounded-md">🐧 旭山企鵝散步</span>
+          </div>
+          <div class="relative h-28 rounded-xl overflow-hidden bg-sky-100 border border-orange-200/70">
+            <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=600&q=80" alt="砂川 SHIRO 玻璃森林工廠" onerror="this.onerror=null;this.src='https://placehold.co/600x320/f1f5f9/334155?text=SHIRO+Factory';" class="w-full h-full object-cover">
+            <span class="absolute bottom-1.5 left-1.5 bg-slate-900/75 text-white text-[10px] font-bold px-2 py-0.5 rounded-md">🧴 砂川 SHIRO 工廠</span>
+          </div>
+        </div>
         <div class="flex items-start justify-between gap-2 mb-2">
           <div>
             <span class="text-xs font-black text-orange-600 uppercase tracking-wider">DAY 4｜12/12 (六) 包車日</span>
@@ -749,6 +796,11 @@
         <div class="flex flex-wrap gap-1.5 mb-3">
           <span class="text-[11px] font-bold bg-sky-50 text-sky-800 border border-sky-200/80 px-2.5 py-0.5 rounded-full">🌡️ 旭川・札幌：-5°C ~ +1°C</span>
           <span class="text-[11px] font-bold bg-indigo-50 text-indigo-800 border border-indigo-200/80 px-2.5 py-0.5 rounded-full">🤝 德、歐晚上札幌會合！</span>
+        </div>
+        <!-- Day 4 雙景點專屬明信片 -->
+        <div class="grid grid-cols-2 gap-2 mb-3">
+          <div class="day-postcard rounded-xl overflow-hidden border border-orange-100 h-28 relative" data-scene="penguin" data-caption="旭山動物園 11:00 企鵝散步"></div>
+          <div class="day-postcard rounded-xl overflow-hidden border border-orange-100 h-28 relative" data-scene="shiro" data-caption="砂川 SHIRO 純白玻璃森林工廠"></div>
         </div>
         <div class="space-y-3 border-l-2 border-slate-200 ml-2 pl-3.5 text-xs sm:text-sm">
           <div class="relative">
@@ -784,6 +836,17 @@
 
       <!-- DAY 5 -->
       <article id="card-d5" class="day-card glass-card rounded-2xl p-4 shadow-sm border-l-4 border-l-indigo-600">
+        <!-- Day 5 景點實景雙圖廊 -->
+        <div class="grid grid-cols-2 gap-2 mb-3">
+          <div class="relative h-28 rounded-xl overflow-hidden bg-sky-100 border border-indigo-200/70">
+            <img src="https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=600&q=80" alt="小樽三角市場海鮮丼" onerror="this.onerror=null;this.src='https://placehold.co/600x320/e0e7ff/3730a3?text=Otaru+Seafood';" class="w-full h-full object-cover">
+            <span class="absolute bottom-1.5 left-1.5 bg-slate-900/75 text-white text-[10px] font-bold px-2 py-0.5 rounded-md">🦀 三角市場海鮮</span>
+          </div>
+          <div class="relative h-28 rounded-xl overflow-hidden bg-sky-100 border border-indigo-200/70">
+            <img src="https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=600&q=80" alt="小樽運河黃昏點燈" onerror="this.onerror=null;this.src='https://placehold.co/600x320/e0e7ff/3730a3?text=Otaru+Canal+Night';" class="w-full h-full object-cover">
+            <span class="absolute bottom-1.5 left-1.5 bg-slate-900/75 text-white text-[10px] font-bold px-2 py-0.5 rounded-md">🏮 小樽運河點燈</span>
+          </div>
+        </div>
         <div class="flex items-start justify-between gap-2 mb-2">
           <div>
             <span class="text-xs font-black text-indigo-600 uppercase tracking-wider">DAY 5｜12/13 (日)</span>
@@ -794,6 +857,11 @@
         <div class="flex flex-wrap gap-1.5 mb-3">
           <span class="text-[11px] font-bold bg-sky-50 text-sky-800 border border-sky-200/80 px-2.5 py-0.5 rounded-full">🌡️ 小樽・札幌：-3°C ~ +2°C (海風微涼)</span>
           <span class="text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200/80 px-2.5 py-0.5 rounded-full">🌅 日落：約 16:02</span>
+        </div>
+        <!-- Day 5 雙景點專屬明信片 -->
+        <div class="grid grid-cols-2 gap-2 mb-3">
+          <div class="day-postcard rounded-xl overflow-hidden border border-indigo-100 h-28 relative" data-scene="otaru_canal" data-caption="小樽運河 16:00 煤油燈藍調夜景"></div>
+          <div class="day-postcard rounded-xl overflow-hidden border border-indigo-100 h-28 relative" data-scene="seafood" data-caption="小樽三角市場海膽帝王蟹丼"></div>
         </div>
 
         <!-- 札幌 ⇄ 小樽 JR 快速 Airport 參考時刻表 -->
@@ -868,6 +936,17 @@
 
       <!-- DAY 6 -->
       <article id="card-d6" class="day-card glass-card rounded-2xl p-4 shadow-sm border-l-4 border-l-emerald-500">
+        <!-- Day 6 景點實景雙圖廊 -->
+        <div class="grid grid-cols-2 gap-2 mb-3">
+          <div class="relative h-28 rounded-xl overflow-hidden bg-sky-100 border border-emerald-200/70">
+            <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80" alt="美瑛選果現烤麵包伴手禮" onerror="this.onerror=null;this.src='https://placehold.co/600x320/d1fae5/065f46?text=Airport+Souvenirs';" class="w-full h-full object-cover">
+            <span class="absolute bottom-1.5 left-1.5 bg-slate-900/75 text-white text-[10px] font-bold px-2 py-0.5 rounded-md">🌽 機場限定伴手禮</span>
+          </div>
+          <div class="relative h-28 rounded-xl overflow-hidden bg-sky-100 border border-emerald-200/70">
+            <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=600&q=80" alt="新千歲機場返台班機" onerror="this.onerror=null;this.src='https://placehold.co/600x320/d1fae5/065f46?text=New+Chitose+Flight';" class="w-full h-full object-cover">
+            <span class="absolute bottom-1.5 left-1.5 bg-slate-900/75 text-white text-[10px] font-bold px-2 py-0.5 rounded-md">✈️ 新千歲滿載返台</span>
+          </div>
+        </div>
         <div class="flex items-start justify-between gap-2 mb-2">
           <div>
             <span class="text-xs font-black text-emerald-600 uppercase tracking-wider">DAY 6｜12/14 (一)</span>
@@ -878,6 +957,11 @@
         <div class="flex flex-wrap gap-1.5 mb-3">
           <span class="text-[11px] font-bold bg-sky-50 text-sky-800 border border-sky-200/80 px-2.5 py-0.5 rounded-full">🌡️ 札幌・千歲：-4°C ~ +1°C</span>
           <span class="text-[11px] font-bold bg-indigo-50 text-indigo-800 border border-indigo-200/80 px-2.5 py-0.5 rounded-full">✈️ 華航 14:40 ／ 長榮 15:20 起飛</span>
+        </div>
+        <!-- Day 6 雙景點專屬明信片 -->
+        <div class="grid grid-cols-2 gap-2 mb-3">
+          <div class="day-postcard rounded-xl overflow-hidden border border-emerald-100 h-28 relative" data-scene="sapporo_night" data-caption="札幌大通公園白色燈樹節"></div>
+          <div class="day-postcard rounded-xl overflow-hidden border border-emerald-100 h-28 relative" data-scene="airport" data-caption="新千歲機場掃貨＆平安返台"></div>
         </div>
 
         <!-- 南3條薄野 -> 新千歲機場 利木津巴士時刻表 -->
@@ -1232,21 +1316,44 @@
     <!-- ==================== 分頁 6：共同支出記帳與收據紀錄 ==================== -->
     <section id="panel-expense" class="tab-panel hidden space-y-4">
       
-      <!-- 第一階段公費明細總覽卡（7人：三日包車＋旭山動物園門票） -->
-      <div class="glass-card rounded-2xl p-4 shadow-sm border-2 border-amber-200 bg-amber-50/60 space-y-2.5">
+      <!-- 團體公費基金帳戶總覽卡（7人：實算 ¥29,572，整數收 ¥40,000 × 7 ＝ ¥280,000） -->
+      <div class="glass-card rounded-2xl p-4 shadow-sm border-2 border-amber-300 bg-gradient-to-br from-amber-50 to-orange-50/70 space-y-3">
         <div class="flex items-center justify-between border-b border-amber-200/80 pb-2 gap-2">
           <div>
             <h2 class="text-sm sm:text-base font-black text-amber-950 flex items-center gap-1.5">
-              <span>💰</span> 先行 7 寶第一階段公費明細
+              <span>🏦</span> 先行 7 寶公費基金帳戶
             </h2>
-            <p class="text-[11px] text-amber-800 font-medium mt-0.5">洹、吉、lin、勲、丹、臻、歐巴（7人均攤・D5/D6車資先不收）</p>
+            <p class="text-[11px] text-amber-800 font-bold mt-0.5">實算 ¥29,572，整數收 ¥40,000 × 7人（點擊成員可切換已繳狀態）</p>
           </div>
           <button type="button" onclick="copyPublicFundNotice()" class="shrink-0 text-xs font-extrabold text-white bg-amber-600 hover:bg-amber-700 px-3 py-1.5 rounded-xl shadow-2xs active:scale-95 transition">
             📋 複製公費通知
           </button>
         </div>
 
-        <div class="bg-white rounded-xl p-3 border border-amber-200/80 space-y-1.5 text-xs">
+        <!-- 7位成員繳費狀態膠囊（點擊可切換已繳/未繳） -->
+        <div id="public-fund-members-grid" class="flex flex-wrap gap-1.5"></div>
+
+        <!-- 公費基金即時收支與餘額儀表板 -->
+        <div class="grid grid-cols-3 gap-2 text-center">
+          <div class="bg-white rounded-xl p-2 border border-amber-200">
+            <div class="text-[10px] font-bold text-slate-500">公費實收總額</div>
+            <div id="pf-collected-jpy" class="text-xs sm:text-sm font-black text-emerald-700 font-mono mt-0.5">¥280,000</div>
+            <div id="pf-collected-twd" class="text-[10px] text-slate-400 font-mono">約 NT$ 60,200</div>
+          </div>
+          <div class="bg-white rounded-xl p-2 border border-amber-200">
+            <div class="text-[10px] font-bold text-slate-500">公費已支出</div>
+            <div id="pf-spent-jpy" class="text-xs sm:text-sm font-black text-rose-600 font-mono mt-0.5">¥207,000</div>
+            <div id="pf-spent-twd" class="text-[10px] text-slate-400 font-mono">約 NT$ 44,505</div>
+          </div>
+          <div class="bg-amber-500 text-white rounded-xl p-2 shadow-2xs">
+            <div class="text-[10px] font-bold text-amber-100">公費剩餘餘額</div>
+            <div id="pf-balance-jpy" class="text-xs sm:text-sm font-black font-mono mt-0.5">¥73,000</div>
+            <div id="pf-balance-twd" class="text-[10px] text-amber-100 font-mono">約 NT$ 15,695</div>
+          </div>
+        </div>
+
+        <!-- 第一階段公費明細摺疊摘要 -->
+        <div class="bg-white/95 rounded-xl p-3 border border-amber-200/80 space-y-1.5 text-xs">
           <div class="flex justify-between items-center text-slate-700">
             <span>• D1 接機包車（12/09 機場➔永旺➔星野）</span>
             <span class="font-mono font-bold">¥50,000</span>
@@ -1263,9 +1370,9 @@
             <span>• D4 旭山動物園門票（¥1,000 × 7 人）</span>
             <span class="font-mono font-bold">¥7,000</span>
           </div>
-          <div class="flex justify-between items-center font-black text-amber-950 bg-amber-100/70 rounded-lg px-2.5 py-2 mt-1">
-            <span>👉 合計 ¥207,000 ÷ 7 人（建議收整數）</span>
-            <span class="font-mono text-sm text-rose-700">公費¥30,000 / 人</span>
+          <div class="flex justify-between items-center font-black text-amber-950 bg-amber-100/80 rounded-lg px-2.5 py-2 mt-1">
+            <span>👉 實算 ¥29,572／人，整數收 ¥40,000</span>
+            <span class="font-mono text-xs text-emerald-700">多 ¥10,428／人入餐費公費</span>
           </div>
         </div>
       </div>
@@ -1352,9 +1459,10 @@
 
           <!-- 誰先代墊 -->
           <div>
-            <label class="block text-xs font-bold text-slate-700 mb-1">誰先付款（代墊人）</label>
+            <label class="block text-xs font-bold text-slate-700 mb-1">誰先付款（代墊人 / 公費基金）</label>
             <select id="exp-payer" class="w-full text-sm font-bold bg-white border border-slate-200 rounded-xl px-3 py-2.5 focus:outline-none focus:border-blue-500">
-              <option value="洹">洹 </option>
+              <option value="公費基金">🏦 公費基金（直接從公費餘額扣款）</option>
+              <option value="洹">洹</option>
               <option value="吉">吉</option>
               <option value="lin">lin</option>
               <option value="勲">勲</option>
@@ -2075,7 +2183,7 @@
         viewBox: '0 0 420 260',
         stops: [
           { name: '1. 新千歲機場', emoji: '✈️', time: 'D1 ＆ D6', x: 176, y: 205, align: 'bottom', note: '12/09 11:00 抵達包車出發；12/14 國內線掃貨返台' },
-          { name: '2. 星野 TOMAMU', emoji: '🏔️', time: 'D1–D2', x: 282, y: 172, align: 'right', note: '連住2晚・霧冰平台、微笑海灘＆木林之湯、森林餐廳' },
+          { name: '2. 星野 TOMAMU', emoji: '🏔️', time: 'D1–D2', x: 282, y: 172, align: 'right', photo: 'https://www.snowtomamu.jp/winter/img/hotel/tower/main_01.jpg', fallbackPhoto: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Alpha_Resort_Tomamu_%E6%98%9F%E9%87%8E%E6%B8%A1%E5%81%87%E6%9D%91_-_panoramio.jpg/1280px-Alpha_Resort_Tomamu_%E6%98%9F%E9%87%8E%E6%B8%A1%E5%81%87%E6%9D%91_-_panoramio.jpg', note: '連住2晚・霧冰平台、微笑海灘＆木林之湯、森林餐廳' },
           { name: '3. 美瑛雪原', emoji: '🎄', time: 'D3 白天', x: 278, y: 108, align: 'right', note: 'D3 包車・純平炸蝦丼、聖誕樹、美瑛選果＆青池點燈' },
           { name: '4. 旭川＆動物園', emoji: '🐧', time: 'D3–D4', x: 256, y: 54, align: 'top', note: 'D3 宿 JR INN 旭川大浴場；D4 旭山動物園企鵝散步' },
           { name: '5. 小樽運河', emoji: '🍰', time: 'D5 全日', x: 84, y: 128, align: 'top', note: 'D5 搭 JR 浪漫一日遊・三角市場海鮮、堺町通＆運河點燈' },
@@ -2091,7 +2199,7 @@
         stops: [
           { name: '1. 新千歲機場', emoji: '✈️', time: '11:00–12:00', x: 170, y: 215, align: 'bottom', note: '11:00 抵達・領行李後 12:00 包車準時出發' },
           { name: '2. 永旺千歲店 (AEON)', emoji: '🛒', time: '12:10–13:10', x: 148, y: 175, align: 'left', note: '中停吃午餐、採買北海道鮮奶、水果與零食飲料' },
-          { name: '3. 星野 TOMAMU', emoji: '🏔️', time: '15:00 入住', x: 278, y: 168, align: 'top', note: 'The Tower 入住・迎賓茶飲、木林之湯＆20:30 水之教會' }
+          { name: '3. 星野 TOMAMU', emoji: '🏔️', time: '15:00 入住', x: 278, y: 168, align: 'top', photo: 'https://www.snowtomamu.jp/winter/img/hotel/tower/main_01.jpg', fallbackPhoto: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Alpha_Resort_Tomamu_%E6%98%9F%E9%87%8E%E6%B8%A1%E5%81%87%E6%9D%91_-_panoramio.jpg/1280px-Alpha_Resort_Tomamu_%E6%98%9F%E9%87%8E%E6%B8%A1%E5%81%87%E6%9D%91_-_panoramio.jpg', note: 'The Tower 入住・迎賓茶飲、木林之湯＆20:30 水之教會' }
         ]
       },
       d2: {
@@ -2101,7 +2209,7 @@
         color: '#2563eb',
         viewBox: '185 185 110 90',
         stops: [
-          { name: '1. 霧冰平台 ❄️', emoji: '❄️', time: '09:00–11:30', x: 222, y: 214, align: 'top-left', note: '搭乘雲海纜車登上海拔 1,088m 霧冰平台，欣賞雪白樹冰與日高山脈絕景。' },
+          { name: '1. 霧冰平台 ❄️', emoji: '❄️', time: '09:00–11:30', x: 222, y: 214, align: 'top-left', photo: 'https://www.snowtomamu.jp/winter/img/hotel/tower/main_01.jpg', fallbackPhoto: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Alpha_Resort_Tomamu_%E6%98%9F%E9%87%8E%E6%B8%A1%E5%81%87%E6%9D%91_-_panoramio.jpg/1280px-Alpha_Resort_Tomamu_%E6%98%9F%E9%87%8E%E6%B8%A1%E5%81%87%E6%9D%91_-_panoramio.jpg', note: '搭乘雲海纜車登上海拔 1,088m 霧冰平台，欣賞雪白樹冰與日高山脈絕景。' },
           { name: '2. 微笑海灘＆木林之湯 ♨️', emoji: '♨️', time: '14:30–17:30', x: 248, y: 226, align: 'right', note: '日本最大室內造浪泳池玩水，傍晚享受雪見露天風呂「木林之湯」。' },
           { name: '3. 螢火蟲街道 🌲', emoji: '🌲', time: '17:30–18:30', x: 218, y: 244, align: 'left', note: 'Ski-in/Ski-out 商店街與夜間雪地散步，逛限定戶外選品店與甜點咖啡。' },
           { name: '4. 森林餐廳＆hal 🍖', emoji: '🍖', time: '18:30–20:30', x: 246, y: 254, align: 'bottom-right', note: '享用長腳蟹腳與海陸自助晚餐；20:30 回 Tower 櫃檯將大行李寄往札幌！' }
@@ -2114,13 +2222,13 @@
         color: '#d97706',
         viewBox: '165 25 215 175',
         stops: [
-          { name: '1. 星野 TOMAMU', emoji: '🚐', time: '10:00 出發', x: 282, y: 175, align: 'bottom', note: '09:15 退房・10:00 包車準時北上美瑛' },
-          { name: '2. 純平洋食 junpei', emoji: '🍤', time: '12:00 訂位', x: 238, y: 126, align: 'left', note: '已訂位 12:00 午餐（用餐 1.5 小時，必點招牌炸蝦丼）' },
-          { name: '3. 聖誕樹之木', emoji: '🎄', time: '13:40–14:15', x: 222, y: 96, align: 'left', note: '雪原上的孤獨聖誕樹拍照 35 分鐘（建議用 2x 長焦拍）' },
-          { name: '4. 美瑛選果＆農場', emoji: '🍞', time: '14:25–15:25', x: 282, y: 102, align: 'right', note: '美瑛小麥工房買夢之力吐司與黑豆麵包（玉米麵包為機場限定）' },
-          { name: '5. 白金青池點燈', emoji: '💎', time: '15:50–17:00', x: 312, y: 130, align: 'right', note: '16:30 冬季點燈・把握 16:15–16:45 藍調時刻拍倒影' },
-          { name: '6. 白鬚瀑布', emoji: '🌊', time: '17:05–17:30', x: 325, y: 154, align: 'right', note: '夜間藍色河水與白色冰瀑點燈，停留 25 分鐘' },
-          { name: '7. JR INN 旭川', emoji: '♨️', time: '18:45 入住', x: 256, y: 54, align: 'top', note: '入住旭川站直結飯店・19:30 大黑屋烤羊肉＆5F大浴場' }
+          { name: '1. 星野 TOMAMU', emoji: '🚐', time: '10:00 出發', x: 282, y: 175, align: 'bottom', photo: 'https://images.unsplash.com/photo-1548263594-a71ea65a8598?auto=format&fit=crop&w=900&q=80', note: '09:15 退房・10:00 包車準時北上美瑛' },
+          { name: '2. 純平洋食 junpei', emoji: '🍤', time: '12:00 訂位', x: 238, y: 126, align: 'left', photo: 'https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?auto=format&fit=crop&w=900&q=80', note: '已訂位 12:00 午餐（用餐 1.5 小時，必點招牌炸蝦丼）' },
+          { name: '3. 聖誕樹之木', emoji: '🎄', time: '13:40–14:15', x: 222, y: 96, align: 'left', photo: 'https://images.unsplash.com/photo-1511184150666-9bb7d41a88f4?auto=format&fit=crop&w=900&q=80', note: '雪原上的孤獨聖誕樹拍照 35 分鐘（建議用 2x 長焦拍）' },
+          { name: '4. 美瑛選果＆農場', emoji: '🍞', time: '14:25–15:25', x: 282, y: 102, align: 'right', photo: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=80', note: '美瑛小麥工房買夢之力吐司與黑豆麵包（玉米麵包為機場限定）' },
+          { name: '5. 白金青池點燈', emoji: '💎', time: '15:50–17:00', x: 312, y: 130, align: 'right', photo: 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=900&q=80', note: '16:30 冬季點燈・把握 16:15–16:45 藍調時刻拍倒影' },
+          { name: '6. 白鬚瀑布', emoji: '🌊', time: '17:05–17:30', x: 325, y: 154, align: 'right', photo: 'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=900&q=80', note: '夜間藍色河水與白色冰瀑點燈，停留 25 分鐘' },
+          { name: '7. JR INN 旭川', emoji: '♨️', time: '18:45 入住', x: 256, y: 54, align: 'top', photo: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=80', note: '入住旭川站直結飯店・19:30 大黑屋烤羊肉＆5F大浴場' }
         ]
       },
       d4: {
@@ -2130,11 +2238,11 @@
         color: '#ea580c',
         viewBox: '75 25 265 170',
         stops: [
-          { name: '1. JR INN 旭川', emoji: '🚐', time: '09:50 出發', x: 242, y: 66, align: 'left', note: '退房後行李直接放包車免寄物，前往旭山動物園' },
-          { name: '2. 旭山動物園', emoji: '🐧', time: '10:30–14:00', x: 288, y: 62, align: 'right', note: '11:00 國王企鵝散步・海豹館圓柱水槽＆北極熊館，14:00 準時出發' },
-          { name: '3. みんなの工場 by SHIRO', emoji: '🧴', time: '15:00–16:30', x: 212, y: 106, align: 'left', note: 'Blender Lab 調香免預約・15:00 一進店先抽整理券，可免稅＆SHIRO CAFE下午茶' },
-          { name: '4. 札幌東急 Stay', emoji: '🧳', time: '17:30 入住', x: 142, y: 142, align: 'left', note: '辦理入住並領取從星野寄來的大行李箱，進房整裝休息 1 小時' },
-          { name: '5. 薄野「肉海鮮炉端 芯々」', emoji: '🍻', time: '18:30 晚餐', x: 162, y: 168, align: 'bottom', note: '與德、歐會合・全團 9 人大合體！餐後逛大通白色燈樹節' }
+          { name: '1. JR INN 旭川', emoji: '🚐', time: '09:50 出發', x: 242, y: 66, align: 'left', photo: 'https://images.unsplash.com/photo-1542718610-a1d656d1884c?auto=format&fit=crop&w=900&q=80', note: '退房後行李直接放包車免寄物，前往旭山動物園' },
+          { name: '2. 旭山動物園', emoji: '🐧', time: '10:30–14:00', x: 288, y: 62, align: 'right', photo: 'https://images.unsplash.com/photo-1551986782-d0169b3f8fa7?auto=format&fit=crop&w=900&q=80', note: '11:00 國王企鵝散步・海豹館圓柱水槽＆北極熊館，14:00 準時出發' },
+          { name: '3. みんなの工場 by SHIRO', emoji: '🧴', time: '15:00–16:30', x: 212, y: 106, align: 'left', photo: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=900&q=80', note: 'Blender Lab 調香免預約・15:00 一進店先抽整理券，可免稅＆SHIRO CAFE下午茶' },
+          { name: '4. 札幌東急 Stay', emoji: '🧳', time: '17:30 入住', x: 142, y: 142, align: 'left', photo: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=80', note: '辦理入住並領取從星野寄來的大行李箱，進房整裝休息 1 小時' },
+          { name: '5. 薄野「肉海鮮炉端 芯々」', emoji: '🍻', time: '18:30 晚餐', x: 162, y: 168, align: 'bottom', photo: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=80', note: '與德、歐會合・全團 9 人大合體！餐後逛大通白色燈樹節' }
         ]
       },
       d5: {
@@ -2144,11 +2252,11 @@
         color: '#4f46e5',
         viewBox: '35 85 215 115',
         stops: [
-          { name: '1. JR 札幌站', emoji: '🚆', time: '09:33 出發', x: 168, y: 148, align: 'right', note: '搭快速 Airport 31 號往小樽（建議加購 u-Seat 指定席）' },
-          { name: '2. 小樽三角市場', emoji: '🦀', time: '10:15–11:45', x: 88, y: 112, align: 'top', note: '出站步行 1 分鐘・現剖帝王蟹與海膽鮭魚卵早午餐' },
-          { name: '3. 堺町通甜點街', emoji: '🍰', time: '12:00–15:45', x: 112, y: 138, align: 'right', note: 'LeTAO 觀景台、北菓樓泡芙、六花亭＆小樽音樂盒堂' },
-          { name: '4. 小樽運河 (淺草橋)', emoji: '🏮', time: '16:00 點燈', x: 82, y: 134, align: 'left', note: '16:00 日落拍藍調煤油燈夜景，17:00 搭 JR 回札幌' },
-          { name: '5. 薄野風土燒肉＆湯香郷', emoji: '♨️', time: '19:00 晚餐', x: 162, y: 172, align: 'bottom', note: '19:00 訂位和牛燒肉・餐後步行至湯香郷天然溫泉泡湯' }
+          { name: '1. JR 札幌站', emoji: '🚆', time: '09:33 出發', x: 168, y: 148, align: 'right', photo: 'https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=900&q=80', note: '搭快速 Airport 31 號往小樽（建議加購 u-Seat 指定席）' },
+          { name: '2. 小樽三角市場', emoji: '🦀', time: '10:15–11:45', x: 88, y: 112, align: 'top', photo: 'https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=900&q=80', note: '出站步行 1 分鐘・現剖帝王蟹與海膽鮭魚卵早午餐' },
+          { name: '3. 堺町通甜點街', emoji: '🍰', time: '12:00–15:45', x: 112, y: 138, align: 'right', photo: 'https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=900&q=80', note: 'LeTAO 觀景台、北菓樓泡芙、六花亭＆小樽音樂盒堂' },
+          { name: '4. 小樽運河 (淺草橋)', emoji: '🏮', time: '16:00 點燈', x: 82, y: 134, align: 'left', photo: 'https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=900&q=80', note: '16:00 日落拍藍調煤油燈夜景，17:00 搭 JR 回札幌' },
+          { name: '5. 薄野風土燒肉＆湯香郷', emoji: '♨️', time: '19:00 晚餐', x: 162, y: 172, align: 'bottom', photo: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=80', note: '19:00 訂位和牛燒肉・餐後步行至湯香郷天然溫泉泡湯' }
         ]
       },
       d6: {
@@ -2158,10 +2266,10 @@
         color: '#059669',
         viewBox: '75 115 210 130',
         stops: [
-          { name: '1. 札幌東急 Stay', emoji: '🧳', time: '09:20 退房', x: 134, y: 146, align: 'top', note: '7 位回程團員退房，推大行李步行約 5–6 分鐘出發' },
-          { name: '2. 南3條薄野巴士站', emoji: '🚌', time: '09:25 / 09:40', x: 126, y: 174, align: 'left', note: '搭利木津巴士（¥1,300 可刷西瓜卡）直達機場國內線' },
-          { name: '3. 新千歲國內線 1F–3F', emoji: '🌽', time: '10:40–12:00', x: 186, y: 196, align: 'right', note: '1F 人工寄物 ➔ 2F 搶玉米麵包 ➔ 3F 拉麵 ➔ 12:00 領行李' },
-          { name: '4. 新千歲國際線 3F', emoji: '✈️', time: '12:10 移動', x: 205, y: 222, align: 'bottom', note: '12:10 連通道步行 ➔ 12:30 報到・華航 14:40／長榮 15:20 起飛' }
+          { name: '1. 札幌東急 Stay', emoji: '🧳', time: '09:20 退房', x: 134, y: 146, align: 'top', photo: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=80', note: '7 位回程團員退房，推大行李步行約 5–6 分鐘出發' },
+          { name: '2. 南3條薄野巴士站', emoji: '🚌', time: '09:25 / 09:40', x: 126, y: 174, align: 'left', photo: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=900&q=80', note: '搭利木津巴士（¥1,300 可刷西瓜卡）直達機場國內線' },
+          { name: '3. 新千歲國內線 1F–3F', emoji: '🌽', time: '10:40–12:00', x: 186, y: 196, align: 'right', photo: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=80', note: '1F 人工寄物 ➔ 2F 搶玉米麵包 ➔ 3F 拉麵 ➔ 12:00 領行李' },
+          { name: '4. 新千歲國際線 3F', emoji: '✈️', time: '12:10 移動', x: 205, y: 222, align: 'bottom', photo: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=900&q=80', note: '12:10 連通道步行 ➔ 12:30 報到・華航 14:40／長榮 15:20 起飛' }
         ]
       }
     };
@@ -2170,11 +2278,63 @@
       renderMapForDay('all');
     }
 
+    const CUSTOM_SPOT_PHOTOS_KEY = 'hokkaido_2026_spot_photos_v1';
+    let currentSelectedPin = { dayId: 'all', idx: 0 };
+
+    function getCustomSpotPhotos() {
+      try {
+        return JSON.parse(localStorage.getItem(CUSTOM_SPOT_PHOTOS_KEY) || '{}');
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function handleSpotPhotoUpload(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+          const canvas = document.createElement('canvas');
+          const maxDim = 960;
+          let w = img.width;
+          let h = img.height;
+          if (w > maxDim || h > maxDim) {
+            if (w > h) {
+              h = Math.round((h * maxDim) / w);
+              w = maxDim;
+            } else {
+              w = Math.round((w * maxDim) / h);
+              h = maxDim;
+            }
+          }
+          canvas.width = w;
+          canvas.height = h;
+          canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+          const dataUrl = canvas.toDataURL('image/jpeg', 0.78);
+          const key = `${currentSelectedPin.dayId}_${currentSelectedPin.idx}`;
+          const saved = getCustomSpotPhotos();
+          saved[key] = dataUrl;
+          try {
+            localStorage.setItem(CUSTOM_SPOT_PHOTOS_KEY, JSON.stringify(saved));
+            selectCutePin(currentSelectedPin.dayId, currentSelectedPin.idx);
+            showToast('📸 已更新此景點的專屬照片！');
+          } catch (err) {
+            showToast('照片檔案過大，請換一張較小的照片唷！');
+          }
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
     function selectCutePin(dayId, idx, event) {
       if (event) {
         event.preventDefault();
         event.stopPropagation();
       }
+      currentSelectedPin = { dayId, idx };
       const data = DAILY_MAP_DATA[dayId] || DAILY_MAP_DATA.all;
       const stop = data.stops[idx];
       if (!stop) return;
@@ -2182,10 +2342,34 @@
       const titleEl = document.getElementById('cute-popup-title');
       const timeEl = document.getElementById('cute-popup-time');
       const noteEl = document.getElementById('cute-popup-note');
+      const photoWrapEl = document.getElementById('cute-popup-photo-wrap');
+      const photoImgEl = document.getElementById('cute-popup-photo');
+      const photoCapEl = document.getElementById('cute-popup-photo-caption');
+
       if (emojiEl) emojiEl.textContent = stop.emoji;
       if (titleEl) titleEl.textContent = stop.name;
       if (timeEl) timeEl.textContent = stop.time || '重點站點';
       if (noteEl) noteEl.textContent = stop.note;
+
+      const customPhotos = getCustomSpotPhotos();
+      const customSrc = customPhotos[`${dayId}_${idx}`];
+      const finalPhotoSrc = customSrc || stop.photo || '';
+      if (photoWrapEl && photoImgEl) {
+        if (finalPhotoSrc) {
+          photoImgEl.onerror = function() {
+            if (stop.fallbackPhoto && photoImgEl.src !== stop.fallbackPhoto) {
+              photoImgEl.src = stop.fallbackPhoto;
+            } else {
+              photoWrapEl.classList.add('hidden');
+            }
+          };
+          photoImgEl.src = finalPhotoSrc;
+          if (photoCapEl) photoCapEl.textContent = `${stop.emoji} ${stop.name}`;
+          photoWrapEl.classList.remove('hidden');
+        } else {
+          photoWrapEl.classList.add('hidden');
+        }
+      }
 
       const mapEl = document.getElementById('itinerary-map');
       if (mapEl) {
@@ -2504,91 +2688,87 @@
     // ==================== 共同支出記帳與收據紀錄邏輯 ====================
     const ALL_MEMBERS = ['洹', '吉', 'lin', '勲', '丹', '臻', '歐巴', '德', '歐'];
     const EARLY_7_MEMBERS = ['洹', '吉', 'lin', '勲', '丹', '臻', '歐巴'];
-    const EXPENSE_STORAGE_KEY = 'hokkaido_2026_expenses_v1';
+    const EXPENSE_STORAGE_KEY = 'hokkaido_2026_expenses_v2';
+    const PUBLIC_FUND_STORAGE_KEY = 'hokkaido_2026_public_fund_paid_v1';
+    const PUBLIC_FUND_PER_PERSON_JPY = 40000;
 
     let selectedSplitMembers = [...ALL_MEMBERS];
     let currentReceiptBase64 = '';
     let expensesList = [];
     let expCalcBuffer = '';
+    let publicFundPaidMap = {};
+
+    function loadPublicFundState() {
+      try {
+        const raw = localStorage.getItem(PUBLIC_FUND_STORAGE_KEY);
+        if (raw) {
+          publicFundPaidMap = JSON.parse(raw);
+        } else {
+          EARLY_7_MEMBERS.forEach(m => { publicFundPaidMap[m] = true; });
+          savePublicFundState();
+        }
+      } catch (e) {
+        EARLY_7_MEMBERS.forEach(m => { publicFundPaidMap[m] = true; });
+      }
+    }
+
+    function savePublicFundState() {
+      try {
+        localStorage.setItem(PUBLIC_FUND_STORAGE_KEY, JSON.stringify(publicFundPaidMap));
+      } catch (e) {}
+    }
+
+    function togglePublicFundPaid(member) {
+      publicFundPaidMap[member] = !publicFundPaidMap[member];
+      savePublicFundState();
+      renderExpenseList();
+      showToast(`${member} 公費狀態已更新為：${publicFundPaidMap[member] ? '已繳 ¥40,000 ✓' : '待繳款'}`);
+    }
 
     function toggleExpCalc() {
       const box = document.getElementById('exp-mini-calc');
-      const label = document.getElementById('exp-calc-toggle-text');
+      const toggleText = document.getElementById('exp-calc-toggle-text');
       if (!box) return;
       const isHidden = box.classList.contains('hidden');
       if (isHidden) {
         box.classList.remove('hidden');
-        if (label) label.textContent = '收合計算機';
-        const curVal = document.getElementById('exp-amount')?.value;
-        if (curVal && !expCalcBuffer) {
-          expCalcBuffer = String(curVal);
-          updateExpCalcDisplay();
-        }
+        if (toggleText) toggleText.textContent = '收合計算機';
       } else {
         box.classList.add('hidden');
-        if (label) label.textContent = '展開計算機';
+        if (toggleText) toggleText.textContent = '展開計算機';
       }
-    }
-
-    function safeEvalMath(expr) {
-      const sanitized = expr.replace(/[^0-9+\-*/.]/g, '');
-      if (!sanitized) return 0;
-      const trimmed = sanitized.replace(/[+\-*/.]+$/, '');
-      if (!trimmed) return 0;
-      try {
-        const val = Function('"use strict"; return (' + trimmed + ')')();
-        if (typeof val === 'number' && isFinite(val)) {
-          return Math.round(val * 100) / 100;
-        }
-      } catch (e) {}
-      return null;
     }
 
     function updateExpCalcDisplay() {
       const exprEl = document.getElementById('exp-calc-expr');
       const resEl = document.getElementById('exp-calc-result');
-      if (!exprEl || !resEl) return;
-      if (!expCalcBuffer) {
-        exprEl.textContent = '0';
-        resEl.textContent = '0';
-        return;
+      if (exprEl) {
+        exprEl.textContent = expCalcBuffer
+          ? expCalcBuffer.replace(/\*/g, '×').replace(/\//g, '÷')
+          : '0';
       }
-      const prettyExpr = expCalcBuffer.replace(/\*/g, '×').replace(/\//g, '÷');
-      exprEl.textContent = prettyExpr;
-      const preview = safeEvalMath(expCalcBuffer);
-      if (preview !== null) {
-        resEl.textContent = preview.toLocaleString();
+      if (resEl) {
+        try {
+          const sanitized = expCalcBuffer.replace(/[+\-*/.]+$/, '');
+          if (!sanitized) {
+            resEl.textContent = '0';
+          } else if (/^[0-9+\-*/.() ]+$/.test(sanitized)) {
+            const val = Function('"use strict";return (' + sanitized + ')')();
+            resEl.textContent = isFinite(val) ? Math.round(val * 100) / 100 : '0';
+          }
+        } catch (e) {
+          resEl.textContent = '0';
+        }
       }
     }
 
     function expCalcInput(token) {
-      const isOp = ['+', '-', '*', '/'].includes(token);
-      if (isOp) {
+      if (['+', '-', '*', '/'].includes(token)) {
         if (!expCalcBuffer) return;
-        if (/[+\-*/]$/.test(expCalcBuffer)) {
-          expCalcBuffer = expCalcBuffer.slice(0, -1) + token;
-        } else {
-          expCalcBuffer += token;
-        }
-      } else if (token === '.') {
-        const parts = expCalcBuffer.split(/[+\-*/]/);
-        const lastNum = parts[parts.length - 1];
-        if (lastNum.includes('.')) return;
-        expCalcBuffer += lastNum === '' ? '0.' : '.';
+        expCalcBuffer = expCalcBuffer.replace(/[+\-*/.]+$/, '') + token;
       } else {
-        if (expCalcBuffer === '0' && token !== '00') {
-          expCalcBuffer = token;
-        } else if (expCalcBuffer === '0' && token === '00') {
-          return;
-        } else {
-          expCalcBuffer += token;
-        }
+        expCalcBuffer += token;
       }
-      updateExpCalcDisplay();
-    }
-
-    function expCalcBackspace() {
-      expCalcBuffer = expCalcBuffer.slice(0, -1);
       updateExpCalcDisplay();
     }
 
@@ -2597,70 +2777,80 @@
       updateExpCalcDisplay();
     }
 
+    function expCalcBackspace() {
+      expCalcBuffer = expCalcBuffer.slice(0, -1);
+      updateExpCalcDisplay();
+    }
+
     function expCalcEval() {
-      const val = safeEvalMath(expCalcBuffer);
-      if (val !== null) {
-        expCalcBuffer = String(val);
+      const resEl = document.getElementById('exp-calc-result');
+      updateExpCalcDisplay();
+      if (resEl && resEl.textContent !== '0') {
+        expCalcBuffer = resEl.textContent;
         updateExpCalcDisplay();
       }
     }
 
     function applyExpCalcResult() {
-      const val = safeEvalMath(expCalcBuffer);
-      const amountInput = document.getElementById('exp-amount');
-      if (val !== null && val > 0 && amountInput) {
-        amountInput.value = val;
-        showToast('已帶入金額：' + val.toLocaleString());
-        const box = document.getElementById('exp-mini-calc');
-        const label = document.getElementById('exp-calc-toggle-text');
-        if (box) box.classList.add('hidden');
-        if (label) label.textContent = '展開計算機';
-      } else {
-        showToast('請先計算出有效金額唷！');
+      expCalcEval();
+      const resEl = document.getElementById('exp-calc-result');
+      const amtInput = document.getElementById('exp-amount');
+      if (resEl && amtInput) {
+        const val = parseFloat(resEl.textContent);
+        if (!isNaN(val) && val > 0) {
+          amtInput.value = val;
+          showToast('已帶入金額：' + val.toLocaleString());
+        }
       }
+      const box = document.getElementById('exp-mini-calc');
+      const toggleText = document.getElementById('exp-calc-toggle-text');
+      if (box) box.classList.add('hidden');
+      if (toggleText) toggleText.textContent = '展開計算機';
     }
 
     function initExpenseForm() {
-      renderMemberChips();
-    }
-
-    function renderMemberChips() {
       const grid = document.getElementById('exp-members-grid');
-      const countLabel = document.getElementById('split-count-label');
       if (!grid) return;
       grid.innerHTML = '';
-      ALL_MEMBERS.forEach(name => {
-        const active = selectedSplitMembers.includes(name);
+      ALL_MEMBERS.forEach(m => {
+        const active = selectedSplitMembers.includes(m);
         const btn = document.createElement('button');
         btn.type = 'button';
-        btn.textContent = name;
+        btn.onclick = () => toggleSplitMember(m);
         btn.className = active
-          ? 'text-xs font-bold px-2.5 py-1 rounded-full bg-blue-600 text-white shadow-2xs transition active:scale-95'
+          ? 'text-xs font-extrabold px-2.5 py-1 rounded-full bg-blue-600 text-white shadow-2xs transition active:scale-95'
           : 'text-xs font-bold px-2.5 py-1 rounded-full bg-white text-slate-500 border border-slate-200 transition active:scale-95';
-        btn.onclick = () => {
-          if (selectedSplitMembers.includes(name)) {
-            if (selectedSplitMembers.length > 1) {
-              selectedSplitMembers = selectedSplitMembers.filter(m => m !== name);
-            } else {
-              showToast('至少需要 1 位分攤成員唷！');
-            }
-          } else {
-            selectedSplitMembers.push(name);
-          }
-          renderMemberChips();
-        };
+        btn.textContent = m;
         grid.appendChild(btn);
       });
+      const countLabel = document.getElementById('split-count-label');
       if (countLabel) countLabel.textContent = selectedSplitMembers.length;
     }
 
-    function selectSplitGroup(type) {
-      selectedSplitMembers = type === '7' ? [...EARLY_7_MEMBERS] : [...ALL_MEMBERS];
-      renderMemberChips();
+    function toggleSplitMember(member) {
+      if (selectedSplitMembers.includes(member)) {
+        if (selectedSplitMembers.length <= 1) {
+          showToast('至少需要 1 位分攤成員唷！');
+          return;
+        }
+        selectedSplitMembers = selectedSplitMembers.filter(m => m !== member);
+      } else {
+        selectedSplitMembers.push(member);
+      }
+      initExpenseForm();
+    }
+
+    function selectSplitGroup(groupType) {
+      if (groupType === '7') {
+        selectedSplitMembers = [...EARLY_7_MEMBERS];
+      } else {
+        selectedSplitMembers = [...ALL_MEMBERS];
+      }
+      initExpenseForm();
     }
 
     function handleReceiptUpload(event) {
-      const file = event.target.files[0];
+      const file = event.target.files && event.target.files[0];
       if (!file) return;
       const reader = new FileReader();
       reader.onload = function(e) {
@@ -2681,13 +2871,14 @@
           }
           canvas.width = w;
           canvas.height = h;
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0, w, h);
+          canvas.getContext('2d').drawImage(img, 0, 0, w, h);
           currentReceiptBase64 = canvas.toDataURL('image/jpeg', 0.72);
-          document.getElementById('receipt-preview-img').src = currentReceiptBase64;
-          document.getElementById('receipt-preview-box').classList.remove('hidden');
-          document.getElementById('btn-clear-receipt').classList.remove('hidden');
-          showToast('收據照片已壓縮載入！');
+          const previewBox = document.getElementById('receipt-preview-box');
+          const previewImg = document.getElementById('receipt-preview-img');
+          const clearBtn = document.getElementById('btn-clear-receipt');
+          if (previewImg) previewImg.src = currentReceiptBase64;
+          if (previewBox) previewBox.classList.remove('hidden');
+          if (clearBtn) clearBtn.classList.remove('hidden');
         };
         img.src = e.target.result;
       };
@@ -2697,16 +2888,69 @@
     function clearReceiptPreview() {
       currentReceiptBase64 = '';
       const input = document.getElementById('exp-receipt-input');
+      const previewBox = document.getElementById('receipt-preview-box');
+      const previewImg = document.getElementById('receipt-preview-img');
+      const clearBtn = document.getElementById('btn-clear-receipt');
       if (input) input.value = '';
-      document.getElementById('receipt-preview-box').classList.add('hidden');
-      document.getElementById('btn-clear-receipt').classList.add('hidden');
+      if (previewImg) previewImg.src = '';
+      if (previewBox) previewBox.classList.add('hidden');
+      if (clearBtn) clearBtn.classList.add('hidden');
+    }
+
+    function saveExpenses() {
+      try {
+        localStorage.setItem(EXPENSE_STORAGE_KEY, JSON.stringify(expensesList));
+      } catch (e) {
+        showToast('儲存空間已滿，建議刪除舊收據照片');
+      }
+    }
+
+    function loadExpenses() {
+      try {
+        const raw = localStorage.getItem(EXPENSE_STORAGE_KEY);
+        if (raw) {
+          expensesList = JSON.parse(raw);
+        } else {
+          // 首次載入預設帶入先行 7 寶第一階段公費支出（三日包車＋旭山動物園門票，由公費基金直接扣款）
+          expensesList = [
+            {
+              id: 2026120901,
+              title: '三日包車專車（D1 ¥5萬＋D3 ¥8萬＋D4 ¥7萬）',
+              currency: 'JPY',
+              amount: 200000,
+              payer: '公費基金',
+              splitMembers: [...EARLY_7_MEMBERS],
+              receipt: '',
+              time: '公費扣款'
+            },
+            {
+              id: 2026121202,
+              title: 'D4 旭山動物園門票（¥1,000 × 7人）',
+              currency: 'JPY',
+              amount: 7000,
+              payer: '公費基金',
+              splitMembers: [...EARLY_7_MEMBERS],
+              receipt: '',
+              time: '公費扣款'
+            }
+          ];
+          saveExpenses();
+        }
+      } catch (e) {
+        expensesList = [];
+      }
     }
 
     function addExpense() {
-      const title = document.getElementById('exp-title').value.trim();
-      const currency = document.getElementById('exp-currency').value;
-      const amount = parseFloat(document.getElementById('exp-amount').value);
-      const payer = document.getElementById('exp-payer').value;
+      const titleEl = document.getElementById('exp-title');
+      const currEl = document.getElementById('exp-currency');
+      const amtEl = document.getElementById('exp-amount');
+      const payerEl = document.getElementById('exp-payer');
+
+      const title = titleEl ? titleEl.value.trim() : '';
+      const currency = currEl ? currEl.value : 'JPY';
+      const amount = amtEl ? parseFloat(amtEl.value) : 0;
+      const payer = payerEl ? payerEl.value : '公費基金';
 
       if (!title) {
         showToast('請輸入消費項目名稱唷！');
@@ -2714,6 +2958,10 @@
       }
       if (isNaN(amount) || amount <= 0) {
         showToast('請輸入正確的消費金額！');
+        return;
+      }
+      if (selectedSplitMembers.length === 0) {
+        showToast('請至少勾選 1 位分攤成員！');
         return;
       }
 
@@ -2728,325 +2976,296 @@
         payer,
         splitMembers: [...selectedSplitMembers],
         receipt: currentReceiptBase64,
-        time: timeStr
+        time: payer === '公費基金' ? `公費・${timeStr}` : timeStr
       });
 
       saveExpenses();
       renderExpenseList();
 
-      document.getElementById('exp-title').value = '';
-      document.getElementById('exp-amount').value = '';
+      if (titleEl) titleEl.value = '';
+      if (amtEl) amtEl.value = '';
       clearReceiptPreview();
-      showToast('已新增共同支出紀錄！');
+      showToast(payer === '公費基金' ? '已從公費基金扣除並入帳！' : '已新增共同支出紀錄！');
     }
 
     function deleteExpense(id) {
-      expensesList = expensesList.filter(item => item.id !== id);
+      expensesList = expensesList.filter(x => x.id !== id);
       saveExpenses();
       renderExpenseList();
-      showToast('已刪除該筆支出');
-    }
-
-    function saveExpenses() {
-      try {
-        localStorage.setItem(EXPENSE_STORAGE_KEY, JSON.stringify(expensesList));
-      } catch (e) {
-        showToast('儲存空間已滿，建議移除部分舊收據照片');
-      }
-    }
-
-    function loadExpenses() {
-      try {
-        const raw = localStorage.getItem(EXPENSE_STORAGE_KEY);
-        if (raw) {
-          expensesList = JSON.parse(raw);
-        } else {
-          // 首次載入預設帶入先行 7 寶第一階段公費（三日包車＋旭山動物園門票）
-          expensesList = [
-            {
-              id: 2026120901,
-              title: '三日包車專車（D1 ¥5萬＋D3 ¥8萬＋D4 ¥7萬）',
-              currency: 'JPY',
-              amount: 200000,
-              payer: '洹',
-              splitMembers: [...EARLY_7_MEMBERS],
-              receipt: '',
-              time: '公費預設'
-            },
-            {
-              id: 2026121202,
-              title: 'D4 旭山動物園門票（¥1,000 × 7人）',
-              currency: 'JPY',
-              amount: 7000,
-              payer: '洹',
-              splitMembers: [...EARLY_7_MEMBERS],
-              receipt: '',
-              time: '公費預設'
-            }
-          ];
-          saveExpenses();
-        }
-      } catch (e) {
-        expensesList = [];
-      }
+      showToast('已刪除該筆支出紀錄');
     }
 
     function copyPublicFundNotice() {
       const rate = getRate();
-      const twdEst = Math.round(29572 * rate);
+      const twdEst = Math.round(40000 * rate);
       const msg = [
-        '📢 【北海道 7 人團｜第一階段公費通知（包車＋動物園門票）】',
-        '先跟大家收前幾天的包車車資與旭山動物園門票（D5 小樽 JR 與 D6 機場巴士先不收，到時各自刷交通卡即可）：',
+        '📢 【北海道 7 人團｜第一階段公費基金通知（包車＋動物園門票＋餐費公費）】',
+        '先跟大家收前幾天的包車車資、旭山動物園門票與共同餐費預備金（D5 小樽 JR 與 D6 機場巴士先不收，到時各自刷交通卡即可）：',
         '・D1 接機包車：¥50,000',
         '・D3 美瑛包車：¥80,000',
         '・D4 旭川札幌包車：¥70,000',
         '（包車合計 ¥200,000 ÷ 7 人 ＝ ¥28,572／人）',
         '・D4 旭山動物園門票：¥1,000／人',
         '',
-        `👉 每人應繳：日幣 ¥29,600（實算 ¥29,572；若先收台幣約 NT$ ${twdEst.toLocaleString()}，依匯率 ${rate} 估算）`
+        `👉 實算 ¥29,572，整數收日幣 ¥40,000／人（多餘 ¥10,428／人、7人共 ¥73,000 直接作為共同餐費公費；若先收台幣約 NT$ ${twdEst.toLocaleString()}，依匯率 ${rate} 估算）`
       ].join('\n');
       copyText(msg, '已複製公費通知，可直接貼到群組！');
     }
 
     function renderExpenseList() {
       const rate = getRate();
-      const listEl = document.getElementById('expense-list');
-      const countEl = document.getElementById('expense-count');
-      const totalEl = document.getElementById('total-expense-twd');
-      const settleEl = document.getElementById('settlement-grid');
-      if (!listEl || !countEl || !totalEl || !settleEl) return;
 
-      countEl.textContent = expensesList.length;
+      // 1. 計算公費基金收支（實算 ¥29,572，整數收 ¥40,000 × 7 人 ＝ ¥280,000）
+      let paidCount = 0;
+      const pfGrid = document.getElementById('public-fund-members-grid');
+      if (pfGrid) {
+        pfGrid.innerHTML = '';
+        EARLY_7_MEMBERS.forEach(m => {
+          const isPaid = !!publicFundPaidMap[m];
+          if (isPaid) paidCount++;
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.onclick = () => togglePublicFundPaid(m);
+          btn.className = isPaid
+            ? 'text-xs font-extrabold px-2.5 py-1 rounded-full bg-emerald-600 text-white shadow-2xs transition active:scale-95'
+            : 'text-xs font-bold px-2.5 py-1 rounded-full bg-white text-slate-500 border border-amber-300 transition active:scale-95';
+          btn.textContent = isPaid ? `${m} ✓` : `${m} 待繳`;
+          pfGrid.appendChild(btn);
+        });
+      }
 
-      const balances = {};
-      ALL_MEMBERS.forEach(m => balances[m] = 0);
-      let grandTotalTwd = 0;
+      const collectedJpy = paidCount * PUBLIC_FUND_PER_PERSON_JPY;
+      let pfSpentJpy = 0;
+
+      // 2. 計算個人代墊結算與總花費
+      const paidTwd = {};
+      const owedTwd = {};
+      ALL_MEMBERS.forEach(m => {
+        paidTwd[m] = 0;
+        owedTwd[m] = 0;
+      });
+
+      let totalAllTwd = 0;
 
       expensesList.forEach(item => {
-        const twdVal = item.currency === 'JPY' ? item.amount * rate : item.amount;
-        grandTotalTwd += twdVal;
-        balances[item.payer] = (balances[item.payer] || 0) + twdVal;
-        const share = twdVal / item.splitMembers.length;
-        item.splitMembers.forEach(m => {
-          balances[m] = (balances[m] || 0) - share;
-        });
-      });
+        const amtJpy = item.currency === 'JPY' ? item.amount : Math.round(item.amount / rate);
+        const amtTwd = item.currency === 'TWD' ? item.amount : Math.round(item.amount * rate);
+        totalAllTwd += amtTwd;
 
-      totalEl.textContent = '總計 NT$ ' + Math.round(grandTotalTwd).toLocaleString();
-
-      settleEl.innerHTML = '';
-      ALL_MEMBERS.forEach(m => {
-        const net = Math.round(balances[m]);
-        const card = document.createElement('div');
-        card.className = 'bg-slate-50 border border-slate-100 rounded-xl p-2 text-center';
-        let colorClass = 'text-slate-500';
-        let prefix = '';
-        if (net > 0) {
-          colorClass = 'text-emerald-600';
-          prefix = '+';
-        } else if (net < 0) {
-          colorClass = 'text-rose-600';
+        if (item.payer === '公費基金') {
+          pfSpentJpy += amtJpy;
+        } else {
+          if (paidTwd[item.payer] !== undefined) {
+            paidTwd[item.payer] += amtTwd;
+          }
+          const members = (item.splitMembers && item.splitMembers.length > 0) ? item.splitMembers : ALL_MEMBERS;
+          const share = amtTwd / members.length;
+          members.forEach(m => {
+            if (owedTwd[m] !== undefined) {
+              owedTwd[m] += share;
+            }
+          });
         }
-        card.innerHTML = `
-          <div class="text-xs font-extrabold text-slate-800">${m}</div>
-          <div class="text-xs font-black font-mono mt-0.5 ${colorClass}">${prefix}${net.toLocaleString()}</div>
-        `;
-        settleEl.appendChild(card);
       });
+
+      const balanceJpy = collectedJpy - pfSpentJpy;
+
+      const elColJpy = document.getElementById('pf-collected-jpy');
+      const elColTwd = document.getElementById('pf-collected-twd');
+      const elSptJpy = document.getElementById('pf-spent-jpy');
+      const elSptTwd = document.getElementById('pf-spent-twd');
+      const elBalJpy = document.getElementById('pf-balance-jpy');
+      const elBalTwd = document.getElementById('pf-balance-twd');
+
+      if (elColJpy) elColJpy.textContent = `¥${collectedJpy.toLocaleString()}`;
+      if (elColTwd) elColTwd.textContent = `約 NT$ ${Math.round(collectedJpy * rate).toLocaleString()}`;
+      if (elSptJpy) elSptJpy.textContent = `¥${pfSpentJpy.toLocaleString()}`;
+      if (elSptTwd) elSptTwd.textContent = `約 NT$ ${Math.round(pfSpentJpy * rate).toLocaleString()}`;
+      if (elBalJpy) elBalJpy.textContent = `¥${balanceJpy.toLocaleString()}`;
+      if (elBalTwd) elBalTwd.textContent = `約 NT$ ${Math.round(balanceJpy * rate).toLocaleString()}`;
+
+      // 3. 更新結算網格
+      const totalEl = document.getElementById('total-expense-twd');
+      if (totalEl) totalEl.textContent = `總計 NT$ ${Math.round(totalAllTwd).toLocaleString()}`;
+
+      const settleGrid = document.getElementById('settlement-grid');
+      if (settleGrid) {
+        settleGrid.innerHTML = ALL_MEMBERS.map(m => {
+          const net = Math.round(paidTwd[m] - owedTwd[m]);
+          const colorCls = net > 0
+            ? 'text-emerald-700 bg-emerald-50 border-emerald-200'
+            : (net < 0 ? 'text-rose-600 bg-rose-50 border-rose-200' : 'text-slate-600 bg-slate-50 border-slate-200');
+          const prefix = net > 0 ? '+' : '';
+          return `
+            <div class="rounded-xl p-2 border ${colorCls} text-center">
+              <div class="text-xs font-black text-slate-800">${m}</div>
+              <div class="text-xs font-black font-mono mt-0.5">${prefix}${net.toLocaleString()}</div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // 4. 渲染歷史明細列表
+      const countEl = document.getElementById('expense-count');
+      if (countEl) countEl.textContent = expensesList.length;
+
+      const listEl = document.getElementById('expense-list');
+      if (!listEl) return;
 
       if (expensesList.length === 0) {
-        listEl.innerHTML = '<div class="text-center py-6 text-xs text-slate-400">目前還沒有共同支出紀錄，上方輸入即可開始記帳 ✍️</div>';
+        listEl.innerHTML = '<div class="text-center text-xs text-slate-400 py-6">尚無支出紀錄，快新增第一筆吧！</div>';
         return;
       }
 
-      listEl.innerHTML = '';
-      expensesList.forEach(item => {
-        const twdVal = Math.round(item.currency === 'JPY' ? item.amount * rate : item.amount);
+      listEl.innerHTML = expensesList.map(item => {
+        const isPf = item.payer === '公費基金';
+        const amtTwd = item.currency === 'TWD' ? item.amount : Math.round(item.amount * rate);
         const origStr = item.currency === 'JPY'
-          ? `¥${item.amount.toLocaleString()} (約 NT$ ${twdVal.toLocaleString()})`
+          ? `¥${item.amount.toLocaleString()} (約 NT$ ${amtTwd.toLocaleString()})`
           : `NT$ ${item.amount.toLocaleString()}`;
+        const badgeCls = isPf
+          ? 'bg-amber-100 text-amber-900 border border-amber-300'
+          : 'bg-blue-50 text-blue-700 border border-blue-200';
+        const payerLabel = isPf ? '🏦 公費基金扣款' : `💳 ${item.payer} 先付`;
+        const membersText = (item.splitMembers || []).join('、');
 
-        const row = document.createElement('div');
-        row.className = 'bg-white border border-slate-200/80 rounded-xl p-3 space-y-2';
-        row.innerHTML = `
-          <div class="flex items-start justify-between gap-2">
-            <div>
-              <div class="flex items-center gap-1.5">
-                <span class="text-xs font-black text-slate-900">${item.title}</span>
-                <span class="text-[10px] text-slate-400">${item.time}</span>
+        return `
+          <div class="bg-white border border-slate-200 rounded-xl p-3 space-y-1.5">
+            <div class="flex items-start justify-between gap-2">
+              <div class="min-w-0">
+                <div class="font-extrabold text-slate-900 text-sm break-words">${item.title}</div>
+                <div class="flex flex-wrap items-center gap-1.5 mt-1">
+                  <span class="text-[11px] font-bold px-2 py-0.5 rounded-md ${badgeCls}">${payerLabel}</span>
+                  <span class="text-[11px] text-slate-400">${item.time || ''}</span>
+                </div>
               </div>
-              <div class="text-xs font-extrabold text-blue-700 font-mono mt-0.5">${origStr}</div>
+              <div class="text-right shrink-0">
+                <div class="font-mono font-black text-sm text-slate-900">${origStr}</div>
+                <button type="button" onclick="deleteExpense(${item.id})" class="text-[11px] font-bold text-rose-500 hover:text-rose-700 mt-1">刪除</button>
+              </div>
             </div>
-            <button onclick="deleteExpense(${item.id})" class="text-[11px] font-bold text-slate-400 hover:text-rose-600 px-1.5 py-0.5">刪除</button>
-          </div>
-          <div class="flex items-center justify-between text-[11px] bg-slate-50 rounded-lg px-2.5 py-1.5">
-            <span><strong class="text-amber-700">${item.payer}</strong> 先付 ・ ${item.splitMembers.length}人分 (${item.splitMembers.join('、')})</span>
-            ${item.receipt ? `<button onclick="openReceiptModal(${item.id})" class="text-blue-600 font-bold underline shrink-0 ml-2">🖼️ 看收據</button>` : ''}
+            <div class="text-[11px] text-slate-500 pt-1 border-t border-slate-100 flex items-center justify-between gap-2">
+              <span>分攤（${(item.splitMembers || []).length}人）：${membersText}</span>
+              ${item.receipt ? `<button type="button" onclick="openReceiptModal('${item.title.replace(/'/g, "\\'")}', '${item.receipt}')" class="shrink-0 text-blue-600 font-bold underline">檢視收據</button>` : ''}
+            </div>
           </div>
         `;
-        listEl.appendChild(row);
-      });
+      }).join('');
     }
 
-    function openReceiptModal(id) {
-      const item = expensesList.find(x => x.id === id);
-      if (!item || !item.receipt) return;
+    function openReceiptModal(title, src) {
+      const modal = document.getElementById('receipt-modal');
       const titleEl = document.getElementById('modal-receipt-title');
       const imgEl = document.getElementById('modal-receipt-img');
-      const modalEl = document.getElementById('receipt-modal');
-      if (titleEl) titleEl.textContent = item.title + '（收據照片）';
-      if (imgEl) imgEl.src = item.receipt;
-      if (modalEl) modalEl.classList.remove('hidden');
+      if (titleEl) titleEl.textContent = title;
+      if (imgEl) imgEl.src = src;
+      if (modal) modal.classList.remove('hidden');
     }
 
     function closeReceiptModal() {
-      const modalEl = document.getElementById('receipt-modal');
-      if (modalEl) modalEl.classList.add('hidden');
+      const modal = document.getElementById('receipt-modal');
+      if (modal) modal.classList.add('hidden');
     }
 
     function copyExpenseSummary() {
-      if (expensesList.length === 0) {
-        showToast('目前沒有支出明細可複製唷！');
-        return;
-      }
       const rate = getRate();
-      let lines = ['📒【2026 北海道之旅 共同支出明細】', `（參考匯率：1 JPY = ${rate} TWD）`, ''];
-      let totalTwd = 0;
+      const lines = ['📒 【2026 北海道之旅｜共同支出明細】'];
       expensesList.forEach((item, idx) => {
-        const twd = Math.round(item.currency === 'JPY' ? item.amount * rate : item.amount);
-        totalTwd += twd;
-        const amtText = item.currency === 'JPY' ? `¥${item.amount} (約NT$${twd})` : `NT$${item.amount}`;
-        lines.push(`${idx + 1}. ${item.title}：${amtText}｜${item.payer}先付（${item.splitMembers.length}人分）`);
+        const amtTwd = item.currency === 'TWD' ? item.amount : Math.round(item.amount * rate);
+        const orig = item.currency === 'JPY' ? `¥${item.amount.toLocaleString()}` : `NT$${item.amount.toLocaleString()}`;
+        lines.push(`${idx + 1}. ${item.title}：${orig} (約 NT$${amtTwd.toLocaleString()})｜${item.payer}`);
       });
-      lines.push('', `💰 總計約：NT$ ${totalTwd.toLocaleString()}`);
-      copyText(lines.join('\n'), '已複製全部支出明細，可直接貼到群組！');
+      copyText(lines.join('\n'), '已複製全部支出明細！');
     }
 
-    // ==================== Papago & Google 翻譯與手指日文卡 ====================
+    // ==================== 翻譯助手與手指日文卡 ====================
     const PHRASE_CARDS = [
-      {
-        tag: '餐廳訂位報到',
-        zh: '我有訂位，訂位名字是 Tsai Ming Huan。',
-        jp: '予約しています。予約名は Tsai Ming Huan です。'
-      },
-      {
-        tag: '星野寄大行李',
-        zh: '不好意思，我想用黑貓宅急便寄這個大行李箱到札幌的飯店。',
-        jp: 'すみません、このスーツケースをヤマト運輸で札幌のホテルまで送りたいです。'
-      },
-      {
-        tag: '札幌飯店領行李',
-        zh: '我有事前寄宅配行李過來，訂房名字是 Tsai Ming Huan。',
-        jp: '事前に宅配便で荷物を送っています。予約名は Tsai Ming Huan です。'
-      },
-      {
-        tag: '餐廳候位 7 人分兩桌',
-        zh: '不好意思，我們總共有 7 個人，可以分成兩桌坐沒有關係。',
-        jp: 'すみません、全部で7名です。2つのテーブルに分かれても大丈夫です。'
-      },
-      {
-        tag: '點餐與中文菜單',
-        zh: '請問有中文菜單嗎？請問店裡最推薦的招牌菜是什麼？',
-        jp: '中国語のメニューはありますか？このお店のおすすめは何ですか？'
-      },
-      {
-        tag: '購物退稅詢問',
-        zh: '請問這筆消費可以辦理免稅（Tax-Free）嗎？',
-        jp: 'すみません、これは免税（タックスフリー）になりますか？'
-      }
+      { tag: '購物退稅', jp: '免税（めんぜい）の手続きをお願いできますか？', zh: '請問可以幫我辦理免稅手續嗎？' },
+      { tag: '信用卡結帳', jp: 'クレジットカードで、日本円（にほんえん）払いでお願いします。', zh: '我要用信用卡結帳，請幫我用「日圓」計價。' },
+      { tag: '餐廳人數', jp: '予約（よやく）している〇〇です。大人9名（きゅうめい）です。', zh: '我們是有訂位的〇〇，大人總共 9 位。' },
+      { tag: '分開結帳', jp: '別々（べつべつ）にお会計（かいけい）をお願いできますか？', zh: '請問可以幫我們分開結帳嗎？' },
+      { tag: '寄放行李', jp: 'チェックイン前ですが、荷物を預かっていただけますか？', zh: '還沒到入住時間，請問可以先寄放行李嗎？' },
+      { tag: '黑貓宅急便', jp: 'このスーツケースを札幌のホテルまでクール便ではなく通常便で送りたいです。', zh: '我想把這個行李箱用一般宅急便寄到札幌的飯店。' },
+      { tag: '點餐不吃牛/生食', jp: '牛肉（ぎゅうにく）と生もの（なまもの）が食べられません。', zh: '我不吃牛肉以及生食。' }
     ];
 
-    function renderPhraseCards() {
+    function initPhraseCards() {
       const container = document.getElementById('phrase-cards-container');
       if (!container) return;
-      container.innerHTML = '';
-      PHRASE_CARDS.forEach((p, idx) => {
-        const card = document.createElement('div');
-        card.className = 'bg-white border border-slate-200/90 hover:border-blue-400 rounded-2xl p-3.5 cursor-pointer transition active:scale-[0.99] shadow-2xs';
-        card.onclick = () => openPhraseModal(idx);
-        card.innerHTML = `
-          <div class="flex items-center justify-between mb-1">
-            <span class="text-[11px] font-extrabold bg-sky-100 text-sky-800 px-2.5 py-0.5 rounded-full">${p.tag}</span>
-            <span class="text-[11px] font-bold text-blue-600">🔍 點擊放大顯示</span>
+      container.innerHTML = PHRASE_CARDS.map((p, idx) => `
+        <div onclick="openPhraseModal(${idx})" class="bg-white hover:bg-sky-50/60 border border-slate-200 rounded-xl p-3 cursor-pointer transition active:scale-[0.99] space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] font-extrabold bg-sky-100 text-sky-800 px-2 py-0.5 rounded">${p.tag}</span>
+            <span class="text-[11px] font-bold text-blue-600">點擊放大 ↗</span>
           </div>
-          <div class="text-sm font-black text-slate-900 mt-1">${p.jp}</div>
-          <div class="text-xs text-slate-500 mt-0.5">${p.zh}</div>
-        `;
-        container.appendChild(card);
-      });
+          <div class="text-sm font-black text-slate-900">${p.jp}</div>
+          <div class="text-xs text-slate-500">${p.zh}</div>
+        </div>
+      `).join('');
     }
 
     function openPhraseModal(idx) {
       const p = PHRASE_CARDS[idx];
       if (!p) return;
+      const modal = document.getElementById('phrase-modal');
       const tagEl = document.getElementById('modal-phrase-tag');
       const jpEl = document.getElementById('modal-phrase-jp');
       const zhEl = document.getElementById('modal-phrase-zh');
       const copyBtn = document.getElementById('modal-phrase-copy-btn');
-      const modalEl = document.getElementById('phrase-modal');
       if (tagEl) tagEl.textContent = p.tag;
       if (jpEl) jpEl.textContent = p.jp;
       if (zhEl) zhEl.textContent = p.zh;
-      if (copyBtn) copyBtn.onclick = () => copyText(p.jp, '已複製日文句子！');
-      if (modalEl) modalEl.classList.remove('hidden');
+      if (copyBtn) copyBtn.onclick = () => copyText(p.jp, '已複製日文句型！');
+      if (modal) modal.classList.remove('hidden');
     }
 
     function closePhraseModal() {
-      const modalEl = document.getElementById('phrase-modal');
-      if (modalEl) modalEl.classList.add('hidden');
+      const modal = document.getElementById('phrase-modal');
+      if (modal) modal.classList.add('hidden');
     }
 
-    function openTranslator(engine, targetLang = 'ja') {
-      const inputEl = document.getElementById('trans-input');
-      const text = inputEl ? inputEl.value.trim() : '';
+    function openTranslator(service, targetLang) {
+      const input = document.getElementById('trans-input');
+      const text = input ? input.value.trim() : '';
       const encoded = encodeURIComponent(text);
       let url = '';
-      if (engine === 'papago') {
-        url = text
-          ? `https://papago.naver.com/?sk=zh-TW&tk=${targetLang}&st=${encoded}`
-          : `https://papago.naver.com/?sk=zh-TW&tk=${targetLang}`;
+      if (service === 'papago') {
+        url = `https://papago.naver.com/?sk=zh-TW&tk=${targetLang}&st=${encoded}`;
       } else {
-        url = text
-          ? `https://translate.google.com/?sl=zh-TW&tl=${targetLang}&text=${encoded}&op=translate`
-          : `https://translate.google.com/?sl=zh-TW&tl=${targetLang}&op=translate`;
+        url = `https://translate.google.com/?sl=zh-TW&tl=${targetLang}&text=${encoded}&op=translate`;
       }
       window.open(url, '_blank');
     }
 
-    // ==================== 伴手禮採買推薦單邏輯 ====================
+    // ==================== 伴手禮採買推薦單 ====================
     const SOUVENIR_STORAGE_KEY = 'hokkaido_2026_souvenirs_v1';
     const DEFAULT_SOUVENIRS = [
-      { id: 's1', cat: 'biei', loc: 'D3 美瑛選果（美瑛小麥工房）', name: '美瑛小麥工房「吐司／黑豆麵包／紅豆麵包」', desc: '使用 100% 美瑛產「夢之力」小麥製作（註：美瑛本店沒有販售玉米麵包，玉米麵包為新千歲機場店限定）。', tag: '美瑛本店限定' },
-      { id: 's2', cat: 'biei', loc: 'D3 美瑛選果', name: '美瑛選果 凍乾草莓巧克力／黑豆茶', desc: '文青質感包裝，美瑛當地農產製成，送長輩超體面。', tag: '質感伴手禮' },
-      { id: 's2_farm', cat: 'biei', loc: 'D3 美瑛丘陵（機動順遊）', name: 'ひとさじ農場製造所 手工水果果醬／烤餅乾', desc: '北海道有機水果熬製手工果醬，包裝質感極佳（冬季營業日不固定，出發前確認 IG 若有開門可順遊）。', tag: '視營業順遊' },
-      { id: 's1_airport', cat: 'airport', loc: 'D6 新千歲機場（美瑛選果）', name: '美瑛選果「新千歲機場限定 玉米麵包」', desc: '新千歲機場國內線 2F 分店限定！不加一滴水與糖、只用美瑛甜玉米烘焙，出爐即秒殺。', tag: '機場店限定⭐' },
-      { id: 's3', cat: 'otaru', loc: 'D5 小樽堺町通', name: 'LeTAO 紅茶巧克力餅乾 (Thé Noir)', desc: '大吉嶺紅茶香氣夾心餅乾，常溫保存好攜帶，分送同事首選。', tag: '常溫好帶' },
-      { id: 's4', cat: 'otaru', loc: 'D5 小樽堺町通', name: 'LeTAO 雙層起司蛋糕 (Fromage Double)', desc: '小樽必吃經典！回台建議 Day 6 在機場買冷凍版＋保冷袋。', tag: '招牌必買' },
-      { id: 's5', cat: 'otaru', loc: 'D5 小樽堺町通', name: '北菓樓 北海道開拓米菓 (おかき)', desc: '帆立貝、甜蝦、昆布、秋鮭口味，鹹香酥脆輕巧不佔重量。', tag: '鹹食首選' },
-      { id: 's6', cat: 'otaru', loc: 'D5 小樽堺町通', name: '六花亭 蘭姆葡萄奶油夾心餅＆草莓巧克力', desc: '蘭姆葡萄夾心保存期約 9 天，建議留到 Day 6 機場買最新鮮。', tag: '經典不敗' },
-      { id: 's7', cat: 'airport', loc: 'D4–6 札幌＆機場', name: 'SNOWS 冬季限定 生巧克力夾心餅', desc: '每年 11月–4月冬季限定！放牧牛乳生巧克力配貓舌餅，看到必搶。', tag: '冬季限定⭐' },
-      { id: 's7_shiro', cat: 'airport', loc: 'D4 砂川中停站', name: 'みんなの工場 by SHIRO 砂川限定調香＆保養品', desc: '砂川工廠旗艦店限定「Blender Lab」自調香水、酒粕化妝水與昆布精華。', tag: '砂川工廠限定' },
-      { id: 's8', cat: 'airport', loc: 'D4–6 札幌＆機場', name: '札幌農學校 北海道牛奶餅乾', desc: '奶香極濃、價格親民，CP 值最高的辦公室分送伴手禮。', tag: '高CP值' },
-      { id: 's9', cat: 'airport', loc: 'D4–6 札幌＆機場', name: "ROYCE' 生巧克力 (原味／抹茶)＆巧克力洋芋片", desc: 'Day 6 出境前在機場免稅店直接買＋保冷袋最方便，不用一路冰飯店。', tag: '機場必掃' },
-      { id: 's10', cat: 'airport', loc: 'D4–6 札幌＆機場', name: 'Calbee 薯塊三姐妹 (いも子とこぶ太郎)／黃金馬鈴薯', desc: '紫色包裝馬鈴薯片配酥脆昆布超涮嘴，比薯條三兄弟更稀有！', tag: '北海道限定' },
-      { id: 's11', cat: 'airport', loc: 'D4–6 札幌＆機場', name: '柳月 三方六年輪蛋糕（小割獨立包裝版）', desc: '白樺樹紋路年輪蛋糕，買「小割」獨立小包裝不用自己切。', tag: '獨立包裝' }
+      { id: 's1', cat: 'biei', name: '美瑛小麥工房 100%夢之力吐司＆黑豆麵包', place: 'D3 美瑛選果本店', checked: false },
+      { id: 's2', cat: 'airport', name: '美瑛選果 機場限定現烤玉米麵包（每人限購）', place: 'D6 新千歲國內線 2F', checked: false },
+      { id: 's3', cat: 'airport', name: '冬季限定 SNOWS 生巧克力夾心餅乾', place: 'D6 新千歲國內線 2F', checked: false },
+      { id: 's4', cat: 'airport', name: 'ROYCE\' 生巧克力（原味 / 香檳 / 抹茶）', place: 'D6 新千歲國內線 2F', checked: false },
+      { id: 's5', cat: 'airport', name: '六花亭 蘭姆葡萄奶油夾心餅＆草莓巧克力', place: 'D5 小樽 / D6 機場', checked: false },
+      { id: 's6', cat: 'airport', name: '札幌農學校 北海道牛奶餅乾', place: 'D6 新千歲國內線 2F', checked: false },
+      { id: 's7', cat: 'otaru', name: 'LeTAO 紅茶巧克力夾心餅＆雙層起司蛋糕', place: 'D5 小樽堺町通', checked: false },
+      { id: 's8', cat: 'otaru', name: '北菓樓 北海道開拓米菓（帆立貝 / 甜蝦）', place: 'D5 小樽堺町通', checked: false },
+      { id: 's9', cat: 'airport', name: 'みんなの工場 by SHIRO 砂川限定自調香水', place: 'D4 砂川 SHIRO 工廠', checked: false }
     ];
 
-    let souvenirState = { checked: {}, custom: [] };
+    let souvenirsList = [];
     let currentSouvenirFilter = 'all';
 
-    function loadSouvenirState() {
+    function loadSouvenirs() {
       try {
         const raw = localStorage.getItem(SOUVENIR_STORAGE_KEY);
-        if (raw) souvenirState = JSON.parse(raw);
+        souvenirsList = raw ? JSON.parse(raw) : [...DEFAULT_SOUVENIRS];
       } catch (e) {
-        souvenirState = { checked: {}, custom: [] };
+        souvenirsList = [...DEFAULT_SOUVENIRS];
       }
     }
 
-    function saveSouvenirState() {
+    function saveSouvenirs() {
       try {
-        localStorage.setItem(SOUVENIR_STORAGE_KEY, JSON.stringify(souvenirState));
+        localStorage.setItem(SOUVENIR_STORAGE_KEY, JSON.stringify(souvenirsList));
       } catch (e) {}
     }
 
@@ -3063,183 +3282,74 @@
       renderSouvenirs();
     }
 
-    function toggleSouvenir(id) {
-      souvenirState.checked[id] = !souvenirState.checked[id];
-      saveSouvenirState();
-      renderSouvenirs();
+    function toggleSouvenirCheck(id) {
+      const item = souvenirsList.find(s => s.id === id);
+      if (item) {
+        item.checked = !item.checked;
+        saveSouvenirs();
+        renderSouvenirs();
+      }
     }
 
     function addCustomSouvenir() {
       const input = document.getElementById('custom-souvenir-input');
-      if (!input) return;
-      const val = input.value.trim();
+      const val = input ? input.value.trim() : '';
       if (!val) {
         showToast('請輸入想買的伴手禮名稱唷！');
         return;
       }
-      souvenirState.custom.unshift({
-        id: 'c_' + Date.now(),
+      souvenirsList.unshift({
+        id: 'custom_' + Date.now(),
         cat: 'custom',
-        loc: '我的自訂清單',
         name: val,
-        desc: '自行新增的採買目標',
-        tag: '自訂'
+        place: '我的自訂清單',
+        checked: false
       });
-      input.value = '';
-      saveSouvenirState();
+      saveSouvenirs();
+      if (input) input.value = '';
       renderSouvenirs();
       showToast('已加入伴手禮清單！');
-    }
-
-    function deleteCustomSouvenir(id, event) {
-      if (event) event.stopPropagation();
-      souvenirState.custom = souvenirState.custom.filter(x => x.id !== id);
-      delete souvenirState.checked[id];
-      saveSouvenirState();
-      renderSouvenirs();
-      showToast('已移除自訂項目');
     }
 
     function renderSouvenirs() {
       const container = document.getElementById('souvenir-list-container');
       const badge = document.getElementById('souvenir-progress-badge');
+      const checkedCount = souvenirsList.filter(s => s.checked).length;
+      if (badge) badge.textContent = `已買 ${checkedCount} / ${souvenirsList.length} 件`;
       if (!container) return;
 
-      const allItems = [...souvenirState.custom, ...DEFAULT_SOUVENIRS];
-      const boughtCount = allItems.filter(item => souvenirState.checked[item.id]).length;
-      if (badge) badge.textContent = `已買 ${boughtCount} / ${allItems.length} 件`;
-
       const filtered = currentSouvenirFilter === 'all'
-        ? allItems
-        : allItems.filter(item => item.cat === currentSouvenirFilter);
+        ? souvenirsList
+        : souvenirsList.filter(s => s.cat === currentSouvenirFilter);
 
       if (filtered.length === 0) {
-        container.innerHTML = '<div class="text-center py-6 text-xs text-slate-400">此分類目前沒有項目，可在上方輸入框自行新增 🎁</div>';
+        container.innerHTML = '<div class="text-center text-xs text-slate-400 py-5">此分類目前沒有項目</div>';
         return;
       }
 
-      container.innerHTML = '';
-      filtered.forEach(item => {
-        const isDone = !!souvenirState.checked[item.id];
-        const card = document.createElement('div');
-        card.onclick = () => toggleSouvenir(item.id);
-        card.className = `flex items-start gap-3 p-3 rounded-2xl border transition cursor-pointer select-none ${
-          isDone
-            ? 'bg-pink-50/70 border-pink-200 opacity-75'
-            : 'bg-white border-slate-200/90 hover:border-pink-300 shadow-2xs'
-        }`;
-
-        card.innerHTML = `
-          <div class="mt-0.5 w-5 h-5 rounded-lg flex items-center justify-center shrink-0 transition ${
-            isDone ? 'bg-pink-500 text-white' : 'border-2 border-slate-300 bg-white'
-          }">
-            ${isDone ? '<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>' : ''}
-          </div>
-          <div class="flex-1 min-w-0">
-            <div class="flex items-center justify-between gap-1.5 flex-wrap">
-              <span class="text-[10px] font-bold bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md">${item.loc}</span>
-              <div class="flex items-center gap-1.5">
-                <span class="text-[10px] font-bold bg-amber-100 text-amber-800 px-2 py-0.5 rounded-md">${item.tag}</span>
-                ${item.cat === 'custom' ? `<button type="button" onclick="deleteCustomSouvenir('${item.id}', event)" class="text-[11px] font-bold text-slate-400 hover:text-rose-600 px-1">✕</button>` : ''}
-              </div>
+      container.innerHTML = filtered.map(s => `
+        <div onclick="toggleSouvenirCheck('${s.id}')" class="flex items-center justify-between gap-3 p-3 rounded-xl border cursor-pointer transition ${s.checked ? 'bg-emerald-50/70 border-emerald-200' : 'bg-white border-slate-200 hover:bg-slate-50'}">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <span class="w-5 h-5 rounded-md flex items-center justify-center text-xs font-black shrink-0 ${s.checked ? 'bg-emerald-500 text-white' : 'border-2 border-slate-300 bg-white'}">
+              ${s.checked ? '✓' : ''}
+            </span>
+            <div class="min-w-0">
+              <div class="text-xs sm:text-sm font-extrabold ${s.checked ? 'line-through text-slate-400' : 'text-slate-900'}">${s.name}</div>
+              <div class="text-[11px] text-slate-500 mt-0.5">📍 ${s.place}</div>
             </div>
-            <div class="text-xs sm:text-sm font-black mt-1 ${isDone ? 'line-through text-slate-400' : 'text-slate-900'}">${item.name}</div>
-            <p class="text-[11px] text-slate-500 mt-0.5 leading-relaxed">${item.desc}</p>
           </div>
-        `;
-        container.appendChild(card);
-      });
+        </div>
+      `).join('');
     }
 
-    // 頁面載入完成後統一初始化
-    window.addEventListener('DOMContentLoaded', () => {
-      updateDepartureCountdown();
-      setInterval(updateDepartureCountdown, 1000);
-      initItineraryMap();
-      renderMilkMap();
-      fetchLiveExchangeRate(false);
-      initExpenseForm();
-      loadExpenses();
-      renderExpenseList();
-      renderPhraseCards();
-      loadSouvenirState();
-      renderSouvenirs();
-    });
-
-    // ==================== 北海道夢幻牛乳產區可愛地圖邏輯 ====================
+    // ==================== 北海道牛乳產區可愛互動地圖 ====================
     const MILK_REGIONS = [
-      {
-        id: 'tomamu',
-        name: '1. 星野 TOMAMU 牧場',
-        shortName: '星野牧場',
-        emoji: '🏔️',
-        fat: '低溫殺菌・冬脂 4.0%+',
-        spot: 'D1–2 星野必喝',
-        x: 256,
-        y: 168,
-        align: 'right',
-        desc: '星野自有牧場 65°C 低溫殺菌鮮乳！12月冬季乳脂肪最濃郁，瓶口常浮一層天然奶油蓋，就在 The Tower 商店與早餐餐廳！'
-      },
-      {
-        id: 'biei',
-        name: '2. 美瑛放牧酪農場',
-        shortName: '美瑛牛乳',
-        emoji: '🎄',
-        fat: '放牧生乳・清甜濃厚',
-        spot: 'D3 美瑛＆機場',
-        x: 248,
-        y: 112,
-        align: 'right',
-        desc: '美瑛丘陵放牧牛隻生乳製成，奶香濃厚卻清爽不膩，推薦在美瑛選果配剛出爐的「美瑛小麥工房」紅豆／黑豆麵包一起享用！'
-      },
-      {
-        id: 'tokachi',
-        name: '3. 十勝・四葉特選 4.0',
-        shortName: '十勝四葉4.0',
-        emoji: '🍀',
-        fat: '乳脂肪 4.0% 以上',
-        spot: '全行程超商必買',
-        x: 306,
-        y: 178,
-        align: 'bottom',
-        desc: '北海道十勝平原王牌「よつ葉特選 4.0 牛乳」！7-11、Lawson 與超市隨手可得，金色深藍包裝、濃醇度滿分！'
-      },
-      {
-        id: 'toyotomi',
-        name: '4. 豐富町牛乳 (Seicomart)',
-        shortName: '豐富町牛乳',
-        emoji: '🧡',
-        fat: '日本最北酪農聖地',
-        spot: '橘色超商限定',
-        x: 222,
-        y: 34,
-        align: 'left',
-        desc: '北海道橘色超商 Seicomart 獨家販售！來自最北端稚內旁「豐富町」，入口甜度驚人，許多台灣旅客公認第一名！'
-      },
-      {
-        id: 'kura',
-        name: '5. 後志・倉島牧場 3.7',
-        shortName: '倉島 3.7 牛乳',
-        emoji: '🐄',
-        fat: '後志小樽名產・3.7%',
-        spot: 'D5 小樽・札幌',
-        x: 132,
-        y: 152,
-        align: 'left',
-        desc: '小樽、岩內一帶代表性牧場，紅白可愛牛牛紙盒包裝，也是許多小樽甜點老店指定使用的香濃鮮乳！'
-      },
-      {
-        id: 'hakodate',
-        name: '6. 函館・山川牧場自然牛乳',
-        shortName: '山川牧場',
-        emoji: '🍼',
-        fat: '老字號經典玻璃瓶',
-        spot: 'D1 千歲永旺超市',
-        x: 102,
-        y: 222,
-        align: 'right',
-        desc: '道南大沼名門牧場，口感極度純淨滑順、毫無腥味，Day 1 中停「永旺千歲店（AEON）」冷藏櫃就能買到！'
-      }
+      { id: 0, name: '1. 星野 TOMAMU 農場', emoji: '🐄', spot: 'D1–2 必喝', fat: '冬季乳脂高達 4.0%+', x: 278, y: 170, align: 'right', desc: '星野自有牧場低溫殺菌鮮乳！12月冬季乳脂肪最濃郁，喝起來像融化的香草冰淇淋，就在 Day 1–2 The Tower 大廳商店與早餐餐廳！' },
+      { id: 1, name: '2. 美瑛放牧酪農場', emoji: '🥛', spot: 'D3 美瑛選果', fat: '放牧生乳・醇厚清爽', x: 266, y: 108, align: 'right', desc: '使用美瑛丘陵放牧牛隻生乳，乳香濃厚且清爽不膩，搭配美瑛小麥工房的現烤紅豆麵包或吐司簡直是夢幻早餐組合！' },
+      { id: 2, name: '3. 十勝四葉特選 4.0', emoji: '🍀', spot: '全行程超商', fat: '乳脂肪 4.0% 以上', x: 326, y: 185, align: 'bottom', desc: '十勝產區王牌！金色／深藍包裝的「特選よつ葉 4.0 牛乳」乳脂肪高達 4.0% 以上，CP 值最高、7-11 與 Lawson 隨時買得到。' },
+      { id: 3, name: '4. 豐富町牛乳 (Seicomart)', emoji: '🧡', spot: '橘色超商限定', fat: '日本最北酪農聖地', x: 214, y: 34, align: 'top', desc: '北海道第一名連鎖超商 Seicomart 獨家！產自日本最北端酪農聖地「豐富町」，入口甜度驚人、喝過就回不去。' },
+      { id: 4, name: '5. 後志倉島牧場 3.7', emoji: '🐮', spot: 'D5 小樽超市', fat: '後志經典紅白牛牛瓶', x: 96, y: 132, align: 'top', desc: '後志地區（小樽・積丹一帶）代表性牧場，紅白復古牛牛包裝超可愛，奶香醇厚順口，也是許多小樽甜點店指定原料。' },
+      { id: 5, name: '6. 函館山川牧場自然牛乳', emoji: '🍼', spot: 'D1 永旺超市', fat: '老字號名門玻璃瓶裝', x: 74, y: 216, align: 'bottom', desc: '北海道老字號名門牧場，玻璃瓶裝（也有紙盒裝）口感極為純淨滑順，尾韻帶有淡淡牧草清香，Day 1 千歲永旺超市就能買到！' }
     ];
 
     function selectMilkRegion(idx, event) {
@@ -3249,105 +3359,86 @@
       }
       const item = MILK_REGIONS[idx];
       if (!item) return;
+      const eEl = document.getElementById('milk-popup-emoji');
+      const tEl = document.getElementById('milk-popup-title');
+      const sEl = document.getElementById('milk-popup-spot');
+      const fEl = document.getElementById('milk-popup-fat');
+      const dEl = document.getElementById('milk-popup-desc');
+      if (eEl) eEl.textContent = item.emoji;
+      if (tEl) tEl.textContent = item.name;
+      if (sEl) sEl.textContent = item.spot;
+      if (fEl) fEl.textContent = item.fat;
+      if (dEl) dEl.textContent = item.desc;
 
-      const emojiEl = document.getElementById('milk-popup-emoji');
-      const titleEl = document.getElementById('milk-popup-title');
-      const fatEl = document.getElementById('milk-popup-fat');
-      const descEl = document.getElementById('milk-popup-desc');
-      const spotEl = document.getElementById('milk-popup-spot');
-
-      if (emojiEl) emojiEl.textContent = item.emoji;
-      if (titleEl) titleEl.textContent = item.name;
-      if (fatEl) fatEl.textContent = item.fat;
-      if (descEl) descEl.textContent = item.desc;
-      if (spotEl) spotEl.textContent = item.spot;
-
-      const canvasEl = document.getElementById('milk-map-canvas');
-      if (canvasEl) {
-        canvasEl.querySelectorAll('.milk-pin-group').forEach((el, i) => {
-          if (i === idx) {
-            el.classList.add('is-selected');
-          } else {
-            el.classList.remove('is-selected');
-          }
+      const canvas = document.getElementById('milk-map-canvas');
+      if (canvas) {
+        canvas.querySelectorAll('.cute-pin-group').forEach((g, i) => {
+          if (i === idx) g.classList.add('is-selected');
+          else g.classList.remove('is-selected');
         });
       }
-
-      document.querySelectorAll('.milk-pill-btn').forEach((btn, i) => {
-        if (i === idx) {
-          btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-200');
-          btn.classList.add('bg-sky-600', 'text-white', 'border-sky-600');
-        } else {
-          btn.classList.remove('bg-sky-600', 'text-white', 'border-sky-600');
-          btn.classList.add('bg-white', 'text-slate-700', 'border-slate-200');
-        }
-      });
     }
 
     function renderMilkMap() {
-      const canvasEl = document.getElementById('milk-map-canvas');
-      const pillsEl = document.getElementById('milk-region-pills');
-      if (!canvasEl) return;
-
-      if (pillsEl) {
-        pillsEl.innerHTML = MILK_REGIONS.map((r, idx) => `
-          <button type="button" onclick="selectMilkRegion(${idx}, event)" class="milk-pill-btn inline-flex items-center gap-1 ${idx === 0 ? 'bg-sky-600 text-white border-sky-600' : 'bg-white text-slate-700 border-slate-200'} border text-xs font-bold px-2.5 py-1 rounded-full shadow-2xs transition active:scale-95">
-            <span>${r.emoji}</span>
-            <span>${r.shortName}</span>
+      const canvas = document.getElementById('milk-map-canvas');
+      const pills = document.getElementById('milk-region-pills');
+      if (pills) {
+        pills.innerHTML = MILK_REGIONS.map((r, i) => `
+          <button type="button" onclick="selectMilkRegion(${i}, event)" class="text-xs font-extrabold bg-white hover:bg-sky-50 border border-sky-200 text-slate-800 px-2.5 py-1 rounded-full shadow-2xs transition active:scale-95">
+            ${r.emoji} ${r.name}
           </button>
         `).join('');
       }
+      if (!canvas) return;
 
       const pinsSvg = MILK_REGIONS.map((r, idx) => {
-        const labelW = r.shortName.length * 9.5 + 18;
+        const labelW = r.name.length * 7.8 + 14;
         const pos = getLabelOffset(r.align, labelW);
         return `
-          <g class="cute-pin-group milk-pin-group ${idx === 0 ? 'is-selected' : ''}" onclick="selectMilkRegion(${idx}, event)" transform="translate(${r.x}, ${r.y})">
+          <g class="cute-pin-group ${idx === 0 ? 'is-selected' : ''}" onclick="selectMilkRegion(${idx}, event)" transform="translate(${r.x}, ${r.y})">
             <circle cx="0" cy="-22" r="24" fill="transparent" />
-            <circle class="pin-ring" cx="0" cy="-27" r="22" fill="none" stroke="#f59e0b" stroke-width="3.5" />
+            <circle class="pin-ring" cx="0" cy="-27" r="21" fill="none" stroke="#f59e0b" stroke-width="3" />
             <ellipse cx="0" cy="4" rx="10" ry="4" fill="rgba(15, 23, 42, 0.2)" pointer-events="none" />
             <path d="M 0 2 C -12 -10, -16 -20, -16 -27 A 16 16 0 1 1 16 -27 C 16 -20, 12 -10, 0 2 Z" fill="#0284c7" stroke="#ffffff" stroke-width="2.5" />
             <circle cx="0" cy="-27" r="11.5" fill="#ffffff" />
             <text x="0" y="-22.5" text-anchor="middle" font-size="13" pointer-events="none">${r.emoji}</text>
-            <circle cx="-12" cy="-38" r="7" fill="#f59e0b" stroke="#ffffff" stroke-width="1.5" />
-            <text x="-12" y="-35" text-anchor="middle" fill="#ffffff" font-size="8.5" font-weight="900" pointer-events="none">${idx + 1}</text>
-            <rect class="cute-label-pill" x="${pos.rx}" y="${pos.ry}" width="${labelW}" height="18" rx="9" fill="#ffffff" stroke="#0284c7" stroke-width="1.6" pointer-events="none" />
-            <text x="${pos.tx}" y="${pos.ty + 0.5}" text-anchor="${pos.anchor}" fill="#0f172a" font-size="9.5" font-weight="900" pointer-events="none">${r.shortName}</text>
+            <rect class="cute-label-pill" x="${pos.rx}" y="${pos.ry}" width="${labelW}" height="17" rx="8.5" fill="#ffffff" stroke="#0284c7" stroke-width="1.5" pointer-events="none" />
+            <text x="${pos.tx}" y="${pos.ty}" text-anchor="${pos.anchor}" fill="#0f172a" font-size="9.5" font-weight="900" pointer-events="none">${r.name}</text>
           </g>
         `;
       }).join('');
 
-      canvasEl.innerHTML = `
+      canvas.innerHTML = `
         <svg viewBox="0 0 420 260" class="w-full h-full select-none" preserveAspectRatio="xMidYMid meet">
-          <defs>
-            <filter id="milkIslandShadow" x="-10%" y="-10%" width="120%" height="120%">
-              <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#0284c7" flood-opacity="0.22"/>
-            </filter>
-          </defs>
-
-          <!-- Q版北海道全島雪白牛奶輪廓 -->
-          <path d="M 218 14 Q 246 28, 275 68 Q 332 82, 392 78 Q 406 112, 376 144 Q 345 178, 315 215 Q 282 222, 255 192 Q 212 182, 172 194 Q 142 212, 132 238 Q 96 248, 84 224 Q 94 196, 118 182 Q 106 154, 134 134 Q 168 122, 198 86 Q 204 42, 218 14 Z"
-                fill="#ffffff" stroke="#7dd3fc" stroke-width="3.5" filter="url(#milkIslandShadow)" pointer-events="none" />
-          <path d="M 220 24 Q 244 38, 270 74 Q 324 88, 380 84 Q 392 112, 366 140 Q 336 172, 310 204 Q 280 210, 256 184 Q 212 174, 170 186 Q 140 202, 128 228 Q 102 236, 94 218 Q 104 194, 126 180 Q 116 154, 140 138 Q 172 126, 202 90 Q 208 50, 220 24 Z"
-                fill="#f0f9ff" opacity="0.8" pointer-events="none" />
-
-          <!-- 可愛牧場小元素 -->
-          <g opacity="0.6" pointer-events="none">
-            <text x="275" y="128" font-size="15">🐄</text>
-            <text x="178" y="156" font-size="14">🥛</text>
-            <text x="335" y="122" font-size="13">🌿</text>
-            <text x="215" y="72" font-size="12">❄️</text>
-          </g>
-
-          <text x="24" y="42" font-size="11" fill="#0369a1" opacity="0.45" font-weight="900" pointer-events="none">🥛 北海道生乳王國</text>
-          <text x="318" y="244" font-size="11" fill="#0369a1" opacity="0.45" font-weight="900" pointer-events="none">太平洋 🌊</text>
-
+          <path d="M 22 92 Q 48 68, 86 78 Q 112 52, 152 38 Q 215 16, 295 14 Q 355 24, 398 58 Q 412 108, 385 155 Q 355 202, 292 238 Q 230 254, 175 242 Q 135 224, 102 232 Q 62 246, 26 218 Q 12 182, 34 150 Q 10 124, 22 92 Z"
+                fill="#ffffff" stroke="#7dd3fc" stroke-width="3.5" pointer-events="none" />
+          <path d="M 34 96 Q 56 76, 90 85 Q 116 62, 154 48 Q 214 28, 288 26 Q 344 35, 384 65 Q 396 108, 372 150 Q 344 192, 286 226 Q 228 240, 178 228 Q 138 212, 104 220 Q 68 232, 36 208 Q 24 178, 44 148 Q 22 124, 34 96 Z"
+                fill="#f0f9ff" opacity="0.85" pointer-events="none" />
           ${pinsSvg}
         </svg>
       `;
-
       selectMilkRegion(0);
     }
+
+    // ==================== 頁面啟動初始化 ====================
+    document.addEventListener('DOMContentLoaded', function() {
+      try {
+        updateDepartureCountdown();
+        setInterval(updateDepartureCountdown, 1000);
+        fetchLiveExchangeRate(false);
+        loadPublicFundState();
+        initExpenseForm();
+        loadExpenses();
+        renderExpenseList();
+        initPhraseCards();
+        loadSouvenirs();
+        renderSouvenirs();
+        initItineraryMap();
+        renderMilkMap();
+      } catch (err) {
+        console.error('Initialization error:', err);
+      }
+    });
   </script>
 </body>
 </html>
