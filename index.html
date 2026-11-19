@@ -23,25 +23,25 @@
     }
   </script>
   <style>
-    /* 放大全站基準字級，方便手機清楚閱讀 */
+    /* 選項 A：全站字體再放大一級，手機閱讀超輕鬆 */
     html {
-      font-size: 18px;
+      font-size: 20px;
     }
     .text-\[10px\] {
-      font-size: 13px !important;
-      line-height: 1.45 !important;
-    }
-    .text-\[11px\] {
-      font-size: 14px !important;
+      font-size: 14.5px !important;
       line-height: 1.5 !important;
     }
-    .text-xs {
-      font-size: 15px !important;
+    .text-\[11px\] {
+      font-size: 15.5px !important;
       line-height: 1.55 !important;
     }
-    .text-sm {
+    .text-xs {
       font-size: 16.5px !important;
       line-height: 1.6 !important;
+    }
+    .text-sm {
+      font-size: 18px !important;
+      line-height: 1.65 !important;
     }
     .no-scrollbar::-webkit-scrollbar {
       display: none;
@@ -132,7 +132,7 @@
       </p>
 
       <!-- 出發倒數計時器（數字隔離翻譯，避免韓文模式跳動） -->
-      <div id="countdown-banner" class="mt-3.5 bg-white/15 backdrop-blur-md border border-white/25 rounded-2xl px-3.5 py-2.5 flex items-center justify-between gap-2 shadow-xs">
+      <div id="countdown-banner" class="mt-3.5 bg-white/15 backdrop-blur-md border border-white/25 rounded-2xl px-3.5 py-2.5 flex items-center justify-between gap-2 shadow-xs flex-wrap">
         <div class="flex items-center gap-2 min-w-0">
           <span class="text-lg leading-none shrink-0">⏳</span>
           <div class="min-w-0">
@@ -141,19 +141,19 @@
           </div>
         </div>
         <div id="countdown-timer" class="flex items-center gap-1.5 font-mono text-center shrink-0">
-          <div class="bg-slate-900/40 border border-white/20 rounded-xl px-2 py-1 w-[44px]">
+          <div class="bg-slate-900/40 border border-white/20 rounded-xl px-2 py-1 min-w-[46px]">
             <div id="cd-days" class="notranslate tabular-nums text-sm sm:text-base font-black text-amber-300 leading-none" translate="no">--</div>
             <div class="text-[9px] text-sky-100 mt-0.5">天</div>
           </div>
-          <div class="bg-slate-900/40 border border-white/20 rounded-xl px-2 py-1 w-[40px]">
+          <div class="bg-slate-900/40 border border-white/20 rounded-xl px-2 py-1 min-w-[42px]">
             <div id="cd-hours" class="notranslate tabular-nums text-sm sm:text-base font-black text-white leading-none" translate="no">--</div>
             <div class="text-[9px] text-sky-100 mt-0.5">時</div>
           </div>
-          <div class="bg-slate-900/40 border border-white/20 rounded-xl px-2 py-1 w-[40px]">
+          <div class="bg-slate-900/40 border border-white/20 rounded-xl px-2 py-1 min-w-[42px]">
             <div id="cd-mins" class="notranslate tabular-nums text-sm sm:text-base font-black text-white leading-none" translate="no">--</div>
             <div class="text-[9px] text-sky-100 mt-0.5">分</div>
           </div>
-          <div class="bg-slate-900/40 border border-white/20 rounded-xl px-2 py-1 w-[40px]">
+          <div class="bg-slate-900/40 border border-white/20 rounded-xl px-2 py-1 min-w-[42px]">
             <div id="cd-secs" class="notranslate tabular-nums text-sm sm:text-base font-black text-sky-200 leading-none" translate="no">--</div>
             <div class="text-[9px] text-sky-100 mt-0.5">秒</div>
           </div>
@@ -195,6 +195,9 @@
       <button type="button" onclick="switchTab('expense')" id="tab-expense" class="tab-btn shrink-0 py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-slate-100">
         📒 共同記帳
       </button>
+      <button type="button" onclick="switchTab('coupons')" id="tab-coupons" class="tab-btn shrink-0 py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-slate-100">
+        🎟️ 購物優惠券
+      </button>
       <button type="button" onclick="switchTab('translate')" id="tab-translate" class="tab-btn shrink-0 py-2 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:bg-slate-100">
         🗣️ 翻譯助手
       </button>
@@ -228,7 +231,7 @@
         </div>
 
         <div class="bg-sky-50/80 border border-sky-200/80 rounded-2xl p-3.5 space-y-2">
-          <div class="flex items-center justify-between text-xs font-bold text-sky-800">
+          <div class="flex items-center justify-between text-xs font-bold text-sky-800 flex-wrap gap-1">
             <span>🛫 去程｜12/09 (週三) 桃園第二航廈 (T2)</span>
             <span class="bg-emerald-600 text-white px-2.5 py-0.5 rounded-lg shadow-xs">長榮 BR166</span>
           </div>
@@ -252,13 +255,13 @@
         </div>
 
         <div class="space-y-2.5 pt-1">
-          <div class="text-xs font-extrabold text-slate-600 px-1 flex items-center justify-between">
+          <div class="text-xs font-extrabold text-slate-600 px-1 flex items-center justify-between flex-wrap gap-1">
             <span>🛬 回程｜12/14 (週一) 兩班不同航空分流</span>
             <span class="text-[11px] font-bold text-rose-600">先過退稅再託運</span>
           </div>
 
           <div class="bg-indigo-50/60 border border-indigo-200/80 rounded-xl p-3">
-            <div class="flex items-center justify-between text-xs font-bold mb-1">
+            <div class="flex items-center justify-between text-xs font-bold mb-1 flex-wrap gap-1">
               <span class="text-indigo-800 font-black">華航 CI131（國際線航廈）</span>
               <span class="bg-indigo-600 text-white px-2 py-0.5 rounded-md"><span class="member-name" data-zh="吉">吉</span>、<span class="member-name" data-zh="洹">洹</span>、<span class="member-name" data-zh="lin">lin</span>、<span class="member-name" data-zh="勲">勲</span>、<span class="member-name" data-zh="丹">丹</span></span>
             </div>
@@ -270,7 +273,7 @@
           </div>
 
           <div class="bg-emerald-50/60 border border-emerald-200/80 rounded-xl p-3">
-            <div class="flex items-center justify-between text-xs font-bold mb-1">
+            <div class="flex items-center justify-between text-xs font-bold mb-1 flex-wrap gap-1">
               <span class="text-emerald-800 font-black">長榮 BR115（國際線航廈）</span>
               <span class="bg-emerald-600 text-white px-2 py-0.5 rounded-md"><span class="member-name" data-zh="臻">臻</span>、<span class="member-name" data-zh="歐巴">歐巴</span></span>
             </div>
@@ -293,7 +296,7 @@
         </div>
 
         <div class="bg-indigo-50/70 border border-indigo-200/80 rounded-xl p-3 space-y-1.5 text-xs">
-          <div class="flex items-center justify-between">
+          <div class="flex items-center justify-between flex-wrap gap-1">
             <span class="font-black text-indigo-950">1. 華航配合貴賓室｜Royal Lounge（皇家貴賓室）</span>
             <span class="text-[10px] font-bold bg-indigo-100 text-indigo-800 px-2 py-0.5 rounded">國際線管制區 4F</span>
           </div>
@@ -305,7 +308,7 @@
         </div>
 
         <div class="bg-amber-50/80 border border-amber-200 rounded-xl p-3 space-y-1.5 text-xs">
-          <div class="flex items-center justify-between">
+          <div class="flex items-center justify-between flex-wrap gap-1">
             <span class="font-black text-amber-950">2. Café Sky Library（Portom 飯店 4F）</span>
             <span class="text-[10px] font-bold bg-amber-500 text-white px-2 py-0.5 rounded">管制區外・安檢前</span>
           </div>
@@ -317,7 +320,7 @@
         </div>
 
         <div class="bg-sky-50/70 border border-sky-200/80 rounded-xl p-3 space-y-1.5 text-xs">
-          <div class="flex items-center justify-between">
+          <div class="flex items-center justify-between flex-wrap gap-1">
             <span class="font-black text-sky-950">3. 國內線 3F「Super Lounge」</span>
             <span class="text-[10px] font-bold bg-sky-600 text-white px-2 py-0.5 rounded">JCB 白金卡以上免費</span>
           </div>
@@ -446,7 +449,7 @@
           </div>
 
           <div class="bg-rose-50/70 border border-rose-200/80 rounded-xl p-2.5 space-y-1.5 text-xs">
-            <div class="flex items-center justify-between">
+            <div class="flex items-center justify-between flex-wrap gap-1">
               <span class="font-extrabold text-rose-950 flex items-center gap-1">
                 <span>♨️</span> すすきの天然温泉 湯香郷（Day 5 晚餐後）
               </span>
@@ -619,7 +622,7 @@
         </div>
       </article>
 
-      <!-- DAY 3（已同步更新：純平洋食無法事先訂位／備案調整中＋大黑屋僅能現場排隊抽整理券） -->
+      <!-- DAY 3 -->
       <article id="card-d3" class="day-card glass-card rounded-2xl p-4 shadow-sm border-l-4 border-l-amber-500">
         <div class="flex items-start justify-between gap-2 mb-2">
           <div class="min-w-0 flex-1">
@@ -697,8 +700,10 @@
           </div>
           <div class="relative">
             <span class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-indigo-600 ring-4 ring-white"></span>
-            <div class="font-bold text-indigo-900">18:30 與「德、歐」會合 ➔ 晚餐：肉海鮮炉端 芯々</div>
-            <p class="text-slate-600 text-xs mt-0.5"><strong>已訂位（薄野南6條西4丁目）</strong>，全團 9 人合體！餐後散步逛大通公園「白色燈樹節」與聖誕市集。</p>
+            <div class="font-bold text-indigo-900">18:30 與「德、歐」會合 ➔ 晚餐：肉海鮮炉端 芯々 ➔ 逛聖誕市集＆白色燈飾 ✨</div>
+            <p class="text-slate-600 text-xs mt-0.5 leading-relaxed">
+              <strong>已訂位（薄野南6條西4丁目）</strong>，全團 9 人合體！餐後散步逛 <strong>大通公園「慕尼黑聖誕市集」（11:00–21:00，餐飲最後點餐 20:45）</strong> 與 <strong>「札幌白色燈飾」（16:30–22:00，飯店門口南一條通亮燈至 24:00）</strong>！
+            </p>
             <a href="https://maps.app.goo.gl/pfWsbKoDwqAYeWjh9" target="_blank" class="inline-flex items-center gap-1 mt-1.5 text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-lg">
               📍 開啟餐廳地圖 (肉海鮮炉端 芯々)
             </a>
@@ -721,7 +726,7 @@
         </div>
 
         <div class="bg-indigo-50/70 border border-indigo-200/80 rounded-xl p-3 mb-3.5 space-y-2.5">
-          <div class="flex items-center justify-between border-b border-indigo-100 pb-1.5">
+          <div class="flex items-center justify-between border-b border-indigo-100 pb-1.5 flex-wrap gap-1">
             <span class="text-xs font-black text-indigo-950 flex items-center gap-1.5">
               <span>🚆</span> 札幌 ⇄ 小樽 JR 快速 Airport 時刻表
             </span>
@@ -810,7 +815,7 @@
               📍 巴士站地圖
             </a>
           </div>
-          <div class="grid grid-cols-2 gap-1.5 font-mono text-[11px] text-slate-800">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 font-mono text-[11px] text-slate-800">
             <div class="bg-amber-50 rounded-lg px-2.5 py-1.5 border border-amber-300 flex justify-between items-center font-black text-amber-950">
               <span>09:25 發⭐</span>
               <span>➔ 10:40 國內線</span>
@@ -884,9 +889,9 @@
           </button>
         </div>
 
-        <div class="bg-sky-50/80 border border-sky-100 rounded-xl p-3 flex items-center justify-between gap-2">
+        <div class="bg-sky-50/80 border border-sky-100 rounded-xl p-3 flex items-center justify-between gap-2 flex-wrap">
           <div class="text-xs">
-            <div class="flex items-center gap-1.5">
+            <div class="flex items-center gap-1.5 flex-wrap">
               <span class="font-bold text-sky-900">目前設定匯率</span>
               <span id="rate-status-badge" class="text-[10px] font-bold bg-sky-100 text-sky-700 px-1.5 py-0.5 rounded">載入即時匯率中...</span>
             </div>
@@ -962,7 +967,7 @@
       
       <!-- 團體公費基金帳戶總覽卡（7人：實算 ¥29,572，整數收 ¥40,000 × 7 ＝ ¥280,000） -->
       <div class="glass-card rounded-2xl p-4 shadow-sm border-2 border-amber-300 bg-gradient-to-br from-amber-50 to-orange-50/70 space-y-3">
-        <div class="flex items-center justify-between border-b border-amber-200/80 pb-2 gap-2">
+        <div class="flex items-center justify-between border-b border-amber-200/80 pb-2 gap-2 flex-wrap">
           <div>
             <h2 class="text-sm sm:text-base font-black text-amber-950 flex items-center gap-1.5">
               <span>🏦</span> 先行 7 寶公費基金帳戶
@@ -975,12 +980,16 @@
         </div>
 
         <div id="public-fund-members-grid" class="flex flex-wrap gap-1.5"></div>
+        <div class="flex items-center justify-end gap-1.5 pt-0.5">
+          <button type="button" onclick="setAllPublicFundPaid(true)" class="text-[11px] font-bold bg-emerald-100 hover:bg-emerald-200 text-emerald-900 border border-emerald-300 px-2.5 py-1 rounded-lg active:scale-95 transition">✓ 全部標記已繳</button>
+          <button type="button" onclick="setAllPublicFundPaid(false)" class="text-[11px] font-bold bg-white hover:bg-amber-100 text-amber-900 border border-amber-300 px-2.5 py-1 rounded-lg active:scale-95 transition">↺ 重設全部待繳</button>
+        </div>
 
         <div class="grid grid-cols-3 gap-2 text-center">
           <div class="bg-white rounded-xl p-2 border border-amber-200">
             <div class="text-[10px] font-bold text-slate-500">公費實收總額</div>
-            <div id="pf-collected-jpy" class="text-xs sm:text-sm font-black text-emerald-700 font-mono mt-0.5">¥280,000</div>
-            <div id="pf-collected-twd" class="text-[10px] text-slate-400 font-mono">約 NT$ 60,200</div>
+            <div id="pf-collected-jpy" class="text-xs sm:text-sm font-black text-emerald-700 font-mono mt-0.5">¥0</div>
+            <div id="pf-collected-twd" class="text-[10px] text-slate-400 font-mono">約 NT$ 0</div>
           </div>
           <div class="bg-white rounded-xl p-2 border border-amber-200">
             <div class="text-[10px] font-bold text-slate-500">公費已支出</div>
@@ -989,29 +998,29 @@
           </div>
           <div class="bg-amber-500 text-white rounded-xl p-2 shadow-2xs">
             <div class="text-[10px] font-bold text-amber-100">公費剩餘餘額</div>
-            <div id="pf-balance-jpy" class="text-xs sm:text-sm font-black font-mono mt-0.5">¥73,000</div>
-            <div id="pf-balance-twd" class="text-[10px] text-amber-100 font-mono">約 NT$ 15,695</div>
+            <div id="pf-balance-jpy" class="text-xs sm:text-sm font-black font-mono mt-0.5">-¥207,000</div>
+            <div id="pf-balance-twd" class="text-[10px] text-amber-100 font-mono">約 -NT$ 44,505</div>
           </div>
         </div>
 
         <div class="bg-white/95 rounded-xl p-3 border border-amber-200/80 space-y-1.5 text-xs">
-          <div class="flex justify-between items-center text-slate-700">
+          <div class="flex justify-between items-center text-slate-700 gap-2">
             <span>• D1 接機包車（12/09 機場➔永旺➔星野）</span>
-            <span class="font-mono font-bold">¥50,000</span>
+            <span class="font-mono font-bold shrink-0">¥50,000</span>
           </div>
-          <div class="flex justify-between items-center text-slate-700">
+          <div class="flex justify-between items-center text-slate-700 gap-2">
             <span>• D3 美瑛包車（12/11 星野➔美瑛➔旭川）</span>
-            <span class="font-mono font-bold">¥80,000</span>
+            <span class="font-mono font-bold shrink-0">¥80,000</span>
           </div>
-          <div class="flex justify-between items-center text-slate-700">
+          <div class="flex justify-between items-center text-slate-700 gap-2">
             <span>• D4 旭川札幌包車（12/12 動物園➔SHIRO➔札幌）</span>
-            <span class="font-mono font-bold">¥70,000</span>
+            <span class="font-mono font-bold shrink-0">¥70,000</span>
           </div>
-          <div class="flex justify-between items-center text-slate-700 border-t border-slate-100 pt-1.5">
+          <div class="flex justify-between items-center text-slate-700 border-t border-slate-100 pt-1.5 gap-2">
             <span>• D4 旭山動物園門票（¥1,000 × 7 人）</span>
-            <span class="font-mono font-bold">¥7,000</span>
+            <span class="font-mono font-bold shrink-0">¥7,000</span>
           </div>
-          <div class="flex justify-between items-center font-black text-amber-950 bg-amber-100/80 rounded-lg px-2.5 py-2 mt-1">
+          <div class="flex justify-between items-center font-black text-amber-950 bg-amber-100/80 rounded-lg px-2.5 py-2 mt-1 flex-wrap gap-1">
             <span>👉 實算 ¥29,572／人，整數收 ¥40,000</span>
             <span class="font-mono text-xs text-emerald-700">多 ¥10,428／人入餐費公費</span>
           </div>
@@ -1155,13 +1164,149 @@
 
       <!-- 歷史支出明細列表 -->
       <div class="glass-card rounded-2xl p-4 shadow-sm space-y-3">
-        <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-2 flex-wrap gap-1">
           <h3 class="text-sm font-extrabold text-slate-900">🧾 支出明細與收據（<span id="expense-count">0</span>筆）</h3>
           <button type="button" onclick="copyExpenseSummary()" class="text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-lg active:scale-95">
             📋 複製明細貼群組
           </button>
         </div>
         <div id="expense-list" class="space-y-2.5"></div>
+      </div>
+    </section>
+
+    <!-- ==================== 新增分頁：購物優惠券 ==================== -->
+    <section id="panel-coupons" class="tab-panel hidden space-y-4">
+      <div class="glass-card rounded-2xl p-4 shadow-sm border-2 border-rose-200 bg-gradient-to-br from-rose-50 to-amber-50/70 space-y-2">
+        <div class="flex items-center justify-between">
+          <h2 class="text-base font-black text-rose-950 flex items-center gap-2">
+            <span class="w-7 h-7 rounded-xl bg-rose-500 text-white flex items-center justify-center text-sm">🎟️</span>
+            北海道血拼免稅優惠券專區
+          </h2>
+          <span class="text-[10px] font-black bg-rose-600 text-white px-2.5 py-1 rounded-full">最高 10% + 7%</span>
+        </div>
+        <p class="text-xs text-slate-700 leading-relaxed">
+          結帳前請先出示<strong>護照正本</strong>與下方電子優惠券／條碼！下方條碼卡片<strong>點擊可全螢幕放大</strong>給店員掃描槍感應。
+        </p>
+      </div>
+
+      <!-- 1. 松本清 Matsumoto KiYoshi -->
+      <div class="glass-card rounded-2xl p-4 shadow-sm border-2 border-yellow-400 space-y-3">
+        <div class="flex items-center justify-between flex-wrap gap-1 border-b border-yellow-200 pb-2">
+          <div>
+            <span class="inline-block text-[10px] font-black bg-yellow-400 text-slate-950 px-2 py-0.5 rounded-md">藥妝必備・有效至 2027-03-31</span>
+            <h3 class="text-base font-black text-slate-900 mt-1">💊 松本清 Matsumoto KiYoshi</h3>
+          </div>
+          <span class="text-xs font-black text-rose-600">免稅 10% + 最高 7% OFF</span>
+        </div>
+        <p class="text-xs text-slate-600 leading-relaxed">
+          依單筆未稅消費金額出示對應代碼或條碼（專櫃化妝品、菸、雜誌、嬰兒紙尿布及部分商品除外；Outlet 店鋪不適用）：
+        </p>
+        <div class="space-y-2.5">
+          <div onclick="openBarcodeModal('松本清 3% OFF（滿 ¥10,000～¥30,000 未滿）', '9839011010033', '有效期限至 2027-03-31')" class="bg-rose-50/90 hover:bg-rose-100 border-2 border-rose-200 rounded-xl p-3 cursor-pointer transition active:scale-[0.99]">
+            <div class="flex items-center justify-between font-black text-rose-800 text-sm">
+              <span>滿 1萬～3萬日圓 ➔ 3% OFF</span>
+              <span class="text-xs text-blue-600 underline">放大條碼 ↗</span>
+            </div>
+            <div class="notranslate font-mono text-base font-black tracking-wider text-slate-900 mt-1" translate="no">代碼：9839011010033</div>
+          </div>
+
+          <div onclick="openBarcodeModal('松本清 5% OFF（滿 ¥30,000～¥50,000 未滿）', '9839011110054', '有效期限至 2027-03-31')" class="bg-rose-50/90 hover:bg-rose-100 border-2 border-rose-200 rounded-xl p-3 cursor-pointer transition active:scale-[0.99]">
+            <div class="flex items-center justify-between font-black text-rose-800 text-sm">
+              <span>滿 3萬～5萬日圓 ➔ 5% OFF</span>
+              <span class="text-xs text-blue-600 underline">放大條碼 ↗</span>
+            </div>
+            <div class="notranslate font-mono text-base font-black tracking-wider text-slate-900 mt-1" translate="no">代碼：9839011110054</div>
+          </div>
+
+          <div onclick="openBarcodeModal('松本清 7% OFF（滿 ¥50,000 以上）', '9839011210075', '有效期限至 2027-03-31')" class="bg-rose-100/90 hover:bg-rose-200 border-2 border-rose-400 rounded-xl p-3 cursor-pointer transition active:scale-[0.99]">
+            <div class="flex items-center justify-between font-black text-rose-900 text-sm">
+              <span>滿 5萬日圓以上 ➔ 7% OFF</span>
+              <span class="text-xs text-blue-700 underline">放大條碼 ↗</span>
+            </div>
+            <div class="notranslate font-mono text-base font-black tracking-wider text-slate-900 mt-1" translate="no">代碼：9839011210075</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. 札幌藥妝 SATUDORA -->
+      <div class="glass-card rounded-2xl p-4 shadow-sm border-2 border-emerald-300 space-y-3">
+        <div class="flex items-center justify-between flex-wrap gap-1 border-b border-emerald-100 pb-2">
+          <div>
+            <span class="inline-block text-[10px] font-black bg-emerald-600 text-white px-2 py-0.5 rounded-md">北海道連鎖藥妝</span>
+            <h3 class="text-base font-black text-slate-900 mt-1">🌿 札幌藥妝 SATUDORA（サツドラ）</h3>
+          </div>
+          <span class="text-xs font-black text-emerald-700">免稅 10% + 5% / 7% OFF</span>
+        </div>
+        <div class="space-y-2.5">
+          <div onclick="openBarcodeModal('札幌藥妝 10% 免稅 + 5% OFF', '2300009800587', '代碼 980058｜結帳前出示護照與條碼')" class="bg-emerald-50/80 hover:bg-emerald-100 border border-emerald-200 rounded-xl p-3 cursor-pointer transition space-y-1.5">
+            <div class="flex items-center justify-between font-black text-emerald-900 text-sm">
+              <span>免稅 10% + 5% OFF（一般滿額）</span>
+              <span class="text-xs text-blue-600 underline">點擊放大 ↗</span>
+            </div>
+            <div id="barcode-satudora-5" class="bg-white p-2 rounded-lg border border-emerald-200 flex justify-center"></div>
+          </div>
+
+          <div onclick="openBarcodeModal('札幌藥妝 10% 免稅 + 7% OFF（滿 ¥38,888）', '2300001014272', '代碼 101427｜不含稅滿 38,888 日圓以上')" class="bg-emerald-50/80 hover:bg-emerald-100 border border-emerald-300 rounded-xl p-3 cursor-pointer transition space-y-1.5">
+            <div class="flex items-center justify-between font-black text-emerald-950 text-sm">
+              <span>免稅 10% + 7% OFF（滿 ¥38,888）</span>
+              <span class="text-xs text-blue-600 underline">點擊放大 ↗</span>
+            </div>
+            <div id="barcode-satudora-7" class="bg-white p-2 rounded-lg border border-emerald-200 flex justify-center"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. BicCamera / KOJIMA -->
+      <div class="glass-card rounded-2xl p-4 shadow-sm border-2 border-red-300 space-y-3">
+        <div class="flex items-center justify-between flex-wrap gap-1 border-b border-red-100 pb-2">
+          <div>
+            <span class="inline-block text-[10px] font-black bg-red-600 text-white px-2 py-0.5 rounded-md">有效期限至 2027/04/30</span>
+            <h3 class="text-base font-black text-slate-900 mt-1">📷 BicCamera / KOJIMA 電器藥妝</h3>
+          </div>
+          <span class="text-xs font-black text-red-600">家電 7%・藥妝 5%・清酒 3%</span>
+        </div>
+        <p class="text-xs text-slate-600 leading-relaxed">
+          結帳時<strong>① 與 ② 兩個條碼必須同時掃描</strong>（Apple 純正品、遊戲主機、部分手錶與獺祭八海山除外）：
+        </p>
+        <div onclick="openDualBarcodeModal('BicCamera / KOJIMA 雙條碼優惠券', '2973890181815', '2402230007947', '有效期限至 2027/04/30｜結帳需同時掃描 ① 與 ②')" class="bg-red-50/70 hover:bg-red-100 border border-red-200 rounded-xl p-3 cursor-pointer transition space-y-2">
+          <div class="flex items-center justify-between font-black text-red-900 text-xs">
+            <span>點擊全螢幕同時放大 ① ＆ ② 雙條碼</span>
+            <span class="text-blue-600 underline">放大掃描 ↗</span>
+          </div>
+          <div class="grid grid-cols-1 gap-2">
+            <div id="barcode-bic-1" class="bg-white p-2 rounded-lg border border-red-200 flex justify-center"></div>
+            <div id="barcode-bic-2" class="bg-white p-2 rounded-lg border border-red-200 flex justify-center"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. 三大官方線上優惠券連結 -->
+      <div class="glass-card rounded-2xl p-4 shadow-sm space-y-3">
+        <h3 class="text-sm font-black text-slate-900 border-b border-slate-100 pb-2">🔗 百貨＆超市官方電子優惠券（一鍵開啟）</h3>
+
+        <a href="https://www.welcome-aeon.com/coupon/web_coupon.php?lang=zh-CHT&id=19&cid=cp1694597628&cv=1" target="_blank" class="block bg-fuchsia-50/80 hover:bg-fuchsia-100 border border-fuchsia-200 rounded-xl p-3.5 transition">
+          <div class="flex items-center justify-between font-black text-fuchsia-950 text-sm">
+            <span>🛒 AEON 永旺百貨 / 超市（5% OFF 優惠券）</span>
+            <span class="text-xs bg-fuchsia-600 text-white px-2.5 py-1 rounded-lg">開啟條碼 ↗</span>
+          </div>
+          <p class="text-xs text-slate-600 mt-1">Day 1 永旺千歲店、Day 3 旭川站直結 AEON Mall 結帳出示即時條碼享 95 折。</p>
+        </a>
+
+        <a href="https://japanportal.donki-global.com/coupon/cp001_zhtw.html" target="_blank" class="block bg-amber-50/80 hover:bg-amber-100 border border-amber-300 rounded-xl p-3.5 transition">
+          <div class="flex items-center justify-between font-black text-amber-950 text-sm">
+            <span>🐧 唐吉訶德 Don Quijote（最高 10% + 7% OFF）</span>
+            <span class="text-xs bg-amber-500 text-slate-950 px-2.5 py-1 rounded-lg">開啟電子券 ↗</span>
+          </div>
+          <p class="text-xs text-slate-600 mt-1">札幌狸小路唐吉訶德適用！結帳時必須連網點擊頁面產生動態條碼給店員掃描（截圖無效）。</p>
+        </a>
+
+        <a href="https://flight.cdn-eztravel.com.tw/Coupon/Japan/daimaru-matsuzakaya-taxfree-coupon.png" target="_blank" class="block bg-sky-50/80 hover:bg-sky-100 border border-sky-200 rounded-xl p-3.5 transition">
+          <div class="flex items-center justify-between font-black text-sky-950 text-sm">
+            <span>🏬 大丸松坂屋百貨（免稅 10% + 5% OFF）</span>
+            <span class="text-xs bg-sky-600 text-white px-2.5 py-1 rounded-lg">開啟優惠券 ↗</span>
+          </div>
+          <p class="text-xs text-slate-600 mt-1">JR 札幌站大丸百貨（Daimaru Sapporo）專櫃購物出示條碼享額外 5% 折扣。</p>
+        </a>
       </div>
     </section>
 
@@ -1229,10 +1374,10 @@
       </div>
     </section>
 
-    <!-- ==================== 分頁 7：拍照小技巧・建議穿著雪況・必吃必買必拍 ==================== -->
+    <!-- ==================== 分頁 7：拍照小技巧・建議穿著雪況・冬季點燈＆必吃必買 ==================== -->
     <section id="panel-photoguide" class="tab-panel hidden space-y-4">
       <div class="glass-card rounded-2xl p-4 shadow-sm border-2 border-sky-200 space-y-3">
-        <div class="flex items-center justify-between border-b border-sky-100 pb-2.5">
+        <div class="flex items-center justify-between border-b border-sky-100 pb-2.5 flex-wrap gap-1">
           <div>
             <h2 class="text-base font-black text-slate-900 flex items-center gap-2">
               <span class="w-7 h-7 rounded-xl bg-sky-100 text-sky-600 flex items-center justify-center text-sm">🧥</span>
@@ -1269,6 +1414,31 @@
             <li>• <strong>外層（防風防水）：</strong>長版羽絨衣或防風防水衝鋒外套（下雪時雪花拍掉就乾，不會濕透）。</li>
             <li>• <strong>📸 拍照配色心機：</strong>背景全是白雪時，<strong>避免穿全白外套</strong>（容易跟雪地融為一體）；穿<strong>焦糖棕、酒紅、薑黃、寶藍或亮色圍巾毛帽</strong>，在雪地裡超級顯白又亮眼！</li>
           </ul>
+        </div>
+      </div>
+
+      <!-- 12/12–12/14 札幌冬季限定點燈＆聖誕市集每日營業時間 -->
+      <div class="glass-card rounded-2xl p-4 shadow-sm border-2 border-indigo-200 bg-gradient-to-br from-indigo-50/80 to-sky-50/80 space-y-3">
+        <div class="flex items-center justify-between border-b border-indigo-100 pb-2 flex-wrap gap-1">
+          <h2 class="text-base font-black text-indigo-950 flex items-center gap-2">
+            <span class="w-7 h-7 rounded-xl bg-indigo-600 text-white flex items-center justify-center text-sm">🎄</span>
+            12/12–12/14 札幌冬季點燈＆市集時間表
+          </h2>
+          <span class="text-[10px] font-black bg-indigo-600 text-white px-2.5 py-0.5 rounded-full">行程期間全遇得到</span>
+        </div>
+        <div class="space-y-2 text-xs">
+          <div class="bg-white rounded-xl p-3 border border-indigo-100 space-y-1">
+            <div class="font-black text-rose-800">🎪 慕尼黑聖誕市集（大通公園 1・2 丁目）</div>
+            <p class="text-slate-700"><strong>每日營業時間：11:00 – 21:00</strong>（餐飲攤位最後點餐 20:45，熱紅酒與德國香腸記得 20:45 前去！）</p>
+          </div>
+          <div class="bg-white rounded-xl p-3 border border-indigo-100 space-y-1">
+            <div class="font-black text-sky-900">✨ 札幌白色燈飾（大通公園、站前通、北三條赤煉瓦廣場、紅磚廳舍）</div>
+            <p class="text-slate-700"><strong>每日點燈時間：16:30 – 22:00</strong>（其中<strong>南一條通點燈至 24:00</strong>，就在東急 Stay 飯店門口！）</p>
+          </div>
+          <div class="bg-white rounded-xl p-3 border border-indigo-100 space-y-1">
+            <div class="font-black text-emerald-900">🎄 Sapporo Factory 15 公尺室內巨大聖誕樹</div>
+            <p class="text-slate-700"><strong>每日點燈時間：16:00 – 22:00</strong>（<strong>每整點有約 5 分鐘音樂燈光秀</strong>，距東急 Stay 步行約 10 分鐘，全室內吹暖氣拍超美！）</p>
+          </div>
         </div>
       </div>
 
@@ -1363,7 +1533,7 @@
             <div class="space-y-1 text-slate-700 leading-relaxed">
               <div><span class="font-extrabold text-rose-600">🍴 必吃：</span>肉海鮮炉端 芯々、風土和牛燒肉、機場冠軍 Kinotoya 極上牛乳霜淇淋、一幻拉麵。</div>
               <div><span class="font-extrabold text-amber-600">🛍️ 必買：</span>美瑛選果「機場店限定玉米麵包」、冬季限定 SNOWS 生巧克力夾心餅、札幌農學校牛奶餅乾、ROYCE'、六花亭。</div>
-              <div><span class="font-extrabold text-blue-600">📷 必拍：</span>大通公園「札幌白色燈樹節」聖誕樹燈飾、薄野 NIKKA 威士忌霓虹招牌。</div>
+              <div><span class="font-extrabold text-blue-600">📷 必拍：</span>大通公園「札幌白色燈飾」與慕尼黑聖誕市集、Sapporo Factory 巨大聖誕樹、薄野 NIKKA 威士忌霓虹招牌。</div>
             </div>
           </div>
         </div>
@@ -1385,7 +1555,7 @@
           我們 12 月出發<strong>全部適用新制</strong>！結帳時先付「含稅全額」，離境當天在<strong>新千歲機場託運行李前</strong>刷護照確認，才會將消費稅退回帳戶。
         </p>
 
-        <div class="grid grid-cols-2 gap-2 text-xs">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
           <div class="bg-rose-50/70 border border-rose-100 rounded-xl p-2.5">
             <div class="font-extrabold text-rose-900">1. 先付含稅・機場後退</div>
             <p class="text-[11px] text-slate-600 mt-0.5">結帳先付含稅價，並線上登記退稅收款方式（推薦退信用卡）。</p>
@@ -1438,7 +1608,7 @@
     <!-- ==================== 分頁 9：北海道伴手禮採買推薦單 ==================== -->
     <section id="panel-souvenirs" class="tab-panel hidden space-y-4">
       <div class="glass-card rounded-2xl p-4 shadow-sm space-y-3">
-        <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-2.5 flex-wrap gap-1">
           <div>
             <h2 class="text-base font-black text-slate-900 flex items-center gap-2">
               <span class="w-7 h-7 rounded-xl bg-pink-100 text-pink-600 flex items-center justify-center text-sm">🎁</span>
@@ -1475,7 +1645,7 @@
     <!-- ==================== 分頁 10：北海道牛乳地圖 ==================== -->
     <section id="panel-milkmap" class="tab-panel hidden space-y-4">
       <div class="glass-card rounded-2xl p-4 shadow-sm border-2 border-sky-200 space-y-3">
-        <div class="flex items-center justify-between border-b border-sky-100 pb-2.5">
+        <div class="flex items-center justify-between border-b border-sky-100 pb-2.5 flex-wrap gap-1">
           <div>
             <h2 class="text-base font-black text-slate-900 flex items-center gap-2">
               <span class="w-7 h-7 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center text-sm">🥛</span>
@@ -1545,6 +1715,19 @@
   <!-- Toast 提示框 -->
   <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-slate-900/95 text-white text-xs font-bold px-4 py-2.5 rounded-full shadow-lg pointer-events-none opacity-0 translate-y-2 transition-all duration-200">
     <span id="toast-msg">已複製！</span>
+  </div>
+
+  <!-- 條碼全螢幕放大彈窗（給店員掃描槍感應） -->
+  <div id="barcode-modal" onclick="closeBarcodeModal()" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-xs hidden flex items-center justify-center p-4">
+    <div class="max-w-md w-full bg-white rounded-3xl overflow-hidden shadow-2xl p-6 text-center space-y-4" onclick="event.stopPropagation()">
+      <h3 id="modal-bc-title" class="text-base font-black text-slate-900">優惠券條碼</h3>
+      <div id="modal-bc-svg-container" class="bg-white border-2 border-slate-200 rounded-2xl p-4 space-y-3 flex flex-col items-center justify-center"></div>
+      <p id="modal-bc-note" class="text-xs font-bold text-slate-500"></p>
+      <div class="flex gap-2 pt-1">
+        <button type="button" id="modal-bc-copy-btn" class="flex-1 bg-blue-600 text-white font-bold text-xs py-3 rounded-xl active:scale-95">📋 複製代碼數字</button>
+        <button type="button" onclick="closeBarcodeModal()" class="flex-1 bg-slate-100 text-slate-700 font-bold text-xs py-3 rounded-xl">關閉 ✕</button>
+      </div>
+    </div>
   </div>
 
   <!-- 手指日文大字顯示彈窗 -->
@@ -1735,6 +1918,100 @@
       if (modal) modal.classList.add('hidden');
     }
 
+    // ==================== 高解析度 EAN-13 條碼產生器（購物優惠券專用） ====================
+    const EAN13_L = ['0001101','0011001','0010011','0111101','0100011','0110001','0101111','0111011','0110111','0001011'];
+    const EAN13_G = ['0100111','0110011','0011011','0100001','0011101','0111001','0000101','0010001','0001001','0010111'];
+    const EAN13_R = ['1110010','1100110','1101100','1000010','1011100','1001110','1010000','1000100','1001000','1110100'];
+    const EAN13_PARITY = ['LLLLLL','LLGLGG','LLGGLG','LLGGGL','LGLLGG','LGGLLG','LGGGLL','LGLGLG','LGLGGL','LGGLGL'];
+
+    function buildEan13Svg(code, height = 56) {
+      const digits = String(code).replace(/\D/g, '').padEnd(13, '0').slice(0, 13);
+      const first = parseInt(digits[0], 10);
+      const parity = EAN13_PARITY[first];
+      let bits = '101';
+      for (let i = 1; i <= 6; i++) {
+        const d = parseInt(digits[i], 10);
+        bits += parity[i - 1] === 'L' ? EAN13_L[d] : EAN13_G[d];
+      }
+      bits += '01010';
+      for (let i = 7; i <= 12; i++) {
+        const d = parseInt(digits[i], 10);
+        bits += EAN13_R[d];
+      }
+      bits += '101';
+
+      const barW = 2.2;
+      const totalW = bits.length * barW + 24;
+      let rects = '';
+      for (let i = 0; i < bits.length; i++) {
+        if (bits[i] === '1') {
+          const isGuard = (i < 3) || (i >= 45 && i < 50) || (i >= 92);
+          rects += `<rect x="${12 + i * barW}" y="4" width="${barW}" height="${isGuard ? height + 6 : height}" fill="#000000" />`;
+        }
+      }
+      const spacedText = `${digits[0]}  ${digits.slice(1, 7)}  ${digits.slice(7, 13)}`;
+      return `
+        <svg viewBox="0 0 ${totalW} ${height + 24}" class="w-full max-w-[260px] h-auto" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100%" height="100%" fill="#ffffff" />
+          ${rects}
+          <text x="${totalW / 2}" y="${height + 20}" text-anchor="middle" font-family="monospace" font-size="13" font-weight="bold" fill="#000000">${spacedText}</text>
+        </svg>
+      `;
+    }
+
+    function initCouponBarcodes() {
+      const s5 = document.getElementById('barcode-satudora-5');
+      const s7 = document.getElementById('barcode-satudora-7');
+      const b1 = document.getElementById('barcode-bic-1');
+      const b2 = document.getElementById('barcode-bic-2');
+      if (s5) s5.innerHTML = buildEan13Svg('2300009800587', 48);
+      if (s7) s7.innerHTML = buildEan13Svg('2300001014272', 48);
+      if (b1) b1.innerHTML = buildEan13Svg('2973890181815', 48);
+      if (b2) b2.innerHTML = buildEan13Svg('2402230007947', 48);
+    }
+
+    function openBarcodeModal(title, code, note) {
+      const modal = document.getElementById('barcode-modal');
+      const tEl = document.getElementById('modal-bc-title');
+      const box = document.getElementById('modal-bc-svg-container');
+      const nEl = document.getElementById('modal-bc-note');
+      const cBtn = document.getElementById('modal-bc-copy-btn');
+      if (tEl) tEl.textContent = title;
+      if (box) box.innerHTML = buildEan13Svg(code, 74);
+      if (nEl) nEl.textContent = note || '';
+      if (cBtn) cBtn.onclick = () => copyText(code, '已複製條碼代碼：' + code);
+      if (modal) modal.classList.remove('hidden');
+    }
+
+    function openDualBarcodeModal(title, code1, code2, note) {
+      const modal = document.getElementById('barcode-modal');
+      const tEl = document.getElementById('modal-bc-title');
+      const box = document.getElementById('modal-bc-svg-container');
+      const nEl = document.getElementById('modal-bc-note');
+      const cBtn = document.getElementById('modal-bc-copy-btn');
+      if (tEl) tEl.textContent = title;
+      if (box) {
+        box.innerHTML = `
+          <div class="w-full flex flex-col items-center">
+            <span class="text-xs font-black text-red-700 mb-1">① カウント JAN</span>
+            ${buildEan13Svg(code1, 62)}
+          </div>
+          <div class="w-full border-t border-dashed border-slate-300 pt-2 flex flex-col items-center">
+            <span class="text-xs font-black text-red-700 mb-1">② 自動割引 JAN</span>
+            ${buildEan13Svg(code2, 62)}
+          </div>
+        `;
+      }
+      if (nEl) nEl.textContent = note || '';
+      if (cBtn) cBtn.onclick = () => copyText(`${code1} / ${code2}`, '已複製雙條碼數字！');
+      if (modal) modal.classList.remove('hidden');
+    }
+
+    function closeBarcodeModal() {
+      const modal = document.getElementById('barcode-modal');
+      if (modal) modal.classList.add('hidden');
+    }
+
     // ==================== 分頁切換與行程篩選 ====================
     let currentMapDay = 'all';
 
@@ -1836,7 +2113,7 @@
           { name: '3. 美瑛雪原', shortLabel: '美瑛雪原', emoji: '🎄', time: 'D3 白天', x: 278, y: 108, align: 'right', note: 'D3 包車・純平洋食（現場候位/備案）、聖誕樹、美瑛選果＆青池點燈' },
           { name: '4. 旭川＆動物園', shortLabel: '旭川・動物園', emoji: '🐧', time: 'D3–D4', x: 256, y: 54, align: 'top', note: 'D3 宿 JR INN 旭川＆大黑屋排隊；D4 旭山動物園企鵝散步' },
           { name: '5. 小樽運河', shortLabel: '小樽運河', emoji: '🍰', time: 'D5 全日', x: 84, y: 128, align: 'top', note: 'D5 搭 JR 浪漫一日遊・三角市場海鮮、堺町通＆運河點燈' },
-          { name: '6. 札幌市區', shortLabel: '札幌市區', emoji: '🏨', time: 'D4–D6', x: 136, y: 156, align: 'left', note: '9人合體宿東急 Stay・大通白色燈樹節＆薄野美食泡湯' }
+          { name: '6. 札幌市區', shortLabel: '札幌市區', emoji: '🏨', time: 'D4–D6', x: 136, y: 156, align: 'left', note: '9人合體宿東急 Stay・大通白色燈飾＆薄野美食泡湯' }
         ]
       },
       d1: {
@@ -1891,7 +2168,7 @@
           { name: '2. 旭山動物園', shortLabel: '旭山動物園', emoji: '🐧', time: '10:30–14:00', x: 288, y: 62, align: 'right', note: '11:00 國王企鵝散步・海豹館圓柱水槽＆北極熊館，14:00 準時出發' },
           { name: '3. みんなの工場 by SHIRO', shortLabel: '砂川 SHIRO', emoji: '🧴', time: '15:00–16:30', x: 212, y: 106, align: 'left', note: 'Blender Lab 調香免預約・15:00 一進店先抽整理券，可免稅＆SHIRO CAFE下午茶' },
           { name: '4. 札幌東急 Stay', shortLabel: '札幌東急Stay', emoji: '🧳', time: '17:30 入住', x: 142, y: 142, align: 'left', note: '辦理入住並領取從星野寄來的大行李箱，進房整裝休息 1 小時' },
-          { name: '5. 薄野「肉海鮮炉端 芯々」', shortLabel: '薄野炉端芯々', emoji: '🍻', time: '18:30 晚餐', x: 162, y: 168, align: 'bottom', note: '與德、歐會合・全團 9 人大合體！餐後逛大通白色燈樹節' }
+          { name: '5. 薄野「肉海鮮炉端 芯々」', shortLabel: '薄野炉端芯々', emoji: '🍻', time: '18:30 晚餐', x: 162, y: 168, align: 'bottom', note: '與德、歐會合・全團 9 人大合體！餐後逛大通白色燈飾＆聖誕市集' }
         ]
       },
       d5: {
@@ -2224,7 +2501,7 @@
     const ALL_MEMBERS = ['洹', '吉', 'lin', '勲', '丹', '臻', '歐巴', '德', '歐'];
     const EARLY_7_MEMBERS = ['洹', '吉', 'lin', '勲', '丹', '臻', '歐巴'];
     const EXPENSE_STORAGE_KEY = 'hokkaido_2026_expenses_v3';
-    const PUBLIC_FUND_STORAGE_KEY = 'hokkaido_2026_public_fund_paid_v2';
+    const PUBLIC_FUND_STORAGE_KEY = 'hokkaido_2026_public_fund_paid_v3';
     const PUBLIC_FUND_PER_PERSON_JPY = 40000;
 
     let selectedSplitMembers = [...ALL_MEMBERS];
@@ -2239,11 +2516,11 @@
         if (raw) {
           publicFundPaidMap = JSON.parse(raw);
         } else {
-          EARLY_7_MEMBERS.forEach(m => { publicFundPaidMap[m] = true; });
+          EARLY_7_MEMBERS.forEach(m => { publicFundPaidMap[m] = false; });
           savePublicFundState();
         }
       } catch (e) {
-        EARLY_7_MEMBERS.forEach(m => { publicFundPaidMap[m] = true; });
+        EARLY_7_MEMBERS.forEach(m => { publicFundPaidMap[m] = false; });
       }
     }
 
@@ -2258,7 +2535,14 @@
       savePublicFundState();
       renderExpenseList();
       const displayM = getDisplayMemberName(member);
-      showToast(`${displayM} 公費狀態已更新為：${publicFundPaidMap[member] ? '已繳 ¥40,000 ✓' : '待繳款'}`);
+      showToast(`${displayM} 公費狀態已更新為：${publicFundPaidMap[member] ? '已繳 ¥40,000 ✓' : '待繳'}`);
+    }
+
+    function setAllPublicFundPaid(paidState) {
+      EARLY_7_MEMBERS.forEach(m => { publicFundPaidMap[m] = paidState; });
+      savePublicFundState();
+      renderExpenseList();
+      showToast(paidState ? '✓ 已將 7 位成員全部標記為已繳 ¥40,000' : '↺ 已重設 7 位成員為「待繳」狀態');
     }
 
     function toggleExpCalc() {
@@ -2961,6 +3245,7 @@
         initExpenseForm();
         loadExpenses();
         renderExpenseList();
+        initCouponBarcodes();
         initPhraseCards();
         loadSouvenirs();
         renderSouvenirs();
